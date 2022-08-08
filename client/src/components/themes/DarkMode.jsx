@@ -1,4 +1,4 @@
-import "./darkmode.css";
+import "styles/darkmode.css";
 
 const setDark = () => {
 	localStorage.setItem("theme", "dark");

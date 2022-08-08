@@ -2,6 +2,7 @@ import { Route, Routes } from "react-router-dom";
 
 import GlobalStyles from "styles/GlobalStyles";
 import Home from "pages/Home";
+import LinearProg from "utils/porgress/LinearProg";
 import React from "react";
 import styled from "styled-components";
 import { useAuth0 } from "@auth0/auth0-react";
@@ -10,7 +11,7 @@ const App = () => {
 	const { isLoading } = useAuth0();
 
 	if (isLoading) {
-		return <h1>Loading</h1>;
+		return <LinearProg />;
 	}
 
 	return (
