@@ -16,29 +16,46 @@ const App = () => {
 	return (
 		<Wrapper>
 			<GlobalStyles />
-			<Nav></Nav>
-			<LeftAside></LeftAside>
+			<Nav>NAV</Nav>
+			<LeftAside>LEFT</LeftAside>
 			<Main>
 				<Routes>
 					<Route exact path="/" element={<Home />} />
 				</Routes>
 			</Main>
-			<RightAside></RightAside>
-			<Footer></Footer>
+			<RightAside>RIGHT</RightAside>
+			<Footer>FOOTER</Footer>
 		</Wrapper>
 	);
 };
 
-const Wrapper = styled.div``;
+const Wrapper = styled.div`
+	display: flex;
+	flex-wrap: wrap;
+`;
 
-const Nav = styled.nav``;
+const Nav = styled.header`
+	flex: 0 0 100%;
+	height: 15vh;
+`;
 
-const LeftAside = styled.aside``;
+const LeftAside = styled.aside`
+	flex: 0 0 15%;
+	min-height: 70vh;
+`;
 
-const Main = styled.div``;
+const Main = styled.article`
+	flex: 0 0 70%;
+	min-height: 70vh;
+`;
 
-const RightAside = styled.aside``;
+const RightAside = styled.aside`
+	flex: 0 0 15%;
+	min-height: 70vh;
+`;
 
-const Footer = styled.footer``;
+const Footer = styled.footer`
+	flex: 0 0 100%;
+`;
 
 export default App;
