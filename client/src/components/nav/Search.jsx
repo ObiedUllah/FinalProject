@@ -1,7 +1,5 @@
-import React, { useContext } from "react";
-
 import { BsSearch } from "react-icons/bs";
-import { SearchContext } from "context/SearchContext";
+import React from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";

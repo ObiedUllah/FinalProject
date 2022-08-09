@@ -22,7 +22,10 @@ express()
 	.get("/", (req, res) => {
 		res.send("here");
 	})
+
+	//endpoints
 	.use(require("./endpoints/userEndpoints"))
+	.use(require("./endpoints/videoEndpoints"))
 
 	// Node spins up our server and sets it to listen on set port
 	.listen(PORT, () => console.log(`Listening on port ${PORT}`));

@@ -76,6 +76,7 @@ const RightAside = styled.aside`
 
 const FooterDiv = styled.footer`
 	flex: 0 0 100%;
+	min-height: 15vh;
 `;
 
 export default App;

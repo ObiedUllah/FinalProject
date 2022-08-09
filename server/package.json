@@ -10,7 +10,8 @@
     "mongodb": "^4.8.1",
     "morgan": "^1.10.0",
     "node": "^18.7.0",
-    "nodemon": "^2.0.19"
+    "nodemon": "^2.0.19",
+    "youtube-search-without-api-key": "^1.0.7"
   },
   "scripts": {
     "start": "nodemon server.js"

@@ -1,35 +1,44 @@
-import { useEffect, useState } from "react";
+import DetailsProvider, { DetailsContext } from "context/DetailsContext";
+import { useContext, useEffect, useState } from "react";
 
+import CircularProg from "utils/porgress/CircularProg";
 import React from "react";
 import VideoSection from "components/animeDetails/VideoSection";
-import styled from "styled-components";
 import { useParams } from "react-router-dom";
 
 const AnimeDetails = () => {
 	//this will capture the id of the anime clicked
 	const { id } = useParams();
 
-	//store anime
-	const [anime, setAnime] = useState();
+	const { anime } = useContext(DetailsContext).value;
+	const { setId, setAnime, setAnimeTheme } = useContext(DetailsContext).actions;
 
 	//get anime with id from params
+	//get theme
 	useEffect(() => {
 		const getAnime = async () => {
 			const anime = await fetch(`https://api.jikan.moe/v4/anime/${id}/full`).then((res) => res.json());
-			setAnime(anime);
+			setId(id);
+			setAnime(anime.data);
+		};
+		const getInitialTheme = async () => {
+			const response = await fetch(`/api/video/${anime?.theme.openings[0] + " opening"}`).then((res) => res.json());
+			setAnimeTheme(response.data);
 		};
 		getAnime();
-	}, []);
+		getInitialTheme();
+	}, [id]);
+
+	//if the anime is null then wait
+	if (!anime) {
+		return <CircularProg />;
+	}
 
 	return (
-		<Wrapper>
+		<DetailsProvider>
 			<VideoSection />
-		</Wrapper>
+		</DetailsProvider>
 	);
 };
-
-const Wrapper = styled.article`
-	display: flex;
-`;
 
 export default AnimeDetails;
