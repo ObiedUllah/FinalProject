@@ -26,10 +26,19 @@ const VideoSection = ({ anime, id }) => {
 	useEffect(() => {
 		const getInitialTheme = async () => {
 			try {
-				if (anime?.theme.openings[0] === undefined) {
+				//if no opening or ending set to null
+				if (anime?.theme.openings[0] === undefined && anime?.theme.endings[0] === undefined) {
 					setSelectedTheme(null);
-				} else {
+				}
+				//if opening then set to opening
+				else if (anime?.theme.openings[0] !== undefined) {
 					const response = await fetch(`/api/video/${anime?.theme.openings[0] + " opening"}`);
+					const result = await response.json();
+					setSelectedTheme(result.data);
+				}
+				//if ending then set to ending
+				else if (anime?.theme.endings[0] !== undefined) {
+					const response = await fetch(`/api/video/${anime?.theme.endings[0] + " opening"}`);
 					const result = await response.json();
 					setSelectedTheme(result.data);
 				}
@@ -151,12 +160,10 @@ const VideoSection = ({ anime, id }) => {
 				<OpeningList>
 					{anime.theme.openings.map((theme, index) => {
 						return (
-							<ButtonWrap>
-								<ButtonLabel onClick={(e) => handleClick(e, index, true)}>
-									<Name>{formatText(theme)} </Name>
-									<Download onClick={(e) => handleDownload(e, index, true)} />
-								</ButtonLabel>
-							</ButtonWrap>
+							<ButtonLabel onClick={(e) => handleClick(e, index, true)}>
+								<Name>{formatText(theme)} </Name>
+								<Download onClick={(e) => handleDownload(e, index, true)} />
+							</ButtonLabel>
 						);
 					})}
 				</OpeningList>
@@ -164,12 +171,10 @@ const VideoSection = ({ anime, id }) => {
 				<EndingList>
 					{anime.theme.endings.map((theme, index) => {
 						return (
-							<ButtonWrap>
-								<ButtonLabel onClick={(e) => handleClick(e, index, false)}>
-									<Name>{formatText(theme)} </Name>
-									<Download onClick={(e) => handleDownload(e, index, false)} />
-								</ButtonLabel>
-							</ButtonWrap>
+							<ButtonLabel onClick={(e) => handleClick(e, index, false)}>
+								<Name>{formatText(theme)} </Name>
+								<Download onClick={(e) => handleDownload(e, index, false)} />
+							</ButtonLabel>
 						);
 					})}
 				</EndingList>
@@ -211,22 +216,25 @@ const Title = styled.h1`
 	font-size: 26px;
 `;
 
-const ButtonWrap = styled.div``;
-
 const ButtonLabel = styled.button`
 	background-color: #999;
-	width: 300px;
-	height: 80px;
+	width: 280px;
+	height: 70px;
 	margin: 12px 8px;
-	font-size: 14px;
 	cursor: pointer;
 	display: flex;
 	align-items: center;
 	justify-content: center;
+
+	&:hover {
+		background-color: #444;
+		color: inherit;
+	}
 `;
 
 const Name = styled.span`
 	flex: 1 1 90%;
+	font-size: 16px;
 `;
 
 const Download = styled(BsDownload)`

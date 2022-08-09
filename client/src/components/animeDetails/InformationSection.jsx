@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 
+import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 
 const InformationSection = ({ anime, id }) => {
@@ -10,7 +11,6 @@ const InformationSection = ({ anime, id }) => {
 	useEffect(() => {
 		const getAnime = async () => {
 			const data = await fetch(`https://api.jikan.moe/v4/anime/${id}/episodes`).then((res) => res.json());
-			console.log(data);
 			setEpisodes(data.data);
 		};
 		getAnime();
@@ -20,6 +20,8 @@ const InformationSection = ({ anime, id }) => {
 		<Wrapper>
 			<First>
 				<Image src={anime.images.jpg.image_url} />
+
+				{/* INFO BELOW IMAGE */}
 				<Information>
 					<Title>Information: </Title>
 					<Container>
@@ -39,7 +41,7 @@ const InformationSection = ({ anime, id }) => {
 
 					<Container>
 						<InformationLabel>Aired: </InformationLabel>
-						{anime.aired.to ? (
+						{anime?.aired?.to ? (
 							<InformationData>{anime.aired.to.split("T")[0]}</InformationData>
 						) : (
 							<InformationData>Not Aired</InformationData>
@@ -101,35 +103,104 @@ const InformationSection = ({ anime, id }) => {
 						)}
 					</Container>
 				</Information>
+
+				{/* ANIME STATS  */}
+				<Information style={{ marginTop: "20px" }}>
+					<Title>Stats:</Title>
+
+					<Container>
+						<InformationLabel>Score: </InformationLabel>
+						<InformationData>{anime.score}</InformationData>
+					</Container>
+
+					<Container>
+						<InformationLabel>Scored By: </InformationLabel>
+						<InformationData>{anime.scored_by}</InformationData>
+					</Container>
+
+					<Container>
+						<InformationLabel>Popularity: </InformationLabel>
+						<InformationData>{anime.popularity}</InformationData>
+					</Container>
+
+					<Container>
+						<InformationLabel>Ranking: </InformationLabel>
+						<InformationData>{anime.rank}</InformationData>
+					</Container>
+				</Information>
 			</First>
 
 			<Second>
+				{/* ANIME SYNOPSIS  */}
 				<Background>
 					<Title>Synopsis: </Title>
 					{anime.synopsis ? <Synopsis>{anime.synopsis}</Synopsis> : <Synopsis>Unavailable</Synopsis>}
 					<Title>Background: </Title>
 					{anime.background ? <Synopsis>{anime.background}</Synopsis> : <Synopsis>Unavailable</Synopsis>}
 				</Background>
-				<EpisodeList>
-					<Title>Episodes: </Title>
-					<Episode style={{ border: "none" }}>
-						<EpisodeLabel>#</EpisodeLabel>
-						<EpisodeLabel>Score:</EpisodeLabel>
-						<EpisodeLabel>Aired:</EpisodeLabel>
-						Title
-					</Episode>
-					{episodes &&
-						episodes.map((ep, index) => {
+
+				{/* ANIME EPISODES */}
+				{episodes && episodes.length > 0 && <SubTitle>Episodes: </SubTitle>}
+				{episodes && episodes.length > 0 && (
+					<EpisodeList>
+						<Episode style={{ border: "none" }}>
+							<EpisodeLabel>#</EpisodeLabel>
+							<EpisodeLabel>Score (/5):</EpisodeLabel>
+							<EpisodeLabel>Aired:</EpisodeLabel>
+							<EpisodeLabel>Title:</EpisodeLabel>
+						</Episode>
+
+						{episodes.map((ep, index) => {
 							return (
 								<Episode>
 									<EpisodeLabel>{episodes.length - index}</EpisodeLabel>
 									<EpisodeLabel>{ep.score}</EpisodeLabel>
-									<EpisodeLabel>{ep.aired.split("T")[0]} </EpisodeLabel>
+									{ep.aired ? <EpisodeLabel>{ep.aired.split("T")[0]} </EpisodeLabel> : <EpisodeLabel>Not Out Yet</EpisodeLabel>}
 									<EpisodeLabel>"{ep.title}"</EpisodeLabel>
 								</Episode>
 							);
 						})}
-				</EpisodeList>
+					</EpisodeList>
+				)}
+
+				{/* ANIME RELATIONS  */}
+				{anime.relations && anime.relations.length > 0 && <SubTitle>Relations: </SubTitle>}
+				{anime.relations && (
+					<RelationList>
+						{anime.relations.map((item, index) => {
+							return (
+								<Relation>
+									<EpisodeLabel style={{ textDecoration: "underline" }}>{item.relation}: </EpisodeLabel>
+									<Episode style={{ border: "none" }}>
+										<EpisodeLabel>Type</EpisodeLabel>
+										<EpisodeLabel>Name</EpisodeLabel>
+									</Episode>
+									{item.entry.map((obj) => {
+										if (obj.type === "anime") {
+											return (
+												<Link to={`/anime/${obj.mal_id}`}>
+													<Episode>
+														<EpisodeLabel>{obj.type}</EpisodeLabel>
+														<EpisodeLabel>{obj.name}</EpisodeLabel>
+													</Episode>
+												</Link>
+											);
+										} else {
+											return (
+												<Anchor href={obj.url} target="_blank" rel="noreferrer">
+													<Episode>
+														<EpisodeLabel>{obj.type}</EpisodeLabel>
+														<EpisodeLabel>{obj.name}</EpisodeLabel>
+													</Episode>
+												</Anchor>
+											);
+										}
+									})}
+								</Relation>
+							);
+						})}
+					</RelationList>
+				)}
 			</Second>
 		</Wrapper>
 	);
@@ -154,19 +225,25 @@ const Image = styled.img`
 const Background = styled.div`
 	display: flex;
 	flex-direction: column;
-	padding: 0px 16px;
-	height: 370px;
+	padding: 10px 16px;
+	max-height: 350px;
+	overflow: hidden;
 `;
 
 const Title = styled.h1`
-	width: 98%;
+	width: 100%;
 	border-bottom: 1px solid #999;
+`;
+
+const SubTitle = styled.h1`
+	width: 97%;
+	border-bottom: 1px solid #999;
+	margin-left: 20px;
+	margin-top: 16px;
 `;
 
 const Synopsis = styled.p`
 	padding: 16px 0px;
-	flex-shrink: 0;
-	flex-grow: 0;
 `;
 
 const Second = styled.div`
@@ -177,13 +254,13 @@ const Second = styled.div`
 const Information = styled.div`
 	display: flex;
 	flex-direction: column;
-	padding-top: 16px;
+	padding-top: 20px;
 	flex-basis: 250px;
 `;
 
 const Container = styled.div`
 	display: flex;
-	padding-top: 10px;
+	padding-top: 14px;
 `;
 
 const InformationLabel = styled.h2``;
@@ -195,13 +272,19 @@ const InformationData = styled.p`
 const EpisodeList = styled.div`
 	display: flex;
 	flex-direction: column;
-	margin-left: 20px;
-	max-height: 400px;
+	align-items: center;
 	overflow-y: auto;
+	border: 1px solid black;
+	margin-left: 20px;
+	margin-top: 16px;
+	max-height: 400px;
+	padding: 8px;
 `;
 
 const Episode = styled.div`
 	display: flex;
+	justify-content: space-around;
+	align-items: center;
 	margin-top: 8px;
 	border: 1px solid #666;
 	padding: 10px;
@@ -209,7 +292,47 @@ const Episode = styled.div`
 `;
 
 const EpisodeLabel = styled.p`
-	flex-basis: 150px;
+	flex-basis: 22%;
+	text-align: center;
+`;
+
+const RelationList = styled.div`
+	display: flex;
+	flex-direction: column;
+	overflow-y: auto;
+	border: 1px solid black;
+	margin-left: 20px;
+	margin-top: 16px;
+	max-height: 400px;
+	padding: 14px;
+`;
+
+const Relation = styled.div`
+	margin-top: 10px;
+`;
+
+const Link = styled(NavLink)`
+	text-decoration: none;
+	color: inherit;
+
+	transition: 0.4s;
+
+	&:hover {
+		background-color: #444;
+		color: #888;
+	}
+`;
+
+const Anchor = styled.a`
+	text-decoration: none;
+	color: inherit;
+
+	transition: 0.4s;
+
+	&:hover {
+		background-color: #313131;
+		color: blue;
+	}
 `;
 
 export default InformationSection;
