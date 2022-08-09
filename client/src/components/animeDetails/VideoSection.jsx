@@ -26,15 +26,19 @@ const VideoSection = ({ anime, id }) => {
 	useEffect(() => {
 		const getInitialTheme = async () => {
 			try {
-				const response = await fetch(`/api/video/${anime?.theme.openings[0] + " opening"}`);
-				const result = await response.json();
-				setSelectedTheme(result.data);
+				if (anime?.theme.openings[0] === undefined) {
+					setSelectedTheme(null);
+				} else {
+					const response = await fetch(`/api/video/${anime?.theme.openings[0] + " opening"}`);
+					const result = await response.json();
+					setSelectedTheme(result.data);
+				}
 			} catch (error) {
-				console.log(error);
+				setSelectedTheme(null);
 			}
 		};
 		getInitialTheme();
-	}, [id]);
+	}, [id, anime]);
 
 	/**
 	 * When user clicks on opening/ending, will set the video to the first youtube search for that opening/ending
