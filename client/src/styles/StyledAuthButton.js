@@ -5,7 +5,7 @@ import styled from "styled-components";
  */
 const Button = styled.button`
 	/* CSS */
-	padding: 1em 2em;
+	padding: 1.5em 3em;
 	border: none;
 	outline: none;
 	color: rgb(255, 255, 255);
