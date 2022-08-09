@@ -32,6 +32,7 @@ const downloadMp3 = async (req, res) => {
 	try {
 		//get video first
 		const title = req.body.video.substring(3, req.body.video.length).replace(/ *\([^)]*\) */g, " ");
+		console.log(title);
 		const videos = await yt.search(title);
 		const video = videos[0];
 
@@ -49,7 +50,6 @@ const downloadMp3 = async (req, res) => {
 		});
 
 		const response = await download.json();
-		console.log(response);
 		response.status === "ok"
 			? sendResponse(res, 200, { song_title: response.title, song_link: response.link }, "video Retrieved")
 			: sendResponse(res, 404, null, "video not retrieved");

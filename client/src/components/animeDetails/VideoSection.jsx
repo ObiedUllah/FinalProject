@@ -88,13 +88,12 @@ const VideoSection = ({ anime, id }) => {
 			console.log(result);
 
 			//modal handling
-			if (result.song_link === null) {
-				setLink(null);
-			}
-			setLink(result.data.song_link);
+			result.song_link === null ? setLink(null) : setLink(result.data.song_link);
+
 			setOpen(true);
 		} catch (error) {
-			console.log(error);
+			setOpen(true);
+			setLink(null);
 		}
 	};
 
@@ -144,7 +143,11 @@ const VideoSection = ({ anime, id }) => {
 
 			{/* video content */}
 			<MainTitle>{anime.title}</MainTitle>
-			{selectedTheme && <Player controls={true} width="100%" height="70vh" url={selectedTheme.url} />}
+			{selectedTheme ? (
+				<Player controls={true} width="100%" height="70vh" url={selectedTheme.url} />
+			) : (
+				<Title style={{ textAlign: "center" }}>Unavailable...</Title>
+			)}
 			<ThemesList>
 				<Title>Openings:</Title>
 				<OpeningList>
