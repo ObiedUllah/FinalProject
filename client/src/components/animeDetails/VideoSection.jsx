@@ -1,10 +1,9 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 
-import React, { useContext, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { BsDownload } from "react-icons/bs";
 import Button from "@mui/material/Button";
-import { DetailsContext } from "context/DetailsContext";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
@@ -13,15 +12,29 @@ import DialogTitle from "@mui/material/DialogTitle";
 import ReactPlayer from "react-player";
 import styled from "styled-components";
 
-const VideoSection = () => {
-	const { anime, animeTheme } = useContext(DetailsContext);
-	const { setAnimeTheme } = useContext(DetailsContext).actions;
+const VideoSection = ({ anime, id }) => {
+	//current theme to display as video
+	const [selectedTheme, setSelectedTheme] = useState(null);
 
 	//link to download song
 	const [link, setLink] = useState(null);
 
 	//status for modal to be open or close
 	const [open, setOpen] = useState(false);
+
+	//will select the initial theme when going to details page
+	useEffect(() => {
+		const getInitialTheme = async () => {
+			try {
+				const response = await fetch(`/api/video/${anime?.theme.openings[0] + " opening"}`);
+				const result = await response.json();
+				setSelectedTheme(result.data);
+			} catch (error) {
+				console.log(error);
+			}
+		};
+		getInitialTheme();
+	}, [id]);
 
 	/**
 	 * When user clicks on opening/ending, will set the video to the first youtube search for that opening/ending
@@ -38,7 +51,7 @@ const VideoSection = () => {
 				: (response = await fetch(`/api/video/${anime?.theme.endings[index] + " opening"}`));
 
 			const result = await response.json();
-			setAnimeTheme(result.data);
+			setSelectedTheme(result.data);
 		} catch (error) {
 			console.log(error);
 		}
@@ -114,7 +127,6 @@ const VideoSection = () => {
 					</DialogContent>
 					<DialogActions>
 						{link ? <Button onClick={handleClose}>Disagree</Button> : <Button onClick={handleClose}>Close</Button>}
-						<Button onClick={handleClose}>Disagree</Button>
 						{link && (
 							<a href={link}>
 								<Button onClick={handleClose} autoFocus>
@@ -128,7 +140,7 @@ const VideoSection = () => {
 
 			{/* video content */}
 			<MainTitle>{anime.title}</MainTitle>
-			{animeTheme && <Player controls={true} width="100%" height="70vh" url={animeTheme.url} />}
+			{selectedTheme && <Player controls={true} width="100%" height="70vh" url={selectedTheme.url} />}
 			<ThemesList>
 				<Title>Openings:</Title>
 				<OpeningList>
