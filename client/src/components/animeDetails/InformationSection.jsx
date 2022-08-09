@@ -153,7 +153,7 @@ const InformationSection = ({ anime, id }) => {
 						{episodes.map((ep, index) => {
 							return (
 								<Episode>
-									<EpisodeLabel>{episodes.length - index}</EpisodeLabel>
+									<EpisodeLabel>{index + 1}</EpisodeLabel>
 									<EpisodeLabel>{ep.score}</EpisodeLabel>
 									{ep.aired ? <EpisodeLabel>{ep.aired.split("T")[0]} </EpisodeLabel> : <EpisodeLabel>Not Out Yet</EpisodeLabel>}
 									<EpisodeLabel>"{ep.title}"</EpisodeLabel>
