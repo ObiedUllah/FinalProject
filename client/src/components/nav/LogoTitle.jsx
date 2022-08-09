@@ -1,20 +1,23 @@
 import Logo from "../../images/chibi.png";
+import { NavLink } from "react-router-dom";
 import React from "react";
 import styled from "styled-components";
 
 const LogoTitle = () => {
 	return (
-		<Wrapper>
+		<Wrapper to="/">
 			<Image src={Logo} />
 			<Title>AnimeEnma</Title>
 		</Wrapper>
 	);
 };
 
-const Wrapper = styled.div`
+const Wrapper = styled(NavLink)`
 	display: flex;
 	align-items: center;
 	padding-left: 50px;
+	text-decoration: none;
+	color: inherit;
 `;
 
 const Image = styled.img`

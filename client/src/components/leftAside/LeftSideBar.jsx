@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 
+import { NavLink } from "react-router-dom";
 import React from "react";
 import styled from "styled-components";
 
@@ -19,7 +20,7 @@ const LeftSideBar = () => {
 		<Nav>
 			<Title>Top Anime</Title>
 			{topAnime.map((anime) => (
-				<Anchor href={anime.url} target="_blank" key={anime.mal_id} rel="noreferrer">
+				<Anchor to={`/anime/${anime.mal_id}`} key={anime.mal_id} rel="noreferrer">
 					{anime.title}
 				</Anchor>
 			))}
@@ -43,7 +44,7 @@ const Title = styled.h3`
 	text-align: center;
 `;
 
-const Anchor = styled.a`
+const Anchor = styled(NavLink)`
 	padding: 8px 16px;
 	width: 70%;
 

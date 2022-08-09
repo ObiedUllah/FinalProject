@@ -1,5 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 
+import AnimeDetails from "pages/AnimeDetails";
 import Footer from "components/footer/Footer";
 import GlobalStyles from "styles/GlobalStyles";
 import Home from "pages/Home";
@@ -35,6 +36,7 @@ const App = () => {
 					<Route exact path="/" element={<Home />} />
 					<Route exact path="/profile" element={<ProtectedRoute component={Profile} />} />
 					<Route exact path="/searchList" element={<SearchedAnimeList />} />
+					<Route exact path="/anime/:id" element={<AnimeDetails />} />
 				</Routes>
 			</Main>
 			<RightAside>

@@ -1,10 +1,11 @@
+import { NavLink } from "react-router-dom";
 import React from "react";
 import styled from "styled-components";
 
 function AnimeCard({ anime }) {
 	return (
 		<Card>
-			<Anchor href={anime.url} target="_blank" rel="noreferrer">
+			<Anchor to={`/anime/${anime.mal_id}`}>
 				<Image src={anime.images.jpg.image_url} alt="img" />
 				<Title>{anime.title}</Title>
 			</Anchor>
@@ -26,7 +27,7 @@ const Card = styled.article`
 	}
 `;
 
-const Anchor = styled.a`
+const Anchor = styled(NavLink)`
 	text-decoration: none;
 	color: inherit;
 `;
