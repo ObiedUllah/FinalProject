@@ -29,7 +29,7 @@ const Search = () => {
 	 */
 	const handleSearch = async (e) => {
 		e.preventDefault();
-		const temp = await fetch(`https://api.jikan.moe/v4/anime?q=${search}&order_by=score&sort=asc&limit=12`).then((res) => res.json());
+		const temp = await fetch(`https://api.jikan.moe/v4/anime?q=${search}&order_by=score&sort=asc&limit=24`).then((res) => res.json());
 		navigate("searchList", { state: { data: temp.data } });
 	};
 
@@ -54,6 +54,7 @@ const SearchInput = styled.input`
 	background: none;
 	outline: none;
 	border: none;
+	font-size: 20px;
 
 	display: block;
 	width: 90%;

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 
 import CircularProg from "utils/porgress/CircularProg";
+import InformationSection from "components/animeDetails/InformationSection";
 import React from "react";
 import VideoSection from "components/animeDetails/VideoSection";
 import { useParams } from "react-router-dom";
@@ -28,8 +29,8 @@ const AnimeDetails = () => {
 
 	return (
 		<>
-			{" "}
 			<VideoSection anime={anime} id={id} />
+			<InformationSection anime={anime} id={id} />
 		</>
 	);
 };

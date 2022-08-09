@@ -14,8 +14,7 @@ function AnimeCard({ anime }) {
 }
 
 const Card = styled.article`
-	flex: 1 1 25%;
-	max-width: 25%;
+	flex: 1 1 15%;
 	text-align: center;
 	margin-bottom: 3vh;
 
@@ -33,7 +32,7 @@ const Anchor = styled(NavLink)`
 `;
 
 const Image = styled.img`
-	width: 11vw;
+	width: 10vw;
 	height: 25vh;
 	border-radius: 16px;
 	box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.15);

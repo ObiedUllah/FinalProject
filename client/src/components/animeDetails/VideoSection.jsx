@@ -52,7 +52,7 @@ const VideoSection = ({ anime, id }) => {
 			let response;
 			isOpening
 				? (response = await fetch(`/api/video/${anime?.theme.openings[index] + " opening"}`))
-				: (response = await fetch(`/api/video/${anime?.theme.endings[index] + " opening"}`));
+				: (response = await fetch(`/api/video/${anime?.theme.endings[index] + " ending"}`));
 
 			const result = await response.json();
 			setSelectedTheme(result.data);
@@ -73,7 +73,7 @@ const VideoSection = ({ anime, id }) => {
 		try {
 			//get videoid first
 			let data;
-			isOpening ? (data = anime?.theme.openings[index]) : (data = anime?.theme.endings[index]);
+			isOpening ? (data = anime?.theme.openings[index] + " opening") : (data = anime?.theme.endings[index] + " ending");
 
 			//download mp3
 			const response = await fetch("/api/convert-mp3", {
@@ -84,14 +84,12 @@ const VideoSection = ({ anime, id }) => {
 				body: JSON.stringify({ video: data }),
 			});
 
-			const result = await response.json();
-			console.log(result);
-
 			//modal handling
+			const result = await response.json();
 			result.song_link === null ? setLink(null) : setLink(result.data.song_link);
-
 			setOpen(true);
 		} catch (error) {
+			//open modal to say there was an error
 			setOpen(true);
 			setLink(null);
 		}
