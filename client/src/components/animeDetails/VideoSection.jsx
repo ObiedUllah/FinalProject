@@ -115,6 +115,7 @@ const VideoSection = ({ anime, id }) => {
 
 			{/* video content */}
 			<MainTitle>{anime.title}</MainTitle>
+			{anime.title_english && <EnglishTitle>{anime.title_english}</EnglishTitle>}
 			{selectedTheme ? (
 				<Player controls={true} width="100%" height="70vh" url={selectedTheme.url} />
 			) : (
@@ -157,6 +158,12 @@ const MainTitle = styled.h1`
 	font-size: 28px;
 	text-align: center;
 	margin: 2vh 1vw;
+`;
+
+const EnglishTitle = styled.h1`
+	font-size: 22px;
+	text-align: center;
+	margin-bottom: 1vh;
 `;
 
 const ThemesList = styled.div`
