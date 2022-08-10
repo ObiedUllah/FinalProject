@@ -3,12 +3,7 @@
 import React, { useEffect, useState } from "react";
 
 import { BsDownload } from "react-icons/bs";
-import Button from "@mui/material/Button";
-import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
-import DialogTitle from "@mui/material/DialogTitle";
+import DownloadDialog from "./DownloadDialog";
 import ReactPlayer from "react-player";
 import styled from "styled-components";
 
@@ -105,13 +100,6 @@ const VideoSection = ({ anime, id }) => {
 	};
 
 	/**
-	 * closes modal
-	 */
-	const handleClose = () => {
-		setOpen(false);
-	};
-
-	/**
 	 * formats the text to look good
 	 * @param {*} str
 	 * @returns
@@ -123,30 +111,7 @@ const VideoSection = ({ anime, id }) => {
 	return (
 		<Wrapper>
 			{/* modal to confirm download */}
-			{open && (
-				<Dialog open={open} onClose={handleClose} aria-labelledby="alert-dialog-title" aria-describedby="alert-dialog-description">
-					<DialogTitle id="alert-dialog-title">{"Download Song"}</DialogTitle>
-					<DialogContent>
-						{link ? (
-							<DialogContentText id="alert-dialog-description">
-								Do you allow this third party application download a song into your computer!?
-							</DialogContentText>
-						) : (
-							<DialogContentText id="alert-dialog-description">There is no video link for this opening/ending!?</DialogContentText>
-						)}
-					</DialogContent>
-					<DialogActions>
-						{link ? <Button onClick={handleClose}>Disagree</Button> : <Button onClick={handleClose}>Close</Button>}
-						{link && (
-							<a href={link}>
-								<Button onClick={handleClose} autoFocus>
-									Agree
-								</Button>
-							</a>
-						)}
-					</DialogActions>
-				</Dialog>
-			)}
+			{open && <DownloadDialog link={link} setOpen={setOpen} />}
 
 			{/* video content */}
 			<MainTitle>{anime.title}</MainTitle>
