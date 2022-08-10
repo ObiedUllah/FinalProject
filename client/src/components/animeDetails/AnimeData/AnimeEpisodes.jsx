@@ -1,4 +1,4 @@
-import { Episode, EpisodeLabel, EpisodeList, SubTitle, Title } from "styles/AnimeDetailsStyles";
+import { Episode, EpisodeLabel, EpisodeList, SubTitle } from "styles/AnimeDetailsStyles";
 import React, { useEffect, useState } from "react";
 
 const AnimeEpisodes = ({ anime, id }) => {
@@ -26,7 +26,7 @@ const AnimeEpisodes = ({ anime, id }) => {
 
 					{episodes.map((ep, index) => {
 						return (
-							<Episode>
+							<Episode key={index}>
 								<EpisodeLabel>{index + 1}</EpisodeLabel>
 								<EpisodeLabel>{ep.score}</EpisodeLabel>
 								{ep.aired ? <EpisodeLabel>{ep.aired.split("T")[0]} </EpisodeLabel> : <EpisodeLabel>Not Out Yet</EpisodeLabel>}

@@ -6,11 +6,11 @@ const AnimeRelations = ({ anime }) => {
 	return (
 		<div>
 			{anime.relations && anime.relations.length > 0 && <SubTitle>Relations: </SubTitle>}
-			{anime.relations && (
+			{anime.relations && anime.relations.length > 0 && (
 				<RelationList>
-					{anime.relations.map((item) => {
+					{anime.relations.map((item, index) => {
 						return (
-							<Relation>
+							<Relation key={index}>
 								<EpisodeLabel style={{ textDecoration: "underline" }}>{item.relation}: </EpisodeLabel>
 								<Episode style={{ border: "none" }}>
 									<EpisodeLabel>Type</EpisodeLabel>
@@ -19,7 +19,7 @@ const AnimeRelations = ({ anime }) => {
 								{item.entry.map((obj) => {
 									if (obj.type === "anime") {
 										return (
-											<Link to={`/anime/${obj.mal_id}`}>
+											<Link to={`/anime/${obj.mal_id}`} key={obj.mal_id}>
 												<Episode>
 													<EpisodeLabel>{obj.type}</EpisodeLabel>
 													<EpisodeLabel>{obj.name}</EpisodeLabel>
@@ -28,7 +28,7 @@ const AnimeRelations = ({ anime }) => {
 										);
 									} else {
 										return (
-											<Anchor href={obj.url} target="_blank" rel="noreferrer">
+											<Anchor href={obj.url} target="_blank" rel="noreferrer" key={obj.mal_id}>
 												<Episode>
 													<EpisodeLabel>{obj.type}</EpisodeLabel>
 													<EpisodeLabel>{obj.name}</EpisodeLabel>

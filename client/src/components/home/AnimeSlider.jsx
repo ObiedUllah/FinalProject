@@ -5,17 +5,17 @@ import { NavLink } from "react-router-dom";
 import Slider from "react-slick";
 import styled from "styled-components";
 
-const AnimeSlider = ({ list, title }) => {
+const AnimeSlider = ({ list, title, isRecommended, scroll = 8 }) => {
 	var settings = {
 		dots: true,
 		infinite: true,
 		speed: 500,
-		slidesToShow: 6,
-		slidesToScroll: 6,
+		slidesToShow: scroll,
+		slidesToScroll: scroll,
 		arrows: true,
 	};
 	return (
-		<Wrapper>
+		<Wrapper isRec={isRecommended}>
 			<Title>{title}</Title>
 			<Slider {...settings}>
 				{list.map((slide) => {
@@ -48,7 +48,7 @@ const Title = styled.h1`
 `;
 
 const Wrapper = styled.section`
-	width: 65vw;
+	width: ${(props) => (props.isRec ? "50vw" : "65vw")};
 	padding: 30px 3px;
 `;
 

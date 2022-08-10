@@ -1,5 +1,6 @@
 import AnimeEpisodes from "./AnimeData/AnimeEpisodes";
 import AnimeInformation from "./AnimeData/AnimeInformation";
+import AnimeRecommendations from "./AnimeData/AnimeRecommendations";
 import AnimeRelations from "./AnimeData/AnimeRelations";
 import AnimeStats from "./AnimeData/AnimeStats";
 import AnimeSynopsis from "./AnimeData/AnimeSynopsis";
@@ -28,6 +29,9 @@ const InformationSection = ({ anime, id }) => {
 
 				{/* ANIME RELATIONS  */}
 				<AnimeRelations anime={anime} />
+
+				{/* ANIME RECOMMENDATIONS */}
+				<AnimeRecommendations anime={anime} id={id} />
 			</Second>
 		</Wrapper>
 	);

@@ -125,7 +125,7 @@ const VideoSection = ({ anime, id }) => {
 				<OpeningList>
 					{anime.theme.openings.map((theme, index) => {
 						return (
-							<ButtonLabel onClick={(e) => handleClick(e, index, true)}>
+							<ButtonLabel key={index} onClick={(e) => handleClick(e, index, true)}>
 								<Name>{formatText(theme)} </Name>
 								<Download onClick={(e) => handleDownload(e, index, true)} />
 							</ButtonLabel>
@@ -136,7 +136,7 @@ const VideoSection = ({ anime, id }) => {
 				<EndingList>
 					{anime.theme.endings.map((theme, index) => {
 						return (
-							<ButtonLabel onClick={(e) => handleClick(e, index, false)}>
+							<ButtonLabel key={index} onClick={(e) => handleClick(e, index, false)}>
 								<Name>{formatText(theme)} </Name>
 								<Download onClick={(e) => handleDownload(e, index, false)} />
 							</ButtonLabel>

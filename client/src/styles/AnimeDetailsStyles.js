@@ -28,6 +28,7 @@ export const Background = styled.div`
 export const Title = styled.h1`
 	width: 100%;
 	border-bottom: 1px solid #999;
+	padding-bottom: 7px;
 `;
 
 export const SubTitle = styled.h1`
