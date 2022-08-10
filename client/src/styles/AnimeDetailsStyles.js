@@ -36,6 +36,7 @@ export const SubTitle = styled.h1`
 	border-bottom: 1px solid #999;
 	margin-left: 20px;
 	margin-top: 16px;
+	padding-bottom: 7px;
 `;
 
 export const Synopsis = styled.p`
@@ -70,11 +71,12 @@ export const EpisodeList = styled.div`
 	flex-direction: column;
 	align-items: center;
 	overflow-y: auto;
-	border: 1px solid black;
+	border: 1px solid #666;
 	margin-left: 20px;
 	margin-top: 16px;
 	max-height: 400px;
 	padding: 8px;
+	border-radius: 3px;
 `;
 
 export const Episode = styled.div`
@@ -85,6 +87,7 @@ export const Episode = styled.div`
 	border: 1px solid #666;
 	padding: 10px;
 	width: 95%;
+	border-radius: 5px;
 `;
 
 export const EpisodeLabel = styled.p`
@@ -96,11 +99,12 @@ export const RelationList = styled.div`
 	display: flex;
 	flex-direction: column;
 	overflow-y: auto;
-	border: 1px solid black;
+	border: 1px solid #666;
 	margin-left: 20px;
 	margin-top: 16px;
 	max-height: 400px;
 	padding: 14px;
+	border-radius: 3px;
 `;
 
 export const Relation = styled.div`

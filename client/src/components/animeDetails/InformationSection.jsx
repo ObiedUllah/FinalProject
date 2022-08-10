@@ -41,6 +41,9 @@ const Wrapper = styled.div`
 	display: flex;
 	flex-direction: row;
 	padding: 16px;
+	margin: 16px;
+	border: 2px solid #aaa;
+	border-radius: 2px;
 `;
 
 const First = styled.div`
@@ -56,6 +59,7 @@ const Image = styled.img`
 const Second = styled.div`
 	display: flex;
 	flex-direction: column;
+	overflow: hidden;
 `;
 
 export default InformationSection;

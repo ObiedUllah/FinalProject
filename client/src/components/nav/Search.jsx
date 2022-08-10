@@ -55,17 +55,18 @@ const SearchInput = styled.input`
 	outline: none;
 	border: none;
 	font-size: 20px;
+	margin-left: auto;
 
 	display: block;
-	width: 90%;
-	padding: 16px;
+	width: 80%;
+	padding: 14px;
 	border-radius: 999px;
-	background-color: #eee;
+	background-color: #ccc;
 
 	transition: 0.4s;
 
 	::placeholder {
-		color: #888;
+		color: inherit;
 	}
 
 	&:focus,

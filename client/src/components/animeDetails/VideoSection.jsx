@@ -154,7 +154,7 @@ const Wrapper = styled.div`
 `;
 
 const MainTitle = styled.h1`
-	font-size: 32px;
+	font-size: 28px;
 	text-align: center;
 	margin: 2vh 1vw;
 `;
@@ -163,6 +163,7 @@ const ThemesList = styled.div`
 	display: flex;
 	flex-direction: column;
 	border: 3px solid #aaa;
+	border-radius: 2px;
 	padding: 16px;
 	margin: 16px;
 `;
@@ -178,14 +179,13 @@ const EndingList = styled.div`
 `;
 
 const Title = styled.h1`
-	font-size: 26px;
+	font-size: 22px;
 `;
 
 const ButtonLabel = styled.button`
-	background-color: #999;
-	width: 280px;
-	height: 70px;
-	margin: 12px 8px;
+	width: 240px;
+	height: 55px;
+	margin: 12px 6px;
 	cursor: pointer;
 	display: flex;
 	align-items: center;
@@ -193,13 +193,13 @@ const ButtonLabel = styled.button`
 
 	&:hover {
 		background-color: #444;
-		color: inherit;
+		color: #777;
 	}
 `;
 
 const Name = styled.span`
 	flex: 1 1 90%;
-	font-size: 16px;
+	font-size: 14px;
 `;
 
 const Download = styled(BsDownload)`

@@ -25,7 +25,7 @@ const Image = styled.img`
 `;
 
 const Title = styled.div`
-	font-size: 3em;
+	font-size: 2.5em;
 	margin-left: 30px;
 `;
 

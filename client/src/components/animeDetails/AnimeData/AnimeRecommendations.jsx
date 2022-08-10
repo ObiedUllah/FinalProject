@@ -10,7 +10,7 @@ const AnimeRecommendations = ({ anime, id }) => {
 
 	//get anime recommendations with id from params
 	useEffect(() => {
-		const getAnime = async () => {
+		const getRecommendations = async () => {
 			const data = await fetch(`https://api.jikan.moe/v4/anime/${id}/recommendations`).then((res) => res.json());
 			setRecommendations(data.data);
 
@@ -25,7 +25,11 @@ const AnimeRecommendations = ({ anime, id }) => {
 				}
 			}
 		};
-		getAnime();
+		//add interval because the jikkan api only allows 3 requests per second, this will bypass that
+		const interval = setInterval(() => {
+			getRecommendations();
+		}, 1500);
+		return () => clearInterval(interval);
 	}, [id, anime]);
 
 	return (

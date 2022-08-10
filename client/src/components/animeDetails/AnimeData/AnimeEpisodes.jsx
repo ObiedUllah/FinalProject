@@ -5,11 +5,11 @@ const AnimeEpisodes = ({ anime, id }) => {
 	const [episodes, setEpisodes] = useState(null);
 	//get anime with id from params
 	useEffect(() => {
-		const getAnime = async () => {
+		const getEpisodes = async () => {
 			const data = await fetch(`https://api.jikan.moe/v4/anime/${id}/episodes`).then((res) => res.json());
 			setEpisodes(data.data);
 		};
-		getAnime();
+		getEpisodes();
 	}, [id, anime]);
 
 	return (

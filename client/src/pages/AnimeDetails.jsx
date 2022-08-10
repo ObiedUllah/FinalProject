@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 
+import AddToListSection from "components/animeDetails/AddToListSection";
 import CircularProg from "utils/porgress/CircularProg";
 import InformationSection from "components/animeDetails/InformationSection";
 import React from "react";
@@ -30,6 +31,7 @@ const AnimeDetails = () => {
 	return (
 		<>
 			<VideoSection anime={anime} id={id} />
+			<AddToListSection anime={anime} />
 			<InformationSection anime={anime} id={id} />
 		</>
 	);
