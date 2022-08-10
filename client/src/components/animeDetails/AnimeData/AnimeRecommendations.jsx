@@ -7,7 +7,8 @@ import styled from "styled-components";
 const AnimeRecommendations = ({ anime, id }) => {
 	const [recommendations, setRecommendations] = useState(null);
 	const [length, setLength] = useState(0);
-	//get anime with id from params
+
+	//get anime recommendations with id from params
 	useEffect(() => {
 		const getAnime = async () => {
 			const data = await fetch(`https://api.jikan.moe/v4/anime/${id}/recommendations`).then((res) => res.json());
@@ -35,6 +36,13 @@ const AnimeRecommendations = ({ anime, id }) => {
 			) : (
 				<>
 					<p>refresh page/unavailable</p>
+					<Button
+						onClick={(e) => {
+							window.location.reload();
+						}}
+					>
+						Refresh Page
+					</Button>
 				</>
 			)}
 		</Wrapper>
@@ -43,6 +51,12 @@ const AnimeRecommendations = ({ anime, id }) => {
 
 const Wrapper = styled.div`
 	padding: 16px;
+`;
+
+const Button = styled.button`
+	margin: 20px 0px;
+	padding: 20px;
+	cursor: pointer;
 `;
 
 export default AnimeRecommendations;

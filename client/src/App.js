@@ -62,16 +62,20 @@ const Nav = styled.header`
 const LeftAside = styled.aside`
 	flex: 0 0 15%;
 	min-height: 70vh;
+	min-width: 12vw;
 `;
 
 const Main = styled.article`
 	flex: 0 0 70%;
 	min-height: 70vh;
+	padding-bottom: 6vh;
+	min-width: 60vw;
 `;
 
 const RightAside = styled.aside`
 	flex: 0 0 15%;
 	min-height: 70vh;
+	min-width: 12vw;
 `;
 
 const FooterDiv = styled.footer`

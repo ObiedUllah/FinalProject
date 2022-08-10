@@ -13,7 +13,7 @@ const InformationSection = ({ anime, id }) => {
 			<First>
 				<Image src={anime.images.jpg.image_url} />
 
-				{/* INFO BELOW IMAGE */}
+				{/* ANIME INFO BELOW IMAGE */}
 				<AnimeInformation anime={anime} />
 
 				{/* ANIME STATS  */}
