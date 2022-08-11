@@ -5,15 +5,32 @@ import ProfileFavorites from "./lists/ProfileFavorites";
 import ProfilePlan from "./lists/ProfilePlan";
 import styled from "styled-components";
 
-const ProfileTabs = ({ user }) => {
+const ProfileTabs = ({ user, setUser }) => {
 	const [selectedTab, setSelectedTab] = useState(() => 0);
+
+	const handleTabClick = async (event, index) => {
+		event.preventDefault();
+		//refresh list
+		const response = await fetch(`/api/user/${user.email}`);
+		const result = await response.json();
+		setUser(result.data);
+
+		//change tab
+		setSelectedTab(index);
+	};
 
 	return (
 		<Wrapper>
 			<ButtonWrapper>
-				<Button onClick={() => setSelectedTab(0)}>Completed</Button>
-				<Button onClick={() => setSelectedTab(1)}>Plan To Watch</Button>
-				<Button onClick={() => setSelectedTab(2)}>Favorites</Button>
+				<Button onClick={(e) => handleTabClick(e, 0)} isSelected={selectedTab === 0}>
+					Completed
+				</Button>
+				<Button onClick={(e) => handleTabClick(e, 1)} isSelected={selectedTab === 1}>
+					Plan To Watch
+				</Button>
+				<Button onClick={(e) => handleTabClick(e, 2)} isSelected={selectedTab === 2}>
+					Favorites
+				</Button>
 			</ButtonWrapper>
 
 			{selectedTab === 0 && <ProfileCompleted user={user} />}
@@ -40,9 +57,12 @@ const Button = styled.button`
 	flex: 1 1 33%;
 	cursor: pointer;
 	background-color: #d0d0d0;
-	border: 1px solid gray;
 	height: 30px;
-	border: none;
+	border-top: none;
+	border-left: none;
+	border-right: none;
+	border-bottom: ${(props) => (props.isSelected ? "3px solid purple" : "none")};
+	font-weight: ${(props) => (props.isSelected ? "bold" : "")};
 	margin: 0 3px;
 	border-radius: 2px;
 `;

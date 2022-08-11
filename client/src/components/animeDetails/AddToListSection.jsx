@@ -95,6 +95,7 @@ const AddToListSection = ({ anime }) => {
 				title: anime.title,
 				image: anime.images.jpg.image_url,
 				score: anime.score,
+				type: anime?.type,
 			},
 		};
 
@@ -140,6 +141,7 @@ const AddToListSection = ({ anime }) => {
 				title: anime.title,
 				image: anime.images.jpg.image_url,
 				score: anime.score,
+				type: anime?.type,
 				status: status,
 				rating: rating,
 			},

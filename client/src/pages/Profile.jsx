@@ -30,7 +30,7 @@ const Profile = () => {
 	return (
 		<Wrapper>
 			<ProfileInformation user={dbUser} />
-			<ProfileTabs user={dbUser} />
+			<ProfileTabs user={dbUser} setUser={setDbUser} />
 		</Wrapper>
 	);
 };

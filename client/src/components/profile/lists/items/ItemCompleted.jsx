@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 
+import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 
 const ItemCompleted = ({ user, anime, list, setList }) => {
 	const [rating, setRating] = useState(() => anime.rating);
-	const status = anime.status;
 
 	/**
 	 * removes an anime from the users completed list
@@ -113,11 +113,15 @@ const ItemCompleted = ({ user, anime, list, setList }) => {
 	return (
 		<Wrapper>
 			<Label>
-				<Image src={anime.image} />
+				<Anchor to={`/anime/${anime.mal_id}`}>
+					<Image src={anime.image} />
+				</Anchor>
 			</Label>
-			<Label>{anime.title}</Label>
+			<Anchor to={`/anime/${anime.mal_id}`}>
+				<Label>{anime.title}</Label>
+			</Anchor>
 			<Label>
-				<Select id="status" onChange={handleStatusChange} value={status}>
+				<Select id="status" onChange={handleStatusChange} value={anime.status}>
 					<Option value="plan">Plan to Watch</Option>
 					<Option value="completed">Completed</Option>
 				</Select>
@@ -208,6 +212,26 @@ const Option = styled.option`
 	border: none;
 	padding: 8px;
 	cursor: pointer;
+`;
+
+const Anchor = styled(NavLink)`
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	text-decoration: none;
+	color: inherit;
+
+	&:hover {
+		img {
+			width: 7vw;
+			height: 10vw;
+		}
+
+		div {
+			font-size: 22px;
+			color: #999;
+		}
+	}
 `;
 
 export default ItemCompleted;
