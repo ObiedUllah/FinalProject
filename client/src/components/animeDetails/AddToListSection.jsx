@@ -13,6 +13,8 @@ const AddToListSection = ({ anime }) => {
 	const [status, setStatus] = useState(() => "plan");
 	const [inList, setInList] = useState(() => false);
 
+	const [isUpdated, setIsUpdated] = useState(() => false);
+
 	const [dbUser, setDbUser] = useState(null);
 
 	//gets the user from the mongo db
@@ -159,6 +161,7 @@ const AddToListSection = ({ anime }) => {
 				setInList(true);
 				setRating(rating);
 				setStatus(status);
+				setIsUpdated(true);
 			}
 		} catch (error) {
 			alert("An error occured please try again or contact support");
@@ -193,6 +196,7 @@ const AddToListSection = ({ anime }) => {
 				setInList(false);
 				setRating("");
 				setStatus("plan");
+				setIsUpdated(false);
 			}
 		} catch (error) {
 			alert("An error occured please try again or contact support");
@@ -208,7 +212,7 @@ const AddToListSection = ({ anime }) => {
 						<Option value="completed">Completed</Option>
 					</Select>
 
-					<Select id="rating" disabled={status !== "completed"} onChange={handleRatingChange} defaultValue={""} value={rating}>
+					<Select id="rating" disabled={status !== "completed"} onChange={handleRatingChange} value={rating}>
 						<Option disabled value={""}>
 							Rating
 						</Option>
@@ -231,11 +235,14 @@ const AddToListSection = ({ anime }) => {
 							<Button confirm={false} onClick={handleRemoveFromList}>
 								Remove
 							</Button>
+							{isUpdated && <SuccessMessage>Updated!</SuccessMessage>}
 						</div>
 					) : (
-						<Button confirm={true} onClick={handleAddToList}>
-							Add to List
-						</Button>
+						<div>
+							<Button confirm={true} onClick={handleAddToList}>
+								Add to List
+							</Button>
+						</div>
 					)}
 					<div>
 						<label htmlFor="favorite">Favorite</label>
@@ -330,6 +337,12 @@ const LoginDiv = styled.div`
 
 const Checkbox = styled.input`
 	cursor: pointer;
+`;
+
+const SuccessMessage = styled.div`
+	text-align: center;
+	color: lightskyblue;
+	margin-top: 3px;
 `;
 
 export default AddToListSection;
