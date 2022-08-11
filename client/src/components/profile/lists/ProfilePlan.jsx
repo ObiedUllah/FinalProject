@@ -1,8 +1,8 @@
+import { Button, Label, TitleDiv, Wrapper } from "styles/profile/ProfileHeaderStyles";
 import React, { useState } from "react";
 import { sortByScore, sortByTitle } from "./ProfileHelpers";
 
 import ItemPlan from "./items/ItemPlan";
-import styled from "styled-components";
 
 const ProfilePlan = ({ user }) => {
 	const [list, setList] = useState(() => user.list.filter((item) => item.status === "plan"));
@@ -27,37 +27,5 @@ const ProfilePlan = ({ user }) => {
 		</Wrapper>
 	);
 };
-
-const Wrapper = styled.div`
-	display: flex;
-	flex-direction: column;
-	margin-top: 10px;
-	border: 1px solid #777;
-`;
-
-const TitleDiv = styled.div`
-	display: flex;
-	justify-content: space-around;
-	border-bottom: 3px solid #777;
-`;
-const Label = styled.label`
-	font-size: 20px;
-	margin: 1vh 0vh;
-`;
-
-const Button = styled.button`
-	margin-bottom: 5px;
-	background-color: transparent;
-	color: inherit;
-	border: none;
-	font-size: 20px;
-	margin: 1vh 0vh;
-
-	&:hover {
-		border-bottom: 3px solid #999;
-		font-weight: bold;
-		cursor: pointer;
-	}
-`;
 
 export default ProfilePlan;

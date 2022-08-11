@@ -12,6 +12,8 @@ const Profile = () => {
 	const [dbUser, setDbUser] = useState(() => null);
 	const { user } = useAuth0();
 
+	const [showButton, setShowButton] = useState(false);
+
 	//gets the user from the mongo db
 	useEffect(() => {
 		const getUser = async () => {
@@ -22,6 +24,27 @@ const Profile = () => {
 		getUser();
 	}, []);
 
+	//check for user scroll
+	useEffect(() => {
+		window.addEventListener("scroll", () => {
+			if (window.pageYOffset > 400) {
+				setShowButton(true);
+			} else {
+				setShowButton(false);
+			}
+		});
+	}, []);
+
+	/**
+	 * click method for automatic scroll back to top of page
+	 */
+	const scrollToTop = () => {
+		window.scrollTo({
+			top: 0,
+			behavior: "smooth", // for smoothly scrolling
+		});
+	};
+
 	//wait until user from db is retrived
 	if (!dbUser) {
 		return <CircularProg />;
@@ -31,6 +54,7 @@ const Profile = () => {
 		<Wrapper>
 			<ProfileInformation user={dbUser} />
 			<ProfileTabs user={dbUser} setUser={setDbUser} />
+			{showButton && <BackToTopButton onClick={scrollToTop}>&#8679;</BackToTopButton>}
 		</Wrapper>
 	);
 };
@@ -38,6 +62,27 @@ const Profile = () => {
 const Wrapper = styled.div`
 	display: flex;
 	flex-direction: column;
+`;
+
+const BackToTopButton = styled.button`
+	position: fixed;
+	bottom: 50px;
+	right: 80px;
+	z-index: 99;
+	border: none;
+	outline: none;
+	background-color: red;
+	color: white;
+	cursor: pointer;
+	padding: 18px 25px;
+	border-radius: 10px;
+	font-size: 30px;
+
+	transition: 0.4s;
+
+	&:hover {
+		padding: 25px 30px;
+	}
 `;
 
 export default Profile;
