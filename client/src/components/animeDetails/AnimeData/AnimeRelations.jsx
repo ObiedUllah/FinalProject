@@ -2,6 +2,11 @@ import { Anchor, Episode, EpisodeLabel, Link, Relation, RelationList, SubTitle }
 
 import React from "react";
 
+/**
+ * Displays other fictional series relating to the anime in question
+ * @param {*} param0
+ * @returns
+ */
 const AnimeRelations = ({ anime }) => {
 	return (
 		<div>

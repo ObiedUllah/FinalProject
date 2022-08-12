@@ -1,6 +1,13 @@
 import { Episode, EpisodeLabel, EpisodeList, SubTitle } from "styles/AnimeDetailsStyles";
 import React, { useEffect, useState } from "react";
 
+import CircularProg from "utils/porgress/CircularProg";
+
+/**
+ * Displays information of the first 100 episodes of an anime
+ * @param {*} param0
+ * @returns
+ */
 const AnimeEpisodes = ({ anime, id }) => {
 	const [episodes, setEpisodes] = useState(null);
 	//get anime with id from params
@@ -16,6 +23,11 @@ const AnimeEpisodes = ({ anime, id }) => {
 			window.location.reload();
 		}
 	}, [id, anime]);
+
+	//wait for episodes to be loaded
+	if (!episodes) {
+		return <CircularProg />;
+	}
 
 	return (
 		<div>

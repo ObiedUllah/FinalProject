@@ -3,6 +3,9 @@ import { useEffect, useState } from "react";
 import React from "react";
 import styled from "styled-components";
 
+/**
+ * displays random quotes
+ */
 const RightSideBar = () => {
 	const [quotes, setQuotes] = useState(() => []);
 
@@ -10,9 +13,9 @@ const RightSideBar = () => {
 	useEffect(() => {
 		const getRandomAnimeQuotes = async () => {
 			const data = await fetch(`https://animechan.vercel.app/api/quotes`).then((res) => res.json());
-			setQuotes(data.slice(0, 5));
+			setQuotes(data.slice(0, 3));
 		};
-		//getRandomAnimeQuotes();
+		getRandomAnimeQuotes();
 	}, []);
 
 	return (
@@ -31,7 +34,7 @@ const RightSideBar = () => {
 };
 
 const Nav = styled.nav`
-	padding: 1vh 1vw;
+	padding: 10%;
 	display: flex;
 	flex-direction: column;
 `;
@@ -49,7 +52,7 @@ const Box = styled.div`
 	min-height: 7vh;
 	margin-top: 10%;
 	border: 1px solid black;
-	padding: 5%;
+	padding: 1vh 1vw;
 	border-radius: 5%;
 	background-color: #aaa;
 	color: #313131;
@@ -70,26 +73,6 @@ const Anime = styled.h2``;
 
 const Character = styled.h1`
 	font-weight: bold;
-`;
-
-const Anchor = styled.a`
-	padding: 8px 16px;
-	width: 70%;
-
-	color: #888;
-	font-size: 16px;
-	margin-bottom: 16px;
-
-	background-color: #eee;
-	border-radius: 999px;
-	text-decoration: none;
-
-	transition: 0.4s;
-
-	&:hover {
-		background-color: #313131;
-		color: #aaa;
-	}
 `;
 
 export default RightSideBar;

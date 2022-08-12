@@ -4,8 +4,15 @@ import { sortByRating, sortByScore, sortByTitle } from "./ProfileHelpers";
 
 import ItemCompleted from "./items/ItemCompleted";
 
+/**
+ * Shows all the anime that a user has completed in a display flex table looking format
+ * @param {*} param0
+ * @returns
+ */
 const ProfileCompleted = ({ user }) => {
 	const [list, setList] = useState(() => user.list.filter((item) => item.status === "completed"));
+
+	//handles sortung
 	const [titleAsc, setTitleAsc] = useState(false);
 	const [scoreAsc, setScoreAsc] = useState(false);
 	const [ratingAsc, setRatingAsc] = useState(false);

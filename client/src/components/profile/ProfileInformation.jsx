@@ -3,15 +3,27 @@ import React, { useRef, useState } from "react";
 import Default from "../../images/default.png";
 import styled from "styled-components";
 
+/**
+ * first section of the users profile containing user information and profile picture
+ * @param {} param0
+ * @returns
+ */
 const ProfileInformation = ({ user }) => {
+	//profile picture state
 	const [fileInputState, setFileInputState] = useState("");
 	const [previewSource, setPreviewSource] = useState(() => (user.image === "" ? Default : user.image));
 	const [selectedFile, setSelectedFile] = useState();
 	const inputFile = useRef(null);
+
+	//avg of completed anime
 	const average =
 		user.list.filter((item) => item.status === "completed").reduce((total, next) => parseInt(total) + parseInt(next.rating), 0) /
 		user.list.filter((item) => item.status === "completed").length;
 
+	/**
+	 * gets file from the file explorer
+	 * @param {*} e
+	 */
 	const handleFileInputChange = (e) => {
 		const file = e.target.files[0];
 		previewFile(file);
@@ -19,6 +31,11 @@ const ProfileInformation = ({ user }) => {
 		setFileInputState(e.target.value);
 	};
 
+	/**
+	 * previews the file in the users profile picture
+	 * @param {*} file
+	 * @returns
+	 */
 	const previewFile = (file) => {
 		const reader = new FileReader();
 		reader.readAsDataURL(file);
@@ -31,6 +48,11 @@ const ProfileInformation = ({ user }) => {
 		};
 	};
 
+	/**
+	 * makes sure there is a file and gets file data and then uploads image
+	 * @param {*} e
+	 * @returns
+	 */
 	const handleSubmitFile = (e) => {
 		e.preventDefault();
 		if (!selectedFile) return;
@@ -44,8 +66,11 @@ const ProfileInformation = ({ user }) => {
 		};
 	};
 
+	/**
+	 * uploads image to db
+	 * @param {*} base64EncodedImage
+	 */
 	const uploadImage = async (base64EncodedImage) => {
-		console.log(base64EncodedImage);
 		try {
 			await fetch("/api/upload", {
 				method: "POST",
@@ -58,6 +83,9 @@ const ProfileInformation = ({ user }) => {
 		}
 	};
 
+	/**
+	 * ref to open file explorer by clicking on the image
+	 */
 	const openFileExpolerer = () => {
 		inputFile.current.click();
 	};
@@ -109,7 +137,7 @@ const ProfileInformation = ({ user }) => {
 						<Avatar src={previewSource} alt="Profile" />
 						<Centered>Upload Image</Centered>
 					</ImageContainer>
-					<UploadButton className="btn" type="submit">
+					<UploadButton type="submit" hasFile={selectedFile !== undefined} disabled={selectedFile === undefined}>
 						Save
 					</UploadButton>
 				</Form>
@@ -210,10 +238,10 @@ const UploadButton = styled.button`
 	border: none;
 	background-color: #405cf5;
 	border-radius: 10px;
-	cursor: pointer;
+	cursor: ${(props) => (props.hasFile ? "pointer" : "disabled")};
 
 	&:hover {
-		transform: scale(1.15);
+		transform: ${(props) => props.hasFile && "scale(1.15)"};
 	}
 `;
 

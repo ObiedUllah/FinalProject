@@ -2,7 +2,12 @@ import { NavLink } from "react-router-dom";
 import React from "react";
 import styled from "styled-components";
 
-function AnimeCard({ anime }) {
+/**
+ * Single Anime card containing image and title to be used when user searches for an anime
+ * @param {*} anime
+ * @returns
+ */
+const AnimeCard = ({ anime }) => {
 	return (
 		<Card>
 			<Anchor to={`/anime/${anime.mal_id}`}>
@@ -11,7 +16,7 @@ function AnimeCard({ anime }) {
 			</Anchor>
 		</Card>
 	);
-}
+};
 
 const Card = styled.article`
 	flex: 0 0 15%;

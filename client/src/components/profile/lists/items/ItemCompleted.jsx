@@ -2,6 +2,11 @@ import { Anchor, Button, Image, Label, Option, Select, Wrapper } from "styles/pr
 import React, { useState } from "react";
 import { handleRemoveFromList, handleStatusChange } from "../ProfileHelpers";
 
+/**
+ * Single Anime that a user has completed
+ * @param {*} param0
+ * @returns
+ */
 const ItemCompleted = ({ user, anime, list, setList }) => {
 	const [rating, setRating] = useState(() => anime.rating);
 

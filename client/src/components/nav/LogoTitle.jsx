@@ -3,6 +3,10 @@ import { NavLink } from "react-router-dom";
 import React from "react";
 import styled from "styled-components";
 
+/**
+ * Left Side of the navbar containing the logo and the title
+ * @returns
+ */
 const LogoTitle = () => {
 	return (
 		<Wrapper to="/">

@@ -5,6 +5,12 @@ import ProfileFavorites from "./lists/ProfileFavorites";
 import ProfilePlan from "./lists/ProfilePlan";
 import styled from "styled-components";
 
+/**
+ * 3 tabs (completed, plan to watch, favorite)
+ * allows t switch between them
+ * @param {*} param0
+ * @returns
+ */
 const ProfileTabs = ({ user, setUser }) => {
 	const [selectedTab, setSelectedTab] = useState(() => 0);
 

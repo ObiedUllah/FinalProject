@@ -4,6 +4,10 @@ import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
+/**
+ * Search input handling in the nav bar
+ * @returns
+ */
 const Search = () => {
 	//display if search bar should appear
 	const [display, setDisplay] = useState(() => false);

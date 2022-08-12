@@ -5,7 +5,12 @@ import { NavLink } from "react-router-dom";
 import Slider from "react-slick";
 import styled from "styled-components";
 
-const AnimeSlider = ({ list, title, isRecommended, scroll = 8 }) => {
+/**
+ * Carousel for Anime List using Slider from "react-slick";
+ * @param {*} param0
+ * @returns
+ */
+const AnimeSlider = ({ list, title, scroll = 8 }) => {
 	var settings = {
 		dots: true,
 		infinite: true,
@@ -15,27 +20,27 @@ const AnimeSlider = ({ list, title, isRecommended, scroll = 8 }) => {
 		arrows: true,
 	};
 	return (
-		<Wrapper isRec={isRecommended}>
+		<Wrapper>
 			<Title>{title}</Title>
 			<Slider {...settings}>
 				{list.map((slide) => {
 					if (slide.entry) {
 						return (
-							<Data key={slide.entry.mal_id}>
+							<div key={slide.entry.mal_id}>
 								<Anchor to={`/anime/${slide.entry.mal_id}`}>
 									<Image src={slide.entry.images.jpg.image_url} />
 									<Text>{slide.entry.title.substring(0, 13)}... </Text>
 								</Anchor>
-							</Data>
+							</div>
 						);
 					}
 					return (
-						<Data key={slide.mal_id}>
+						<div key={slide.mal_id}>
 							<Anchor to={`/anime/${slide.mal_id}`}>
 								<Image src={slide.images.jpg.image_url} />
 								<Text>{slide.title.substring(0, 13)}... </Text>
 							</Anchor>
-						</Data>
+						</div>
 					);
 				})}
 			</Slider>
@@ -48,11 +53,9 @@ const Title = styled.h1`
 `;
 
 const Wrapper = styled.section`
-	width: ${(props) => (props.isRec ? "50vw" : "65vw")};
+	width: 100%;
 	padding: 30px 3px;
 `;
-
-const Data = styled.div``;
 
 const Image = styled.img`
 	width: 6vw;

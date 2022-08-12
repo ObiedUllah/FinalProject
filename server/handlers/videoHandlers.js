@@ -16,7 +16,6 @@ const getVideo = async (req, res) => {
 
 		sendResponse(res, 200, videos[0], "video Retrieved");
 	} catch (error) {
-		console.log(error);
 		sendResponse(res, 500, null, "Server Error");
 	}
 };

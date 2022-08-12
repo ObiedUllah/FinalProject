@@ -7,6 +7,11 @@ import AnimeSynopsis from "./AnimeData/AnimeSynopsis";
 import React from "react";
 import styled from "styled-components";
 
+/**
+ * Third section of anime detail containing all the info of an anime
+ * @param {*} param0
+ * @returns
+ */
 const InformationSection = ({ anime, id }) => {
 	return (
 		<Wrapper>

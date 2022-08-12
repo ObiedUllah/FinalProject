@@ -4,10 +4,18 @@ import { sortByScore, sortByTitle } from "./ProfileHelpers";
 
 import ItemPlan from "./items/ItemPlan";
 
+/**
+ * Shows all the anime that a user plans to watch in a display flex table looking format
+ * @param {*} param0
+ * @returns
+ */
 const ProfilePlan = ({ user }) => {
 	const [list, setList] = useState(() => user.list.filter((item) => item.status === "plan"));
+
+	//sort
 	const [titleAsc, setTitleAsc] = useState(false);
 	const [scoreAsc, setScoreAsc] = useState(false);
+
 	return (
 		<Wrapper>
 			<TitleDiv>

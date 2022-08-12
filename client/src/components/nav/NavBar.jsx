@@ -3,6 +3,10 @@ import NavButtons from "./NavButtons";
 import React from "react";
 import styled from "styled-components";
 
+/**
+ * Navbar containing a left and right side
+ * @returns
+ */
 const NavBar = () => {
 	return (
 		<Nav>

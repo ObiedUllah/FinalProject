@@ -7,6 +7,11 @@ import React from "react";
 import VideoSection from "components/animeDetails/VideoSection";
 import { useParams } from "react-router-dom";
 
+/**
+ * Shows the details of an anime by using 3 other componenets
+ *
+ * @returns
+ */
 const AnimeDetails = () => {
 	//this will capture the id of the anime clicked
 	const { id } = useParams();
@@ -29,7 +34,8 @@ const AnimeDetails = () => {
 		return (
 			<>
 				<CircularProg />
-				<p style={{ textAlign: "center", marginTop: "30%" }}> Whoops! Something went wrong! Refresh the page</p>
+				<p style={{ textAlign: "center", marginTop: "30%" }}> Whoops! Too many requests were made!</p>
+				<p style={{ textAlign: "center", marginTop: "30%" }}> Refresh the page!</p>
 			</>
 		);
 	}

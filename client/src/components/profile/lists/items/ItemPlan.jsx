@@ -2,10 +2,17 @@ import { Anchor, Button, Image, Label, Option, Select, Wrapper } from "styles/pr
 import React, { useState } from "react";
 import { handleRemoveFromList, handleStatusChange } from "../ProfileHelpers";
 
+/**
+ * Single Anime that a user plans to watch
+ * @param {*} param0
+ * @returns
+ */
 const ItemPlan = ({ user, anime, list, setList }) => {
-	const [toDisplay, setToDisplay] = useState(false);
 	const [rating, setRating] = useState(() => 0);
 	const [status, setStatus] = useState(() => anime.status);
+
+	//displays the rating if the user completed the anime
+	const [toDisplay, setToDisplay] = useState(false);
 
 	/**
 	 * changes the status and shows the rating and add to list button

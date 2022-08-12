@@ -7,6 +7,11 @@ import DownloadDialog from "./DownloadDialog";
 import ReactPlayer from "react-player";
 import styled from "styled-components";
 
+/**
+ * First section of an anime details containing the video and the list of openings and endingg
+ * @param {*} param0
+ * @returns
+ */
 const VideoSection = ({ anime, id }) => {
 	//current theme to display as video
 	const [selectedTheme, setSelectedTheme] = useState(null);
@@ -61,7 +66,7 @@ const VideoSection = ({ anime, id }) => {
 			const result = await response.json();
 			setSelectedTheme(result.data);
 		} catch (error) {
-			console.log(error);
+			alert("Could not fetch video!?");
 		}
 	};
 

@@ -4,6 +4,10 @@ import { NavLink } from "react-router-dom";
 import React from "react";
 import styled from "styled-components";
 
+/**
+ * Side bar containing the top anime
+ * @returns
+ */
 const LeftSideBar = () => {
 	const [topAnime, setTopAnime] = useState(() => []);
 

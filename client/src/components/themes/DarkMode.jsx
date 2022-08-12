@@ -1,5 +1,9 @@
 import "styles/darkmode.css";
 
+/**
+ * Sets website to light or dark mode
+ */
+
 const setDark = () => {
 	localStorage.setItem("theme", "dark");
 	document.documentElement.setAttribute("data-theme", "dark");

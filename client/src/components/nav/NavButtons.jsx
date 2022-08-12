@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+
 import React, { useEffect, useState } from "react";
 
 import AuthenticationButton from "components/auth/buttons/AuthenticationButton";
@@ -7,6 +9,10 @@ import Search from "./Search";
 import styled from "styled-components";
 import { useAuth0 } from "@auth0/auth0-react";
 
+/**
+ * Right side of the navbar
+ * @returns
+ */
 const NavButtons = () => {
 	//get user
 	const { user, isAuthenticated } = useAuth0();

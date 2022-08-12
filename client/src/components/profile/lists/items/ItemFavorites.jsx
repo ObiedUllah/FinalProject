@@ -2,6 +2,11 @@ import { Anchor, Button, Image, Label, Wrapper } from "styles/profile/ProfileIte
 
 import React from "react";
 
+/**
+ * Single Anime that a user has favorited
+ * @param {*} param0
+ * @returns
+ */
 const ItemFavorites = ({ user, anime, list, setList }) => {
 	/**
 	 * removes the anime from favorites list
@@ -24,8 +29,6 @@ const ItemFavorites = ({ user, anime, list, setList }) => {
 				type: anime?.type,
 			},
 		};
-
-		console.log(body);
 
 		try {
 			//update the favorites in the database

@@ -2,6 +2,11 @@ import { Container, Information, InformationData, InformationLabel, Title } from
 
 import React from "react";
 
+/**
+ * Displays Informtaion about the anime
+ * @param {*} param0
+ * @returns
+ */
 const AnimeInformation = ({ anime }) => {
 	return (
 		<Information>
@@ -47,7 +52,7 @@ const AnimeInformation = ({ anime }) => {
 
 			<Container>
 				<InformationLabel>Genres: </InformationLabel>
-				{anime.genres ? (
+				{anime.genres?.length > 0 ? (
 					<InformationData>{anime.genres.map((item) => item.name + ", ")}</InformationData>
 				) : (
 					<InformationData>No Genres</InformationData>
@@ -56,7 +61,7 @@ const AnimeInformation = ({ anime }) => {
 
 			<Container>
 				<InformationLabel>Studios: </InformationLabel>
-				{anime.studios ? (
+				{anime.studios?.length > 0 ? (
 					<InformationData>{anime.studios.map((item) => item.name + ", ")}</InformationData>
 				) : (
 					<InformationData>No Studios</InformationData>
@@ -65,7 +70,7 @@ const AnimeInformation = ({ anime }) => {
 
 			<Container>
 				<InformationLabel>Licensors: </InformationLabel>
-				{anime.licensors ? (
+				{anime.licensors?.length > 0 ? (
 					<InformationData>{anime.licensors.map((item) => item.name + ", ")}</InformationData>
 				) : (
 					<InformationData>No Licensors</InformationData>
@@ -74,7 +79,7 @@ const AnimeInformation = ({ anime }) => {
 
 			<Container>
 				<InformationLabel>Producers: </InformationLabel>
-				{anime.producers ? (
+				{anime.producers?.length > 0 ? (
 					<InformationData>{anime.producers.map((item) => item.name + ", ")}</InformationData>
 				) : (
 					<InformationData>No producers</InformationData>

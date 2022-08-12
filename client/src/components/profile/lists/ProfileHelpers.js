@@ -39,7 +39,6 @@ export const sortByScore = (e, scoreAsc, setScoreAsc, list, setList) => {
 export const sortByRating = (e, ratingAsc, setRatingAsc, list, setList) => {
 	e.preventDefault();
 
-	console.log(list);
 	ratingAsc
 		? setList([...list.sort((a, b) => parseInt(b.rating) - parseInt(a.rating))])
 		: setList([...list.sort((a, b) => parseInt(a.rating) - parseInt(b.rating))]);

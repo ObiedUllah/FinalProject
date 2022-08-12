@@ -4,10 +4,18 @@ import { sortByScore, sortByTitle } from "./ProfileHelpers";
 
 import ItemFavorites from "./items/ItemFavorites";
 
+/**
+ * Shows all the anime that a user has favorited in a display flex table looking format
+ * @param {*} param0
+ * @returns
+ */
 const ProfileFavorites = ({ user }) => {
 	const [list, setList] = useState(() => user.favorites);
+
+	//sorting
 	const [titleAsc, setTitleAsc] = useState(false);
 	const [scoreAsc, setScoreAsc] = useState(false);
+
 	return (
 		<Wrapper>
 			<TitleDiv>

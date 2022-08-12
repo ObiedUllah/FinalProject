@@ -2,6 +2,11 @@ import { Container, Information, InformationData, InformationLabel, Title } from
 
 import React from "react";
 
+/**
+ * Displays the stats for an anime
+ * @param {*} param0
+ * @returns
+ */
 const AnimeStats = ({ anime }) => {
 	return (
 		<Information style={{ marginTop: "20px" }}>

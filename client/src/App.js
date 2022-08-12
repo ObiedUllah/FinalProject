@@ -52,6 +52,10 @@ const App = () => {
 const Wrapper = styled.div`
 	display: flex;
 	flex-wrap: wrap;
+	@media (max-width: 1200px) {
+		display: flex;
+		flex-direction: column;
+	}
 `;
 
 const Nav = styled.header`
@@ -63,6 +67,10 @@ const LeftAside = styled.aside`
 	flex: 0 0 15%;
 	min-height: 70vh;
 	min-width: 12vw;
+
+	@media (max-width: 1200px) {
+		display: none;
+	}
 `;
 
 const Main = styled.article`
@@ -70,12 +78,19 @@ const Main = styled.article`
 	min-height: 70vh;
 	padding-bottom: 6vh;
 	min-width: 60vw;
+	@media (max-width: 1200px) {
+		width: 85vw;
+		padding: 0px 5vw;
+	}
 `;
 
 const RightAside = styled.aside`
 	flex: 0 0 15%;
 	min-height: 70vh;
 	min-width: 12vw;
+	@media (max-width: 1200px) {
+		display: none;
+	}
 `;
 
 const FooterDiv = styled.footer`

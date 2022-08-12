@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useLayoutEffect, useState } from "react";
 
 import CircularProg from "utils/porgress/CircularProg";
 import ProfileInformation from "components/profile/ProfileInformation";
@@ -8,6 +8,10 @@ import ProfileTabs from "components/profile/ProfileTabs";
 import styled from "styled-components";
 import { useAuth0 } from "@auth0/auth0-react";
 
+/**
+ * has user information and their lists
+ * @returns
+ */
 const Profile = () => {
 	const [dbUser, setDbUser] = useState(() => null);
 	const { user } = useAuth0();
@@ -25,7 +29,7 @@ const Profile = () => {
 	}, []);
 
 	//check for user scroll
-	useEffect(() => {
+	useLayoutEffect(() => {
 		window.addEventListener("scroll", () => {
 			if (window.pageYOffset > 400) {
 				setShowButton(true);

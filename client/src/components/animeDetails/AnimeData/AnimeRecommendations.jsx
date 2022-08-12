@@ -1,9 +1,15 @@
 import React, { useEffect, useState } from "react";
 
 import AnimeSlider from "components/home/AnimeSlider";
+import CircularProg from "utils/porgress/CircularProg";
 import { Title } from "styles/AnimeDetailsStyles";
 import styled from "styled-components";
 
+/**
+ * Displays recommendations for an anime
+ * @param {*} param0
+ * @returns
+ */
 const AnimeRecommendations = ({ anime, id }) => {
 	const [recommendations, setRecommendations] = useState(null);
 	const [length, setLength] = useState(0);
@@ -16,10 +22,8 @@ const AnimeRecommendations = ({ anime, id }) => {
 
 			//set length of anime slider
 			if (data.data) {
-				if (data.data.length < 2) {
-					setLength(1);
-				} else if (data.data.length < 8) {
-					setLength(parseInt(data.data.length / 2));
+				if (data.data.length < 8) {
+					setLength(parseInt(data.data.length));
 				} else {
 					setLength(8);
 				}
@@ -33,11 +37,16 @@ const AnimeRecommendations = ({ anime, id }) => {
 		}
 	}, [id, anime]);
 
+	//wait for recommendations to be loaded
+	if (!recommendations) {
+		return <CircularProg />;
+	}
+
 	return (
 		<Wrapper>
-			<Title>Recommendations: </Title>
+			{recommendations && recommendations.length > 0 && <Title>Recommendations: </Title>}
 			{recommendations ? (
-				<AnimeSlider list={recommendations} title={""} isRecommended={true} scroll={length} />
+				<AnimeSlider list={recommendations} title={""} scroll={length} />
 			) : (
 				<>
 					<p>refresh page/unavailable</p>
@@ -55,7 +64,7 @@ const AnimeRecommendations = ({ anime, id }) => {
 };
 
 const Wrapper = styled.div`
-	padding: 16px;
+	padding: 30px;
 	display: flex;
 	align-items: center;
 	flex-direction: column;

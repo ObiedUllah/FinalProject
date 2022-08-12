@@ -6,16 +6,26 @@ import LoginButton from "components/auth/buttons/LoginButton";
 import styled from "styled-components";
 import { useAuth0 } from "@auth0/auth0-react";
 
+/**
+ * Second section of anime detail allowing the user to modify their anime list
+ * @param {*} param0
+ * @returns
+ */
 const AddToListSection = ({ anime }) => {
+	//getting user
 	const { user, isAuthenticated } = useAuth0();
+	const [dbUser, setDbUser] = useState(null);
+
+	//states for the inputs
 	const [isFavorite, setIsFavorite] = useState(() => false);
 	const [rating, setRating] = useState(() => "");
 	const [status, setStatus] = useState(() => "plan");
+
+	//checks if anime is in list to change the button from add -> update/delete
 	const [inList, setInList] = useState(() => false);
 
+	//checks if list was updated and will allow user to see a message
 	const [isUpdated, setIsUpdated] = useState(() => false);
-
-	const [dbUser, setDbUser] = useState(null);
 
 	//gets the user from the mongo db
 	useEffect(() => {
@@ -66,7 +76,6 @@ const AddToListSection = ({ anime }) => {
 	 * @param {*} event
 	 */
 	const handleStatusChange = (event) => {
-		console.log("✅" + event.target.value);
 		if (event.target.value === "plan") {
 			setRating("");
 		}
@@ -86,7 +95,9 @@ const AddToListSection = ({ anime }) => {
 	 * @param {*} event
 	 */
 	const handleFavoriteChange = async (event) => {
-		event.preventDefault();
+		//changes the frontend
+		setIsFavorite((current) => !current);
+
 		//data to send to db
 		const body = {
 			email: dbUser.email,
@@ -101,37 +112,37 @@ const AddToListSection = ({ anime }) => {
 
 		try {
 			//update the favorites in the database
-			const response = await fetch("/api/user/favorite", {
+			await fetch("/api/user/favorite", {
 				method: "PUT",
 				headers: {
 					"Content-Type": "application/json",
 				},
 				body: JSON.stringify(body),
 			});
-			const result = await response.json();
-
-			//change checkbox
-			if (result.status === 200) {
-				setIsFavorite((current) => !current);
-			}
 		} catch (error) {
 			alert("An error occured please try again or contact support");
 		}
 	};
 
 	/**
-	 * adds an anime to the users completed/ plan to watch list
+	 * adds an anime to the users completed/plan to watch list
 	 * @param {*} event
 	 * @returns
 	 */
 	const handleAddToList = async (event) => {
 		event.preventDefault();
 
-		//make sure the user selected a rating
+		//make sure the user selected a rating if the anime is completed
 		if (status === "completed" && isNaN(parseInt(rating))) {
 			alert("Select a Rating, you may change it later");
 			return;
 		}
+
+		//change frontend to make it so the anime is added to list
+		setInList(true);
+		setRating(rating);
+		setStatus(status);
+		setIsUpdated(true);
 
 		//data to send to db
 		let body = {
@@ -148,34 +159,32 @@ const AddToListSection = ({ anime }) => {
 		};
 
 		try {
-			//update the favorites in the database
-			const response = await fetch("/api/user/status", {
+			//update the status in the database
+			await fetch("/api/user/status", {
 				method: "PUT",
 				headers: {
 					"Content-Type": "application/json",
 				},
 				body: JSON.stringify(body),
 			});
-			const result = await response.json();
-
-			//change status
-			if (result.status === 200) {
-				setInList(true);
-				setRating(rating);
-				setStatus(status);
-				setIsUpdated(true);
-			}
 		} catch (error) {
 			alert("An error occured please try again or contact support");
 		}
 	};
 
 	/**
-	 * removes an anime from the users plan towatch/completed list
+	 * removes an anime from the users plan to watch/completed list
 	 * @param {*} event
 	 */
 	const handleRemoveFromList = async (event) => {
 		event.preventDefault();
+
+		//remove anime from frontend
+		setInList(false);
+		setRating("");
+		setStatus("plan");
+		setIsUpdated(false);
+
 		//data to send to db
 		const body = {
 			email: dbUser.email,
@@ -183,23 +192,14 @@ const AddToListSection = ({ anime }) => {
 		};
 
 		try {
-			//update the favorites in the database
-			const response = await fetch("/api/user/status", {
+			//delete the aniem from the list in the database
+			await fetch("/api/user/status", {
 				method: "DELETE",
 				headers: {
 					"Content-Type": "application/json",
 				},
 				body: JSON.stringify(body),
 			});
-			const result = await response.json();
-
-			//change status and
-			if (result.status === 200) {
-				setInList(false);
-				setRating("");
-				setStatus("plan");
-				setIsUpdated(false);
-			}
 		} catch (error) {
 			alert("An error occured please try again or contact support");
 		}

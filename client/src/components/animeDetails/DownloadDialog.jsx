@@ -7,7 +7,7 @@ import DialogTitle from "@mui/material/DialogTitle";
 import React from "react";
 
 /**
- * Dialog to ask a user if it is ok to download a song into their computer
+ * Dialog to ask a user if it is ok to download a song onto their computer
  * @param {*} param0
  * @returns
  */

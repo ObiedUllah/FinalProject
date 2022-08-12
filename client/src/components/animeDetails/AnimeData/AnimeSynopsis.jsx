@@ -2,6 +2,11 @@ import { Background, Synopsis, Title } from "styles/AnimeDetailsStyles";
 
 import React from "react";
 
+/**
+ * Display the anime synopsis and background if there is one
+ * @param {*} param0
+ * @returns
+ */
 const AnimeSynopsis = ({ anime }) => {
 	return (
 		<Background>

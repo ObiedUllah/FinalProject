@@ -3,8 +3,12 @@ import React from "react";
 import styled from "styled-components";
 import { useLocation } from "react-router-dom";
 
+/**
+ * has a list of searched anime
+ * @returns
+ */
 const SearchedAnimeList = () => {
-	//get the searched data
+	//get the searched data that contain a popularity and sort by most popular and get only the first 24
 	const { state } = useLocation();
 	const animeList = state.data
 		.filter((item) => item.popularity !== 0)
