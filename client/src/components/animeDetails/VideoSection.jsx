@@ -56,13 +56,13 @@ const VideoSection = ({ anime, id }) => {
 				<Title>Openings:</Title>
 				<OpeningList>
 					{anime.theme.openings.map((theme, index) => {
-						return <VideoButton anime={anime} index={index} theme={theme} setSelectedTheme={setSelectedTheme} />;
+						return <VideoButton key={index} anime={anime} index={index} theme={theme} setSelectedTheme={setSelectedTheme} />;
 					})}
 				</OpeningList>
 				<Title>Endings:</Title>
 				<EndingList>
 					{anime.theme.endings.map((theme, index) => {
-						return <VideoButton anime={anime} index={index} theme={theme} setSelectedTheme={setSelectedTheme} />;
+						return <VideoButton key={index} anime={anime} index={index} theme={theme} setSelectedTheme={setSelectedTheme} />;
 					})}
 				</EndingList>
 			</ThemesList>
