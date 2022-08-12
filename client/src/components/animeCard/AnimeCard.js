@@ -17,6 +17,8 @@ const Card = styled.article`
 	flex: 1 1 15%;
 	text-align: center;
 	margin-bottom: 3vh;
+	width: 10vw;
+	height: 25vh;
 
 	&:hover {
 		img {
@@ -32,8 +34,8 @@ const Anchor = styled(NavLink)`
 `;
 
 const Image = styled.img`
-	width: 10vw;
-	height: 25vh;
+	width: 75%;
+	height: 75%;
 	border-radius: 16px;
 	box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.15);
 

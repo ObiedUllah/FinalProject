@@ -9,7 +9,12 @@ const AnimeEpisodes = ({ anime, id }) => {
 			const data = await fetch(`https://api.jikan.moe/v4/anime/${id}/episodes`).then((res) => res.json());
 			setEpisodes(data.data);
 		};
-		getEpisodes();
+		//add timeout because the jikkan api only allows 3 requests per second, this will bypass that
+		try {
+			setTimeout(() => getEpisodes(), 1500);
+		} catch (error) {
+			window.location.reload();
+		}
 	}, [id, anime]);
 
 	return (

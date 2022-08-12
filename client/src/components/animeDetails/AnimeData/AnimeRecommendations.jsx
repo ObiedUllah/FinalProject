@@ -25,11 +25,12 @@ const AnimeRecommendations = ({ anime, id }) => {
 				}
 			}
 		};
-		//add interval because the jikkan api only allows 3 requests per second, this will bypass that
-		const interval = setInterval(() => {
-			getRecommendations();
-		}, 1500);
-		return () => clearInterval(interval);
+		//add timeout because the jikkan api only allows 3 requests per second, this will bypass that
+		try {
+			setTimeout(() => getRecommendations(), 2000);
+		} catch (error) {
+			window.location.reload();
+		}
 	}, [id, anime]);
 
 	return (
@@ -58,8 +59,8 @@ const Wrapper = styled.div`
 `;
 
 const Button = styled.button`
-	margin: 20px 0px;
-	padding: 20px;
+	margin: 10px 0px;
+	padding: 10px;
 	cursor: pointer;
 `;
 

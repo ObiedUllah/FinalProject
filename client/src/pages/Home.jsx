@@ -14,26 +14,28 @@ const Home = () => {
 			const animeList = await fetch(`https://api.jikan.moe/v4/top/anime`).then((res) => res.json());
 			setTopAnime(animeList.data.slice(0, 24));
 		};
-		getTopAnime();
+		//add timeout because the jikkan api only allows 3 requests per second, this will bypass that
+		setTimeout(() => getTopAnime(), 1000);
 	}, []);
 
 	//get recent anime uploaded
 	useEffect(() => {
 		const getRecentAnime = async () => {
 			const animeList = await fetch(`https://api.jikan.moe/v4/watch/episodes`).then((res) => res.json());
-			console.log(animeList.data);
 			setRecentAnime(animeList.data.slice(0, 30));
 		};
-		getRecentAnime();
+		//add timeout because the jikkan api only allows 3 requests per second, this will bypass that
+		setTimeout(() => getRecentAnime(), 1500);
 	}, []);
 
-	//get ouplar anime currently
+	//get popular anime currently
 	useEffect(() => {
 		const getPopularAnime = async () => {
 			const animeList = await fetch(`https://api.jikan.moe/v4/watch/episodes/popular`).then((res) => res.json());
 			setPopularAnime(animeList.data.slice(0, 30));
 		};
-		getPopularAnime();
+		//add timeout because the jikkan api only allows 3 requests per second, this will bypass that
+		setTimeout(() => getPopularAnime(), 2000);
 	}, []);
 
 	return (

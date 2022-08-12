@@ -72,15 +72,7 @@ const ProfileInformation = ({ user }) => {
 						<Label>Email: </Label>
 						<UserData> {user.email}</UserData>
 					</Container>
-					<Container>
-						{user.email_verified ? (
-							<UserData>
-								<Label>Email Verified </Label>✅
-							</UserData>
-						) : (
-							<Label>Please Verify your email!</Label>
-						)}
-					</Container>
+					<Container>{user.email_verified ? <Label>Email Verified ✅</Label> : <Label>Please Verify your email!</Label>}</Container>
 					<Stats>
 						<Title>Stats: </Title>
 						<Container>
@@ -93,7 +85,7 @@ const ProfileInformation = ({ user }) => {
 						</Container>
 						<Container>
 							<Label>Average Rating: </Label>
-							<UserData>{average.toFixed(2)}</UserData>
+							<UserData>{isNaN(average) ? 0 : average.toFixed(2)}</UserData>
 						</Container>
 						<Container>
 							<Label>Plan To Watch: </Label>

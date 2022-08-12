@@ -13,7 +13,8 @@ const LeftSideBar = () => {
 			const animeList = await fetch(`https://api.jikan.moe/v4/top/anime`).then((res) => res.json());
 			setTopAnime(animeList.data.slice(0, 15));
 		};
-		getTopAnime();
+		//add timeout because the jikkan api only allows 3 requests per second, this will bypass that
+		setTimeout(() => getTopAnime(), 1000);
 	}, []);
 
 	return (

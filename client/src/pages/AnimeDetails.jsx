@@ -20,12 +20,18 @@ const AnimeDetails = () => {
 			const data = await fetch(`https://api.jikan.moe/v4/anime/${id}/full`).then((res) => res.json());
 			setAnime(data.data);
 		};
-		getAnime();
+		//add timeout because the jikkan api only allows 3 requests per second, this will bypass that
+		setTimeout(() => getAnime(), 1000);
 	}, [id]);
 
 	//if the anime is null then wait
 	if (!anime) {
-		return <CircularProg />;
+		return (
+			<>
+				<CircularProg />
+				<p style={{ textAlign: "center", marginTop: "30%" }}> Whoops! Something went wrong! Refresh the page</p>
+			</>
+		);
 	}
 
 	return (

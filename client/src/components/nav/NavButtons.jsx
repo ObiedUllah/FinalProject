@@ -9,7 +9,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 
 const NavButtons = () => {
 	//get user
-	const { user } = useAuth0();
+	const { user, isAuthenticated } = useAuth0();
 	const [dbUser, setDbUser] = useState(() => null);
 
 	//gets the user from the mongo db
@@ -19,7 +19,9 @@ const NavButtons = () => {
 			const result = await response.json();
 			setDbUser(result.data);
 		};
-		getUser();
+		if (isAuthenticated) {
+			getUser();
+		}
 	}, []);
 
 	return (
@@ -27,7 +29,7 @@ const NavButtons = () => {
 			<Search />
 
 			<AuthenticationButton />
-			{dbUser && (
+			{isAuthenticated && dbUser && (
 				<NavLink to="/profile">
 					{dbUser.image === "" ? <Avatar src={Default} alt="Profile" /> : <Avatar src={dbUser.image} alt="Profile" />}
 				</NavLink>
