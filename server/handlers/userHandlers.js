@@ -1,14 +1,7 @@
 "use strict";
 
-//mongo setup
-const { MongoClient } = require("mongodb");
-require("dotenv").config();
-const { MONGO_URI } = process.env;
-const options = {
-	useNewUrlParser: true,
-	useUnifiedTopology: true,
-};
-const DBNAME = "AnimeEnmaDB";
+//get mongo client database name
+const { client, DBNAME } = require("../utils/mongo.js");
 
 //get helper functions
 const { sendResponse } = require("./helperFunctions.js");
@@ -19,9 +12,6 @@ const { sendResponse } = require("./helperFunctions.js");
  * @param {*} res
  */
 const getUsers = async (req, res) => {
-	//create client
-	const client = new MongoClient(MONGO_URI, options);
-
 	try {
 		//connect to db
 		await client.connect();
@@ -44,9 +34,6 @@ const getUsers = async (req, res) => {
  * @param {*} res
  */
 const getUser = async (req, res) => {
-	//create client
-	const client = new MongoClient(MONGO_URI, options);
-
 	try {
 		//connect to db
 		await client.connect();
@@ -75,9 +62,6 @@ const getUser = async (req, res) => {
  * @param {*} res
  */
 const toggleFavorites = async (req, res) => {
-	//create client
-	const client = new MongoClient(MONGO_URI, options);
-
 	try {
 		//connect to db
 		await client.connect();
@@ -92,22 +76,24 @@ const toggleFavorites = async (req, res) => {
 		//list to send to db
 		const favorites = [];
 
-		//add first favorite anime if none added
+		//add first favorite anime if there are none
 		if (user.favorites.length === 0) {
 			favorites.push(req.body.data);
 		}
 		// add previous anime favorited
 		else {
 			let exist = false;
-			// do not add anime to favorites if id matches
-			// add anime to favorites if id does not match
+			/* 
+                loops through all the users favorite animes,
+                if the current anime is already in list, do not add anime to favorites if id matches 
+                --> this will exclude anime from list,
+                add the animes that are not the current anime
+            */
 			for (const anime of user.favorites) {
 				anime.mal_id === req.body.data.mal_id ? (exist = true) : favorites.push(anime);
 			}
 			//if anime did not exist previously, add it
-			if (!exist) {
-				favorites.push(req.body.data);
-			}
+			if (!exist) favorites.push(req.body.data);
 		}
 
 		//update user
@@ -126,9 +112,6 @@ const toggleFavorites = async (req, res) => {
  * @param {*} res
  */
 const changeStatus = async (req, res) => {
-	//create client
-	const client = new MongoClient(MONGO_URI, options);
-
 	try {
 		//connect to db
 		await client.connect();
@@ -153,7 +136,7 @@ const changeStatus = async (req, res) => {
 					animeList.push(req.body.data);
 					exist = true;
 				}
-				// push other item
+				// push other anime
 				else {
 					animeList.push(anime);
 				}
@@ -180,9 +163,6 @@ const changeStatus = async (req, res) => {
  * @param {*} res
  */
 const removeStatus = async (req, res) => {
-	//create client
-	const client = new MongoClient(MONGO_URI, options);
-
 	try {
 		//connect to db
 		await client.connect();

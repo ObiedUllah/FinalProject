@@ -4,8 +4,7 @@ const yt = require("youtube-search-without-api-key");
 const { sendResponse, transformText } = require("./helperFunctions.js");
 
 /**
- * get a anime theme from youtube with a streing from the frontend
- * make the title one that can be searched without the episodes
+ * get a anime theme from youtube with a string from the client
  *
  * @param {*} req
  * @param {*} res
@@ -13,7 +12,6 @@ const { sendResponse, transformText } = require("./helperFunctions.js");
 const getVideo = async (req, res) => {
 	try {
 		const title = transformText(req.params.string);
-		console.log(title);
 		const videos = await yt.search(title);
 
 		sendResponse(res, 200, videos[0], "video Retrieved");

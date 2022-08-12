@@ -3,16 +3,10 @@
 require("dotenv").config();
 
 //cloudinary setup
-const { cloudinary } = require("../utils/cloudinary");
+const { cloudinary, UPLOAD_PRESET_NAME, FOLDER_NAME } = require("../utils/cloudinary");
 
-//mongo setup
-const { MongoClient } = require("mongodb");
-const { MONGO_URI } = process.env;
-const options = {
-	useNewUrlParser: true,
-	useUnifiedTopology: true,
-};
-const DBNAME = "AnimeEnmaDB";
+//get mongo client database name
+const { client, DBNAME } = require("../utils/mongo.js");
 
 //get helper functions
 const { sendResponse } = require("./helperFunctions.js");
@@ -30,14 +24,13 @@ const uploadImage = async (req, res) => {
 
 		//upload to cloudinary
 		const uploadResponse = await cloudinary.uploader.upload(fileStr, {
-			upload_preset: "AnimeEnma",
-			folder: "AnimeEnma",
+			upload_preset: UPLOAD_PRESET_NAME,
+			folder: FOLDER_NAME,
 		});
 
 		//upload url to MongoDB
 		uploadUrlToDB(res, email, uploadResponse.url);
 	} catch (error) {
-		console.log(error);
 		sendResponse(res, 500, null, "Server Error");
 	}
 };
@@ -49,9 +42,6 @@ const uploadImage = async (req, res) => {
  * @param {*} url
  */
 const uploadUrlToDB = async (res, email, url) => {
-	//create client
-	const client = new MongoClient(MONGO_URI, options);
-
 	try {
 		//connect to db
 		await client.connect();
@@ -61,7 +51,6 @@ const uploadUrlToDB = async (res, email, url) => {
 		const updated = await db.collection("users").findOneAndUpdate({ email: email }, { $set: { image: url } });
 		updated ? sendResponse(res, 200, updated, "user updated") : sendResponse(res, 404, null, "user not updated");
 	} catch (error) {
-		console.log(error);
 		sendResponse(res, 500, null, "Server Error");
 	}
 

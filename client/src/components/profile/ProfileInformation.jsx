@@ -1,7 +1,6 @@
 import React, { useRef, useState } from "react";
 
 import Default from "../../images/default.png";
-import { display } from "@mui/system";
 import styled from "styled-components";
 
 const ProfileInformation = ({ user }) => {
@@ -53,8 +52,7 @@ const ProfileInformation = ({ user }) => {
 				body: JSON.stringify({ data: base64EncodedImage, email: user.email }),
 				headers: { "Content-Type": "application/json" },
 			});
-			setFileInputState("");
-			setPreviewSource(base64EncodedImage);
+			window.location.reload(true);
 		} catch (err) {
 			alert("Something went wrong!");
 		}
