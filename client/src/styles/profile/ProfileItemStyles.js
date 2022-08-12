@@ -76,12 +76,11 @@ export const Anchor = styled(NavLink)`
 
 	&:hover {
 		img {
-			width: 7vw;
-			height: 10vw;
+			height: 18vh;
 		}
 
 		div {
-			font-size: 22px;
+			font-size: 20px;
 			color: #999;
 		}
 	}

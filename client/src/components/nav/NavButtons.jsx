@@ -1,23 +1,35 @@
+import React, { useEffect, useState } from "react";
+
 import AuthenticationButton from "components/auth/buttons/AuthenticationButton";
+import Default from "../../images/default.png";
 import { NavLink } from "react-router-dom";
-import React from "react";
 import Search from "./Search";
 import styled from "styled-components";
 import { useAuth0 } from "@auth0/auth0-react";
 
 const NavButtons = () => {
 	//get user
-	const { isAuthenticated, user } = useAuth0();
-	const picture = user?.picture;
+	const { user } = useAuth0();
+	const [dbUser, setDbUser] = useState(() => null);
+
+	//gets the user from the mongo db
+	useEffect(() => {
+		const getUser = async () => {
+			const response = await fetch(`/api/user/${user.email}`);
+			const result = await response.json();
+			setDbUser(result.data);
+		};
+		getUser();
+	}, []);
 
 	return (
 		<Wrapper>
 			<Search />
 
 			<AuthenticationButton />
-			{isAuthenticated && (
+			{dbUser && (
 				<NavLink to="/profile">
-					<Avatar src={picture} alt="Profile" />
+					{dbUser.image === "" ? <Avatar src={Default} alt="Profile" /> : <Avatar src={dbUser.image} alt="Profile" />}
 				</NavLink>
 			)}
 		</Wrapper>
@@ -35,7 +47,6 @@ const Avatar = styled.img`
 	width: 50px;
 	height: 50px;
 	border-radius: 50%;
-	border: 3px solid black;
 	margin-left: 10px;
 `;
 

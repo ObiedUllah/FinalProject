@@ -56,7 +56,7 @@ const ButtonWrapper = styled.nav`
 const Button = styled.button`
 	flex: 1 1 33%;
 	cursor: pointer;
-	background-color: #d0d0d0;
+	background-color: #d0d0d05c;
 	height: 30px;
 	border-top: none;
 	border-left: none;
