@@ -60,7 +60,6 @@ const Image = styled.img`
 `;
 const Text = styled.p`
 	white-space: nowrap;
-	font-size: 1em;
 `;
 
 const Anchor = styled(NavLink)`
@@ -72,8 +71,7 @@ const Anchor = styled(NavLink)`
 
 	&:hover {
 		img {
-			width: 7vw;
-			height: 10vw;
+			transform: scale(1.05);
 		}
 	}
 `;

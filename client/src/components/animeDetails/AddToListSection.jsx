@@ -294,6 +294,7 @@ const Button = styled.button`
 	width: 120px;
 	padding: 0 25px;
 	text-align: center;
+	transition: 0.4s;
 
 	&:disabled {
 		cursor: default;
@@ -305,7 +306,7 @@ const Button = styled.button`
 	}
 
 	&:hover {
-		color: #333;
+		transform: scale(1.1);
 	}
 `;
 

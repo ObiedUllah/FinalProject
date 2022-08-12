@@ -10,10 +10,6 @@ const ItemCompleted = ({ user, anime, list, setList }) => {
 	 * @param {*} e
 	 */
 	const updateRating = async (e) => {
-		//set value in frontend
-		setRating(parseInt(e.target.value));
-		setList([...list.map((obj) => (body.data.mal_id === obj.mal_id ? body.data : obj))]);
-
 		//data to send to db
 		let body = {
 			email: user.email,
@@ -26,6 +22,10 @@ const ItemCompleted = ({ user, anime, list, setList }) => {
 				rating: e.target.value,
 			},
 		};
+
+		//set value in frontend
+		setRating(parseInt(e.target.value));
+		setList([...list.map((obj) => (body.data.mal_id === obj.mal_id ? body.data : obj))]);
 
 		try {
 			//update the rating for the completed anime in the database

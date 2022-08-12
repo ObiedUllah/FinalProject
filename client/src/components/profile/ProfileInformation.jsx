@@ -110,7 +110,7 @@ const ProfileInformation = ({ user }) => {
 						<Centered>Upload Image</Centered>
 					</ImageContainer>
 					<UploadButton className="btn" type="submit">
-						Update
+						Save
 					</UploadButton>
 				</Form>
 			</Info>
@@ -175,6 +175,7 @@ const Form = styled.form`
 const ImageContainer = styled.div`
 	position: relative;
 	color: white;
+	cursor: pointer;
 
 	&:hover {
 		div {
@@ -185,11 +186,11 @@ const ImageContainer = styled.div`
 
 const Centered = styled.div`
 	position: absolute;
-	width: 88%;
+	width: 50%;
 	text-align: center;
 	background-color: black;
 	color: white;
-	opacity: 0.1;
+	opacity: 0.2;
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
@@ -201,7 +202,6 @@ const Avatar = styled.img`
 	border-radius: 50%;
 	margin-left: 10px;
 	margin-left: auto;
-	cursor: pointer;
 `;
 
 const UploadButton = styled.button`
@@ -211,6 +211,10 @@ const UploadButton = styled.button`
 	background-color: #405cf5;
 	border-radius: 10px;
 	cursor: pointer;
+
+	&:hover {
+		transform: scale(1.15);
+	}
 `;
 
 export default ProfileInformation;

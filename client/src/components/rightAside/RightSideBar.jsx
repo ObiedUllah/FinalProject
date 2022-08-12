@@ -54,6 +54,8 @@ const Box = styled.div`
 	background-color: #aaa;
 	color: #313131;
 
+	transition: 0.4s;
+
 	&:hover {
 		background-color: #313131;
 		color: #aaa;

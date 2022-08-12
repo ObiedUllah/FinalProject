@@ -56,15 +56,13 @@ const ButtonWrapper = styled.nav`
 const Button = styled.button`
 	flex: 1 1 33%;
 	cursor: pointer;
-	background-color: #d0d0d05c;
-	height: 30px;
+	background-color: #999;
+	height: 40px;
 	border-top: none;
 	border-left: none;
 	border-right: none;
-	border-bottom: ${(props) => (props.isSelected ? "3px solid purple" : "none")};
+	border-bottom: ${(props) => (props.isSelected ? "5px solid purple" : "none")};
 	font-weight: ${(props) => (props.isSelected ? "bold" : "")};
-	margin: 0 3px;
-	border-radius: 2px;
 `;
 
 export default ProfileTabs;

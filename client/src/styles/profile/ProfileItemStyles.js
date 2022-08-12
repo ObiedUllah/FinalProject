@@ -11,7 +11,7 @@ export const Wrapper = styled.div`
 
 export const Image = styled.img`
 	height: 15vh;
-	margin: 1vh;
+	margin: 1vh 0px;
 `;
 
 export const Label = styled.div`
@@ -19,7 +19,6 @@ export const Label = styled.div`
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	text-align: center;
 `;
 
 export const Button = styled.button`
@@ -47,6 +46,7 @@ export const Button = styled.button`
 
 	&:hover {
 		color: #333;
+		transform: scale(1.1);
 	}
 `;
 
@@ -63,7 +63,6 @@ export const Select = styled.select`
 export const Option = styled.option`
 	outline: none;
 	border: none;
-	padding: 8px;
 	cursor: pointer;
 `;
 
@@ -73,14 +72,15 @@ export const Anchor = styled(NavLink)`
 	align-items: center;
 	text-decoration: none;
 	color: inherit;
+	width: 12vw;
 
 	&:hover {
 		img {
-			height: 18vh;
+			transform: scale(1.1);
 		}
 
 		div {
-			font-size: 20px;
+			transform: scale(1.25);
 			color: #999;
 		}
 	}

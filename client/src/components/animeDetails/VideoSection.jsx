@@ -197,6 +197,7 @@ const ButtonLabel = styled.button`
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	transition: 0.3s;
 
 	&:hover {
 		background-color: #444;
@@ -219,9 +220,9 @@ const Download = styled(BsDownload)`
 
 	&:hover {
 		background-color: #444;
+		color: inherit;
 		border-radius: 4px;
-		width: 40px;
-		height: 40px;
+		transform: scale(1.5);
 	}
 `;
 

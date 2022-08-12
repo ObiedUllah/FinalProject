@@ -81,7 +81,7 @@ const BackToTopButton = styled.button`
 	transition: 0.4s;
 
 	&:hover {
-		padding: 25px 30px;
+		transform: scale(1.5);
 	}
 `;
 

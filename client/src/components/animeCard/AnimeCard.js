@@ -14,16 +14,17 @@ function AnimeCard({ anime }) {
 }
 
 const Card = styled.article`
-	flex: 1 1 15%;
+	flex: 0 0 15%;
 	text-align: center;
-	margin-bottom: 3vh;
-	width: 10vw;
-	height: 25vh;
+	margin: 1.5vh 0.5vw;
+	width: 200px;
+	height: 280px;
 
 	&:hover {
 		img {
 			box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.25);
-			transform: scale(1.05);
+			transform: scale(1.1);
+			cursor: pointer;
 		}
 	}
 `;
@@ -34,11 +35,10 @@ const Anchor = styled(NavLink)`
 `;
 
 const Image = styled.img`
-	width: 75%;
-	height: 75%;
+	width: 150px;
+	height: 200px;
 	border-radius: 16px;
 	box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.15);
-
 	transition: 0.4s;
 `;
 

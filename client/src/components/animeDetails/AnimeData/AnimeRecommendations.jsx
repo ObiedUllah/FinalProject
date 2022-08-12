@@ -56,6 +56,10 @@ const AnimeRecommendations = ({ anime, id }) => {
 
 const Wrapper = styled.div`
 	padding: 16px;
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	justify-content: center;
 `;
 
 const Button = styled.button`

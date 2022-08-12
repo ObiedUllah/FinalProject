@@ -6,7 +6,10 @@ import { useLocation } from "react-router-dom";
 const SearchedAnimeList = () => {
 	//get the searched data
 	const { state } = useLocation();
-	const animeList = state.data;
+	const animeList = state.data
+		.filter((item) => item.popularity !== 0)
+		.sort((a, b) => parseInt(a.popularity) - parseInt(b.popularity))
+		.slice(0, 24);
 
 	return (
 		<Wrapper>
@@ -31,8 +34,8 @@ const Wrapper = styled.div`
 const SearchWrap = styled.div`
 	display: flex;
 	flex-wrap: wrap;
-	align-items: center;
-	justify-content: center;
+	align-items: flex-start;
+	justify-content: flex-start;
 	margin-top: 3vh;
 `;
 

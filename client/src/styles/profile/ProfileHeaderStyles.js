@@ -4,7 +4,7 @@ export const Wrapper = styled.div`
 	display: flex;
 	flex-direction: column;
 	margin-top: 10px;
-	border: 1px solid #777;
+	border: none;
 `;
 
 export const TitleDiv = styled.div`
@@ -15,6 +15,8 @@ export const TitleDiv = styled.div`
 export const Label = styled.label`
 	font-size: 20px;
 	margin: 1vh 0vh;
+	width: 12vw;
+	text-align: center;
 `;
 
 export const Button = styled.button`
@@ -24,9 +26,10 @@ export const Button = styled.button`
 	border: none;
 	font-size: 20px;
 	margin: 1vh 0vh;
+	width: 12vw;
 
 	&:hover {
-		border-bottom: 3px solid #999;
+		border-bottom: 3px solid purple;
 		font-weight: bold;
 		cursor: pointer;
 	}
