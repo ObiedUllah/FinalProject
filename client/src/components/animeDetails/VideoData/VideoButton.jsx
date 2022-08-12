@@ -40,7 +40,6 @@ const VideoButton = ({ anime, index, theme, setSelectedTheme }) => {
 				: (response = await fetch(`/api/video/${anime?.theme.endings[index] + " ending"}`));
 
 			const result = await response.json();
-			console.log(result.data);
 			setSelectedTheme(result.data);
 		} catch (error) {
 			alert("Could Not Fetch Video");
