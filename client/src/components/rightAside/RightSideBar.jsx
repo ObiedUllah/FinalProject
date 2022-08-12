@@ -1,5 +1,7 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 
+import CircularProg from "utils/porgress/CircularProg";
+import { RandomQuoteContext } from "context/RandomQuoteContext";
 import React from "react";
 import styled from "styled-components";
 
@@ -7,22 +9,24 @@ import styled from "styled-components";
  * displays random quotes
  */
 const RightSideBar = () => {
-	const [quotes, setQuotes] = useState(() => []);
+	const { quotes } = useContext(RandomQuoteContext);
+	const { setQuote } = useContext(RandomQuoteContext).actions;
 
-	//get random anime quote
 	useEffect(() => {
-		const getRandomAnimeQuotes = async () => {
-			const data = await fetch(`https://animechan.vercel.app/api/quotes`).then((res) => res.json());
-			setQuotes(data.slice(0, 3));
-		};
-		getRandomAnimeQuotes();
+		if (!quotes) {
+			setQuote();
+		}
 	}, []);
+
+	//wait until the quotes are loaded
+	if (!quotes) {
+		return <CircularProg />;
+	}
 
 	return (
 		<Nav>
 			<Title>Random Anime Quote</Title>
-
-			{quotes.map((anime, index) => (
+			{quotes.slice(0, 3).map((anime, index) => (
 				<Box key={index}>
 					<Quote>'{anime.quote}'</Quote>
 					<Character>-{anime.character}</Character>

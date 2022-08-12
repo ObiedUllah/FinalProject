@@ -1,5 +1,8 @@
-import React, { useEffect, useState } from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
 
+import React, { useContext, useEffect } from "react";
+
+import { AnimeListContext } from "context/AnimeListContext";
 import AnimeSlider from "components/home/AnimeSlider";
 import CircularProg from "utils/porgress/CircularProg";
 import styled from "styled-components";
@@ -9,47 +12,29 @@ import styled from "styled-components";
  * @returns
  */
 const Home = () => {
-	const [topAnime, setTopAnime] = useState(() => []);
-	const [recentAnime, setRecentAnime] = useState(() => []);
-	const [popularAnime, setPopularAnime] = useState(() => []);
+	const { topAnime, recentAnime, popularAnime } = useContext(AnimeListContext);
+	const { setTop, setRecent, setPopular } = useContext(AnimeListContext).actions;
 
-	//get the top anime
 	useEffect(() => {
-		const getTopAnime = async () => {
-			const animeList = await fetch(`https://api.jikan.moe/v4/top/anime`).then((res) => res.json());
-			setTopAnime(animeList.data.slice(0, 24));
-		};
-		//add timeout because the jikkan api only allows 3 requests per second, this will bypass that
-		setTimeout(() => getTopAnime(), 1000);
+		if (!topAnime) {
+			setTop();
+		}
+		if (!recentAnime) {
+			setRecent();
+		}
+		if (!popularAnime) {
+			setPopular();
+		}
 	}, []);
 
-	//get recent anime uploaded
-	useEffect(() => {
-		const getRecentAnime = async () => {
-			const animeList = await fetch(`https://api.jikan.moe/v4/watch/episodes`).then((res) => res.json());
-			setRecentAnime(animeList.data.slice(0, 30));
-		};
-		//add timeout because the jikkan api only allows 3 requests per second, this will bypass that
-		setTimeout(() => getRecentAnime(), 1500);
-	}, []);
-
-	//get popular anime currently
-	useEffect(() => {
-		const getPopularAnime = async () => {
-			const animeList = await fetch(`https://api.jikan.moe/v4/watch/episodes/popular`).then((res) => res.json());
-			setPopularAnime(animeList.data.slice(0, 30));
-		};
-		//add timeout because the jikkan api only allows 3 requests per second, this will bypass that
-		setTimeout(() => getPopularAnime(), 2000);
-	}, []);
-
-	if (topAnime.length === 0) {
+	//wait until all the anime are loaded
+	if (!topAnime) {
 		return <CircularProg />;
 	}
-	if (!recentAnime.length === 0) {
+	if (!recentAnime) {
 		return <CircularProg />;
 	}
-	if (!popularAnime.length === 0) {
+	if (!popularAnime) {
 		return <CircularProg />;
 	}
 

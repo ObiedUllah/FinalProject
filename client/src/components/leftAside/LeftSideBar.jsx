@@ -1,5 +1,9 @@
-import { useEffect, useState } from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
 
+import { useContext, useEffect } from "react";
+
+import { AnimeListContext } from "context/AnimeListContext";
+import CircularProg from "utils/porgress/CircularProg";
 import { NavLink } from "react-router-dom";
 import React from "react";
 import styled from "styled-components";
@@ -9,22 +13,24 @@ import styled from "styled-components";
  * @returns
  */
 const LeftSideBar = () => {
-	const [topAnime, setTopAnime] = useState(() => []);
+	const { topAnime } = useContext(AnimeListContext);
+	const { setTop } = useContext(AnimeListContext).actions;
 
-	//get top animes
 	useEffect(() => {
-		const getTopAnime = async () => {
-			const animeList = await fetch(`https://api.jikan.moe/v4/top/anime`).then((res) => res.json());
-			setTopAnime(animeList.data.slice(0, 15));
-		};
-		//add timeout because the jikkan api only allows 3 requests per second, this will bypass that
-		setTimeout(() => getTopAnime(), 1000);
+		if (!topAnime) {
+			setTop();
+		}
 	}, []);
+
+	//wait until the top anime are loaded
+	if (!topAnime) {
+		return <CircularProg />;
+	}
 
 	return (
 		<Nav>
 			<Title>Top Anime</Title>
-			{topAnime.map((anime) => (
+			{topAnime.slice(0, 15).map((anime) => (
 				<Anchor to={`/anime/${anime.mal_id}`} key={anime.mal_id} rel="noreferrer">
 					{anime.title}
 				</Anchor>
