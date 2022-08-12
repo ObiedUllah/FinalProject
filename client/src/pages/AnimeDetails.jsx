@@ -35,7 +35,7 @@ const AnimeDetails = () => {
 			<>
 				<CircularProg />
 				<p style={{ textAlign: "center", marginTop: "30%" }}> Whoops! Too many requests were made!</p>
-				<p style={{ textAlign: "center", marginTop: "30%" }}> Refresh the page!</p>
+				<p style={{ textAlign: "center" }}> Refresh the page!</p>
 			</>
 		);
 	}
