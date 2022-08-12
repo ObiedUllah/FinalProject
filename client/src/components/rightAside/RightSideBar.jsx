@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+
 import { useContext, useEffect } from "react";
 
 import CircularProg from "utils/porgress/CircularProg";

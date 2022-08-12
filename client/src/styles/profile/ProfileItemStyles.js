@@ -23,7 +23,7 @@ export const Label = styled.div`
 
 export const Button = styled.button`
 	backface-visibility: hidden;
-	background-color: #ff726f;
+	background-color: ${(props) => (props?.confirm ? "#405cf5" : "#ff726f")};
 	border-radius: 6px;
 	border-width: 0;
 	box-shadow: rgba(50, 50, 93, 0.1) 0 0 0 1px inset, rgba(50, 50, 93, 0.1) 0 2px 5px 0, rgba(0, 0, 0, 0.07) 0 1px 1px 0;

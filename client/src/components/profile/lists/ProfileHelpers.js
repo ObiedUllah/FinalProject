@@ -62,9 +62,6 @@ export const handleStatusChange = async (e, list, setList, anime, email, status,
 		return;
 	}
 
-	//update frontend list
-	setList([...list.filter((elem) => elem.mal_id !== anime.mal_id)]);
-
 	//data to send to db
 	let body = {
 		email: email,
@@ -80,13 +77,18 @@ export const handleStatusChange = async (e, list, setList, anime, email, status,
 	};
 	try {
 		//update the status in the database
-		await fetch("/api/user/status", {
+		const response = await fetch("/api/user/status", {
 			method: "PUT",
 			headers: {
 				"Content-Type": "application/json",
 			},
 			body: JSON.stringify(body),
 		});
+		const result = await response.json();
+		//update frontend list
+		if (result.status === 200) {
+			setList([...list.filter((elem) => elem.mal_id !== anime.mal_id)]);
+		}
 	} catch (error) {
 		alert("An error occured please try again or contact support");
 	}
