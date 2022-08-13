@@ -33,7 +33,7 @@ const Search = () => {
 	 */
 	const handleSearch = async (e) => {
 		e.preventDefault();
-		const temp = await fetch(`https://api.jikan.moe/v4/anime?q=${search}&order_by=score&limit=36&sfw`).then((res) => res.json());
+		const temp = await fetch(`https://api.jikan.moe/v4/anime?q=${search}&order_by=score&sort=desc&sfw`).then((res) => res.json());
 		navigate("searchList", { state: { data: temp.data } });
 	};
 

@@ -1,8 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 
-import React, { useContext, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
-import { AnimeDetailsContext } from "context/AnimeDetailsContext";
 import ReactPlayer from "react-player";
 import VideoButton from "./VideoData/VideoButton";
 import styled from "styled-components";
@@ -13,11 +12,32 @@ import styled from "styled-components";
  * @returns
  */
 const VideoSection = ({ anime, id }) => {
-	const { selectedTheme } = useContext(AnimeDetailsContext);
-	const { getInitialTheme } = useContext(AnimeDetailsContext).actions;
+	const [selectedTheme, setSelectedTheme] = useState(() => null);
 
 	useEffect(() => {
-		getInitialTheme(anime);
+		const getInitialTheme = async () => {
+			try {
+				//if no opening or ending set to null
+				if (anime?.theme.openings[0] === undefined && anime?.theme.endings[0] === undefined) {
+					setSelectedTheme(null);
+				}
+				//if opening then set to opening
+				else if (anime?.theme.openings[0] !== undefined) {
+					const response = await fetch(`/api/video/${anime?.theme.openings[0] + " opening"}`);
+					const result = await response.json();
+					setSelectedTheme(result.data);
+				}
+				//if ending then set to ending
+				else if (anime?.theme.endings[0] !== undefined) {
+					const response = await fetch(`/api/video/${anime?.theme.endings[0] + " opening"}`);
+					const result = await response.json();
+					setSelectedTheme(result.data);
+				}
+			} catch (error) {
+				setSelectedTheme(null);
+			}
+		};
+		getInitialTheme();
 	}, [id, anime]);
 
 	return (

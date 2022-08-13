@@ -10,19 +10,18 @@ import { useLocation } from "react-router-dom";
 const SearchedAnimeList = () => {
 	//get the searched data that contain a popularity and sort by most popular and get only the first 24
 	const { state } = useLocation();
-	const animeList = state.data
-		.filter((item) => item.popularity !== 0)
-		.sort((a, b) => parseInt(a.popularity) - parseInt(b.popularity))
-		.slice(0, 24);
+	let animeList;
+	if (state.data) {
+		animeList = state.data
+			.filter((item) => item.popularity !== 0)
+			.sort((a, b) => parseInt(a.popularity) - parseInt(b.popularity))
+			.slice(0, 24);
+	}
 
 	return (
 		<Wrapper>
 			<Title>Search Result:</Title>
-			<SearchWrap>
-				{animeList.map((anime) => (
-					<AnimeCard anime={anime} key={anime.mal_id} />
-				))}
-			</SearchWrap>
+			<SearchWrap>{animeList && animeList.map((anime) => <AnimeCard anime={anime} key={anime.mal_id} />)}</SearchWrap>
 		</Wrapper>
 	);
 };

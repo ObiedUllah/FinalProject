@@ -9,6 +9,7 @@ import LeftSideBar from "components/leftAside/LeftSideBar";
 import LinearProg from "utils/porgress/LinearProg";
 import NavBar from "components/nav/NavBar";
 import Profile from "pages/Profile";
+import Promos from "pages/Promos";
 import ProtectedRoute from "authentication/protected-route";
 import React from "react";
 import RightSideBar from "components/rightAside/RightSideBar";
@@ -39,6 +40,7 @@ const App = () => {
 					<Route exact path="/searchList" element={<SearchedAnimeList />} />
 					<Route exact path="/anime/:id" element={<AnimeDetails />} />
 					<Route exact path="/genres" element={<Genres />} />
+					<Route exact path="/promos" element={<Promos />} />
 				</Routes>
 			</Main>
 			<RightAside>

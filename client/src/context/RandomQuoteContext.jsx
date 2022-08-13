@@ -11,12 +11,9 @@ export const RandomQuoteContext = createContext(null);
 export const RandomQuoteProvider = ({ children }) => {
 	const [quotes, setQuotes] = useState(() => null);
 
-	const getQuotes = () => {
-		const getRandomAnimeQuotes = async () => {
-			const data = await fetch(`https://animechan.vercel.app/api/quotes`).then((res) => res.json());
-			setQuotes(data);
-		};
-		getRandomAnimeQuotes();
+	const getQuotes = async () => {
+		const data = await fetch(`https://animechan.vercel.app/api/quotes`).then((res) => res.json());
+		setQuotes(data);
 	};
 	return (
 		<RandomQuoteContext.Provider

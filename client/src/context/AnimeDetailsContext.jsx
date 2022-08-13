@@ -14,14 +14,12 @@ export const AnimeDetailsProvider = ({ children }) => {
 	const [selectedTheme, setSelectedTheme] = useState(() => null);
 
 	const getAnime = async (id) => {
-		if (!id) return;
-
 		const response = await fetch(`https://api.jikan.moe/v4/anime/${id}/full`);
 
 		//if failure then refresh after 2 sec
 		if (response.status === 429)
 			setTimeout(() => {
-				getAnime();
+				getAnime(id);
 			}, 1000);
 
 		//if success then set data
@@ -32,14 +30,12 @@ export const AnimeDetailsProvider = ({ children }) => {
 	};
 
 	const getEpisodes = async (id) => {
-		if (!id) return;
-
 		const response = await fetch(`https://api.jikan.moe/v4/anime/${id}/episodes`);
 
 		//if failure then refresh after 2 sec
 		if (response.status === 429)
 			setTimeout(() => {
-				getEpisodes();
+				getEpisodes(id);
 			}, 1000);
 
 		//if success then set data
@@ -50,14 +46,12 @@ export const AnimeDetailsProvider = ({ children }) => {
 	};
 
 	const getRecommendations = async (id, setLength) => {
-		if (!id) return;
-
 		const response = await fetch(`https://api.jikan.moe/v4/anime/${id}/recommendations`);
 
 		//if failure then refresh after 2 sec
 		if (response.status === 429)
 			setTimeout(() => {
-				getRecommendations();
+				getRecommendations(id, setLength);
 			}, 1000);
 
 		//if success then set data
@@ -71,7 +65,6 @@ export const AnimeDetailsProvider = ({ children }) => {
 	};
 
 	const getInitialTheme = async (anime) => {
-		if (!anime) return;
 		try {
 			//if no opening or ending set to null
 			if (anime?.theme.openings[0] === undefined && anime?.theme.endings[0] === undefined) {
@@ -94,6 +87,13 @@ export const AnimeDetailsProvider = ({ children }) => {
 		}
 	};
 
+	const reset = () => {
+		setAnime(null);
+		setEpisodes(null);
+		setRecommendations(null);
+		setSelectedTheme(null);
+	};
+
 	return (
 		<AnimeDetailsContext.Provider
 			value={{
@@ -107,6 +107,7 @@ export const AnimeDetailsProvider = ({ children }) => {
 					getRecommendations,
 					getInitialTheme,
 					setSelectedTheme,
+					reset,
 				},
 			}}
 		>

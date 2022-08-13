@@ -1,23 +1,36 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 
 import { Episode, EpisodeLabel, EpisodeList, SubTitle } from "styles/AnimeDetailsStyles";
-import React, { useContext, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
-import { AnimeDetailsContext } from "context/AnimeDetailsContext";
 import CircularProg from "utils/porgress/CircularProg";
 
 /**
  * Displays information of the first 100 episodes of an anime
- * @param {*} param0
+ * @param {*} param
  * @returns
  */
 const AnimeEpisodes = ({ anime, id }) => {
-	const { episodes } = useContext(AnimeDetailsContext);
-	const { getEpisodes } = useContext(AnimeDetailsContext).actions;
+	const [episodes, setEpisodes] = useState(() => null);
 
 	useEffect(() => {
-		getEpisodes(id);
-	}, [anime, id]);
+		const getEpisodes = async () => {
+			const response = await fetch(`https://api.jikan.moe/v4/anime/${id}/episodes`);
+
+			//if failure then refresh after 2 sec
+			if (response.status === 429)
+				setTimeout(() => {
+					getEpisodes(id);
+				}, 1000);
+
+			//if success then set data
+			if (response.status === 200) {
+				const data = await response.json();
+				setEpisodes(data.data);
+			}
+		};
+		getEpisodes();
+	}, [id, anime]);
 
 	//wait for episodes to be loaded
 	if (!episodes) {

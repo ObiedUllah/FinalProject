@@ -1,8 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
-import { AnimeDetailsContext } from "context/AnimeDetailsContext";
 import AnimeSlider from "components/home/AnimeSlider";
 import CircularProg from "utils/porgress/CircularProg";
 import { Title } from "styles/AnimeDetailsStyles";
@@ -14,14 +13,31 @@ import styled from "styled-components";
  * @returns
  */
 const AnimeRecommendations = ({ anime, id }) => {
+	const [recommendations, setRecommendations] = useState(() => null);
 	const [length, setLength] = useState(0);
 
-	const { recommendations } = useContext(AnimeDetailsContext);
-	const { getRecommendations } = useContext(AnimeDetailsContext).actions;
-
 	useEffect(() => {
-		getRecommendations(id, setLength);
-	}, [anime, id]);
+		const getRecommendations = async () => {
+			const response = await fetch(`https://api.jikan.moe/v4/anime/${id}/recommendations`);
+
+			//if failure then refresh after 2 sec
+			if (response.status === 429)
+				setTimeout(() => {
+					getRecommendations();
+				}, 1000);
+
+			//if success then set data
+			if (response.status === 200) {
+				const data = await response.json();
+
+				//set length of anime slider
+				console.log(parseInt(data.data.length));
+				data.data.length < 8 ? setLength(parseInt(data.data.length)) : setLength(8);
+				setRecommendations(data.data);
+			}
+		};
+		getRecommendations();
+	}, [id, anime]);
 
 	//wait for recommendations to be loaded
 	if (!recommendations) {
