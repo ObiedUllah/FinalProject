@@ -1,6 +1,5 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 
-import { AnimeDetailsContext } from "context/AnimeDetailsContext";
 import { BsDownload } from "react-icons/bs";
 import DownloadDialog from "./DownloadDialog";
 import styled from "styled-components";
@@ -10,9 +9,7 @@ import styled from "styled-components";
  * @param {*} param0
  * @returns
  */
-const VideoButton = ({ anime, index, theme }) => {
-	const { setSelectedTheme } = useContext(AnimeDetailsContext).actions;
-
+const VideoButton = ({ anime, index, theme, isOpening, setSelectedTheme }) => {
 	//link to download song
 	const [link, setLink] = useState(null);
 
@@ -33,7 +30,7 @@ const VideoButton = ({ anime, index, theme }) => {
 	 * @param {*} e
 	 * @param {*} index
 	 */
-	const handleClick = async (e, index, isOpening) => {
+	const handleClick = async (e, index) => {
 		e.preventDefault();
 		e.stopPropagation();
 		try {
@@ -53,9 +50,8 @@ const VideoButton = ({ anime, index, theme }) => {
 	 * this will convert the selected song to an mp3, then create a modal so that the user can download the song
 	 * @param {*} e
 	 * @param {*} index
-	 * @param {*} isOpening
 	 */
-	const handleDownload = async (e, index, isOpening) => {
+	const handleDownload = async (e, index) => {
 		e.preventDefault();
 		e.stopPropagation();
 
@@ -90,9 +86,9 @@ const VideoButton = ({ anime, index, theme }) => {
 			{open && <DownloadDialog link={link} setOpen={setOpen} />}
 
 			{/* Button link to opening/ending */}
-			<ButtonLabel key={index} onClick={(e) => handleClick(e, index, false)}>
+			<ButtonLabel key={index} onClick={(e) => handleClick(e, index)}>
 				<Name>{formatText(theme)} </Name>
-				<Download onClick={(e) => handleDownload(e, index, false)} />
+				<Download onClick={(e) => handleDownload(e, index)} />
 			</ButtonLabel>
 		</>
 	);

@@ -1,4 +1,3 @@
-import { AnimeDetailsProvider } from "context/AnimeDetailsContext";
 import { AnimeListProvider } from "context/AnimeListContext";
 import App from "./App";
 import Auth0ProviderWithRedirectCallback from "authentication/auth0-provider-with-redirect-callback";
@@ -14,15 +13,13 @@ root.render(
 	<Router>
 		<Auth0ProviderWithRedirectCallback>
 			<AnimeListProvider>
-				<AnimeDetailsProvider>
-					<RandomQuoteProvider>
-						<GenresListProvider>
-							<PromosProvider>
-								<App />
-							</PromosProvider>
-						</GenresListProvider>
-					</RandomQuoteProvider>
-				</AnimeDetailsProvider>
+				<RandomQuoteProvider>
+					<GenresListProvider>
+						<PromosProvider>
+							<App />
+						</PromosProvider>
+					</GenresListProvider>
+				</RandomQuoteProvider>
 			</AnimeListProvider>
 		</Auth0ProviderWithRedirectCallback>
 	</Router>

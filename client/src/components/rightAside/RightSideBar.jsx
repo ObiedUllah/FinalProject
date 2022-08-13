@@ -29,7 +29,7 @@ const RightSideBar = () => {
 	return (
 		<Nav>
 			<Anchor to={`/genres`}>Genres</Anchor>
-			<Anchor to={`/promos`}>Promos</Anchor>
+			<Anchor to={`/promos`}>Recent Promos</Anchor>
 			<Title>Random Anime Quote</Title>
 			{quotes.slice(0, 3).map((anime, index) => (
 				<Box key={index}>
