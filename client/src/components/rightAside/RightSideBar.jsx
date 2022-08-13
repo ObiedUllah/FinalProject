@@ -13,11 +13,11 @@ import styled from "styled-components";
  */
 const RightSideBar = () => {
 	const { quotes } = useContext(RandomQuoteContext);
-	const { setQuote } = useContext(RandomQuoteContext).actions;
+	const { getQuotes } = useContext(RandomQuoteContext).actions;
 
 	useEffect(() => {
 		if (!quotes) {
-			setQuote();
+			getQuotes();
 		}
 	}, []);
 
