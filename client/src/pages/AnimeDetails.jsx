@@ -18,7 +18,7 @@ const AnimeDetails = () => {
 	//this will capture the id of the anime clicked
 	const { id } = useParams();
 
-	const [anime, setAnime] = useState(() => null);
+	const [anime, setAnime] = useState(null);
 
 	useEffect(() => {
 		const getAnime = async () => {
@@ -36,6 +36,7 @@ const AnimeDetails = () => {
 				setAnime(data.data);
 			}
 		};
+		setAnime(null);
 		getAnime();
 	}, [id]);
 
