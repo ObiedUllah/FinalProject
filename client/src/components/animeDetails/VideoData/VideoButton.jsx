@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 
+import { AnimeDetailsContext } from "context/AnimeDetailsContext";
 import { BsDownload } from "react-icons/bs";
 import DownloadDialog from "./DownloadDialog";
 import styled from "styled-components";
@@ -9,7 +10,9 @@ import styled from "styled-components";
  * @param {*} param0
  * @returns
  */
-const VideoButton = ({ anime, index, theme, setSelectedTheme }) => {
+const VideoButton = ({ anime, index, theme }) => {
+	const { setSelectedTheme } = useContext(AnimeDetailsContext).actions;
+
 	//link to download song
 	const [link, setLink] = useState(null);
 
@@ -55,8 +58,9 @@ const VideoButton = ({ anime, index, theme, setSelectedTheme }) => {
 	const handleDownload = async (e, index, isOpening) => {
 		e.preventDefault();
 		e.stopPropagation();
+
 		try {
-			//get videoid first
+			//change text
 			let data;
 			isOpening ? (data = anime?.theme.openings[index] + " opening") : (data = anime?.theme.endings[index] + " ending");
 

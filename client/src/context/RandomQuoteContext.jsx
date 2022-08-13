@@ -3,7 +3,8 @@ import React, { createContext, useState } from "react";
 export const RandomQuoteContext = createContext(null);
 
 /**
- * Stores the data into context so that the useffect is not called everytime the user goes to home page but only once
+ * Stores the data into context so that the useffect is not called everytime
+ *  the user goes to home page but only once
  * @param {*} param0
  * @returns
  */

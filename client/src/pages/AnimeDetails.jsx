@@ -1,6 +1,9 @@
-import { useEffect, useState } from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
+
+import { useContext, useEffect } from "react";
 
 import AddToListSection from "components/animeDetails/AddToListSection";
+import { AnimeDetailsContext } from "context/AnimeDetailsContext";
 import CircularProg from "utils/porgress/CircularProg";
 import InformationSection from "components/animeDetails/InformationSection";
 import React from "react";
@@ -16,28 +19,16 @@ const AnimeDetails = () => {
 	//this will capture the id of the anime clicked
 	const { id } = useParams();
 
-	//store anime
-	const [anime, setAnime] = useState(null);
+	const { anime } = useContext(AnimeDetailsContext);
+	const { getAnime } = useContext(AnimeDetailsContext).actions;
 
-	//get anime with id from params
 	useEffect(() => {
-		const getAnime = async () => {
-			const data = await fetch(`https://api.jikan.moe/v4/anime/${id}/full`).then((res) => res.json());
-			setAnime(data.data);
-		};
-		//add timeout because the jikkan api only allows 3 requests per second, this will bypass that
-		setTimeout(() => getAnime(), 1000);
-	}, [id]);
+		getAnime(id);
+	}, [anime, id]);
 
 	//if the anime is null then wait
 	if (!anime) {
-		return (
-			<>
-				<CircularProg />
-				<p style={{ textAlign: "center", marginTop: "1%" }}> Whoops! Too many requests were made!</p>
-				<p style={{ textAlign: "center" }}> Refresh the page!</p>
-			</>
-		);
+		return <CircularProg />;
 	}
 
 	return (

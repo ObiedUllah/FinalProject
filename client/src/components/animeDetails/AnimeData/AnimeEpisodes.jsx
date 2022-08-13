@@ -1,6 +1,9 @@
-import { Episode, EpisodeLabel, EpisodeList, SubTitle } from "styles/AnimeDetailsStyles";
-import React, { useEffect, useState } from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
 
+import { Episode, EpisodeLabel, EpisodeList, SubTitle } from "styles/AnimeDetailsStyles";
+import React, { useContext, useEffect } from "react";
+
+import { AnimeDetailsContext } from "context/AnimeDetailsContext";
 import CircularProg from "utils/porgress/CircularProg";
 
 /**
@@ -9,20 +12,12 @@ import CircularProg from "utils/porgress/CircularProg";
  * @returns
  */
 const AnimeEpisodes = ({ anime, id }) => {
-	const [episodes, setEpisodes] = useState(null);
-	//get anime with id from params
+	const { episodes } = useContext(AnimeDetailsContext);
+	const { getEpisodes } = useContext(AnimeDetailsContext).actions;
+
 	useEffect(() => {
-		const getEpisodes = async () => {
-			const data = await fetch(`https://api.jikan.moe/v4/anime/${id}/episodes`).then((res) => res.json());
-			setEpisodes(data.data);
-		};
-		//add timeout because the jikkan api only allows 3 requests per second, this will bypass that
-		try {
-			setTimeout(() => getEpisodes(), 1500);
-		} catch (error) {
-			window.location.reload();
-		}
-	}, [id, anime]);
+		getEpisodes(id);
+	}, [anime, id]);
 
 	//wait for episodes to be loaded
 	if (!episodes) {

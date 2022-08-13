@@ -3,6 +3,7 @@
 import { useContext, useEffect } from "react";
 
 import CircularProg from "utils/porgress/CircularProg";
+import { NavLink } from "react-router-dom";
 import { RandomQuoteContext } from "context/RandomQuoteContext";
 import React from "react";
 import styled from "styled-components";
@@ -27,6 +28,7 @@ const RightSideBar = () => {
 
 	return (
 		<Nav>
+			<Anchor to={`/genres`}>Genres</Anchor>
 			<Title>Random Anime Quote</Title>
 			{quotes.slice(0, 3).map((anime, index) => (
 				<Box key={index}>
@@ -43,6 +45,8 @@ const Nav = styled.nav`
 	padding: 10%;
 	display: flex;
 	flex-direction: column;
+	align-items: center;
+	justify-content: center;
 `;
 
 const Title = styled.h3`
@@ -79,6 +83,26 @@ const Anime = styled.h2``;
 
 const Character = styled.h1`
 	font-weight: bold;
+`;
+
+const Anchor = styled(NavLink)`
+	padding: 8px 16px;
+	width: 70%;
+
+	color: #313131;
+	font-size: 16px;
+	margin-bottom: 16px;
+
+	background-color: #fff;
+	text-decoration: none;
+	text-align: center;
+
+	transition: 0.4s;
+
+	&:hover {
+		background-color: #313131;
+		color: #888;
+	}
 `;
 
 export default RightSideBar;

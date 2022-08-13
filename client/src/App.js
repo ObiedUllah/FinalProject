@@ -2,6 +2,7 @@ import { Route, Routes } from "react-router-dom";
 
 import AnimeDetails from "pages/AnimeDetails";
 import Footer from "components/footer/Footer";
+import Genres from "pages/Genres";
 import GlobalStyles from "styles/GlobalStyles";
 import Home from "pages/Home";
 import LeftSideBar from "components/leftAside/LeftSideBar";
@@ -37,6 +38,7 @@ const App = () => {
 					<Route exact path="/profile" element={<ProtectedRoute component={Profile} />} />
 					<Route exact path="/searchList" element={<SearchedAnimeList />} />
 					<Route exact path="/anime/:id" element={<AnimeDetails />} />
+					<Route exact path="/genres" element={<Genres />} />
 				</Routes>
 			</Main>
 			<RightAside>

@@ -12,6 +12,7 @@ import React from "react";
  * @returns
  */
 const DownloadDialog = ({ link, setOpen }) => {
+	console.log(link);
 	/**
 	 * closes modal
 	 */

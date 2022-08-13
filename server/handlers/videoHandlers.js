@@ -45,7 +45,6 @@ const downloadMp3 = async (req, res) => {
 				"x-rapidapi-host": process.env.API_HOST,
 			},
 		});
-
 		const response = await download.json();
 		response.status === "ok"
 			? sendResponse(res, 200, { song_title: response.title, song_link: response.link }, "video Retrieved")

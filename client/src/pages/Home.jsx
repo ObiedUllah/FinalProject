@@ -13,28 +13,22 @@ import styled from "styled-components";
  */
 const Home = () => {
 	const { topAnime, recentAnime, popularAnime } = useContext(AnimeListContext);
-	const { setTop, setRecent, setPopular } = useContext(AnimeListContext).actions;
+	const { getTopAnime, getRecentAnimes, getPopularAnimes } = useContext(AnimeListContext).actions;
 
 	useEffect(() => {
 		if (!topAnime) {
-			setTop();
+			getTopAnime();
 		}
 		if (!recentAnime) {
-			setRecent();
+			getRecentAnimes();
 		}
 		if (!popularAnime) {
-			setPopular();
+			getPopularAnimes();
 		}
 	}, []);
 
 	//wait until all the anime are loaded
-	if (!topAnime) {
-		return <CircularProg />;
-	}
-	if (!recentAnime) {
-		return <CircularProg />;
-	}
-	if (!popularAnime) {
+	if (!topAnime || !recentAnime || !popularAnime) {
 		return <CircularProg />;
 	}
 

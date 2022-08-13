@@ -1,7 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 
+import { AnimeDetailsContext } from "context/AnimeDetailsContext";
 import ReactPlayer from "react-player";
 import VideoButton from "./VideoData/VideoButton";
 import styled from "styled-components";
@@ -12,34 +13,11 @@ import styled from "styled-components";
  * @returns
  */
 const VideoSection = ({ anime, id }) => {
-	//current theme to display as video
-	const [selectedTheme, setSelectedTheme] = useState(null);
+	const { selectedTheme } = useContext(AnimeDetailsContext);
+	const { getInitialTheme } = useContext(AnimeDetailsContext).actions;
 
-	//will select the initial theme when going to details page
 	useEffect(() => {
-		const getInitialTheme = async () => {
-			try {
-				//if no opening or ending set to null
-				if (anime?.theme.openings[0] === undefined && anime?.theme.endings[0] === undefined) {
-					setSelectedTheme(null);
-				}
-				//if opening then set to opening
-				else if (anime?.theme.openings[0] !== undefined) {
-					const response = await fetch(`/api/video/${anime?.theme.openings[0] + " opening"}`);
-					const result = await response.json();
-					setSelectedTheme(result.data);
-				}
-				//if ending then set to ending
-				else if (anime?.theme.endings[0] !== undefined) {
-					const response = await fetch(`/api/video/${anime?.theme.endings[0] + " opening"}`);
-					const result = await response.json();
-					setSelectedTheme(result.data);
-				}
-			} catch (error) {
-				setSelectedTheme(null);
-			}
-		};
-		getInitialTheme();
+		getInitialTheme(anime);
 	}, [id, anime]);
 
 	return (
@@ -56,13 +34,13 @@ const VideoSection = ({ anime, id }) => {
 				<Title>Openings:</Title>
 				<OpeningList>
 					{anime.theme.openings.map((theme, index) => {
-						return <VideoButton key={index} anime={anime} index={index} theme={theme} setSelectedTheme={setSelectedTheme} />;
+						return <VideoButton key={index} anime={anime} index={index} theme={theme} />;
 					})}
 				</OpeningList>
 				<Title>Endings:</Title>
 				<EndingList>
 					{anime.theme.endings.map((theme, index) => {
-						return <VideoButton key={index} anime={anime} index={index} theme={theme} setSelectedTheme={setSelectedTheme} />;
+						return <VideoButton key={index} anime={anime} index={index} theme={theme} />;
 					})}
 				</EndingList>
 			</ThemesList>

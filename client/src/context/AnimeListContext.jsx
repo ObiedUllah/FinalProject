@@ -3,7 +3,8 @@ import React, { createContext, useState } from "react";
 export const AnimeListContext = createContext(null);
 
 /**
- * Stores the data into context so that the useffect is not called everytime the user goes to home page but only once
+ * Stores the lists into context so that the useffect is not called everytime
+ * the user goes to home page but only once
  * @param {*} param0
  * @returns
  */
@@ -12,28 +13,52 @@ export const AnimeListProvider = ({ children }) => {
 	const [recentAnime, setRecentAnime] = useState(() => null);
 	const [popularAnime, setPopularAnime] = useState(() => null);
 
-	const setTop = () => {
-		const getTopAnime = async () => {
-			const animeList = await fetch(`https://api.jikan.moe/v4/top/anime`).then((res) => res.json());
-			setTopAnime(animeList.data.slice(0, 24));
-		};
-		getTopAnime();
+	const getTopAnime = async () => {
+		const response = await fetch(`https://api.jikan.moe/v4/top/anime`);
+
+		//if failure then refresh after 1 sec
+		if (response.status === 429)
+			setTimeout(() => {
+				getTopAnime();
+			}, 1000);
+
+		//if success then set data
+		if (response.status === 200) {
+			const data = await response.json();
+			setTopAnime(data.data.slice(0, 24));
+		}
 	};
 
-	const setRecent = () => {
-		const getRecentAnime = async () => {
-			const animeList = await fetch(`https://api.jikan.moe/v4/watch/episodes`).then((res) => res.json());
-			setRecentAnime(animeList.data.slice(0, 30));
-		};
-		getRecentAnime();
+	const getRecentAnimes = async () => {
+		const response = await fetch(`https://api.jikan.moe/v4/watch/episodes`);
+
+		//if failure then refresh after 1 sec
+		if (response.status === 429)
+			setTimeout(() => {
+				getRecentAnimes();
+			}, 1000);
+
+		//if success then set data
+		if (response.status === 200) {
+			const data = await response.json();
+			setRecentAnime(data.data.slice(0, 30));
+		}
 	};
 
-	const setPopular = () => {
-		const getPopularAnime = async () => {
-			const animeList = await fetch(`https://api.jikan.moe/v4/watch/episodes/popular`).then((res) => res.json());
-			setPopularAnime(animeList.data.slice(0, 30));
-		};
-		getPopularAnime();
+	const getPopularAnimes = async () => {
+		const response = await fetch(`https://api.jikan.moe/v4/watch/episodes/popular`);
+
+		//if failure then refresh after 1 sec
+		if (response.status === 429)
+			setTimeout(() => {
+				getPopularAnimes();
+			}, 1000);
+
+		//if success then set data
+		if (response.status === 200) {
+			const data = await response.json();
+			setPopularAnime(data.data.slice(0, 30));
+		}
 	};
 
 	return (
@@ -43,9 +68,9 @@ export const AnimeListProvider = ({ children }) => {
 				recentAnime,
 				popularAnime,
 				actions: {
-					setTop,
-					setRecent,
-					setPopular,
+					getTopAnime,
+					getRecentAnimes,
+					getPopularAnimes,
 				},
 			}}
 		>

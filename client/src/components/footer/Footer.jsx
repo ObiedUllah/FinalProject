@@ -19,7 +19,6 @@ const Footer = () => {
 					<a href="https://www.instagram.com/sogekingullah" target="_blank" rel="noreferrer">
 						Instagram
 					</a>
-					{/* <a href="#">CV</a> */}
 				</div>
 				<div>
 					<h4>Information</h4>
@@ -52,16 +51,25 @@ const Footer = () => {
 				<div>
 					<h4>Apis</h4>
 					<a href="https://auth0.com/docs/api" target="_blank" rel="noreferrer">
-						Auth 0
+						Auth 0 API
 					</a>
 					<a href="https://jikan.moe/" target="_blank" rel="noreferrer">
 						Jikan API
+					</a>
+					<a href="https://animechan.vercel.app/api/quotes" target="_blank" rel="noreferrer">
+						AnimeChan API
 					</a>
 					<a href="https://rapidapi.com/" target="_blank" rel="noreferrer">
 						Rapid API (YT download)
 					</a>
 					<a href="https://www.npmjs.com/package/youtube-search-without-api-key" target="_blank" rel="noreferrer">
-						YT search
+						YT search API
+					</a>
+					<a href="https://cloudinary.com/documentation/image_upload_api_reference" target="_blank" rel="noreferrer">
+						Cloudinary API
+					</a>
+					<a href="https://react-slick.neostack.com/docs/api/" target="_blank" rel="noreferrer">
+						Slider API
 					</a>
 				</div>
 			</Upperdiv>
