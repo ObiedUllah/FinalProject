@@ -21,23 +21,27 @@ const AnimeDetails = () => {
 	const [anime, setAnime] = useState(null);
 
 	useEffect(() => {
+		let isCancelled = false;
 		const getAnime = async () => {
-			const response = await fetch(`https://api.jikan.moe/v4/anime/${id}/full`);
+			if (!isCancelled) {
+				const response = await fetch(`https://api.jikan.moe/v4/anime/${id}/full`);
 
-			//if failure then refresh after 2 sec
-			if (response.status === 429)
-				setTimeout(() => {
-					getAnime(id);
-				}, 1000);
+				//if failure then refresh after 2 sec
+				if (response.status === 429) getAnime();
 
-			//if success then set data
-			if (response.status === 200) {
-				const data = await response.json();
-				setAnime(data.data);
+				//if success then set data
+				if (response.status === 200) {
+					const data = await response.json();
+					setAnime(data.data);
+				}
 			}
 		};
 		setAnime(null);
 		getAnime();
+
+		return () => {
+			isCancelled = true;
+		};
 	}, [id]);
 
 	//if the anime is null then wait

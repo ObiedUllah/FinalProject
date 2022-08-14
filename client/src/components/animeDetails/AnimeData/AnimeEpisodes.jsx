@@ -14,22 +14,27 @@ const AnimeEpisodes = ({ anime, id }) => {
 	const [episodes, setEpisodes] = useState(() => null);
 
 	useEffect(() => {
+		let isCancelled = false;
+
 		const getEpisodes = async () => {
-			const response = await fetch(`https://api.jikan.moe/v4/anime/${id}/episodes`);
+			if (!isCancelled) {
+				const response = await fetch(`https://api.jikan.moe/v4/anime/${id}/episodes`);
 
-			//if failure then refresh after 2 sec
-			if (response.status === 429)
-				setTimeout(() => {
-					getEpisodes(id);
-				}, 1000);
+				//if failure then refresh after 2 sec
+				if (response.status === 429) getEpisodes();
 
-			//if success then set data
-			if (response.status === 200) {
-				const data = await response.json();
-				setEpisodes(data.data);
+				//if success then set data
+				if (response.status === 200) {
+					const data = await response.json();
+					setEpisodes(data.data);
+				}
 			}
 		};
 		getEpisodes();
+
+		return () => {
+			isCancelled = true;
+		};
 	}, [id, anime]);
 
 	//wait for episodes to be loaded

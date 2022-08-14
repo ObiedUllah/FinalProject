@@ -17,26 +17,32 @@ const AnimeRecommendations = ({ anime, id }) => {
 	const [length, setLength] = useState(0);
 
 	useEffect(() => {
+		let isCancelled = false;
+
 		const getRecommendations = async () => {
-			const response = await fetch(`https://api.jikan.moe/v4/anime/${id}/recommendations`);
+			if (!isCancelled) {
+				const response = await fetch(`https://api.jikan.moe/v4/anime/${id}/recommendations`);
 
-			//if failure then refresh after 2 sec
-			if (response.status === 429)
-				setTimeout(() => {
-					getRecommendations();
-				}, 1000);
+				//if failure then refresh after 2 sec
+				if (response.status === 429) getRecommendations();
 
-			//if success then set data
-			if (response.status === 200) {
-				const data = await response.json();
+				//if success then set data
+				if (response.status === 200) {
+					const data = await response.json();
 
-				//set length of anime slider
-				console.log(parseInt(data.data.length));
-				data.data.length < 8 ? setLength(parseInt(data.data.length)) : setLength(8);
-				setRecommendations(data.data);
+					//set length of anime slider
+					console.log(parseInt(data.data.length));
+					data.data.length < 8 ? setLength(parseInt(data.data.length)) : setLength(8);
+					setRecommendations(data.data);
+				}
 			}
 		};
+
 		getRecommendations();
+
+		return () => {
+			isCancelled = true;
+		};
 	}, [id, anime]);
 
 	//wait for recommendations to be loaded

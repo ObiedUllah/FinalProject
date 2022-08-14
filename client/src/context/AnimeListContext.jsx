@@ -41,6 +41,7 @@ export const AnimeListProvider = ({ children }) => {
 		//if success then set data
 		if (response.status === 200) {
 			const data = await response.json();
+			console.log(data);
 			setRecentAnime(data.data.slice(0, 30));
 		}
 	};
