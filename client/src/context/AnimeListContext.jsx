@@ -12,14 +12,15 @@ export const AnimeListProvider = ({ children }) => {
 	const [topAnime, setTopAnime] = useState(() => null);
 	const [recentAnime, setRecentAnime] = useState(() => null);
 	const [popularAnime, setPopularAnime] = useState(() => null);
+	const [shonenAnime, setShonenAnime] = useState(() => null);
 
-	const getTopAnime = async () => {
+	const getTopAnimes = async () => {
 		const response = await fetch(`https://api.jikan.moe/v4/top/anime`);
 
 		//if failure then refresh after 1 sec
 		if (response.status === 429)
 			setTimeout(() => {
-				getTopAnime();
+				getTopAnimes();
 			}, 1000);
 
 		//if success then set data
@@ -62,16 +63,34 @@ export const AnimeListProvider = ({ children }) => {
 		}
 	};
 
+	const getShonenAnimes = async () => {
+		const response = await fetch(`https://api.jikan.moe/v4/anime?genres=${27}&order_by=score&sort=desc`);
+
+		//if failure then refresh after 1 sec
+		if (response.status === 429)
+			setTimeout(() => {
+				getShonenAnimes();
+			}, 1500);
+
+		//if success then set data
+		if (response.status === 200) {
+			const data = await response.json();
+			setShonenAnime(data.data.slice(0, 24));
+		}
+	};
+
 	return (
 		<AnimeListContext.Provider
 			value={{
 				topAnime,
 				recentAnime,
 				popularAnime,
+				shonenAnime,
 				actions: {
-					getTopAnime,
+					getTopAnimes,
 					getRecentAnimes,
 					getPopularAnimes,
+					getShonenAnimes,
 				},
 			}}
 		>

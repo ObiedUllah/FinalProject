@@ -12,12 +12,12 @@ import styled from "styled-components";
  * @returns
  */
 const Home = () => {
-	const { topAnime, recentAnime, popularAnime } = useContext(AnimeListContext);
-	const { getTopAnime, getRecentAnimes, getPopularAnimes } = useContext(AnimeListContext).actions;
+	const { topAnime, recentAnime, popularAnime, shonenAnime } = useContext(AnimeListContext);
+	const { getTopAnimes, getRecentAnimes, getPopularAnimes, getShonenAnimes } = useContext(AnimeListContext).actions;
 
 	useEffect(() => {
 		if (!topAnime) {
-			getTopAnime();
+			getTopAnimes();
 		}
 		if (!recentAnime) {
 			getRecentAnimes();
@@ -25,18 +25,22 @@ const Home = () => {
 		if (!popularAnime) {
 			getPopularAnimes();
 		}
+		if (!shonenAnime) {
+			getShonenAnimes();
+		}
 	}, []);
 
 	//wait until all the anime are loaded
-	if (!topAnime || !recentAnime || !popularAnime) {
+	if (!topAnime || !recentAnime || !popularAnime || !shonenAnime) {
 		return <CircularProg />;
 	}
 
 	return (
 		<Wrapper>
 			<AnimeSlider list={topAnime} title={"Top Anime"} />
-			<AnimeSlider list={recentAnime} title={"Recent Anime"} />
-			<AnimeSlider list={popularAnime} title={"Popular Anime"} />
+			{popularAnime.length > 8 && <AnimeSlider list={popularAnime} title={"Popular Anime"} />}
+			{recentAnime.length > 8 && <AnimeSlider list={recentAnime} title={"Recent Anime"} />}
+			<AnimeSlider list={shonenAnime} title={"Shounen Anime"} />
 		</Wrapper>
 	);
 };

@@ -14,11 +14,11 @@ import styled from "styled-components";
  */
 const LeftSideBar = () => {
 	const { topAnime } = useContext(AnimeListContext);
-	const { getTopAnime } = useContext(AnimeListContext).actions;
+	const { getTopAnimes } = useContext(AnimeListContext).actions;
 
 	useEffect(() => {
 		if (!topAnime) {
-			getTopAnime();
+			getTopAnimes();
 		}
 	}, []);
 
