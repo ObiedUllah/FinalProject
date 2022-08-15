@@ -31,7 +31,7 @@ const AnimeSlider = ({ list, title, scroll = 8 }) => {
 							<div key={slide.entry.mal_id}>
 								<Anchor to={`/anime/${slide.entry.mal_id}`}>
 									<Image src={slide.entry.images.jpg.image_url} />
-									<Text>{slide.entry.title.substring(0, 13)}... </Text>
+									<Text>{slide.entry.title} </Text>
 								</Anchor>
 							</div>
 						);
@@ -40,7 +40,7 @@ const AnimeSlider = ({ list, title, scroll = 8 }) => {
 						<div key={slide.mal_id}>
 							<Anchor to={`/anime/${slide.mal_id}`}>
 								<Image src={slide.images.jpg.image_url} />
-								<Text>{slide.title.substring(0, 13)}... </Text>
+								<Text>{slide.title} </Text>
 							</Anchor>
 						</div>
 					);
@@ -64,7 +64,8 @@ const Image = styled.img`
 	height: 9vw;
 `;
 const Text = styled.p`
-	white-space: nowrap;
+	text-align: center;
+	line-height: 1.2em;
 `;
 
 const Anchor = styled(NavLink)`
