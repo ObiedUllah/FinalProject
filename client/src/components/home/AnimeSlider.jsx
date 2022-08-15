@@ -57,6 +57,7 @@ const Title = styled.h1`
 const Wrapper = styled.section`
 	width: 100%;
 	padding: 30px 3px;
+	height: 250px;
 `;
 
 const Image = styled.img`

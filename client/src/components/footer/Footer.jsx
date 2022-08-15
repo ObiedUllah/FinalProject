@@ -1,4 +1,5 @@
 import DarkMode from "components/themes/DarkMode";
+import { Link } from "react-router-dom";
 import React from "react";
 import styled from "styled-components";
 import { useAuth0 } from "@auth0/auth0-react";
@@ -22,12 +23,12 @@ const Footer = () => {
 				</div>
 				<div>
 					<h4>Information</h4>
-					<a href="/genres">Genres</a>
-					<a href="/promos">Promos</a>
+					<Link to="/genres">Genres</Link>
+					<Link to="/promos">Promos</Link>
 				</div>
 				<div>
 					<h4>User</h4>
-					<a href="/profile">Profile</a>
+					<Link to="/profile">Profile</Link>
 					<button
 						onClick={() =>
 							loginWithRedirect({
