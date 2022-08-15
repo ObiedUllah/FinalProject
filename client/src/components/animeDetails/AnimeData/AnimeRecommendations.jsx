@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 
-import { EpisodeLabel, Title } from "styles/AnimeDetailsStyles";
 import React, { useEffect, useState } from "react";
+import { Synopsis, Title } from "styles/AnimeDetailsStyles";
 
 import AnimeSlider from "components/home/AnimeSlider";
 import CircularProg from "utils/porgress/CircularProg";
@@ -59,7 +59,7 @@ const AnimeRecommendations = ({ anime, id }) => {
 				<AnimeSlider list={recommendations} title={""} scroll={length} />
 			) : (
 				<>
-					<EpisodeLabel>None</EpisodeLabel>
+					<Synopsis style={{ alignSelf: "flex-start" }}>None</Synopsis>
 				</>
 			)}
 		</Wrapper>

@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 
-import { Episode, EpisodeLabel, EpisodeList, SubTitle } from "styles/AnimeDetailsStyles";
+import { Episode, EpisodeLabel, EpisodeList, SubTitle, Synopsis } from "styles/AnimeDetailsStyles";
 import React, { useEffect, useState } from "react";
 
 import CircularProg from "utils/porgress/CircularProg";
@@ -67,7 +67,7 @@ const AnimeEpisodes = ({ anime, id }) => {
 					})}
 				</EpisodeList>
 			) : (
-				<EpisodeLabel>None</EpisodeLabel>
+				<Synopsis style={{ paddingLeft: "23px" }}>None</Synopsis>
 			)}
 		</div>
 	);

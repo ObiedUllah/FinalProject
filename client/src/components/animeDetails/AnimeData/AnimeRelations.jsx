@@ -1,4 +1,4 @@
-import { Anchor, Episode, EpisodeLabel, Link, Relation, RelationList, SubTitle } from "styles/AnimeDetailsStyles";
+import { Anchor, Episode, EpisodeLabel, Link, Relation, RelationList, SubTitle, Synopsis } from "styles/AnimeDetailsStyles";
 
 import React from "react";
 
@@ -47,7 +47,7 @@ const AnimeRelations = ({ anime }) => {
 					})}
 				</RelationList>
 			) : (
-				<EpisodeLabel>None</EpisodeLabel>
+				<Synopsis style={{ paddingLeft: "25px" }}>None</Synopsis>
 			)}
 		</div>
 	);
