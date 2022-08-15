@@ -56,7 +56,7 @@ const App = () => {
 const Wrapper = styled.div`
 	display: flex;
 	flex-wrap: wrap;
-	@media (max-width: 1200px) {
+	@media (max-width: 1300px) {
 		display: flex;
 		flex-direction: column;
 	}
@@ -65,6 +65,10 @@ const Wrapper = styled.div`
 const Nav = styled.header`
 	flex: 0 0 100%;
 	height: 15vh;
+
+	@media (max-width: 1300px) {
+		order: 1;
+	}
 `;
 
 const LeftAside = styled.aside`
@@ -72,7 +76,7 @@ const LeftAside = styled.aside`
 	min-height: 70vh;
 	min-width: 12vw;
 
-	@media (max-width: 1200px) {
+	@media (max-width: 1300px) {
 		display: none;
 	}
 `;
@@ -82,9 +86,10 @@ const Main = styled.article`
 	min-height: 70vh;
 	padding-bottom: 6vh;
 	min-width: 60vw;
-	@media (max-width: 1200px) {
+	@media (max-width: 1300px) {
 		width: 85vw;
 		padding: 0px 5vw;
+		order: 3;
 	}
 `;
 
@@ -92,14 +97,19 @@ const RightAside = styled.aside`
 	flex: 0 0 15%;
 	min-height: 70vh;
 	min-width: 12vw;
-	@media (max-width: 1200px) {
-		display: none;
+	@media (max-width: 1300px) {
+		order: 2;
+		min-height: 0px;
 	}
 `;
 
 const FooterDiv = styled.footer`
 	flex: 0 0 100%;
 	min-height: 15vh;
+
+	@media (max-width: 1300px) {
+		order: 4;
+	}
 `;
 
 export default App;
