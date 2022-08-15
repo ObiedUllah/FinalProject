@@ -48,6 +48,7 @@ const RightSideBar = () => {
 
 	return (
 		<Nav>
+			<Anchor to={`/`}>Home</Anchor>
 			<Anchor to={`/genres`}>Genres</Anchor>
 			<Anchor to={`/promos`}>Recent Promos</Anchor>
 			<Button onClick={handleClickSeasonal}>Seasonal Anime</Button>
@@ -137,8 +138,8 @@ const Anchor = styled(NavLink)`
 		transform: scale(1.1);
 	}
 	@media (max-width: 1200px) {
-		padding: 8px 0px;
-		width: 24%;
+		padding: 9px 0px;
+		width: 19%;
 	}
 `;
 
@@ -165,7 +166,7 @@ const Button = styled.button`
 	}
 
 	@media (max-width: 1200px) {
-		width: 24%;
+		width: 19%;
 	}
 `;
 
