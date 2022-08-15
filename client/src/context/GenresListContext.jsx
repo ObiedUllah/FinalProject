@@ -25,7 +25,6 @@ export const GenresListProvider = ({ children }) => {
 		//if success then set data
 		if (response.status === 200) {
 			const data = await response.json();
-			console.log(data.data);
 			setTopGenres(data.data.slice(0, 24));
 		}
 	};
@@ -42,7 +41,6 @@ export const GenresListProvider = ({ children }) => {
 		//if success then set data
 		if (response.status === 200) {
 			const data = await response.json();
-			console.log(data.data);
 			setThemesList(data.data.slice(0, 24));
 		}
 	};
@@ -59,7 +57,6 @@ export const GenresListProvider = ({ children }) => {
 		//if success then set data
 		if (response.status === 200) {
 			const data = await response.json();
-			console.log(data.data);
 			setDemoGraphicsList(data.data.slice(0, 24));
 		}
 	};
