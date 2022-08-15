@@ -1,9 +1,10 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 
+import { NavLink, useNavigate } from "react-router-dom";
 import { useContext, useEffect } from "react";
 
+import { AnimeListContext } from "context/AnimeListContext";
 import CircularProg from "utils/porgress/CircularProg";
-import { NavLink } from "react-router-dom";
 import { RandomQuoteContext } from "context/RandomQuoteContext";
 import React from "react";
 import styled from "styled-components";
@@ -15,11 +16,30 @@ const RightSideBar = () => {
 	const { quotes } = useContext(RandomQuoteContext);
 	const { getQuotes } = useContext(RandomQuoteContext).actions;
 
+	const { seasonalAnimes, upcomingAnimes } = useContext(AnimeListContext);
+	const { getSeasonalAnimes, getUpcomingAnimes } = useContext(AnimeListContext).actions;
+
 	useEffect(() => {
 		if (!quotes) {
 			getQuotes();
 		}
+		if (!seasonalAnimes) {
+			getSeasonalAnimes();
+		}
+		if (!upcomingAnimes) {
+			getUpcomingAnimes();
+		}
 	}, []);
+
+	const navigate = useNavigate();
+	const handleClickSeasonal = async (event) => {
+		event.preventDefault();
+		navigate("searchList", { state: { data: seasonalAnimes } });
+	};
+	const handleClickUpcoming = async (event) => {
+		event.preventDefault();
+		navigate("searchList", { state: { data: upcomingAnimes } });
+	};
 
 	//wait until the quotes are loaded
 	if (!quotes) {
@@ -30,6 +50,8 @@ const RightSideBar = () => {
 		<Nav>
 			<Anchor to={`/genres`}>Genres</Anchor>
 			<Anchor to={`/promos`}>Recent Promos</Anchor>
+			<Button onClick={handleClickSeasonal}>Seasonal Anime</Button>
+			<Button onClick={handleClickUpcoming}>Upcoming Anime</Button>
 			<Title>Random Anime Quote</Title>
 			{quotes.slice(0, 3).map((anime, index) => (
 				<Box key={index}>
@@ -88,7 +110,7 @@ const Character = styled.h1`
 
 const Anchor = styled(NavLink)`
 	padding: 8px 16px;
-	width: 70%;
+	width: 230px;
 
 	color: #313131;
 	font-size: 16px;
@@ -107,4 +129,26 @@ const Anchor = styled(NavLink)`
 	}
 `;
 
+const Button = styled.button`
+	padding: 8px 0px;
+	width: 262px;
+
+	color: #313131;
+	font-size: 16px;
+	margin-bottom: 16px;
+
+	background-color: #fff;
+	text-decoration: none;
+	text-align: center;
+	cursor: pointer;
+	border: none;
+
+	transition: 0.4s;
+
+	&:hover {
+		background-color: #313131;
+		color: #888;
+		transform: scale(1.1);
+	}
+`;
 export default RightSideBar;

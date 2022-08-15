@@ -7,6 +7,8 @@ import styled from "styled-components";
 
 /**
  * Carousel for Anime List using Slider from "react-slick";
+ * sets default amt of animes per slide to 8 but can be changed
+ * ex: only 2 recommended anime then only have 2 anime per slide and only one slide
  * @param {*} param0
  * @returns
  */

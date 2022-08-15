@@ -10,10 +10,10 @@ import React from "react";
 const ItemFavorites = ({ user, anime, list, setList }) => {
 	/**
 	 * removes the anime from favorites list
-	 * @param {*} e
+	 * @param {*} event
 	 */
-	const removeAnimeFromFavorites = async (e) => {
-		e.preventDefault();
+	const removeAnimeFromFavorites = async (event) => {
+		event.preventDefault();
 
 		//handle frontend first
 		setList([...list.filter((elem) => elem.mal_id !== anime.mal_id)]);

@@ -12,9 +12,9 @@ const ItemCompleted = ({ user, anime, list, setList }) => {
 
 	/**
 	 * updates the rating and changes it in the database
-	 * @param {*} e
+	 * @param {*} event
 	 */
-	const updateRating = async (e) => {
+	const updateRating = async (event) => {
 		//data to send to db
 		let body = {
 			email: user.email,
@@ -24,12 +24,12 @@ const ItemCompleted = ({ user, anime, list, setList }) => {
 				image: anime.image,
 				score: anime.score,
 				status: anime.status,
-				rating: e.target.value,
+				rating: event.target.value,
 			},
 		};
 
 		//set value in frontend
-		setRating(parseInt(e.target.value));
+		setRating(parseInt(event.target.value));
 		setList([...list.map((obj) => (body.data.mal_id === obj.mal_id ? body.data : obj))]);
 
 		try {
@@ -57,7 +57,11 @@ const ItemCompleted = ({ user, anime, list, setList }) => {
 				<Label>{anime.title}</Label>
 			</Anchor>
 			<Label>
-				<Select id="status" onChange={(e) => handleStatusChange(e, list, setList, anime, user.email, "plan", 0, false)} value={anime.status}>
+				<Select
+					id="status"
+					onChange={(event) => handleStatusChange(event, list, setList, anime, user.email, "plan", 0, false)}
+					value={anime.status}
+				>
 					<Option value="plan">Plan to Watch</Option>
 					<Option value="completed">Completed</Option>
 				</Select>
@@ -78,7 +82,7 @@ const ItemCompleted = ({ user, anime, list, setList }) => {
 			<Label>{anime.score}</Label>
 
 			<Label>
-				<Button onClick={(e) => handleRemoveFromList(e, list, setList, anime, user.email)}>Remove</Button>
+				<Button onClick={(event) => handleRemoveFromList(event, list, setList, anime, user.email)}>Remove</Button>
 			</Label>
 		</Wrapper>
 	);

@@ -1,5 +1,6 @@
 import { Anchor, Episode, EpisodeLabel, Link, Relation, RelationList, SubTitle } from "styles/AnimeDetailsStyles";
 
+import CircularProg from "utils/porgress/CircularProg";
 import React from "react";
 
 /**
@@ -10,8 +11,8 @@ import React from "react";
 const AnimeRelations = ({ anime }) => {
 	return (
 		<div>
-			{anime.relations && anime.relations.length > 0 && <SubTitle>Relations: </SubTitle>}
-			{anime.relations && anime.relations.length > 0 && (
+			<SubTitle>Relations: </SubTitle>
+			{anime.relations.length > 0 ? (
 				<RelationList>
 					{anime.relations.map((item, index) => {
 						return (
@@ -46,6 +47,8 @@ const AnimeRelations = ({ anime }) => {
 						);
 					})}
 				</RelationList>
+			) : (
+				<EpisodeLabel>None</EpisodeLabel>
 			)}
 		</div>
 	);

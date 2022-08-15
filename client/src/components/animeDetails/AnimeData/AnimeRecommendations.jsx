@@ -14,6 +14,8 @@ import styled from "styled-components";
  */
 const AnimeRecommendations = ({ anime, id }) => {
 	const [recommendations, setRecommendations] = useState(() => null);
+
+	//length to set the slider
 	const [length, setLength] = useState(0);
 
 	useEffect(() => {
@@ -23,7 +25,7 @@ const AnimeRecommendations = ({ anime, id }) => {
 			if (!isCancelled) {
 				const response = await fetch(`https://api.jikan.moe/v4/anime/${id}/recommendations`);
 
-				//if failure then refresh after 2 sec
+				//if failure then refresh
 				if (response.status === 429) getRecommendations();
 
 				//if success then set data
@@ -39,6 +41,7 @@ const AnimeRecommendations = ({ anime, id }) => {
 
 		getRecommendations();
 
+		//makes sure to render only the anime with the id as param (counters user spamming animes)
 		return () => {
 			isCancelled = true;
 		};

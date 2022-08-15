@@ -27,12 +27,12 @@ const VideoButton = ({ anime, index, theme, isOpening, setSelectedTheme }) => {
 
 	/**
 	 * When user clicks on opening/ending, will set the video to the first youtube search for that opening/ending
-	 * @param {*} e
+	 * @param {*} event
 	 * @param {*} index
 	 */
-	const handleClick = async (e, index) => {
-		e.preventDefault();
-		e.stopPropagation();
+	const handleClick = async (event, index) => {
+		event.preventDefault();
+		event.stopPropagation();
 		try {
 			let response;
 			isOpening
@@ -48,12 +48,12 @@ const VideoButton = ({ anime, index, theme, isOpening, setSelectedTheme }) => {
 
 	/**
 	 * this will convert the selected song to an mp3, then create a modal so that the user can download the song
-	 * @param {*} e
+	 * @param {*} event
 	 * @param {*} index
 	 */
-	const handleDownload = async (e, index) => {
-		e.preventDefault();
-		e.stopPropagation();
+	const handleDownload = async (event, index) => {
+		event.preventDefault();
+		event.stopPropagation();
 
 		try {
 			//change text
@@ -86,9 +86,9 @@ const VideoButton = ({ anime, index, theme, isOpening, setSelectedTheme }) => {
 			{open && <DownloadDialog link={link} setOpen={setOpen} />}
 
 			{/* Button link to opening/ending */}
-			<ButtonLabel key={index} onClick={(e) => handleClick(e, index)}>
+			<ButtonLabel key={index} onClick={(event) => handleClick(event, index)}>
 				<Name>{formatText(theme)} </Name>
-				<Download onClick={(e) => handleDownload(e, index)} />
+				<Download onClick={(event) => handleDownload(event, index)} />
 			</ButtonLabel>
 		</>
 	);

@@ -66,7 +66,10 @@ const ItemPlan = ({ user, anime, list, setList }) => {
 										);
 									})}
 							</Select>
-							<Button confirm={true} onClick={(e) => handleStatusChange(e, list, setList, anime, user.email, status, rating, true)}>
+							<Button
+								confirm={true}
+								onClick={(event) => handleStatusChange(event, list, setList, anime, user.email, status, rating, true)}
+							>
 								Add to List
 							</Button>
 						</div>
@@ -76,7 +79,7 @@ const ItemPlan = ({ user, anime, list, setList }) => {
 			<Label>{anime.score}</Label>
 
 			<Label>
-				<Button confirm={false} onClick={(e) => handleRemoveFromList(e, list, setList, anime, user.email)}>
+				<Button confirm={false} onClick={(event) => handleRemoveFromList(event, list, setList, anime, user.email)}>
 					Remove
 				</Button>
 			</Label>

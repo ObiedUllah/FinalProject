@@ -12,13 +12,13 @@ const ProfilePicture = ({ user }) => {
 
 	/**
 	 * gets file from the file explorer
-	 * @param {*} e
+	 * @param {*} event
 	 */
-	const handleFileInputChange = (e) => {
-		const file = e.target.files[0];
+	const handleFileInputChange = (event) => {
+		const file = event.target.files[0];
 		previewFile(file);
 		setSelectedFile(file);
-		setFileInputState(e.target.value);
+		setFileInputState(event.target.value);
 	};
 
 	/**
@@ -40,11 +40,11 @@ const ProfilePicture = ({ user }) => {
 
 	/**
 	 * makes sure there is a file and gets file data and then uploads image
-	 * @param {*} e
+	 * @param {*} event
 	 * @returns
 	 */
-	const handleSubmitFile = (e) => {
-		e.preventDefault();
+	const handleSubmitFile = (event) => {
+		event.preventDefault();
 		if (!selectedFile) return;
 		const reader = new FileReader();
 		reader.readAsDataURL(selectedFile);

@@ -26,8 +26,8 @@ const Genres = () => {
 		}
 	}, []);
 
-	const handleClick = async (e, index) => {
-		e.preventDefault();
+	const handleClick = async (event, index) => {
+		event.preventDefault();
 		const temp = await fetch(`https://api.jikan.moe/v4/anime?genres=${index}&order_by=score&sort=desc`).then((res) => res.json());
 		navigate("/searchList", { state: { data: temp.data } });
 	};
@@ -43,7 +43,7 @@ const Genres = () => {
 			<Data>
 				{genresList.map((item) => {
 					return (
-						<Item key={item.mal_id} onClick={(e) => handleClick(e, item.mal_id)}>
+						<Item key={item.mal_id} onClick={(event) => handleClick(event, item.mal_id)}>
 							{item.name}
 						</Item>
 					);
@@ -53,7 +53,7 @@ const Genres = () => {
 			<Data>
 				{themesList.map((item) => {
 					return (
-						<Item key={item.mal_id} onClick={(e) => handleClick(e, item.mal_id)}>
+						<Item key={item.mal_id} onClick={(event) => handleClick(event, item.mal_id)}>
 							{item.name}
 						</Item>
 					);
@@ -63,7 +63,7 @@ const Genres = () => {
 			<Data>
 				{demographicsList.map((item) => {
 					return (
-						<Item key={item.mal_id} onClick={(e) => handleClick(e, item.mal_id)}>
+						<Item key={item.mal_id} onClick={(event) => handleClick(event, item.mal_id)}>
 							{item.name}
 						</Item>
 					);

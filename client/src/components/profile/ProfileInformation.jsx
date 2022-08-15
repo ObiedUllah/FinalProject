@@ -15,7 +15,7 @@ const ProfileInformation = ({ user }) => {
 
 			<Info>
 				<ProfileInfoData user={user} />
-				{/* Profile Picture COmponent with save button */}
+				{/* Profile Picture component with save button */}
 				<ProfilePicture user={user} />
 			</Info>
 		</Wrapper>

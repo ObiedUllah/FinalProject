@@ -21,10 +21,10 @@ const ProfileCompleted = ({ user }) => {
 		<Wrapper>
 			<TitleDiv>
 				<Label>Image</Label>
-				<Button onClick={(e) => sortByTitle(e, titleAsc, setTitleAsc, list, setList)}>Title</Button>
+				<Button onClick={(event) => sortByTitle(event, titleAsc, setTitleAsc, list, setList)}>Title</Button>
 				<Label>Status</Label>
-				<Button onClick={(e) => sortByRating(e, ratingAsc, setRatingAsc, list, setList)}>Rating</Button>
-				<Button onClick={(e) => sortByScore(e, scoreAsc, setScoreAsc, list, setList)}>Score</Button>
+				<Button onClick={(event) => sortByRating(event, ratingAsc, setRatingAsc, list, setList)}>Rating</Button>
+				<Button onClick={(event) => sortByScore(event, scoreAsc, setScoreAsc, list, setList)}>Score</Button>
 				<Label>Remove</Label>
 			</TitleDiv>
 			<>

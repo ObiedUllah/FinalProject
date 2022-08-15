@@ -13,24 +13,24 @@ import styled from "styled-components";
  * @returns
  */
 const LeftSideBar = () => {
-	const { topAnime } = useContext(AnimeListContext);
+	const { topAnimes } = useContext(AnimeListContext);
 	const { getTopAnimes } = useContext(AnimeListContext).actions;
 
 	useEffect(() => {
-		if (!topAnime) {
+		if (!topAnimes) {
 			getTopAnimes();
 		}
 	}, []);
 
 	//wait until the top anime are loaded
-	if (!topAnime) {
+	if (!topAnimes) {
 		return <CircularProg />;
 	}
 
 	return (
 		<Nav>
 			<Title>Top Anime</Title>
-			{topAnime.slice(0, 15).map((anime) => (
+			{topAnimes.slice(0, 15).map((anime) => (
 				<Anchor to={`/anime/${anime.mal_id}`} key={anime.mal_id} rel="noreferrer">
 					{anime.title}
 				</Anchor>

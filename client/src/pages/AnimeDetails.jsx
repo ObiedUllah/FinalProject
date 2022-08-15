@@ -26,7 +26,7 @@ const AnimeDetails = () => {
 			if (!isCancelled) {
 				const response = await fetch(`https://api.jikan.moe/v4/anime/${id}/full`);
 
-				//if failure then refresh after 2 sec
+				//if failure then refresh
 				if (response.status === 429) getAnime();
 
 				//if success then set data
@@ -39,6 +39,7 @@ const AnimeDetails = () => {
 		setAnime(null);
 		getAnime();
 
+		//makes sure to render only the anime with the id as param (counters user spamming animes)
 		return () => {
 			isCancelled = true;
 		};

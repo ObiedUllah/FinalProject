@@ -28,13 +28,13 @@ const ProfileTabs = ({ user, setUser }) => {
 	return (
 		<Wrapper>
 			<ButtonWrapper>
-				<Button onClick={(e) => handleTabClick(e, 0)} isSelected={selectedTab === 0}>
+				<Button onClick={(event) => handleTabClick(event, 0)} isSelected={selectedTab === 0}>
 					Completed
 				</Button>
-				<Button onClick={(e) => handleTabClick(e, 1)} isSelected={selectedTab === 1}>
+				<Button onClick={(event) => handleTabClick(event, 1)} isSelected={selectedTab === 1}>
 					Plan To Watch
 				</Button>
-				<Button onClick={(e) => handleTabClick(e, 2)} isSelected={selectedTab === 2}>
+				<Button onClick={(event) => handleTabClick(event, 2)} isSelected={selectedTab === 2}>
 					Favorites
 				</Button>
 			</ButtonWrapper>

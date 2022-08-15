@@ -21,18 +21,18 @@ const Search = () => {
 	/**
 	 * Shows or hides the input box depending on if the user clicks on the search icon
 	 * if the search input has text then make the icon into a submit search
-	 *  @param {*} e
+	 *  @param {*} event
 	 */
-	const showInput = async (e) => {
-		display ? (search.length > 0 ? handleSearch(e) : setDisplay(false)) : setDisplay(true);
+	const showInput = async (event) => {
+		display ? (search.length > 0 ? handleSearch(event) : setDisplay(false)) : setDisplay(true);
 	};
 
 	/**
-	 * Will search for the 12 most poppular anime with that search query
-	 * @param {*} e
+	 * Will search for the most poppular anime with that search query
+	 * @param {*} event
 	 */
-	const handleSearch = async (e) => {
-		e.preventDefault();
+	const handleSearch = async (event) => {
+		event.preventDefault();
 		const temp = await fetch(`https://api.jikan.moe/v4/anime?q=${search}&order_by=score&sort=desc&sfw`).then((res) => res.json());
 		navigate("searchList", { state: { data: temp.data } });
 	};
@@ -40,7 +40,13 @@ const Search = () => {
 	return (
 		<SearchBox onSubmit={handleSearch}>
 			{display && (
-				<SearchInput type="search" placeholder="Search for an anime..." required value={search} onChange={(e) => setSearch(e.target.value)} />
+				<SearchInput
+					type="search"
+					placeholder="Search for an anime..."
+					required
+					value={search}
+					onChange={(event) => setSearch(event.target.value)}
+				/>
 			)}
 			<Icon size="30px" onClick={showInput} />
 		</SearchBox>
