@@ -65,8 +65,8 @@ const Image = styled.img`
 const Second = styled.div`
 	display: flex;
 	flex-direction: column;
-	min-width: 55vw;
 	overflow: hidden;
+	width: 100%;
 `;
 
 export default InformationSection;
