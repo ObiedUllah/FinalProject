@@ -57,7 +57,7 @@ const VideoSection = ({ anime, id }) => {
 			{selectedTheme ? (
 				<ReactPlayer controls={true} width="100%" height="70vh" url={selectedTheme.url} />
 			) : (
-				<Title style={{ textAlign: "center" }}>Unavailable...</Title>
+				<Title style={{ textAlign: "center" }}>Themes Unavailable...</Title>
 			)}
 			<ThemesList>
 				<Title>Openings:</Title>
