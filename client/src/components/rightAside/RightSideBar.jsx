@@ -52,14 +52,16 @@ const RightSideBar = () => {
 			<Anchor to={`/promos`}>Recent Promos</Anchor>
 			<Button onClick={handleClickSeasonal}>Seasonal Anime</Button>
 			<Button onClick={handleClickUpcoming}>Upcoming Anime</Button>
-			<Title>Random Anime Quote</Title>
-			{quotes.slice(0, 3).map((anime, index) => (
-				<Box key={index}>
-					<Quote>'{anime.quote}'</Quote>
-					<Character>-{anime.character}</Character>
-					<Anime>Anime: {anime.anime}</Anime>
-				</Box>
-			))}
+			<Quotes>
+				<Title>Random Anime Quote</Title>
+				{quotes.slice(0, 3).map((anime, index) => (
+					<Box key={index}>
+						<Quote>'{anime.quote}'</Quote>
+						<Character>-{anime.character}</Character>
+						<Anime>Anime: {anime.anime}</Anime>
+					</Box>
+				))}
+			</Quotes>
 		</Nav>
 	);
 };
@@ -70,6 +72,13 @@ const Nav = styled.nav`
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
+	@media (max-width: 1300px) {
+		order: 4;
+		padding: 1vh 0px;
+		flex-direction: row;
+		align-items: center;
+		justify-content: space-around;
+	}
 `;
 
 const Title = styled.h3`
@@ -109,8 +118,8 @@ const Character = styled.h1`
 `;
 
 const Anchor = styled(NavLink)`
-	padding: 8px 16px;
-	width: 230px;
+	padding: 8px 1vw;
+	width: 10vw;
 
 	color: #313131;
 	font-size: 16px;
@@ -127,11 +136,15 @@ const Anchor = styled(NavLink)`
 		color: #888;
 		transform: scale(1.1);
 	}
+	@media (max-width: 1300px) {
+		padding: 8px 0px;
+		width: 24%;
+	}
 `;
 
 const Button = styled.button`
 	padding: 8px 0px;
-	width: 262px;
+	width: 12vw;
 
 	color: #313131;
 	font-size: 16px;
@@ -149,6 +162,16 @@ const Button = styled.button`
 		background-color: #313131;
 		color: #888;
 		transform: scale(1.1);
+	}
+
+	@media (max-width: 1300px) {
+		width: 24%;
+	}
+`;
+
+const Quotes = styled.div`
+	@media (max-width: 1300px) {
+		display: none;
 	}
 `;
 export default RightSideBar;
