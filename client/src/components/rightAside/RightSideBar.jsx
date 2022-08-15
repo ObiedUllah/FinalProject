@@ -72,9 +72,9 @@ const Nav = styled.nav`
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	@media (max-width: 1300px) {
+	@media (max-width: 1200px) {
 		order: 4;
-		padding: 1vh 0px;
+		padding: 1vh 1vw;
 		flex-direction: row;
 		align-items: center;
 		justify-content: space-around;
@@ -136,7 +136,7 @@ const Anchor = styled(NavLink)`
 		color: #888;
 		transform: scale(1.1);
 	}
-	@media (max-width: 1300px) {
+	@media (max-width: 1200px) {
 		padding: 8px 0px;
 		width: 24%;
 	}
@@ -164,13 +164,13 @@ const Button = styled.button`
 		transform: scale(1.1);
 	}
 
-	@media (max-width: 1300px) {
+	@media (max-width: 1200px) {
 		width: 24%;
 	}
 `;
 
 const Quotes = styled.div`
-	@media (max-width: 1300px) {
+	@media (max-width: 1200px) {
 		display: none;
 	}
 `;
