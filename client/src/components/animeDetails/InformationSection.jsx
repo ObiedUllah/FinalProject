@@ -54,6 +54,7 @@ const Wrapper = styled.div`
 const First = styled.div`
 	display: flex;
 	flex-direction: column;
+	width: 260px;
 `;
 
 const Image = styled.img`
@@ -64,6 +65,7 @@ const Image = styled.img`
 const Second = styled.div`
 	display: flex;
 	flex-direction: column;
+	min-width: 55vw;
 	overflow: hidden;
 `;
 
