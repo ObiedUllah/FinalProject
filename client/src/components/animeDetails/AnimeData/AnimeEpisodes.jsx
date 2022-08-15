@@ -44,8 +44,8 @@ const AnimeEpisodes = ({ anime, id }) => {
 
 	return (
 		<div>
-			{episodes && episodes.length > 0 && <SubTitle>Episodes: </SubTitle>}
-			{episodes && episodes.length > 0 && (
+			<SubTitle>Episodes: </SubTitle>
+			{episodes?.length > 0 ? (
 				<EpisodeList>
 					<Episode style={{ border: "none" }}>
 						<EpisodeLabel>#</EpisodeLabel>
@@ -65,6 +65,8 @@ const AnimeEpisodes = ({ anime, id }) => {
 						);
 					})}
 				</EpisodeList>
+			) : (
+				<EpisodeLabel>None</EpisodeLabel>
 			)}
 		</div>
 	);

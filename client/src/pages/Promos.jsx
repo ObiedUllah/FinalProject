@@ -3,17 +3,18 @@
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 import CircularProg from "utils/porgress/CircularProg";
 import { PromosContext } from "context/PromosContext";
 import ReactPlayer from "react-player";
-import Slider from "react-slick";
 import styled from "styled-components";
 
 const Promos = () => {
 	const { promos } = useContext(PromosContext);
 	const { getPromos } = useContext(PromosContext).actions;
+
+	const [selectedIndex, setSelectedIndex] = useState(() => 0);
 
 	useEffect(() => {
 		if (!promos) {
@@ -23,33 +24,24 @@ const Promos = () => {
 
 	// wait until data is loaded
 	if (!promos) {
-		<CircularProg />;
+		return <CircularProg />;
 	}
-
-	var settings = {
-		dots: true,
-		infinite: true,
-		speed: 500,
-		slidesToShow: 1,
-		slidesToScroll: 1,
-		arrows: true,
-	};
-
 	return (
 		<Wrapper>
-			<Slider {...settings}>
-				{promos &&
-					promos.slice(0, 5).map((slide) => {
-						return (
-							<div key={slide.entry.mal_id}>
-								<Text>
-									{slide.title}: {slide.entry.title}{" "}
-								</Text>
-								<ReactPlayer controls={true} width="100%" height="70vh" url={slide.trailer.embed_url} />
-							</div>
-						);
-					})}
-			</Slider>
+			<Text>Promotional Videos</Text>
+			<PromosWrapper>
+				{promos.map((promo, index) => {
+					return (
+						<Button key={index} onClick={() => setSelectedIndex(index)}>
+							{promo.title}: {promo.entry.title}
+						</Button>
+					);
+				})}
+			</PromosWrapper>
+			<Text>
+				{promos[selectedIndex].title}: {promos[selectedIndex].entry.title}
+			</Text>
+			<ReactPlayer controls={true} width="100%" height="70vh" url={promos[selectedIndex].trailer.embed_url} />
 		</Wrapper>
 	);
 };
@@ -63,6 +55,30 @@ const Text = styled.h1`
 	font-size: 30px;
 	margin-bottom: 10px;
 	text-align: center;
+`;
+
+const PromosWrapper = styled.div`
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: space-between;
+	margin: 20px;
+`;
+
+const Button = styled.button`
+	flex: 0 0 15%;
+	height: 60px;
+	margin: 4px;
+	border: none;
+	border-radius: 10px;
+	background-color: #888;
+	cursor: pointer;
+
+	&:hover {
+		transform: scale(1.2);
+		background-color: #666;
+	}
 `;
 
 export default Promos;

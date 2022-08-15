@@ -1,10 +1,10 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 
+import { EpisodeLabel, Title } from "styles/AnimeDetailsStyles";
 import React, { useEffect, useState } from "react";
 
 import AnimeSlider from "components/home/AnimeSlider";
 import CircularProg from "utils/porgress/CircularProg";
-import { Title } from "styles/AnimeDetailsStyles";
 import styled from "styled-components";
 
 /**
@@ -31,7 +31,6 @@ const AnimeRecommendations = ({ anime, id }) => {
 					const data = await response.json();
 
 					//set length of anime slider
-					console.log(parseInt(data.data.length));
 					data.data.length < 8 ? setLength(parseInt(data.data.length)) : setLength(8);
 					setRecommendations(data.data);
 				}
@@ -52,19 +51,12 @@ const AnimeRecommendations = ({ anime, id }) => {
 
 	return (
 		<Wrapper>
-			{recommendations && recommendations.length > 0 && <Title>Recommendations: </Title>}
-			{recommendations ? (
+			<Title>Recommendations: </Title>
+			{recommendations.length > 0 ? (
 				<AnimeSlider list={recommendations} title={""} scroll={length} />
 			) : (
 				<>
-					<p>refresh page/unavailable</p>
-					<Button
-						onClick={(e) => {
-							window.location.reload();
-						}}
-					>
-						Refresh Page
-					</Button>
+					<EpisodeLabel>None</EpisodeLabel>
 				</>
 			)}
 		</Wrapper>
@@ -72,7 +64,7 @@ const AnimeRecommendations = ({ anime, id }) => {
 };
 
 const Wrapper = styled.div`
-	padding: 30px;
+	padding: 25px;
 	display: flex;
 	align-items: center;
 	flex-direction: column;

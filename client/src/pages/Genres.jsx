@@ -34,43 +34,40 @@ const Genres = () => {
 
 	// wait until data is loaded
 	if (!genresList || !themesList || !demographicsList) {
-		<CircularProg />;
+		return <CircularProg />;
 	}
 
 	return (
 		<Wrapper>
 			<Title>Genres: </Title>
 			<Data>
-				{genresList &&
-					genresList.map((item) => {
-						return (
-							<Item key={item.mal_id} onClick={(e) => handleClick(e, item.mal_id)}>
-								{item.name}
-							</Item>
-						);
-					})}
+				{genresList.map((item) => {
+					return (
+						<Item key={item.mal_id} onClick={(e) => handleClick(e, item.mal_id)}>
+							{item.name}
+						</Item>
+					);
+				})}
 			</Data>
 			<Title>Themes: </Title>
 			<Data>
-				{themesList &&
-					themesList.map((item) => {
-						return (
-							<Item key={item.mal_id} onClick={(e) => handleClick(e, item.mal_id)}>
-								{item.name}
-							</Item>
-						);
-					})}
+				{themesList.map((item) => {
+					return (
+						<Item key={item.mal_id} onClick={(e) => handleClick(e, item.mal_id)}>
+							{item.name}
+						</Item>
+					);
+				})}
 			</Data>
 			<Title>Demographics: </Title>
 			<Data>
-				{demographicsList &&
-					demographicsList.map((item) => {
-						return (
-							<Item key={item.mal_id} onClick={(e) => handleClick(e, item.mal_id)}>
-								{item.name}
-							</Item>
-						);
-					})}
+				{demographicsList.map((item) => {
+					return (
+						<Item key={item.mal_id} onClick={(e) => handleClick(e, item.mal_id)}>
+							{item.name}
+						</Item>
+					);
+				})}
 			</Data>
 		</Wrapper>
 	);
