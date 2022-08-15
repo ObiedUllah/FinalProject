@@ -74,10 +74,4 @@ const Wrapper = styled.div`
 	justify-content: center;
 `;
 
-const Button = styled.button`
-	margin: 10px 0px;
-	padding: 10px;
-	cursor: pointer;
-`;
-
 export default AnimeRecommendations;

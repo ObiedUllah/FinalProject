@@ -12,12 +12,12 @@ export const AnimeListProvider = ({ children }) => {
 	const [topAnimes, setTopAnime] = useState(() => null);
 	const [recentAnimes, setRecentAnime] = useState(() => null);
 	const [popularAnimes, setPopularAnime] = useState(() => null);
-	const [shonenAnimes, setShonenAnime] = useState(() => null);
+	const [randomGenreAnimes, setRandomGenreAnimes] = useState(() => null);
 	const [seasonalAnimes, setSeasonalAnimes] = useState(() => null);
 	const [upcomingAnimes, setUpcomingAnimes] = useState(() => null);
 
 	const getTopAnimes = async () => {
-		const response = await fetch(`https://api.jikan.moe/v4/top/anime`);
+		const response = await fetch(`https://api.jikan.moe/v4/top/anime?type=tv`);
 
 		//if failure then refresh after 1 sec
 		if (response.status === 429) getTopAnimes();
@@ -30,7 +30,7 @@ export const AnimeListProvider = ({ children }) => {
 	};
 
 	const getRecentAnimes = async () => {
-		const response = await fetch(`https://api.jikan.moe/v4/watch/episodes`);
+		const response = await fetch(`https://api.jikan.moe/v4/top/anime?filter=airing&type=tv`);
 
 		//if failure then refresh after 1 sec
 		if (response.status === 429) getRecentAnimes();
@@ -38,12 +38,12 @@ export const AnimeListProvider = ({ children }) => {
 		//if success then set data
 		if (response.status === 200) {
 			const data = await response.json();
-			setRecentAnime(data.data.slice(0, 30));
+			setRecentAnime(data.data.slice(0, 24));
 		}
 	};
 
 	const getPopularAnimes = async () => {
-		const response = await fetch(`https://api.jikan.moe/v4/watch/episodes/popular`);
+		const response = await fetch(`https://api.jikan.moe/v4/top/anime?filter=bypopularity&type=tv`);
 
 		//if failure then refresh after 1 sec
 		if (response.status === 429) getPopularAnimes();
@@ -51,20 +51,25 @@ export const AnimeListProvider = ({ children }) => {
 		//if success then set data
 		if (response.status === 200) {
 			const data = await response.json();
-			setPopularAnime(data.data.slice(0, 30));
+			setPopularAnime(data.data.slice(0, 24));
 		}
 	};
 
-	const getShonenAnimes = async () => {
-		const response = await fetch(`https://api.jikan.moe/v4/anime?genres=${27}&order_by=score&sort=desc`);
+	const getRandomGenreAnimes = async () => {
+		//get random genre
+		const ids = [1, 2, 4, 8, 30, 27];
+		const names = ["Action", "Adventure", "Comedy", "Drama", "Sports", "Shounen"].map((item) => item + " Anime");
+		const num = Math.floor(Math.random() * ids.length);
+
+		const response = await fetch(`https://api.jikan.moe/v4/anime?genres=${ids[num]}&order_by=score&sort=desc`);
 
 		//if failure then refresh
-		if (response.status === 429) getShonenAnimes();
+		if (response.status === 429) getRandomGenreAnimes();
 
 		//if success then set data
 		if (response.status === 200) {
 			const data = await response.json();
-			setShonenAnime(data.data.slice(0, 24));
+			setRandomGenreAnimes({ name: names[num], data: data.data.slice(0, 24) });
 		}
 	};
 
@@ -77,7 +82,6 @@ export const AnimeListProvider = ({ children }) => {
 		//if success then set data
 		if (response.status === 200) {
 			const data = await response.json();
-			console.log(data);
 			setSeasonalAnimes(data.data.slice(0, 24));
 		}
 	};
@@ -91,7 +95,6 @@ export const AnimeListProvider = ({ children }) => {
 		//if success then set data
 		if (response.status === 200) {
 			const data = await response.json();
-			console.log(data);
 			setUpcomingAnimes(data.data.slice(0, 24));
 		}
 	};
@@ -102,14 +105,14 @@ export const AnimeListProvider = ({ children }) => {
 				topAnimes,
 				recentAnimes,
 				popularAnimes,
-				shonenAnimes,
+				randomGenreAnimes,
 				seasonalAnimes,
 				upcomingAnimes,
 				actions: {
 					getTopAnimes,
 					getRecentAnimes,
 					getPopularAnimes,
-					getShonenAnimes,
+					getRandomGenreAnimes,
 					getSeasonalAnimes,
 					getUpcomingAnimes,
 				},

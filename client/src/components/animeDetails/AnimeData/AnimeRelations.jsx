@@ -1,6 +1,5 @@
 import { Anchor, Episode, EpisodeLabel, Link, Relation, RelationList, SubTitle } from "styles/AnimeDetailsStyles";
 
-import CircularProg from "utils/porgress/CircularProg";
 import React from "react";
 
 /**
