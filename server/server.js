@@ -16,6 +16,7 @@ express()
 		next();
 	})
 	.use(morgan("tiny"))
+	.use(express.static(path.join(__dirname, "build")))
 	.use(express.json({ limit: "50mb" }))
 	.use(express.urlencoded({ limit: "50mb", extended: true }))
 	.use(cors())
@@ -24,8 +25,6 @@ express()
 	.use(require("./endpoints/userEndpoints"))
 	.use(require("./endpoints/videoEndpoints"))
 	.use(require("./endpoints/uploadImageEndpoints"))
-
-	.use(express.static(path.join(__dirname, "build")))
 
 	.get("/*", (req, res) => {
 		res.sendFile(path.join(__dirname, "build", "index.html"));
