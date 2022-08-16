@@ -6,7 +6,7 @@ const morgan = require("morgan");
 const cors = require("cors");
 const path = require("path");
 
-const PORT = 7000;
+const PORT = process.env.PORT || 7000;
 
 express()
 	//default
