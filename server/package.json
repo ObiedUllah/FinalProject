@@ -16,6 +16,9 @@
     "youtube-search-without-api-key": "^1.0.7"
   },
   "scripts": {
-    "start": "nodemon server.js"
+    "start": "nodemon server.js",
+    "build": "react-scripts build",
+    "heroku-postbuild": "npm run build",
+    "dev": "react-scripts start"
   }
 }
