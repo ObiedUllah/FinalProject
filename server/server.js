@@ -4,6 +4,7 @@
 const express = require("express");
 const morgan = require("morgan");
 const cors = require("cors");
+const path = require("path");
 
 const PORT = 7000;
 
@@ -15,20 +16,20 @@ express()
 		next();
 	})
 	.use(morgan("tiny"))
-	.use(express.static("./server/assets"))
 	.use(express.json({ limit: "50mb" }))
 	.use(express.urlencoded({ limit: "50mb", extended: true }))
-	.use("/", express.static(__dirname + "/"))
 	.use(cors())
-
-	.get("/", (req, res) => {
-		res.send("here");
-	})
 
 	//endpoints
 	.use(require("./endpoints/userEndpoints"))
 	.use(require("./endpoints/videoEndpoints"))
 	.use(require("./endpoints/uploadImageEndpoints"))
+
+	.use(express.static(path.join(__dirname, "build")))
+
+	.get("/*", (req, res) => {
+		res.sendFile(path.join(__dirname, "build", "index.html"));
+	})
 
 	// Node spins up our server and sets it to listen on set port
 	.listen(PORT, () => console.log(`Listening on port ${PORT}`));

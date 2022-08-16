@@ -17,42 +17,15 @@ export const AnimeListProvider = ({ children }) => {
 	const [upcomingAnimes, setUpcomingAnimes] = useState(() => null);
 
 	const getTopAnimes = async () => {
-		const response = await fetch(`https://api.jikan.moe/v4/top/anime?type=tv`);
-
-		//if failure then refresh after 1 sec
-		if (response.status === 429) getTopAnimes();
-
-		//if success then set data
-		if (response.status === 200) {
-			const data = await response.json();
-			setTopAnime(data.data.slice(0, 24));
-		}
+		getData(`https://api.jikan.moe/v4/top/anime?type=tv`, getTopAnimes, setTopAnime);
 	};
 
 	const getRecentAnimes = async () => {
-		const response = await fetch(`https://api.jikan.moe/v4/top/anime?filter=airing&type=tv`);
-
-		//if failure then refresh after 1 sec
-		if (response.status === 429) getRecentAnimes();
-
-		//if success then set data
-		if (response.status === 200) {
-			const data = await response.json();
-			setRecentAnime(data.data.slice(0, 24));
-		}
+		getData(`https://api.jikan.moe/v4/top/anime?filter=airing&type=tv`, getRecentAnimes, setRecentAnime);
 	};
 
 	const getPopularAnimes = async () => {
-		const response = await fetch(`https://api.jikan.moe/v4/top/anime?filter=bypopularity&type=tv`);
-
-		//if failure then refresh after 1 sec
-		if (response.status === 429) getPopularAnimes();
-
-		//if success then set data
-		if (response.status === 200) {
-			const data = await response.json();
-			setPopularAnime(data.data.slice(0, 24));
-		}
+		getData(`https://api.jikan.moe/v4/top/anime?filter=bypopularity&type=tv`, getPopularAnimes, setPopularAnime);
 	};
 
 	const getRandomGenreAnimes = async () => {
@@ -74,28 +47,22 @@ export const AnimeListProvider = ({ children }) => {
 	};
 
 	const getSeasonalAnimes = async () => {
-		const response = await fetch(`https://api.jikan.moe/v4/seasons/now`);
-
-		//if failure then refresh
-		if (response.status === 429) getSeasonalAnimes();
-
-		//if success then set data
-		if (response.status === 200) {
-			const data = await response.json();
-			setSeasonalAnimes(data.data.slice(0, 24));
-		}
+		getData(`https://api.jikan.moe/v4/seasons/now`, getSeasonalAnimes, setSeasonalAnimes);
 	};
 
 	const getUpcomingAnimes = async () => {
-		const response = await fetch(`https://api.jikan.moe/v4/seasons/upcoming`);
+		getData(`https://api.jikan.moe/v4/seasons/upcoming`, getUpcomingAnimes, setUpcomingAnimes);
+	};
 
+	const getData = async (url, getFunc, setFunc) => {
+		const response = await fetch(url);
 		//if failure then refresh
-		if (response.status === 429) getUpcomingAnimes();
+		if (response.status === 429) getFunc();
 
 		//if success then set data
 		if (response.status === 200) {
 			const data = await response.json();
-			setUpcomingAnimes(data.data.slice(0, 24));
+			setFunc(data.data.slice(0, 24));
 		}
 	};
 
