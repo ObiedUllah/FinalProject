@@ -68,7 +68,8 @@ const AddToListSection = ({ anime }) => {
 				setStatus("plan");
 			}
 		};
-		getUser();
+		//only run if user is authenticated
+		if (isAuthenticated) getUser();
 	}, [anime]);
 
 	/**

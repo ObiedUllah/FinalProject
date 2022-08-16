@@ -12,8 +12,15 @@ export const PromosProvider = ({ children }) => {
 	const [promos, setPromos] = useState(() => null);
 
 	const getPromos = async () => {
-		const data = await fetch(`https://api.jikan.moe/v4/watch/promos`).then((res) => res.json());
-		setPromos(data.data);
+		const response = await fetch(`https://api.jikan.moe/v4/watch/promos`);
+		//if failure then refresh
+		if (response.status === 429) getPromos();
+
+		//if success then set data
+		if (response.status === 200) {
+			const data = await response.json();
+			setPromos(data.data);
+		}
 	};
 	return (
 		<PromosContext.Provider

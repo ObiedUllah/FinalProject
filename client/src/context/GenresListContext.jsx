@@ -16,11 +16,8 @@ export const GenresListProvider = ({ children }) => {
 	const getGenres = async () => {
 		const response = await fetch(`https://api.jikan.moe/v4/genres/anime?filter=genres`);
 
-		//if failure then refresh after 1 sec
-		if (response.status === 429)
-			setTimeout(() => {
-				getGenres();
-			}, 1000);
+		//if failure then refresh
+		if (response.status === 429) getGenres();
 
 		//if success then set data
 		if (response.status === 200) {
@@ -32,11 +29,8 @@ export const GenresListProvider = ({ children }) => {
 	const getThemes = async () => {
 		const response = await fetch(`https://api.jikan.moe/v4/genres/anime?filter=themes`);
 
-		//if failure then refresh after 1 sec
-		if (response.status === 429)
-			setTimeout(() => {
-				getThemes();
-			}, 1000);
+		//if failure then refresh
+		if (response.status === 429) getThemes();
 
 		//if success then set data
 		if (response.status === 200) {
@@ -48,11 +42,8 @@ export const GenresListProvider = ({ children }) => {
 	const getDemos = async () => {
 		const response = await fetch(`https://api.jikan.moe/v4/genres/anime?filter=demographics`);
 
-		//if failure then refresh after 1 sec
-		if (response.status === 429)
-			setTimeout(() => {
-				getDemos();
-			}, 1000);
+		//if failure then refresh
+		if (response.status === 429) getDemos();
 
 		//if success then set data
 		if (response.status === 200) {
