@@ -10,8 +10,8 @@ https://anime-enma.herokuapp.com/
     - REACT_APP_AUTH0_DOMAIN
     - REACT_APP_AUTH0_CLIENT_ID
     - MONGO_URI
-    - API_KEY
-    - API_HOST
+    - API_KEY (RAPID API)
+    - API_HOST (RAPID API)
     - CLOUDINARY_API_KEY
     - CLOUDINARY_API_SECRET
     - CLOUDINARY_NAME
