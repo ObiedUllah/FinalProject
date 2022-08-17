@@ -7,14 +7,14 @@ https://anime-enma.herokuapp.com/
 - cd server
 - npm install
  *will require api keys for *
-    1. REACT_APP_AUTH0_DOMAIN
-    2. REACT_APP_AUTH0_CLIENT_ID
-    3. MONGO_URI
-    4. API_KEY
-    5. API_HOST
-    6. CLOUDINARY_API_KEY
-    7. CLOUDINARY_API_SECRET
-    8. CLOUDINARY_NAME
+    - REACT_APP_AUTH0_DOMAIN
+    - REACT_APP_AUTH0_CLIENT_ID
+    - MONGO_URI
+    - API_KEY
+    - API_HOST
+    - CLOUDINARY_API_KEY
+    - CLOUDINARY_API_SECRET
+    - CLOUDINARY_NAME
 - npm start
 - open 'http://localhost:7000/' on the browser of your choice
 
