@@ -12,11 +12,12 @@
     "mongodb": "^4.8.1",
     "morgan": "^1.10.0",
     "node": "^18.7.0",
+    "node-fetch": "2",
     "nodemon": "^2.0.19",
     "serve": "^14.0.1",
     "youtube-search-without-api-key": "^1.0.7"
   },
   "scripts": {
-    "start": "node server.js"
+    "start": "nodemon server.js"
   }
 }
