@@ -37,7 +37,7 @@ export const AnimeListProvider = ({ children }) => {
 		const response = await fetch(`https://api.jikan.moe/v4/anime?genres=${ids[num]}&order_by=score&sort=desc`);
 
 		//if failure then refresh
-		if (response.status === 429) getRandomGenreAnimes();
+		if (response.status === 429) setTimeout(() => getRandomGenreAnimes(), 1000);
 
 		//if success then set data
 		if (response.status === 200) {
@@ -57,7 +57,7 @@ export const AnimeListProvider = ({ children }) => {
 	const getData = async (url, getFunc, setFunc) => {
 		const response = await fetch(url);
 		//if failure then refresh
-		if (response.status === 429) getFunc();
+		if (response.status === 429) setTimeout(() => getFunc(), 1000);
 
 		//if success then set data
 		if (response.status === 200) {

@@ -18,7 +18,7 @@ const LeftSideBar = () => {
 
 	useEffect(() => {
 		if (!topAnimes) {
-			getTopAnimes();
+			setTimeout(() => getTopAnimes(), 50);
 		}
 	}, []);
 
