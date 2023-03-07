@@ -70,30 +70,19 @@ const toggleFavorites = async (req, res) => {
 		//get email
 		const email = req.body.email;
 
+		//get anime
+		const anime = req.body.data;
+
 		//get user
 		const user = await db.collection("users").findOne({ email: email });
 
 		//list to send to db
-		const favorites = [];
+		//will get all the favorites amd remove the current favorite if found
+		const favorites = user.favorites.filter((fav) => fav.mal_id !== anime.mal_id);
 
-		//add first favorite anime if there are none
-		if (user.favorites.length === 0) {
-			favorites.push(req.body.data);
-		}
-		// add previous anime favorited
-		else {
-			let exist = false;
-			/* 
-                loops through all the users favorite animes,
-                if the current anime is already in list, do not add anime to favorites if id matches 
-                --> this will exclude anime from list,
-                add the animes that are not the current anime
-            */
-			for (const anime of user.favorites) {
-				anime.mal_id === req.body.data.mal_id ? (exist = true) : favorites.push(anime);
-			}
-			//if anime did not exist previously, add it
-			if (!exist) favorites.push(req.body.data);
+		// will add new favorite if it sees it doesnt exist in the current list
+		if (favorites.length === user.favorites.length) {
+			favorites.push(anime);
 		}
 
 		//update user
@@ -120,30 +109,19 @@ const changeStatus = async (req, res) => {
 		//get email
 		const email = req.body.email;
 
+		//get anime
+		const anime = req.body.data;
+
 		//get user
 		const user = await db.collection("users").findOne({ email: email });
 
-		const animeList = [];
+		//list to send to db
+		//will get all the existing anime and replace the existing anime changed by user
+		const animeList = user.list.map((selected) => (selected.mal_id === anime.mal_id ? anime : selected));
 
-		//add first favorite anime if none added
-		if (user.list.length === 0) {
-			animeList.push(req.body.data);
-		} else {
-			let exist = false;
-			for (const anime of user.list) {
-				//if exist then update the data
-				if (anime.mal_id === req.body.data.mal_id) {
-					animeList.push(req.body.data);
-					exist = true;
-				}
-				// push other anime
-				else {
-					animeList.push(anime);
-				}
-			}
-
-			//add item if it doesnt exist
-			if (!exist) animeList.push(req.body.data);
+		//will add new anime if the anime does not exist in the first place
+		if (!animeList.find((selected) => selected.mal_id === anime.mal_id)) {
+			animeList.push(anime);
 		}
 
 		//update user
@@ -171,15 +149,14 @@ const removeStatus = async (req, res) => {
 		//get email
 		const email = req.body.email;
 
+		//get anime
+		const anime = req.body.data;
+
 		//get user
 		const user = await db.collection("users").findOne({ email: email });
 
-		const animeList = [];
-
-		//add anime to list if the id do not match
-		for (const anime of user.list) {
-			if (anime.mal_id !== req.body.data.mal_id) animeList.push(anime);
-		}
+		//will remove the anime in question by checking the id and keep all the other values
+		const animeList = user.list.filter((anime) => anime.mal_id !== req.body.data.mal_id);
 
 		//update user
 		const updated = await db.collection("users").findOneAndUpdate({ email: email }, { $set: { list: animeList } });
@@ -192,10 +169,26 @@ const removeStatus = async (req, res) => {
 	client.close();
 };
 
+/**
+ * Adds a song to the users list of songs favorited
+ * @param {*} req
+ * @param {*} res
+ */
+const addSongToList = (req, res) => {};
+
+/**
+ * Removes a song to the users list of songs favorited
+ * @param {*} req
+ * @param {*} res
+ */
+const removeSongToList = (req, res) => {};
+
 module.exports = {
 	getUsers,
 	getUser,
 	toggleFavorites,
 	changeStatus,
 	removeStatus,
+	addSongToList,
+	removeSongToList,
 };
