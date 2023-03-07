@@ -1,5 +1,7 @@
+import React, { useState } from "react";
+
+import CircularProg from "utils/porgress/CircularProg";
 import { Link } from "react-router-dom";
-import React from "react";
 import styled from "styled-components";
 
 /**
@@ -8,7 +10,7 @@ import styled from "styled-components";
  * @param {*} param0
  * @returns
  */
-const Song = ({ song, index, setWidgets, dbUser }) => {
+const Song = ({ song, index, setWidgets, dbUser, setStatus }) => {
 	//format the title text
 	const formatText = (str) => {
 		return str.replace(/ *\([^)]*\) */g, " ");
@@ -18,6 +20,8 @@ const Song = ({ song, index, setWidgets, dbUser }) => {
 	const handleRemove = async (event) => {
 		event.preventDefault();
 		event.stopPropagation();
+		//loading state in UserListen
+		setStatus(true);
 
 		try {
 			//update the songs list in the database
@@ -35,6 +39,8 @@ const Song = ({ song, index, setWidgets, dbUser }) => {
 					if (data.status === 200) {
 						setWidgets(data.data.songList);
 					}
+					//ends loading state
+					setStatus(false);
 				});
 		} catch (error) {
 			alert("An error occured please try again or contact support");

@@ -188,6 +188,7 @@ const addSongToList = async (req, res) => {
 		//get song and its info
 		const song = req.body.data;
 
+		//give a random id
 		song.id = uuidv4();
 
 		//get user
@@ -197,22 +198,14 @@ const addSongToList = async (req, res) => {
 		//will get all the existing songs
 		const songList = [...user.songList];
 
-		//will add new song if the anime does not exist in the first place
-		if (!songList.find((songItem) => songItem.mal_id === song.mal_id)) {
-			songList.push(song);
-		}
-		// will add new song if the index in question is not added for openings
-		else if (songList.find((songItem) => songItem.mal_id === song.mal_id && song.type === "opening" && songItem.index !== song.index)) {
-			songList.push(song);
-		}
-		// will add new song if the index in question is not added for endings
-		else if (songList.find((songItem) => songItem.mal_id === song.mal_id && song.type === "ending" && songItem.index !== song.index)) {
-			songList.push(song);
-		}
-		// the user is adding an already existing song
-		else {
+		//check if song is already added
+		const isAdded = songList.find((songItem) => songItem.mal_id === song.mal_id && songItem.type === song.type && songItem.index === song.index);
+
+		if (isAdded) {
 			sendResponse(res, 401, null, "is in list already");
 			return;
+		} else {
+			songList.push(song);
 		}
 
 		//update user

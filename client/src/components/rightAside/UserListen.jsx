@@ -21,6 +21,7 @@ const UserListen = (props) => {
 	const { widgets } = useContext(SongListContext);
 	const { setWidgets } = useContext(SongListContext).actions;
 
+	//status whenever a user adds or remove a song
 	const [status, setStatus] = useState(() => null);
 
 	//gets the user from the mongo db
@@ -37,6 +38,7 @@ const UserListen = (props) => {
 	//will handle the data when song is dropped
 	const handleDrop = async (e) => {
 		e.preventDefault();
+		setStatus(true);
 		const songObject = JSON.parse(e.dataTransfer.getData("text/plain"));
 
 		//data to send to db
@@ -67,6 +69,7 @@ const UserListen = (props) => {
 					} else {
 						alert("Already in List");
 					}
+					setStatus(false);
 				});
 		} catch (error) {
 			alert("An error occured please try again or contact support");
@@ -88,6 +91,18 @@ const UserListen = (props) => {
 		);
 	}
 
+	//if user added or removed a song, it should load
+	if (status) {
+		return (
+			<BoxDiv>
+				<Title>Liked Songs</Title>
+				<WidgetBox>
+					<CircularProg />
+				</WidgetBox>
+			</BoxDiv>
+		);
+	}
+
 	return (
 		<BoxDiv>
 			<Title>Liked Songs</Title>
@@ -102,6 +117,7 @@ const UserListen = (props) => {
 								song={song}
 								setWidgets={setWidgets}
 								dbUser={dbUser}
+								setStatus={setStatus}
 							/>
 						);
 					})}
