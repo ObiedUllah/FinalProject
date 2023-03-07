@@ -1,6 +1,6 @@
 const router = require("express").Router();
 
-const { getUsers, getUser, toggleFavorites, changeStatus, removeStatus, addSongToList, removeSongToList } = require("../handlers/userHandlers");
+const { getUsers, getUser, toggleFavorites, changeStatus, removeStatus, addSongToList, removeSongFromList } = require("../handlers/userHandlers");
 
 //gets all the users
 router.get(`/api/users`, getUsers);
@@ -21,6 +21,6 @@ router.patch(`/api/user/status`, removeStatus);
 router.put(`/api/user/song`, addSongToList);
 
 //remove a song to the users song list
-router.patch(`/api/user/song`, removeSongToList);
+router.patch(`/api/user/song`, removeSongFromList);
 
 module.exports = router;

@@ -1,3 +1,5 @@
+import { SongListContext, SongListProvider } from "context/SongListContext";
+
 import { AnimeListProvider } from "context/AnimeListContext";
 import App from "./App";
 import Auth0ProviderWithRedirectCallback from "authentication/auth0-provider-with-redirect-callback";
@@ -13,13 +15,15 @@ root.render(
 	<Router>
 		<Auth0ProviderWithRedirectCallback>
 			<AnimeListProvider>
-				<RandomQuoteProvider>
-					<GenresListProvider>
-						<PromosProvider>
-							<App />
-						</PromosProvider>
-					</GenresListProvider>
-				</RandomQuoteProvider>
+				<SongListProvider>
+					<RandomQuoteProvider>
+						<GenresListProvider>
+							<PromosProvider>
+								<App />
+							</PromosProvider>
+						</GenresListProvider>
+					</RandomQuoteProvider>
+				</SongListProvider>
 			</AnimeListProvider>
 		</Auth0ProviderWithRedirectCallback>
 	</Router>

@@ -1,13 +1,19 @@
+import React, { useContext } from "react";
+
 import CircularProg from "utils/porgress/CircularProg";
-import React from "react";
+import Song from "./Song";
+import { SongListContext } from "context/SongListContext";
 import styled from "styled-components";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useEffect } from "react";
 import { useState } from "react";
 
-const UserListen = () => {
+const UserListen = (props) => {
 	const [dbUser, setDbUser] = useState(() => null);
 	const { user } = useAuth0();
+
+	const { widgets } = useContext(SongListContext);
+	const { setWidgets } = useContext(SongListContext).actions;
 
 	//gets the user from the mongo db
 	useEffect(() => {
@@ -15,12 +21,13 @@ const UserListen = () => {
 			const response = await fetch(`/api/user/${user.email}`);
 			const result = await response.json();
 			setDbUser(result.data);
+			setWidgets(result.data.songList);
 		};
 		getUser();
 	}, []);
 
 	//if no user then tell user to sign in
-	if (!dbUser) {
+	if (!user) {
 		return (
 			<BoxDiv>
 				<Title>User's Songs</Title>
@@ -29,11 +36,63 @@ const UserListen = () => {
 		);
 	}
 
+	//will handle the data when song is dropped
+	const handleDrop = async (e) => {
+		e.preventDefault();
+		const songObject = JSON.parse(e.dataTransfer.getData("text/plain"));
+
+		//data to send to db
+		const body = {
+			email: dbUser.email,
+			data: {
+				mal_id: songObject.mal_id,
+				theme: songObject.theme,
+				type: songObject.isOpening ? "opening" : "ending",
+				index: songObject.index,
+			},
+		};
+
+		try {
+			//update the songs list in the database
+			await fetch("/api/user/song", {
+				method: "PUT",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify(body),
+			})
+				.then((res) => res.json())
+				.then((data) => {
+					console.log(data);
+					//update in the frontend
+					if (data.status === 200) {
+						setWidgets([...widgets, songObject]);
+					} else {
+						alert("Already in List");
+					}
+				});
+		} catch (error) {
+			alert("An error occured please try again or contact support");
+		}
+	};
+
+	//allows to drop content on top
+	const handleDragOver = (e) => {
+		e.preventDefault();
+	};
+
 	return (
 		<BoxDiv>
 			<Title>User's Songs</Title>
-			{!dbUser && <p>Sign in to add songs to your list</p>}
-			{dbUser && <p>Songs</p>}
+			{!dbUser && <CircularProg />}
+			{dbUser && (
+				<WidgetBox onDragOver={handleDragOver} onDrop={handleDrop}>
+					{widgets.map((song, index) => {
+						console.log(song);
+						return <Song key={`${song.mal_id}${song.title}${song.index}`} index={index} song={song} />;
+					})}
+				</WidgetBox>
+			)}
 		</BoxDiv>
 	);
 };
@@ -42,6 +101,9 @@ const BoxDiv = styled.div`
 	@media (max-width: 1200px) {
 		display: none;
 	}
+	display: flex;
+	flex-direction: column;
+	width: 100%;
 `;
 
 const Title = styled.h3`
@@ -49,6 +111,15 @@ const Title = styled.h3`
 	font-size: 24px;
 	margin-bottom: 16px;
 	text-align: center;
+`;
+
+const WidgetBox = styled.div`
+	height: 400px;
+	width: 100%;
+	border: 1px solid;
+	display: flex;
+	flex-direction: column;
+	overflow-y: scroll;
 `;
 
 export default UserListen;

@@ -80,13 +80,17 @@ const VideoButton = ({ anime, index, theme, isOpening, setSelectedTheme }) => {
 		}
 	};
 
+	const handleDragStart = (e) => {
+		e.dataTransfer.setData("text/plain", JSON.stringify({ mal_id: anime.mal_id, theme, isOpening, index }));
+	};
+
 	return (
 		<>
 			{/* modal to confirm download */}
 			{open && <DownloadDialog link={link} setOpen={setOpen} />}
 
 			{/* Button link to opening/ending */}
-			<ButtonLabel key={index} onClick={(event) => handleClick(event, index)}>
+			<ButtonLabel key={index} draggable onDragStart={handleDragStart} onClick={(event) => handleClick(event, index)}>
 				<Name>{formatText(theme)} </Name>
 				<Download onClick={(event) => handleDownload(event, index)} />
 			</ButtonLabel>
