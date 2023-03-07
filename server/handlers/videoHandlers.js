@@ -52,7 +52,6 @@ const downloadMp3 = async (req, res) => {
 			? sendResponse(res, 200, { song_title: response.title, song_link: response.link }, "video Retrieved")
 			: sendResponse(res, 404, null, "video not retrieved");
 	} catch (error) {
-		console.log(error);
 		sendResponse(res, 500, null, "Server Error");
 	}
 };

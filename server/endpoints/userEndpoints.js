@@ -21,6 +21,6 @@ router.patch(`/api/user/status`, removeStatus);
 router.put(`/api/user/song`, addSongToList);
 
 //remove a song to the users song list
-router.patch(`/api/user/song`, removeSongFromList);
+router.patch(`/api/user/song/:id`, removeSongFromList);
 
 module.exports = router;

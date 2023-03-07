@@ -1,13 +1,13 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 
 import { useEffect, useState } from "react";
+import { useLocation, useParams } from "react-router-dom";
 
 import AddToListSection from "components/animeDetails/AddToListSection";
 import CircularProg from "utils/porgress/CircularProg";
 import InformationSection from "components/animeDetails/InformationSection";
 import React from "react";
 import VideoSection from "components/animeDetails/VideoSection";
-import { useParams } from "react-router-dom";
 
 /**
  * Shows the details of an anime by using 3 other componenets
@@ -19,6 +19,17 @@ const AnimeDetails = () => {
 	const { id } = useParams();
 
 	const [anime, setAnime] = useState(null);
+
+	//get state from songList
+	//only occurs when user clicks on song from right sidebar
+	const location = useLocation();
+	//sets index and type to be able to send it to the video and update it
+	let index = null;
+	let type = null;
+	if (location.state) {
+		index = location.state.index;
+		type = location.state.type;
+	}
 
 	useEffect(() => {
 		let isCancelled = false;
@@ -43,7 +54,7 @@ const AnimeDetails = () => {
 		return () => {
 			isCancelled = true;
 		};
-	}, [id]);
+	}, [id, location.state]);
 
 	//if the anime is null then wait
 	if (!anime) {
@@ -52,7 +63,7 @@ const AnimeDetails = () => {
 
 	return (
 		<>
-			<VideoSection anime={anime} id={id} />
+			<VideoSection anime={anime} id={id} index={index} type={type} />
 			<AddToListSection anime={anime} />
 			<InformationSection anime={anime} id={id} />
 		</>

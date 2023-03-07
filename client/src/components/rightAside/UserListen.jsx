@@ -8,12 +8,20 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { useEffect } from "react";
 import { useState } from "react";
 
+/**
+ * Area that displays all the users liked songs
+ * @param {*} props
+ * @returns
+ */
 const UserListen = (props) => {
 	const [dbUser, setDbUser] = useState(() => null);
 	const { user } = useAuth0();
 
+	//drag and drop func
 	const { widgets } = useContext(SongListContext);
 	const { setWidgets } = useContext(SongListContext).actions;
+
+	const [status, setStatus] = useState(() => null);
 
 	//gets the user from the mongo db
 	useEffect(() => {
@@ -25,16 +33,6 @@ const UserListen = (props) => {
 		};
 		getUser();
 	}, []);
-
-	//if no user then tell user to sign in
-	if (!user) {
-		return (
-			<BoxDiv>
-				<Title>User's Songs</Title>
-				<p>Sign in to add songs to your list</p>
-			</BoxDiv>
-		);
-	}
 
 	//will handle the data when song is dropped
 	const handleDrop = async (e) => {
@@ -63,7 +61,6 @@ const UserListen = (props) => {
 			})
 				.then((res) => res.json())
 				.then((data) => {
-					console.log(data);
 					//update in the frontend
 					if (data.status === 200) {
 						setWidgets([...widgets, songObject]);
@@ -81,15 +78,32 @@ const UserListen = (props) => {
 		e.preventDefault();
 	};
 
+	//if no user then tell user to sign in
+	if (!user) {
+		return (
+			<BoxDiv>
+				<Title>Your Songs</Title>
+				<p>Sign in to add songs to your list</p>
+			</BoxDiv>
+		);
+	}
+
 	return (
 		<BoxDiv>
-			<Title>User's Songs</Title>
+			<Title>Liked Songs</Title>
 			{!dbUser && <CircularProg />}
-			{dbUser && (
+			{dbUser && widgets && (
 				<WidgetBox onDragOver={handleDragOver} onDrop={handleDrop}>
 					{widgets.map((song, index) => {
-						console.log(song);
-						return <Song key={`${song.mal_id}${song.title}${song.index}`} index={index} song={song} />;
+						return (
+							<Song
+								key={`${song.mal_id}${song.theme}${song.index}`}
+								index={index}
+								song={song}
+								setWidgets={setWidgets}
+								dbUser={dbUser}
+							/>
+						);
 					})}
 				</WidgetBox>
 			)}

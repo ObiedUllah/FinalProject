@@ -12,14 +12,28 @@ import styled from "styled-components";
  * @param {*} param0
  * @returns
  */
-const VideoSection = ({ anime, id }) => {
+const VideoSection = ({ anime, id, index, type }) => {
 	const [selectedTheme, setSelectedTheme] = useState(() => null);
 
 	useEffect(() => {
 		const getInitialTheme = async () => {
 			try {
+				//retrieving data from the state (only used depending on if the user clicked the link from the user song list)
+				//only for endings
+				if (index && type === "opening") {
+					const response = await fetch(`/api/video/${anime?.theme.openings[index] + " opening"}`);
+					const result = await response.json();
+					setSelectedTheme(result.data);
+				}
+				//retrieving data from the state (only used depending on if the user clicked the link from the user song list)
+				//only for endings
+				else if (index && type === "ending") {
+					const response = await fetch(`/api/video/${anime?.theme.endings[index] + " opening"}`);
+					const result = await response.json();
+					setSelectedTheme(result.data);
+				}
 				//if no opening or ending set to null
-				if (anime?.theme.openings[0] === undefined && anime?.theme.endings[0] === undefined) {
+				else if (anime?.theme.openings[0] === undefined && anime?.theme.endings[0] === undefined) {
 					setSelectedTheme(false);
 				}
 				//if opening then set to opening
@@ -34,7 +48,6 @@ const VideoSection = ({ anime, id }) => {
 					const result = await response.json();
 					setSelectedTheme(result.data);
 				} else {
-					console.log("here");
 					setSelectedTheme(false);
 				}
 			} catch (error) {

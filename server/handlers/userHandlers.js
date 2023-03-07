@@ -6,6 +6,8 @@ const { client, DBNAME } = require("../utils/mongo.js");
 //get helper functions
 const { sendResponse } = require("./helperFunctions.js");
 
+const { v4: uuidv4 } = require("uuid");
+
 /**
  * get every user in the db
  * @param {*} req
@@ -186,34 +188,29 @@ const addSongToList = async (req, res) => {
 		//get song and its info
 		const song = req.body.data;
 
+		song.id = uuidv4();
+
 		//get user
 		const user = await db.collection("users").findOne({ email: email });
 
 		//list to send to db
 		//will get all the existing songs
 		const songList = [...user.songList];
-		console.log(songList);
-		console.log("seperate");
-		console.log(song);
 
 		//will add new song if the anime does not exist in the first place
 		if (!songList.find((songItem) => songItem.mal_id === song.mal_id)) {
-			console.log("first");
 			songList.push(song);
 		}
 		// will add new song if the index in question is not added for openings
 		else if (songList.find((songItem) => songItem.mal_id === song.mal_id && song.type === "opening" && songItem.index !== song.index)) {
-			console.log("second");
 			songList.push(song);
 		}
 		// will add new song if the index in question is not added for endings
 		else if (songList.find((songItem) => songItem.mal_id === song.mal_id && song.type === "ending" && songItem.index !== song.index)) {
-			console.log("third");
 			songList.push(song);
 		}
 		// the user is adding an already existing song
 		else {
-			console.log("fourth");
 			sendResponse(res, 401, null, "is in list already");
 			return;
 		}
@@ -239,22 +236,23 @@ const removeSongFromList = async (req, res) => {
 		await client.connect();
 		const db = client.db(DBNAME);
 
+		//get id
+		const songId = req.params.id;
+
 		//get email
 		const email = req.body.email;
-
-		//get anime
-		const song = req.body.data;
 
 		//get user
 		const user = await db.collection("users").findOne({ email: email });
 
 		//list to send to db
-		//will filter and remove the song dpeending on the id
-		const songList = user.songList.filter((songItem) => songItem.id !== song.mal_id);
+		//will filter and remove the song depending on the id
+		const songList = user.songList.filter((songItem) => songItem.id !== songId);
 
 		//update user
 		const updated = await db.collection("users").findOneAndUpdate({ email: email }, { $set: { songList: songList } });
-		updated ? sendResponse(res, 200, updated, "user updated") : sendResponse(res, 404, null, "user not updated");
+		console.log(updated);
+		updated ? sendResponse(res, 200, { updated, songList }, "user updated") : sendResponse(res, 404, null, "user not updated");
 	} catch (error) {
 		sendResponse(res, 500, null, "Server Error");
 	}
