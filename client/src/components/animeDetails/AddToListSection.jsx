@@ -195,7 +195,7 @@ const AddToListSection = ({ anime }) => {
 		try {
 			//delete the aniem from the list in the database
 			await fetch("/api/user/status", {
-				method: "DELETE",
+				method: "PATCH",
 				headers: {
 					"Content-Type": "application/json",
 				},

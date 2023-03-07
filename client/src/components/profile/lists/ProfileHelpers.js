@@ -113,7 +113,7 @@ export const handleRemoveFromList = async (event, list, setList, anime, email) =
 	try {
 		//delete anime item from db
 		await fetch("/api/user/status", {
-			method: "DELETE",
+			method: "PATCH",
 			headers: {
 				"Content-Type": "application/json",
 			},

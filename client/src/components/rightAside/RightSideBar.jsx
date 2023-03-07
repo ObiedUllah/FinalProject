@@ -5,9 +5,14 @@ import { useContext, useEffect } from "react";
 
 import { AnimeListContext } from "context/AnimeListContext";
 import CircularProg from "utils/porgress/CircularProg";
+import Quotes from "./Quotes";
+import QuotesListenTabs from "./QuotesListenTabs";
 import { RandomQuoteContext } from "context/RandomQuoteContext";
 import React from "react";
+import UserListen from "./UserListen";
 import styled from "styled-components";
+import { useAuth0 } from "@auth0/auth0-react";
+import { useState } from "react";
 
 /**
  * displays random quotes
@@ -19,6 +24,7 @@ const RightSideBar = () => {
 	const { seasonalAnimes, upcomingAnimes } = useContext(AnimeListContext);
 	const { getSeasonalAnimes, getUpcomingAnimes } = useContext(AnimeListContext).actions;
 
+	//gets the anime information on the right side bar on the top
 	useEffect(() => {
 		if (!quotes) {
 			getQuotes();
@@ -53,16 +59,8 @@ const RightSideBar = () => {
 			<Anchor to={`/promos`}>Recent Promos</Anchor>
 			<Button onClick={handleClickSeasonal}>Seasonal Anime</Button>
 			<Button onClick={handleClickUpcoming}>Upcoming Anime</Button>
-			<Quotes>
-				<Title>Random Anime Quote</Title>
-				{quotes.slice(0, 3).map((anime, index) => (
-					<Box key={index}>
-						<Quote>'{anime.quote}'</Quote>
-						<Character>-{anime.character}</Character>
-						<Anime>Anime: {anime.anime}</Anime>
-					</Box>
-				))}
-			</Quotes>
+
+			<QuotesListenTabs />
 		</Nav>
 	);
 };
@@ -80,42 +78,6 @@ const Nav = styled.nav`
 		align-items: center;
 		justify-content: space-around;
 	}
-`;
-
-const Title = styled.h3`
-	margin-top: 1vh;
-	font-size: 24px;
-	margin-bottom: 16px;
-	text-align: center;
-`;
-
-const Box = styled.div`
-	display: flex;
-	flex-direction: column;
-	min-height: 7vh;
-	margin-top: 10%;
-	border: 1px solid black;
-	padding: 1vh 1vw;
-	border-radius: 5%;
-	background-color: #aaa;
-	color: #313131;
-
-	transition: 0.4s;
-
-	&:hover {
-		background-color: #313131;
-		color: #aaa;
-	}
-`;
-
-const Quote = styled.h3`
-	font-style: italic;
-`;
-
-const Anime = styled.h2``;
-
-const Character = styled.h1`
-	font-weight: bold;
 `;
 
 const Anchor = styled(NavLink)`
@@ -170,9 +132,4 @@ const Button = styled.button`
 	}
 `;
 
-const Quotes = styled.div`
-	@media (max-width: 1200px) {
-		display: none;
-	}
-`;
 export default RightSideBar;
