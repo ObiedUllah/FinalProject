@@ -2,6 +2,8 @@ import { Anchor, Button, Image, Label, Option, Select, Wrapper } from "styles/pr
 import React, { useState } from "react";
 import { handleRemoveFromList, handleStatusChange } from "../ProfileHelpers";
 
+import CircularProg from "utils/porgress/CircularProg";
+
 /**
  * Single Anime that a user plans to watch
  * @param {*} param0
@@ -13,6 +15,8 @@ const ItemPlan = ({ user, anime, list, setList }) => {
 
 	//displays the rating if the user completed the anime
 	const [toDisplay, setToDisplay] = useState(false);
+	//loading state while db updates
+	const [loading, setLoading] = useState(() => null);
 
 	/**
 	 * changes the status and shows the rating and add to list button
@@ -35,6 +39,11 @@ const ItemPlan = ({ user, anime, list, setList }) => {
 	const handleRatingChange = (event) => {
 		setRating(event.target.value);
 	};
+
+	//load while waiting for db to update
+	if (loading === "loading") {
+		return <CircularProg />;
+	}
 
 	return (
 		<Wrapper>
@@ -68,7 +77,7 @@ const ItemPlan = ({ user, anime, list, setList }) => {
 							</Select>
 							<Button
 								confirm={true}
-								onClick={(event) => handleStatusChange(event, list, setList, anime, user.email, status, rating, true)}
+								onClick={(event) => handleStatusChange(event, list, setList, anime, user.email, status, rating, true, setLoading)}
 							>
 								Add to List
 							</Button>

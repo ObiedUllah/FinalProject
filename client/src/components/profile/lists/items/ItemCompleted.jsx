@@ -2,6 +2,8 @@ import { Anchor, Button, Image, Label, Option, Select, Wrapper } from "styles/pr
 import React, { useState } from "react";
 import { handleRemoveFromList, handleStatusChange } from "../ProfileHelpers";
 
+import CircularProg from "utils/porgress/CircularProg";
+
 /**
  * Single Anime that a user has completed
  * @param {*} param0
@@ -9,6 +11,7 @@ import { handleRemoveFromList, handleStatusChange } from "../ProfileHelpers";
  */
 const ItemCompleted = ({ user, anime, list, setList }) => {
 	const [rating, setRating] = useState(() => anime.rating);
+	const [loading, setLoading] = useState(() => null);
 
 	/**
 	 * updates the rating and changes it in the database
@@ -29,6 +32,7 @@ const ItemCompleted = ({ user, anime, list, setList }) => {
 		};
 
 		//set value in frontend
+		setLoading("loading");
 		setRating(parseInt(event.target.value));
 		setList([...list.map((obj) => (body.data.mal_id === obj.mal_id ? body.data : obj))]);
 
@@ -40,11 +44,16 @@ const ItemCompleted = ({ user, anime, list, setList }) => {
 					"Content-Type": "application/json",
 				},
 				body: JSON.stringify(body),
-			});
+			}).then(() => setLoading(null));
 		} catch (error) {
 			alert("An error occured please try again or contact support");
 		}
 	};
+
+	//load while waiting for db to update
+	if (loading === "loading") {
+		return <CircularProg />;
+	}
 
 	return (
 		<Wrapper>
@@ -59,7 +68,7 @@ const ItemCompleted = ({ user, anime, list, setList }) => {
 			<Label>
 				<Select
 					id="status"
-					onChange={(event) => handleStatusChange(event, list, setList, anime, user.email, "plan", 0, false)}
+					onChange={(event) => handleStatusChange(event, list, setList, anime, user.email, "plan", 0, false, setLoading)}
 					value={anime.status}
 				>
 					<Option value="plan">Plan to Watch</Option>
@@ -82,7 +91,7 @@ const ItemCompleted = ({ user, anime, list, setList }) => {
 			<Label>{anime.score}</Label>
 
 			<Label>
-				<Button onClick={(event) => handleRemoveFromList(event, list, setList, anime, user.email)}>Remove</Button>
+				<Button onClick={(event) => handleRemoveFromList(event, list, setList, anime, user.email, setLoading)}>Remove</Button>
 			</Label>
 		</Wrapper>
 	);

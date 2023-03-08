@@ -54,8 +54,10 @@ export const sortByRating = (event, ratingAsc, setRatingAsc, list, setList) => {
  * sets status of anime to plan to watch with no rating or completed with a rating
  * @param {*} event
  */
-export const handleStatusChange = async (event, list, setList, anime, email, status, rating, completed) => {
+export const handleStatusChange = async (event, list, setList, anime, email, status, rating, completed, setLoading) => {
 	event.preventDefault();
+
+	setLoading("loading");
 
 	//if completed then do nothing
 	if (completed && event.target.value === "completed") {
@@ -88,6 +90,7 @@ export const handleStatusChange = async (event, list, setList, anime, email, sta
 		//update frontend list
 		if (result.status === 200) {
 			setList([...list.filter((elem) => elem.mal_id !== anime.mal_id)]);
+			setLoading(null);
 		}
 	} catch (error) {
 		alert("An error occured please try again or contact support");

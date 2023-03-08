@@ -1,6 +1,7 @@
 import { Anchor, Button, Image, Label, Wrapper } from "styles/profile/ProfileItemStyles";
+import React, { useState } from "react";
 
-import React from "react";
+import CircularProg from "utils/porgress/CircularProg";
 
 /**
  * Single Anime that a user has favorited
@@ -8,6 +9,8 @@ import React from "react";
  * @returns
  */
 const ItemFavorites = ({ user, anime, list, setList }) => {
+	const [loading, setLoading] = useState(() => null);
+
 	/**
 	 * removes the anime from favorites list
 	 * @param {*} event
@@ -16,6 +19,7 @@ const ItemFavorites = ({ user, anime, list, setList }) => {
 		event.preventDefault();
 
 		//handle frontend first
+		setLoading("loading");
 		setList([...list.filter((elem) => elem.mal_id !== anime.mal_id)]);
 
 		//data to send to db
@@ -38,11 +42,16 @@ const ItemFavorites = ({ user, anime, list, setList }) => {
 					"Content-Type": "application/json",
 				},
 				body: JSON.stringify(body),
-			});
+			}).then(() => setLoading(null));
 		} catch (error) {
 			alert("An error occured please try again or contact support");
 		}
 	};
+
+	//load while waiting for db to update
+	if (loading === "loading") {
+		return <CircularProg />;
+	}
 
 	return (
 		<Wrapper>
