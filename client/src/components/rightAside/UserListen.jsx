@@ -38,7 +38,15 @@ const UserListen = (props) => {
 	//will handle the data when song is dropped
 	const handleDrop = async (e) => {
 		e.preventDefault();
+
+		//if theres no data then do not do anything
+		if (e.dataTransfer.getData("text/plain").indexOf("mal_id") === -1) {
+			return;
+		}
+
+		//if proper drop the start loading
 		setStatus(true);
+		//retreive song object
 		const songObject = JSON.parse(e.dataTransfer.getData("text/plain"));
 
 		//data to send to db
@@ -99,6 +107,8 @@ const UserListen = (props) => {
 				<WidgetBox>
 					<CircularProg />
 				</WidgetBox>
+				<Arrow> &uarr;</Arrow>
+				<Message>Drag and Drop themes above</Message>
 			</BoxDiv>
 		);
 	}
@@ -123,6 +133,8 @@ const UserListen = (props) => {
 					})}
 				</WidgetBox>
 			)}
+			<Arrow> &uarr;</Arrow>
+			<Message>Drag and Drop themes above</Message>
 		</BoxDiv>
 	);
 };
@@ -137,7 +149,7 @@ const BoxDiv = styled.div`
 `;
 
 const Title = styled.h3`
-	margin-top: 1vh;
+	margin-top: 2vh;
 	font-size: 24px;
 	margin-bottom: 16px;
 	text-align: center;
@@ -150,6 +162,18 @@ const WidgetBox = styled.div`
 	display: flex;
 	flex-direction: column;
 	overflow-y: scroll;
+`;
+
+const Arrow = styled.h1`
+	margin-top: 1%;
+	text-align: center;
+	font-size: 50px;
+`;
+
+const Message = styled.h3`
+	margin-top: 3%;
+	text-align: center;
+	font-weight: bold;
 `;
 
 export default UserListen;

@@ -48,30 +48,35 @@ const Song = ({ song, index, setWidgets, dbUser, setStatus }) => {
 	};
 
 	return (
-		<Wrapper to={`/anime/${song.mal_id}`} state={{ index: song.index, type: song.type }} index={index}>
-			<Span>{index} </Span>
-			<Title>{formatText(song.theme)}</Title>
-			<Button onClick={(event) => handleRemove(event)}>x</Button>
+		<Wrapper>
+			<FlexBox to={`/anime/${song.mal_id}`} state={{ index: song.index, type: song.type }} index={index}>
+				<Span>{index} </Span>
+				<Title>{formatText(song.theme)}</Title>
+				<Button onClick={(event) => handleRemove(event)}>x</Button>
+			</FlexBox>
 		</Wrapper>
 	);
 };
 
-const Wrapper = styled(Link)`
+const Wrapper = styled.div`
+	border: none;
+	background-color: #191414;
+	padding: 8px 8px 0px 8px;
+`;
+
+const FlexBox = styled(Link)`
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	color: black;
-	border: none;
-	background-color: ${(props) => (props.index % 2 === 0 ? "#808080" : "#A9A9A9")};
+	font-size: 12px;
 	padding: 10px;
-	margin: 3px 3px 0px 3px;
 	text-decoration: none;
+	color: white;
 
 	&:hover {
-		color: white;
-		background-color: purple;
-		cursor: pointer;
+		background-color: #474545;
 	}
+	cursor: pointer;
 `;
 
 const Title = styled.h4`
@@ -87,6 +92,7 @@ const Button = styled.button`
 	background-color: inherit;
 	border: none;
 	margin-left: 1px;
+	color: white;
 
 	&:hover {
 		color: black;

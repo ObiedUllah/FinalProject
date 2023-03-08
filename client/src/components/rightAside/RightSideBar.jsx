@@ -5,14 +5,10 @@ import { useContext, useEffect } from "react";
 
 import { AnimeListContext } from "context/AnimeListContext";
 import CircularProg from "utils/porgress/CircularProg";
-import Quotes from "./Quotes";
 import QuotesListenTabs from "./QuotesListenTabs";
 import { RandomQuoteContext } from "context/RandomQuoteContext";
 import React from "react";
-import UserListen from "./UserListen";
 import styled from "styled-components";
-import { useAuth0 } from "@auth0/auth0-react";
-import { useState } from "react";
 
 /**
  * displays random quotes
