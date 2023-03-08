@@ -1,14 +1,16 @@
 "use strict";
 
-//get mongo client database name
+//mongo client and database name
 const { client, DBNAME } = require("../utils/mongo.js");
 
-//get helper functions
+// necessary helper functions
 const { sendResponse } = require("./helperFunctions.js");
 
+//id generator
 const { v4: uuidv4 } = require("uuid");
 
 /**
+ * GET all users
  * get every user in the db
  * @param {*} req
  * @param {*} res
@@ -31,6 +33,7 @@ const getUsers = async (req, res) => {
 };
 
 /**
+ * GET single user
  * get a single user from the db using params to get the email
  * @param {*} req
  * @param {*} res
@@ -56,10 +59,8 @@ const getUser = async (req, res) => {
 };
 
 /**
+ * PUT anime to favorites list
  * Adds or Removes an anime from the users favorites list
- *
- * req.body.data contains mal_id title image
- *
  * @param {*} req
  * @param {*} res
  */
@@ -98,6 +99,7 @@ const toggleFavorites = async (req, res) => {
 };
 
 /**
+ * PUT anime to completed/plan to watch list
  * adds or updates the status and rating of an anime
  * @param {*} req
  * @param {*} res
@@ -138,6 +140,7 @@ const changeStatus = async (req, res) => {
 };
 
 /**
+ * PATCH remove anime from list
  * removes an anime from the list of the user
  * @param {*} req
  * @param {*} res
@@ -172,7 +175,8 @@ const removeStatus = async (req, res) => {
 };
 
 /**
- * Adds a song to the users list of songs favorited
+ * PUT add song to liked songs list
+ * Adds a song to the users list of songs liked
  * @param {*} req
  * @param {*} res
  */
@@ -196,11 +200,13 @@ const addSongToList = async (req, res) => {
 
 		//list to send to db
 		//will get all the existing songs
-		const songList = [...user.songList];
+		const songList = Array.from(user.songList);
 
 		//check if song is already added
-		const isAdded = songList.find((songItem) => songItem.mal_id === song.mal_id && songItem.type === song.type && songItem.index === song.index);
+		const isAdded = songList.some((songItem) => songItem.mal_id === song.mal_id && songItem.type === song.type && songItem.index === song.index);
 
+		//if the song already exists then send an error response
+		//else add song to songList
 		if (isAdded) {
 			sendResponse(res, 401, null, "is in list already");
 			return;
@@ -219,6 +225,7 @@ const addSongToList = async (req, res) => {
 };
 
 /**
+ * PATCH remove song from liked songs list
  * Removes a song to the users list of songs favorited
  * @param {*} req
  * @param {*} res

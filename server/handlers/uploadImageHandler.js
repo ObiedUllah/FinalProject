@@ -2,13 +2,13 @@
 
 require("dotenv").config();
 
-//cloudinary setup
+// cloudinary setup
 const { cloudinary, UPLOAD_PRESET_NAME, FOLDER_NAME } = require("../utils/cloudinary");
 
-//get mongo client database name
+// mongo client database name
 const { client, DBNAME } = require("../utils/mongo.js");
 
-//get helper functions
+// helper functions
 const { sendResponse } = require("./helperFunctions.js");
 
 /**
@@ -37,6 +37,7 @@ const uploadImage = async (req, res) => {
 
 /**
  * uploads image url to database
+ * called by the function uploadImage
  * @param {*} res
  * @param {*} email
  * @param {*} url

@@ -1,7 +1,7 @@
 const fetch = require("node-fetch");
 const yt = require("youtube-search-without-api-key");
 
-//get helper functions
+//helper functions
 const { sendResponse, transformText } = require("./helperFunctions.js");
 
 /**
