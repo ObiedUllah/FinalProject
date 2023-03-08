@@ -19,6 +19,7 @@ export const Label = styled.div`
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	text-align: center;
 `;
 
 export const Button = styled.button`

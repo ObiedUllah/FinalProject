@@ -251,7 +251,6 @@ const removeSongFromList = async (req, res) => {
 
 		//update user
 		const updated = await db.collection("users").findOneAndUpdate({ email: email }, { $set: { songList: songList } });
-		console.log(updated);
 		updated ? sendResponse(res, 200, { updated, songList }, "user updated") : sendResponse(res, 404, null, "user not updated");
 	} catch (error) {
 		sendResponse(res, 500, null, "Server Error");
