@@ -1,9 +1,9 @@
-import React, { useState } from "react";
-
-import ProfileCompleted from "./lists/ProfileCompleted";
-import ProfileFavorites from "./lists/ProfileFavorites";
-import ProfilePlan from "./lists/ProfilePlan";
+import ProfileCompleted from "./lists/sections/ProfileCompleted";
+import ProfileFavorites from "./lists/sections/ProfileFavorites";
+import ProfilePlan from "./lists/sections/ProfilePlan";
+import ProfileSongs from "./lists/sections/ProfileSongs";
 import styled from "styled-components";
+import { useState } from "react";
 
 /**
  * 3 tabs (completed, plan to watch, favorite)
@@ -37,11 +37,15 @@ const ProfileTabs = ({ user, setUser }) => {
 				<Button onClick={(event) => handleTabClick(event, 2)} isSelected={selectedTab === 2}>
 					Favorites
 				</Button>
+				<Button onClick={(event) => handleTabClick(event, 3)} isSelected={selectedTab === 3}>
+					Songs List
+				</Button>
 			</ButtonWrapper>
 
 			{selectedTab === 0 && <ProfileCompleted user={user} />}
 			{selectedTab === 1 && <ProfilePlan user={user} />}
 			{selectedTab === 2 && <ProfileFavorites user={user} />}
+			{selectedTab === 3 && <ProfileSongs user={user} />}
 		</Wrapper>
 	);
 };

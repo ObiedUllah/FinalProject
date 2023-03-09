@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 
 import CircularProg from "utils/porgress/CircularProg";
 import Song from "./Song";
@@ -54,6 +54,7 @@ const UserListen = (props) => {
 			email: dbUser.email,
 			data: {
 				mal_id: songObject.mal_id,
+				title: songObject.title,
 				theme: songObject.theme,
 				type: songObject.isOpening ? "opening" : "ending",
 				index: songObject.index,

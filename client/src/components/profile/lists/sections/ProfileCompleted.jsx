@@ -1,8 +1,8 @@
 import { Button, Label, TitleDiv, Wrapper } from "styles/profile/ProfileHeaderStyles";
-import React, { useState } from "react";
-import { sortByRating, sortByScore, sortByTitle } from "./ProfileHelpers";
+import { sortByRating, sortByScore, sortByTitle } from "../ProfileHelpers";
 
-import ItemCompleted from "./items/ItemCompleted";
+import ItemCompleted from "../items/ItemCompleted";
+import { useState } from "react";
 
 /**
  * Shows all the anime that a user has completed in a display flex table looking format

@@ -1,8 +1,8 @@
 import { Button, Label, TitleDiv, Wrapper } from "styles/profile/ProfileHeaderStyles";
-import React, { useState } from "react";
-import { sortByScore, sortByTitle } from "./ProfileHelpers";
+import { useState } from "react";
+import { sortByScore, sortByTitle } from "../ProfileHelpers";
 
-import ItemFavorites from "./items/ItemFavorites";
+import ItemFavorites from "../items/ItemFavorites";
 
 /**
  * Shows all the anime that a user has favorited in a display flex table looking format

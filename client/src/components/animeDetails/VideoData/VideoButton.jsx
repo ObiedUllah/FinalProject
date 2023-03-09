@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
 import { BsDownload } from "react-icons/bs";
 import DownloadDialog from "./DownloadDialog";
@@ -81,7 +81,7 @@ const VideoButton = ({ anime, index, theme, isOpening, setSelectedTheme }) => {
 	};
 
 	const handleDragStart = (e) => {
-		e.dataTransfer.setData("text/plain", JSON.stringify({ mal_id: anime.mal_id, theme, isOpening, index }));
+		e.dataTransfer.setData("text/plain", JSON.stringify({ mal_id: anime.mal_id, title: anime.title, theme, isOpening, index }));
 	};
 
 	return (

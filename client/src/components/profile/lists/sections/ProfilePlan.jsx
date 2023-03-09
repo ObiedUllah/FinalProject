@@ -1,8 +1,8 @@
 import { Button, Label, TitleDiv, Wrapper } from "styles/profile/ProfileHeaderStyles";
-import React, { useState } from "react";
-import { sortByScore, sortByTitle } from "./ProfileHelpers";
+import { sortByScore, sortByTitle } from "../ProfileHelpers";
 
-import ItemPlan from "./items/ItemPlan";
+import ItemPlan from "../items/ItemPlan";
+import { useState } from "react";
 
 /**
  * Shows all the anime that a user plans to watch in a display flex table looking format
