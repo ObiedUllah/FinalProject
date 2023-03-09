@@ -1,7 +1,7 @@
 import { Anchor, Button, Image, Label, Wrapper } from "styles/profile/ProfileItemStyles";
-import React, { useState } from "react";
 
 import CircularProg from "utils/porgress/CircularProg";
+import { useState } from "react";
 
 /**
  * Single Anime that a user has favorited
@@ -50,7 +50,7 @@ const ItemFavorites = ({ user, anime, list, setList }) => {
 
 	//load while waiting for db to update
 	if (loading === "loading") {
-		return <CircularProg />;
+		return <CircularProg height={12} />;
 	}
 
 	return (

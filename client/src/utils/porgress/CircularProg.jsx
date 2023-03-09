@@ -1,10 +1,9 @@
 import { CircularProgress } from "@mui/material";
-import React from "react";
 import styled from "styled-components";
 
-const CircularProg = () => {
+const CircularProg = ({ height = 30 }) => {
 	return (
-		<Prog>
+		<Prog height={height}>
 			<CircularProgress size="40px" />
 		</Prog>
 	);
@@ -14,7 +13,7 @@ const Prog = styled.div`
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	height: 30vh;
+	height: ${(props) => props.height + "vh"};
 `;
 
 export default CircularProg;

@@ -1,8 +1,8 @@
 import { Anchor, Button, Image, Label, Option, Select, Wrapper } from "styles/profile/ProfileItemStyles";
-import React, { useState } from "react";
 import { handleRemoveFromList, handleStatusChange } from "../ProfileHelpers";
 
-import CircularProg from "utils/porgress/CircularProg";
+import { CircularProgress } from "@mui/material";
+import { useState } from "react";
 
 /**
  * Single Anime that a user plans to watch
@@ -42,7 +42,7 @@ const ItemPlan = ({ user, anime, list, setList }) => {
 
 	//load while waiting for db to update
 	if (loading === "loading") {
-		return <CircularProg />;
+		return <CircularProgress height={12} />;
 	}
 
 	return (

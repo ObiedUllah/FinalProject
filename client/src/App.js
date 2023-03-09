@@ -1,17 +1,16 @@
 import { Route, Routes } from "react-router-dom";
 
 import AnimeDetails from "pages/AnimeDetails";
+import CircularProg from "utils/porgress/CircularProg";
 import Footer from "components/footer/Footer";
 import Genres from "pages/Genres";
 import GlobalStyles from "styles/GlobalStyles";
 import Home from "pages/Home";
 import LeftSideBar from "components/leftAside/LeftSideBar";
-import LinearProg from "utils/porgress/LinearProg";
 import NavBar from "components/nav/NavBar";
 import Profile from "pages/Profile";
 import Promos from "pages/Promos";
 import ProtectedRoute from "authentication/protected-route";
-import React from "react";
 import RightSideBar from "components/rightAside/RightSideBar";
 import SearchedAnimeList from "pages/SearchedAnimeList";
 import styled from "styled-components";
@@ -21,7 +20,7 @@ const App = () => {
 	const { isLoading } = useAuth0();
 
 	if (isLoading) {
-		return <LinearProg />;
+		return <CircularProg />;
 	}
 
 	return (
