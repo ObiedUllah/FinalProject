@@ -39,6 +39,7 @@ const importGenres = async (url, type) => {
 
 		//add new list including previous anime list to db
 		const result = await db.collection("anime").updateOne({ [type]: animeList }, { $set: { [type]: animeList } }, { upsert: true });
+
 		console.log(result);
 	} catch (error) {
 		console.log(error);

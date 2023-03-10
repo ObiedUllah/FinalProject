@@ -37,9 +37,6 @@ const importAnime = async (url, type) => {
 		//fetch anime list
 		const animeList = await getAnime(url);
 
-		//fetch previous anime list
-		const previousAnimeList = await db.collection("anime").find().toArray();
-
 		//add new list including previous anime list to db
 		const result = await db.collection("anime").updateOne({ [type]: animeList }, { $set: { [type]: animeList } }, { upsert: true });
 
