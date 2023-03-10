@@ -6,40 +6,44 @@ const { importRandomAnime } = require("./importRandomAnime");
 //mongo client and database name
 const { client } = require("../utils/mongo.js");
 
+//calls all the functions and waits a few seconds to allow api to fetch
+//only 3 calls per second for this api
 (async () => {
 	try {
 		await importPromos("https://api.jikan.moe/v4/watch/promos", "promos");
 		await importGenres("https://api.jikan.moe/v4/genres/anime?filter=genres", "genres");
 		await importGenres("https://api.jikan.moe/v4/genres/anime?filter=themes", "themes");
 		setTimeout(() => {
-			console.log("loading");
+			console.log("...loading");
 		}, 1500);
 		await importGenres("https://api.jikan.moe/v4/genres/anime?filter=demographics", "demographics");
 		await importAnime("https://api.jikan.moe/v4/top/anime?type=tv", "topAnime");
 		await importAnime("https://api.jikan.moe/v4/top/anime?filter=airing&type=tv", "recentAnime");
 
 		setTimeout(() => {
-			console.log("still loading");
+			console.log("...still loading");
 		}, 1500);
 		await importAnime("https://api.jikan.moe/v4/top/anime?filter=bypopularity&type=tv", "popularAnime");
 		await importAnime("https://api.jikan.moe/v4/seasons/upcoming", "upcomingAnime");
 		await importAnime("https://api.jikan.moe/v4/seasons/now", "seasonalAnime");
 
 		setTimeout(() => {
-			console.log("still loading");
+			console.log("...still loading");
 		}, 1500);
 
+		//get the ids and names
 		const ids = [1, 2, 4, 8, 30, 27];
 		const names = ["Action", "Adventure", "Comedy", "Drama", "Sports", "Shounen"];
 
+		//go through all ids
 		for (const [index, elem] of ids.entries()) {
-			if (index % 3 == 0) {
+			//after doing 3, api calls, setTimeout
+			if ((index + 1) % 3 === 0) {
 				setTimeout(() => {
-					console.log("still loading in loop");
+					console.log("...still loading in loop");
 				}, 1000);
 			}
-			const name = names[index];
-			await importRandomAnime(`https://api.jikan.moe/v4/anime?genres=${elem}&order_by=score&sort=desc`, name);
+			await importRandomAnime(`https://api.jikan.moe/v4/anime?genres=${elem}&order_by=score&sort=desc`, names[index]);
 		}
 	} finally {
 		console.log("completed");

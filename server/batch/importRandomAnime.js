@@ -15,7 +15,7 @@ const getRandomGenreAnimes = async (url, type) => {
 	const response = await fetch(url);
 
 	//if failure then refresh
-	if (response.status === 429) console.log("error");
+	if (response.status === 429) throw new Error("Too many requests. Please try again later.");
 
 	//if success then set data
 	if (response.status === 200) {
@@ -24,15 +24,24 @@ const getRandomGenreAnimes = async (url, type) => {
 	}
 };
 
+/**
+ * Updates the db and adds the new list with animes of a certain category
+ * @param {*} url
+ * @param {*} type
+ */
 const importRandomAnime = async (url, type) => {
 	try {
 		//connect to db
 		await client.connect();
 		const db = client.db(DBNAME);
 
+		//fetch anime list
 		const animeList = await getRandomGenreAnimes(url, type);
 
+		//fetch previous anime list
 		const previousAnimeList = await db.collection("anime").find().toArray();
+
+		//add new list including previous anime list to db
 		const result = await db.collection("anime").updateOne({}, { $set: { ...previousAnimeList, [type]: animeList } });
 
 		console.log(result);
