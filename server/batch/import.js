@@ -17,15 +17,15 @@ const { client } = require("../utils/mongo.js");
 			console.log("...loading");
 		}, 1500);
 		await importGenres("https://api.jikan.moe/v4/genres/anime?filter=demographics", "demographics");
-		await importAnime("https://api.jikan.moe/v4/top/anime?type=tv", "topAnime");
-		await importAnime("https://api.jikan.moe/v4/top/anime?filter=airing&type=tv", "recentAnime");
+		await importAnime("https://api.jikan.moe/v4/top/anime?type=tv", "top");
+		await importAnime("https://api.jikan.moe/v4/top/anime?filter=airing&type=tv", "recent");
 
 		setTimeout(() => {
 			console.log("...still loading");
 		}, 1500);
-		await importAnime("https://api.jikan.moe/v4/top/anime?filter=bypopularity&type=tv", "popularAnime");
-		await importAnime("https://api.jikan.moe/v4/seasons/upcoming", "upcomingAnime");
-		await importAnime("https://api.jikan.moe/v4/seasons/now", "seasonalAnime");
+		await importAnime("https://api.jikan.moe/v4/top/anime?filter=bypopularity&type=tv", "popular");
+		await importAnime("https://api.jikan.moe/v4/seasons/upcoming", "upcoming");
+		await importAnime("https://api.jikan.moe/v4/seasons/now", "seasonal");
 
 		setTimeout(() => {
 			console.log("...still loading");
@@ -33,7 +33,7 @@ const { client } = require("../utils/mongo.js");
 
 		//get the ids and names
 		const ids = [1, 2, 4, 8, 30, 27];
-		const names = ["Action", "Adventure", "Comedy", "Drama", "Sports", "Shounen"];
+		const names = ["action", "adventure", "comedy", "drama", "sports", "shounen"];
 
 		//go through all ids
 		for (const [index, elem] of ids.entries()) {

@@ -28,6 +28,7 @@ const getPromos = async (url) => {
  * @param {*} type
  */
 const importPromos = async (url, type) => {
+	console.log(type);
 	try {
 		//connect to db
 		await client.connect();
@@ -36,11 +37,8 @@ const importPromos = async (url, type) => {
 		//fetch promos list
 		const animeList = await getPromos(url);
 
-		//fetch previous anime list
-		const previousAnimeList = await db.collection("anime").find().toArray();
-
 		//add new list including previous anime list to db
-		const result = await db.collection("anime").updateOne({}, { $set: { ...previousAnimeList, [type]: animeList } });
+		const result = await db.collection("anime").updateOne({ [type]: animeList }, { $set: { [type]: animeList } }, { upsert: true });
 
 		console.log(result);
 	} catch (error) {
