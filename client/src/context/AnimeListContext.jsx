@@ -1,4 +1,4 @@
-import React, { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 
 export const AnimeListContext = createContext(null);
 
@@ -16,53 +16,62 @@ export const AnimeListProvider = ({ children }) => {
 	const [seasonalAnimes, setSeasonalAnimes] = useState(() => null);
 	const [upcomingAnimes, setUpcomingAnimes] = useState(() => null);
 
-	const getTopAnimes = async () => {
-		getData(`https://api.jikan.moe/v4/top/anime?type=tv`, getTopAnimes, setTopAnime);
+	//fetches data on mount of application
+	useEffect(() => {
+		if (!topAnimes || !recentAnimes || !popularAnimes || !seasonalAnimes || !upcomingAnimes) {
+			getAllAnimes();
+		}
+
+		if (!randomGenreAnimes) {
+			getRandomGenreAnimes();
+		}
+	}, []);
+
+	/**
+	 * helper function to make a string have a capital letter in the beginning
+	 * @param {*} string
+	 * @returns
+	 */
+	const capitalizeFirstLetter = (string) => {
+		console.log(typeof string);
+		return string.charAt(0).toUpperCase() + string.slice(1);
 	};
 
-	const getRecentAnimes = async () => {
-		getData(`https://api.jikan.moe/v4/top/anime?filter=airing&type=tv`, getRecentAnimes, setRecentAnime);
-	};
-
-	const getPopularAnimes = async () => {
-		getData(`https://api.jikan.moe/v4/top/anime?filter=bypopularity&type=tv`, getPopularAnimes, setPopularAnime);
-	};
-
+	/**
+	 * gets a random category and all its anime from the database
+	 */
 	const getRandomGenreAnimes = async () => {
-		//get random genre
-		const ids = [1, 2, 4, 8, 30, 27];
-		const names = ["Action", "Adventure", "Comedy", "Drama", "Sports", "Shounen"].map((item) => item + " Anime");
-		const num = Math.floor(Math.random() * ids.length);
-
-		const response = await fetch(`https://api.jikan.moe/v4/anime?genres=${ids[num]}&order_by=score&sort=desc`);
-
-		//if failure then refresh
-		if (response.status === 429) setTimeout(() => getRandomGenreAnimes(), 1000);
+		const response = await fetch(`/api/animes/random`);
+		const result = await response.json();
 
 		//if success then set data
-		if (response.status === 200) {
-			const data = await response.json();
-			setRandomGenreAnimes({ name: names[num], data: data.data.slice(0, 24) });
+		if (result.status === 200) {
+			setRandomGenreAnimes({ name: capitalizeFirstLetter(result.data.name) + " Anime", data: result.data.data });
+		}
+
+		if (result.status === 500) {
+			alert("An error occured! Refresh the page or Contact support");
 		}
 	};
 
-	const getSeasonalAnimes = async () => {
-		getData(`https://api.jikan.moe/v4/seasons/now`, getSeasonalAnimes, setSeasonalAnimes);
-	};
-
-	const getUpcomingAnimes = async () => {
-		getData(`https://api.jikan.moe/v4/seasons/upcoming`, getUpcomingAnimes, setUpcomingAnimes);
-	};
-
-	const getData = async (url, getFunc, setFunc) => {
-		const response = await fetch(url);
-		//if failure then refresh
-		if (response.status === 429) setTimeout(() => getFunc(), 1000);
+	/**
+	 * gets the data of all the animes
+	 */
+	const getAllAnimes = async () => {
+		const response = await fetch("/api/animes");
+		const result = await response.json();
 
 		//if success then set data
-		if (response.status === 200) {
-			const data = await response.json();
-			setFunc(data.data.slice(0, 24));
+		if (result.status === 200) {
+			setTopAnime(result.data["top"]);
+			setRecentAnime(result.data["recent"]);
+			setPopularAnime(result.data["popular"]);
+			setSeasonalAnimes(result.data["seasonal"]);
+			setUpcomingAnimes(result.data["upcoming"]);
+		}
+
+		if (result.status === 500) {
+			alert("An error occured! Refresh the page or Contact support");
 		}
 	};
 
@@ -75,14 +84,6 @@ export const AnimeListProvider = ({ children }) => {
 				randomGenreAnimes,
 				seasonalAnimes,
 				upcomingAnimes,
-				actions: {
-					getTopAnimes,
-					getRecentAnimes,
-					getPopularAnimes,
-					getRandomGenreAnimes,
-					getSeasonalAnimes,
-					getUpcomingAnimes,
-				},
 			}}
 		>
 			{children}

@@ -1,4 +1,4 @@
-import React, { createContext, useState } from "react";
+import { createContext, useState } from "react";
 
 export const GenresListContext = createContext(null);
 
@@ -13,42 +13,22 @@ export const GenresListProvider = ({ children }) => {
 	const [themesList, setThemesList] = useState(() => null);
 	const [demographicsList, setDemoGraphicsList] = useState(() => null);
 
+	/**
+	 * Gets the data from the database and sets the states
+	 */
 	const getGenres = async () => {
-		const response = await fetch(`https://api.jikan.moe/v4/genres/anime?filter=genres`);
-
-		//if failure then refresh
-		if (response.status === 429) getGenres();
+		const response = await fetch("/api/genres");
+		const result = await response.json();
 
 		//if success then set data
-		if (response.status === 200) {
-			const data = await response.json();
-			setTopGenres(data.data.slice(0, 24));
+		if (result.status === 200) {
+			setTopGenres(result.data["genres"]);
+			setThemesList(result.data["themes"]);
+			setDemoGraphicsList(result.data["demographics"]);
 		}
-	};
 
-	const getThemes = async () => {
-		const response = await fetch(`https://api.jikan.moe/v4/genres/anime?filter=themes`);
-
-		//if failure then refresh
-		if (response.status === 429) getThemes();
-
-		//if success then set data
-		if (response.status === 200) {
-			const data = await response.json();
-			setThemesList(data.data.slice(0, 24));
-		}
-	};
-
-	const getDemos = async () => {
-		const response = await fetch(`https://api.jikan.moe/v4/genres/anime?filter=demographics`);
-
-		//if failure then refresh
-		if (response.status === 429) getDemos();
-
-		//if success then set data
-		if (response.status === 200) {
-			const data = await response.json();
-			setDemoGraphicsList(data.data.slice(0, 24));
+		if (result.status === 500) {
+			alert("An error occured! Refresh the page or Contact support");
 		}
 	};
 
@@ -60,8 +40,6 @@ export const GenresListProvider = ({ children }) => {
 				demographicsList,
 				actions: {
 					getGenres,
-					getThemes,
-					getDemos,
 				},
 			}}
 		>

@@ -6,7 +6,7 @@ require("dotenv").config();
 const { cloudinary, UPLOAD_PRESET_NAME, FOLDER_NAME } = require("../utils/cloudinary");
 
 // mongo client database name
-const { client, DBNAME } = require("../utils/mongo.js");
+const { DBNAME, MONGO_URI, options, MongoClient } = require("../utils/mongo.js");
 
 // helper functions
 const { sendResponse } = require("./helperFunctions.js");
@@ -18,17 +18,17 @@ const { sendResponse } = require("./helperFunctions.js");
  */
 const uploadImage = async (req, res) => {
 	try {
-		//get email and fileurl
+		//gets email and fileurl
 		const fileStr = req.body.data;
 		const email = req.body.email;
 
-		//upload to cloudinary
+		//uploads to cloudinary
 		const uploadResponse = await cloudinary.uploader.upload(fileStr, {
 			upload_preset: UPLOAD_PRESET_NAME,
 			folder: FOLDER_NAME,
 		});
 
-		//upload url to MongoDB
+		//uploads url to MongoDB
 		uploadUrlToDB(res, email, uploadResponse.url);
 	} catch (error) {
 		sendResponse(res, 500, null, "Server Error");
@@ -43,19 +43,21 @@ const uploadImage = async (req, res) => {
  * @param {*} url
  */
 const uploadUrlToDB = async (res, email, url) => {
+	//creates client
+	const client = new MongoClient(MONGO_URI, options);
 	try {
-		//connect to db
+		//connects to db
 		await client.connect();
 		const db = client.db(DBNAME);
 
-		//find user
+		//finds user
 		const updated = await db.collection("users").findOneAndUpdate({ email: email }, { $set: { image: url } });
 		updated ? sendResponse(res, 200, updated, "user updated") : sendResponse(res, 404, null, "user not updated");
 	} catch (error) {
 		sendResponse(res, 500, null, "Server Error");
 	}
 
-	// close the connection to the database server
+	//closess the connection to the database server
 	client.close();
 };
 

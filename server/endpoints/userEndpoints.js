@@ -11,7 +11,7 @@ router.get(`/api/user/:email`, getUser);
 //adds or removes an anime from the user's favorites list
 router.put(`/api/user/favorite`, toggleFavorites);
 
-//add or updates a anime status (completed/plan to watch) from the user's list
+//adds or updates a anime status (completed/plan to watch) from the user's list
 router.put(`/api/user/status`, changeStatus);
 
 //removes an anime from the user's list

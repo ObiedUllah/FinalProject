@@ -7,7 +7,6 @@ import { AnimeListContext } from "context/AnimeListContext";
 import CircularProg from "utils/porgress/CircularProg";
 import QuotesListenTabs from "./QuotesListenTabs";
 import { RandomQuoteContext } from "context/RandomQuoteContext";
-import React from "react";
 import styled from "styled-components";
 
 /**
@@ -18,18 +17,11 @@ const RightSideBar = () => {
 	const { getQuotes } = useContext(RandomQuoteContext).actions;
 
 	const { seasonalAnimes, upcomingAnimes } = useContext(AnimeListContext);
-	const { getSeasonalAnimes, getUpcomingAnimes } = useContext(AnimeListContext).actions;
 
 	//gets the anime information on the right side bar on the top
 	useEffect(() => {
 		if (!quotes) {
 			getQuotes();
-		}
-		if (!seasonalAnimes) {
-			getSeasonalAnimes();
-		}
-		if (!upcomingAnimes) {
-			getUpcomingAnimes();
 		}
 	}, []);
 

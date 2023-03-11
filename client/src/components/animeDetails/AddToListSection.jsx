@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 import LoginButton from "components/auth/buttons/LoginButton";
 import styled from "styled-components";
@@ -70,7 +70,7 @@ const AddToListSection = ({ anime }) => {
 		};
 		//only run if user is authenticated
 		if (isAuthenticated) getUser();
-	}, [anime]);
+	}, [anime, user]);
 
 	/**
 	 * sets status of anime
@@ -112,7 +112,7 @@ const AddToListSection = ({ anime }) => {
 		};
 
 		try {
-			//update the favorites in the database
+			//updates the favorites in the database
 			await fetch("/api/user/favorite", {
 				method: "PUT",
 				headers: {
@@ -160,7 +160,7 @@ const AddToListSection = ({ anime }) => {
 		};
 
 		try {
-			//update the status in the database
+			//updates the status in the database
 			await fetch("/api/user/status", {
 				method: "PUT",
 				headers: {
@@ -193,7 +193,7 @@ const AddToListSection = ({ anime }) => {
 		};
 
 		try {
-			//delete the aniem from the list in the database
+			//deletes the aniem from the list in the database
 			await fetch("/api/user/status", {
 				method: "PATCH",
 				headers: {

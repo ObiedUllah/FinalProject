@@ -37,7 +37,7 @@ const ItemCompleted = ({ user, anime, list, setList }) => {
 		setList([...list.map((obj) => (body.data.mal_id === obj.mal_id ? body.data : obj))]);
 
 		try {
-			//update the rating for the completed anime in the database
+			//updates the rating for the completed anime in the database
 			await fetch("/api/user/status", {
 				method: "PUT",
 				headers: {

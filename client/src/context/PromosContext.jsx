@@ -1,4 +1,4 @@
-import React, { createContext, useState } from "react";
+import { createContext, useState } from "react";
 
 export const PromosContext = createContext(null);
 
@@ -11,15 +11,18 @@ export const PromosContext = createContext(null);
 export const PromosProvider = ({ children }) => {
 	const [promos, setPromos] = useState(() => null);
 
+	//gets all the promos from the database
 	const getPromos = async () => {
-		const response = await fetch(`https://api.jikan.moe/v4/watch/promos`);
-		//if failure then refresh
-		if (response.status === 429) getPromos();
+		const response = await fetch("/api/promos");
+		const result = await response.json();
 
 		//if success then set data
-		if (response.status === 200) {
-			const data = await response.json();
-			setPromos(data.data);
+		if (result.status === 200) {
+			setPromos(result.data["promos"]);
+		}
+
+		if (result.status === 500) {
+			alert("An error occured! Refresh the page or Contact support");
 		}
 	};
 	return (

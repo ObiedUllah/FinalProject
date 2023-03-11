@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 
-import React, { useContext, useEffect } from "react";
+import { useContext, useEffect } from "react";
 
 import CircularProg from "utils/porgress/CircularProg";
 import { GenresListContext } from "context/GenresListContext";
@@ -9,23 +9,24 @@ import { useNavigate } from "react-router-dom";
 
 const Genres = () => {
 	const { genresList, themesList, demographicsList } = useContext(GenresListContext);
-	const { getGenres, getThemes, getDemos } = useContext(GenresListContext).actions;
+	const { getGenres } = useContext(GenresListContext).actions;
 
 	//be able to go to the search anime list page
 	const navigate = useNavigate();
 
+	//fetches the data if there isnt any on mount
 	useEffect(() => {
-		if (!genresList) {
+		if (!genresList || !themesList || !demographicsList) {
 			getGenres();
-		}
-		if (!themesList) {
-			getThemes();
-		}
-		if (!demographicsList) {
-			getDemos();
 		}
 	}, []);
 
+	/**
+	 * Sends user to the search list with the chosen genre
+	 * Retrieves the data from the api and sends it to the search list
+	 * @param {*} event
+	 * @param {*} index
+	 */
 	const handleClick = async (event, index) => {
 		event.preventDefault();
 		const temp = await fetch(`https://api.jikan.moe/v4/anime?genres=${index}&order_by=score&sort=desc`).then((res) => res.json());

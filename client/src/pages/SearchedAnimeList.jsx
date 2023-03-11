@@ -1,5 +1,4 @@
 import AnimeCard from "components/animeCard/AnimeCard";
-import React from "react";
 import styled from "styled-components";
 import { useLocation } from "react-router-dom";
 
@@ -8,7 +7,7 @@ import { useLocation } from "react-router-dom";
  * @returns
  */
 const SearchedAnimeList = () => {
-	//get the searched data that contain a popularity and sort by most popular and get only the first 24
+	//gets the searched data that contain a popularity and sort by most popular and get only the first 24
 	const { state } = useLocation();
 	let animeList;
 	if (state.data) {

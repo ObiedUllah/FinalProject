@@ -1,10 +1,9 @@
-import { useContext } from "react";
-
 import CircularProg from "utils/porgress/CircularProg";
 import Song from "./Song";
 import { SongListContext } from "context/SongListContext";
 import styled from "styled-components";
 import { useAuth0 } from "@auth0/auth0-react";
+import { useContext } from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 
@@ -33,9 +32,15 @@ const UserListen = (props) => {
 			setWidgets(result.data.songList);
 		};
 		getUser();
-	}, []);
+	}, [user]);
 
-	//will handle the data when song is dropped
+	/**
+	 * handles the data when song is dropped in the drag and drop box
+	 * sends an object containing the necessary info to add to db
+	 * updates frontend to have new list with new data
+	 * @param {*} e
+	 * @returns
+	 */
 	const handleDrop = async (e) => {
 		e.preventDefault();
 
@@ -44,9 +49,10 @@ const UserListen = (props) => {
 			return;
 		}
 
-		//if proper drop the start loading
+		//if the drop is successfult then start loading
 		setStatus(true);
-		//retreive song object
+
+		//retrieves song object
 		const songObject = JSON.parse(e.dataTransfer.getData("text/plain"));
 
 		//data to send to db
@@ -62,7 +68,7 @@ const UserListen = (props) => {
 		};
 
 		try {
-			//update the songs list in the database
+			//updates the songs list in the database
 			await fetch("/api/user/song", {
 				method: "PUT",
 				headers: {
@@ -72,7 +78,7 @@ const UserListen = (props) => {
 			})
 				.then((res) => res.json())
 				.then((data) => {
-					//update in the frontend
+					//updates in the frontend
 					if (data.status === 200) {
 						setWidgets([...widgets, songObject]);
 					} else {

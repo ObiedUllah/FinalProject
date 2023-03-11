@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 import AuthenticationButton from "components/auth/buttons/AuthenticationButton";
 import Default from "../../images/default.png";
@@ -14,7 +14,7 @@ import { useAuth0 } from "@auth0/auth0-react";
  * @returns
  */
 const NavButtons = () => {
-	//get user
+	//gets user
 	const { user, isAuthenticated } = useAuth0();
 	const [dbUser, setDbUser] = useState(() => null);
 
@@ -23,12 +23,13 @@ const NavButtons = () => {
 		const getUser = async () => {
 			const response = await fetch(`/api/user/${user.email}`);
 			const result = await response.json();
+			console.log(result);
 			setDbUser(result.data);
 		};
 		if (isAuthenticated) {
 			getUser();
 		}
-	}, []);
+	}, [user]);
 
 	return (
 		<Wrapper>

@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 
-import React, { useEffect, useLayoutEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 
 import CircularProg from "utils/porgress/CircularProg";
 import ProfileInformation from "components/profile/ProfileInformation";
@@ -26,7 +26,7 @@ const Profile = () => {
 			setDbUser(result.data);
 		};
 		getUser();
-	}, []);
+	}, [user]);
 
 	//check for user scroll
 	useLayoutEffect(() => {

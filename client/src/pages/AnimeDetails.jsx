@@ -6,7 +6,6 @@ import { useLocation, useParams } from "react-router-dom";
 import AddToListSection from "components/animeDetails/AddToListSection";
 import CircularProg from "utils/porgress/CircularProg";
 import InformationSection from "components/animeDetails/InformationSection";
-import React from "react";
 import VideoSection from "components/animeDetails/VideoSection";
 
 /**
@@ -20,7 +19,7 @@ const AnimeDetails = () => {
 
 	const [anime, setAnime] = useState(null);
 
-	//get state from songList
+	//gets state from songList
 	//only occurs when user clicks on song from right sidebar
 	const location = useLocation();
 	//sets index and type to be able to send it to the video and update it

@@ -1,11 +1,10 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 
 import { AnimeListContext } from "context/AnimeListContext";
 import CircularProg from "utils/porgress/CircularProg";
 import { NavLink } from "react-router-dom";
-import React from "react";
 import styled from "styled-components";
 
 /**
@@ -14,13 +13,6 @@ import styled from "styled-components";
  */
 const LeftSideBar = () => {
 	const { topAnimes } = useContext(AnimeListContext);
-	const { getTopAnimes } = useContext(AnimeListContext).actions;
-
-	useEffect(() => {
-		if (!topAnimes) {
-			setTimeout(() => getTopAnimes(), 50);
-		}
-	}, []);
 
 	//wait until the top anime are loaded
 	if (!topAnimes) {

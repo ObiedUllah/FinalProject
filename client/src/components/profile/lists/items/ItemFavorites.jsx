@@ -35,7 +35,7 @@ const ItemFavorites = ({ user, anime, list, setList }) => {
 		};
 
 		try {
-			//update the favorites in the database
+			//updates the favorites in the database
 			await fetch("/api/user/favorite", {
 				method: "PUT",
 				headers: {

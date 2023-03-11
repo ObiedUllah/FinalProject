@@ -3,7 +3,7 @@
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-import React, { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 
 import CircularProg from "utils/porgress/CircularProg";
 import { PromosContext } from "context/PromosContext";
@@ -16,6 +16,7 @@ const Promos = () => {
 
 	const [selectedIndex, setSelectedIndex] = useState(() => 0);
 
+	//fetches data if none is set yet
 	useEffect(() => {
 		if (!promos) {
 			getPromos();

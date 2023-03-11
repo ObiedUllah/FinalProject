@@ -1,6 +1,3 @@
-import React, { useState } from "react";
-
-import CircularProg from "utils/porgress/CircularProg";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
@@ -16,7 +13,10 @@ const Song = ({ song, index, setWidgets, dbUser, setStatus }) => {
 		return str.replace(/ *\([^)]*\) */g, " ");
 	};
 
-	//will remove a song from the list
+	/**
+	 * removes a song from the list and updates the frontend so that its added to the widgets
+	 * @param {*} event
+	 */
 	const handleRemove = async (event) => {
 		event.preventDefault();
 		event.stopPropagation();
@@ -24,7 +24,7 @@ const Song = ({ song, index, setWidgets, dbUser, setStatus }) => {
 		setStatus(true);
 
 		try {
-			//update the songs list in the database
+			//updates the songs list in the database
 			await fetch(`/api/user/song/${song.id}`, {
 				method: "PATCH",
 				headers: {
@@ -34,7 +34,7 @@ const Song = ({ song, index, setWidgets, dbUser, setStatus }) => {
 			})
 				.then((res) => res.json())
 				.then((data) => {
-					//update in the frontend
+					//updates in the frontend
 					console.log(data);
 					if (data.status === 200) {
 						setWidgets(data.data.songList);

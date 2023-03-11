@@ -8,10 +8,8 @@ const options = {
 	useNewUrlParser: true,
 	useUnifiedTopology: true,
 };
-//create client
-const client = new MongoClient(MONGO_URI, options);
 
 //Database name
 const DBNAME = "AnimeEnmaDB";
 
-module.exports = { client, DBNAME };
+module.exports = { DBNAME, MONGO_URI, options, MongoClient };

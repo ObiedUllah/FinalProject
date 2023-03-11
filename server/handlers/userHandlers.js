@@ -1,7 +1,7 @@
 "use strict";
 
 //mongo client and database name
-const { client, DBNAME } = require("../utils/mongo.js");
+const { DBNAME, MONGO_URI, options, MongoClient } = require("../utils/mongo.js");
 
 // necessary helper functions
 const { sendResponse } = require("./helperFunctions.js");
@@ -11,50 +11,55 @@ const { v4: uuidv4 } = require("uuid");
 
 /**
  * GET all users
- * get every user in the db
+ * gets every user in the db
+ * adding for possible functionality (friends list)
  * @param {*} req
  * @param {*} res
  */
 const getUsers = async (req, res) => {
+	//creates client
+	const client = new MongoClient(MONGO_URI, options);
 	try {
-		//connect to db
+		//connects to db
 		await client.connect();
 		const db = client.db(DBNAME);
 
-		//get all users
+		//gets all users
 		const users = await db.collection("users").find().toArray();
 
 		users ? sendResponse(res, 200, users, "users Retrieved") : sendResponse(res, 404, null, "users not found");
 	} catch (error) {
 		sendResponse(res, 500, null, "Server Error");
 	}
-	// close the connection to the database server
+	//closess the connection to the database server
 	client.close();
 };
 
 /**
  * GET single user
- * get a single user from the db using params to get the email
+ * gets a single user from the db using the email
  * @param {*} req
  * @param {*} res
  */
 const getUser = async (req, res) => {
+	//creates client
+	const client = new MongoClient(MONGO_URI, options);
 	try {
-		//connect to db
+		//connects to db
 		await client.connect();
 		const db = client.db(DBNAME);
 
-		//get email
+		//gets email
 		const email = req.params.email;
 
-		//find user
+		//finds user
 		const user = await db.collection("users").findOne({ email: email });
 
 		user ? sendResponse(res, 200, user, "user Retrieved") : sendResponse(res, 404, null, "user not found");
 	} catch (error) {
 		sendResponse(res, 500, null, "Server Error");
 	}
-	// close the connection to the database server
+	//closess the connection to the database server
 	client.close();
 };
 
@@ -65,36 +70,38 @@ const getUser = async (req, res) => {
  * @param {*} res
  */
 const toggleFavorites = async (req, res) => {
+	//creates client
+	const client = new MongoClient(MONGO_URI, options);
 	try {
-		//connect to db
+		//connects to db
 		await client.connect();
 		const db = client.db(DBNAME);
 
-		//get email
+		//gets email
 		const email = req.body.email;
 
-		//get anime
+		//gets anime
 		const anime = req.body.data;
 
-		//get user
+		//gets user
 		const user = await db.collection("users").findOne({ email: email });
 
 		//list to send to db
-		//will get all the favorites amd remove the current favorite if found
+		//gets all the favorites amd remove the current favorite if found
 		const favorites = user.favorites.filter((fav) => fav.mal_id !== anime.mal_id);
 
-		// will add new favorite if it sees it doesnt exist in the current list
+		//adds new favorite if it sees it doesnt exist in the current list
 		if (favorites.length === user.favorites.length) {
 			favorites.push(anime);
 		}
 
-		//update user
+		//updates user
 		const updated = await db.collection("users").findOneAndUpdate({ email: email }, { $set: { favorites: favorites } });
 		updated ? sendResponse(res, 200, updated, "user updated") : sendResponse(res, 404, null, "user not updated");
 	} catch (error) {
 		sendResponse(res, 500, null, "Server Error");
 	}
-	// close the connection to the database server
+	//closes the connection to the database server
 	client.close();
 };
 
@@ -105,37 +112,39 @@ const toggleFavorites = async (req, res) => {
  * @param {*} res
  */
 const changeStatus = async (req, res) => {
+	//creates client
+	const client = new MongoClient(MONGO_URI, options);
 	try {
-		//connect to db
+		//connects to db
 		await client.connect();
 		const db = client.db(DBNAME);
 
-		//get email
+		//gets email
 		const email = req.body.email;
 
-		//get anime
+		//gets anime
 		const anime = req.body.data;
 
-		//get user
+		//gets user
 		const user = await db.collection("users").findOne({ email: email });
 
 		//list to send to db
-		//will get all the existing anime and replace the existing anime changed by user
+		//gets all the existing anime and replace the existing anime changed by user
 		const animeList = user.list.map((selected) => (selected.mal_id === anime.mal_id ? anime : selected));
 
-		//will add new anime if the anime does not exist in the first place
+		//adds the new anime if the anime does not exist in the first place
 		if (!animeList.find((selected) => selected.mal_id === anime.mal_id)) {
 			animeList.push(anime);
 		}
 
-		//update user
+		//updates user
 		const updated = await db.collection("users").findOneAndUpdate({ email: email }, { $set: { list: animeList } });
 		updated ? sendResponse(res, 200, updated, "user updated") : sendResponse(res, 404, null, "user not updated");
 	} catch (error) {
 		sendResponse(res, 500, null, "Server Error");
 	}
 
-	// close the connection to the database server
+	//closes the connection to the database server
 	client.close();
 };
 
@@ -146,31 +155,33 @@ const changeStatus = async (req, res) => {
  * @param {*} res
  */
 const removeStatus = async (req, res) => {
+	//creates client
+	const client = new MongoClient(MONGO_URI, options);
 	try {
-		//connect to db
+		//connects to db
 		await client.connect();
 		const db = client.db(DBNAME);
 
-		//get email
+		//gets email
 		const email = req.body.email;
 
-		//get anime
+		//gets anime
 		const anime = req.body.data;
 
-		//get user
+		//gets user
 		const user = await db.collection("users").findOne({ email: email });
 
-		//will remove the anime in question by checking the id and keep all the other values
+		//removes the anime in question by checking the id and keep all the other values
 		const animeList = user.list.filter((anime) => anime.mal_id !== req.body.data.mal_id);
 
-		//update user
+		//updates user
 		const updated = await db.collection("users").findOneAndUpdate({ email: email }, { $set: { list: animeList } });
 		updated ? sendResponse(res, 200, updated, "user updated") : sendResponse(res, 404, null, "user not updated");
 	} catch (error) {
 		sendResponse(res, 500, null, "Server Error");
 	}
 
-	// close the connection to the database server
+	//closes the connection to the database server
 	client.close();
 };
 
@@ -181,25 +192,27 @@ const removeStatus = async (req, res) => {
  * @param {*} res
  */
 const addSongToList = async (req, res) => {
+	//creates client
+	const client = new MongoClient(MONGO_URI, options);
 	try {
-		//connect to db
+		//connects to db
 		await client.connect();
 		const db = client.db(DBNAME);
 
-		//get email
+		//gets email
 		const email = req.body.email;
 
-		//get song and its info
+		//gets song and its info
 		const song = req.body.data;
 
 		//give a random id
 		song.id = uuidv4();
 
-		//get user
+		//gets user
 		const user = await db.collection("users").findOne({ email: email });
 
 		//list to send to db
-		//will get all the existing songs
+		//gets all the existing songs
 		const songList = Array.from(user.songList);
 
 		//check if song is already added
@@ -214,13 +227,13 @@ const addSongToList = async (req, res) => {
 			songList.push(song);
 		}
 
-		//update user
+		//updates user
 		const updated = await db.collection("users").findOneAndUpdate({ email: email }, { $set: { songList: songList } });
 		updated ? sendResponse(res, 200, updated, "user updated") : sendResponse(res, 404, null, "user not updated");
 	} catch (error) {
 		sendResponse(res, 500, null, "Server Error");
 	}
-	// close the connection to the database server
+	//closes the connection to the database server
 	client.close();
 };
 
@@ -231,31 +244,33 @@ const addSongToList = async (req, res) => {
  * @param {*} res
  */
 const removeSongFromList = async (req, res) => {
+	//creates client
+	const client = new MongoClient(MONGO_URI, options);
 	try {
-		//connect to db
+		//connects to db
 		await client.connect();
 		const db = client.db(DBNAME);
 
-		//get id
+		//gets id
 		const songId = req.params.id;
 
-		//get email
+		//gets email
 		const email = req.body.email;
 
-		//get user
+		//gets user
 		const user = await db.collection("users").findOne({ email: email });
 
 		//list to send to db
-		//will filter and remove the song depending on the id
+		//filters and removes the song depending on the id
 		const songList = user.songList.filter((songItem) => songItem.id !== songId);
 
-		//update user
+		//updates user
 		const updated = await db.collection("users").findOneAndUpdate({ email: email }, { $set: { songList: songList } });
 		updated ? sendResponse(res, 200, { updated, songList }, "user updated") : sendResponse(res, 404, null, "user not updated");
 	} catch (error) {
 		sendResponse(res, 500, null, "Server Error");
 	}
-	// close the connection to the database server
+	//closes the connection to the database server
 	client.close();
 };
 

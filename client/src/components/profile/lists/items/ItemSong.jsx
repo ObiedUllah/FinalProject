@@ -5,21 +5,24 @@ import { SongListContext } from "context/SongListContext";
 import styled from "styled-components";
 
 const ItemSong = ({ user, song, list, setList }) => {
-    //update widget if user clicks on delete
+	//updates widget if user clicks on delete
 	const { setWidgets } = useContext(SongListContext).actions;
 
-    //loading state to wait for db 
+	//loading state to wait for db
 	const [loading, setLoading] = useState(() => null);
 
-	//will remove a song from the list
+	/**
+	 * removes a song from the list and updates the widgets and the users list
+	 * @param {*} event
+	 */
 	const handleRemove = async (event) => {
 		event.preventDefault();
 		event.stopPropagation();
-		//loading state 
+		//loading state
 		setLoading(true);
 
 		try {
-			//update the songs list in the database
+			//updates the songs list in the database
 			await fetch(`/api/user/song/${song.id}`, {
 				method: "PATCH",
 				headers: {
@@ -29,7 +32,7 @@ const ItemSong = ({ user, song, list, setList }) => {
 			})
 				.then((res) => res.json())
 				.then((data) => {
-					//update in the frontend, also for right side bar
+					//updates in the frontend, also for right side bar
 					console.log(data);
 					if (data.status === 200) {
 						setWidgets(data.data.songList);

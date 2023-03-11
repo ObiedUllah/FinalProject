@@ -78,7 +78,7 @@ export const handleStatusChange = async (event, list, setList, anime, email, sta
 		},
 	};
 	try {
-		//update the status in the database
+		//updates the status in the database
 		const response = await fetch("/api/user/status", {
 			method: "PUT",
 			headers: {
@@ -87,7 +87,7 @@ export const handleStatusChange = async (event, list, setList, anime, email, sta
 			body: JSON.stringify(body),
 		});
 		const result = await response.json();
-		//update frontend list
+		//updates frontend list
 		if (result.status === 200) {
 			setList([...list.filter((elem) => elem.mal_id !== anime.mal_id)]);
 			setLoading(null);
@@ -114,7 +114,7 @@ export const handleRemoveFromList = async (event, list, setList, anime, email) =
 	};
 
 	try {
-		//delete anime item from db
+		//deletes anime item from db
 		await fetch("/api/user/status", {
 			method: "PATCH",
 			headers: {

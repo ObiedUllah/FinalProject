@@ -30,12 +30,12 @@ const getVideo = async (req, res) => {
  */
 const downloadMp3 = async (req, res) => {
 	try {
-		//get video first
+		//gets video first
 		const title = transformText(req.body.video);
 		const videos = await yt.search(title);
 		const video = videos[0];
 
-		//get video id
+		//gets video id
 		const videoId = video.id.videoId;
 
 		//downloads video through api
