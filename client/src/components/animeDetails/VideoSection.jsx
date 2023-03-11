@@ -18,16 +18,18 @@ const VideoSection = ({ anime, id, index, type }) => {
 	useEffect(() => {
 		const getInitialTheme = async () => {
 			try {
+				console.log(index);
+				console.log(type);
 				//retrieving data from the state (only used depending on if the user clicked the link from the user song list)
 				//only for endings
-				if (index && type === "opening") {
+				if (typeof index === "number" && type === "opening") {
 					const response = await fetch(`/api/video/${anime?.theme.openings[index] + " opening " + anime.title}`);
 					const result = await response.json();
 					setSelectedTheme(result.data);
 				}
 				//retrieving data from the state (only used depending on if the user clicked the link from the user song list)
 				//only for endings
-				else if (index && type === "ending") {
+				else if (typeof index === "number" && type === "ending") {
 					const response = await fetch(`/api/video/${anime?.theme.endings[index] + " opening " + anime.title}`);
 					const result = await response.json();
 					setSelectedTheme(result.data);

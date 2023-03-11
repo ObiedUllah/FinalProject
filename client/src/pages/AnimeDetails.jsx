@@ -29,6 +29,8 @@ const AnimeDetails = () => {
 		index = location.state.index;
 		type = location.state.type;
 	}
+	console.log(index);
+	console.log(type);
 
 	useEffect(() => {
 		let isCancelled = false;

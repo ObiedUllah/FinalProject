@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+
 import CircularProg from "utils/porgress/CircularProg";
 import Song from "./Song";
 import { SongListContext } from "context/SongListContext";
@@ -55,6 +57,7 @@ const UserListen = (props) => {
 		//retrieves song object
 		const songObject = JSON.parse(e.dataTransfer.getData("text/plain"));
 
+		console.log(songObject);
 		//data to send to db
 		const body = {
 			email: dbUser.email,
@@ -80,7 +83,7 @@ const UserListen = (props) => {
 				.then((data) => {
 					//updates in the frontend
 					if (data.status === 200) {
-						setWidgets([...widgets, songObject]);
+						setWidgets([...widgets, body.data]);
 					} else {
 						alert("Already in List");
 					}
