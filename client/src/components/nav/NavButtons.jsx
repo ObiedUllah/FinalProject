@@ -23,7 +23,6 @@ const NavButtons = () => {
 		const getUser = async () => {
 			const response = await fetch(`/api/user/${user.email}`);
 			const result = await response.json();
-			console.log(result);
 			setDbUser(result.data);
 		};
 		if (isAuthenticated) {

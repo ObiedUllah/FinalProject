@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 import CircularProg from "utils/porgress/CircularProg";
 import ReactPlayer from "react-player";
@@ -21,14 +21,14 @@ const VideoSection = ({ anime, id, index, type }) => {
 				//retrieving data from the state (only used depending on if the user clicked the link from the user song list)
 				//only for endings
 				if (index && type === "opening") {
-					const response = await fetch(`/api/video/${anime?.theme.openings[index] + " opening"}`);
+					const response = await fetch(`/api/video/${anime?.theme.openings[index] + " opening " + anime.title}`);
 					const result = await response.json();
 					setSelectedTheme(result.data);
 				}
 				//retrieving data from the state (only used depending on if the user clicked the link from the user song list)
 				//only for endings
 				else if (index && type === "ending") {
-					const response = await fetch(`/api/video/${anime?.theme.endings[index] + " opening"}`);
+					const response = await fetch(`/api/video/${anime?.theme.endings[index] + " opening " + anime.title}`);
 					const result = await response.json();
 					setSelectedTheme(result.data);
 				}
@@ -38,13 +38,13 @@ const VideoSection = ({ anime, id, index, type }) => {
 				}
 				//if opening then set to opening
 				else if (anime?.theme.openings[0] !== undefined) {
-					const response = await fetch(`/api/video/${anime?.theme.openings[0] + " opening"}`);
+					const response = await fetch(`/api/video/${anime?.theme.openings[0] + " opening " + anime.title}`);
 					const result = await response.json();
 					setSelectedTheme(result.data);
 				}
 				//if ending then set to ending
 				else if (anime?.theme.endings[0] !== undefined) {
-					const response = await fetch(`/api/video/${anime?.theme.endings[0] + " opening"}`);
+					const response = await fetch(`/api/video/${anime?.theme.endings[0] + " opening " + anime.title}`);
 					const result = await response.json();
 					setSelectedTheme(result.data);
 				} else {

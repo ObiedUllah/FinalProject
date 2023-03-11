@@ -1,8 +1,7 @@
-import { useState } from "react";
-
 import { BsDownload } from "react-icons/bs";
 import DownloadDialog from "./DownloadDialog";
 import styled from "styled-components";
+import { useState } from "react";
 
 /**
  * Single button link to an opening/ending and allows to download video as mp3
@@ -36,8 +35,8 @@ const VideoButton = ({ anime, index, theme, isOpening, setSelectedTheme }) => {
 		try {
 			let response;
 			isOpening
-				? (response = await fetch(`/api/video/${anime?.theme.openings[index] + " opening"}`))
-				: (response = await fetch(`/api/video/${anime?.theme.endings[index] + " ending"}`));
+				? (response = await fetch(`/api/video/${anime?.theme.openings[index] + " opening " + anime.title}`))
+				: (response = await fetch(`/api/video/${anime?.theme.endings[index] + " ending " + anime.title}`));
 
 			const result = await response.json();
 			setSelectedTheme(result.data);

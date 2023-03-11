@@ -35,7 +35,6 @@ const Song = ({ song, index, setWidgets, dbUser, setStatus }) => {
 				.then((res) => res.json())
 				.then((data) => {
 					//updates in the frontend
-					console.log(data);
 					if (data.status === 200) {
 						setWidgets(data.data.songList);
 					}

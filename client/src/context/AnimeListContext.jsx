@@ -33,7 +33,6 @@ export const AnimeListProvider = ({ children }) => {
 	 * @returns
 	 */
 	const capitalizeFirstLetter = (string) => {
-		console.log(typeof string);
 		return string.charAt(0).toUpperCase() + string.slice(1);
 	};
 

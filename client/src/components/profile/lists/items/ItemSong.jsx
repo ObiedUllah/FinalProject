@@ -33,7 +33,6 @@ const ItemSong = ({ user, song, list, setList }) => {
 				.then((res) => res.json())
 				.then((data) => {
 					//updates in the frontend, also for right side bar
-					console.log(data);
 					if (data.status === 200) {
 						setWidgets(data.data.songList);
 						setList(data.data.songList);
