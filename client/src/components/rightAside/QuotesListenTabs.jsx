@@ -1,5 +1,4 @@
 import Quotes from "./Quotes";
-import React from "react";
 import UserListen from "./UserListen";
 import styled from "styled-components";
 import { useState } from "react";
@@ -34,6 +33,10 @@ const Wrapper = styled.div`
 	width: 100%;
 	height: 50px;
 	display: flex;
+
+	@media (max-width: 1200px) {
+		display: none;
+	}
 `;
 
 const Button = styled.button`

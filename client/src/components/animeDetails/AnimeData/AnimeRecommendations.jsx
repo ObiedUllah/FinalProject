@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Synopsis, Title } from "styles/AnimeDetailsStyles";
 
 import AnimeSlider from "components/home/AnimeSlider";
@@ -32,7 +32,7 @@ const AnimeRecommendations = ({ anime, id }) => {
 				if (response.status === 200) {
 					const data = await response.json();
 
-					//set length of anime slider
+					//sets length of anime slider
 					data.data.length < 8 ? setLength(parseInt(data.data.length)) : setLength(8);
 					setRecommendations(data.data);
 				}

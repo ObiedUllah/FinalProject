@@ -13,6 +13,7 @@ import Promos from "pages/Promos";
 import ProtectedRoute from "authentication/protected-route";
 import RightSideBar from "components/rightAside/RightSideBar";
 import SearchedAnimeList from "pages/SearchedAnimeList";
+import SongLibrary from "pages/SongLibrary";
 import styled from "styled-components";
 import { useAuth0 } from "@auth0/auth0-react";
 
@@ -40,6 +41,7 @@ const App = () => {
 					<Route exact path="/anime/:id" element={<AnimeDetails />} />
 					<Route exact path="/genres" element={<Genres />} />
 					<Route exact path="/promos" element={<Promos />} />
+					<Route exact path="/songLibrary" element={<SongLibrary />} />
 				</Routes>
 			</Main>
 			<RightAside>

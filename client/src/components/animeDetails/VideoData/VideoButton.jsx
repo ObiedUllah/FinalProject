@@ -84,7 +84,7 @@ const VideoButton = ({ anime, index, theme, isOpening, setSelectedTheme }) => {
 	 * @param {*} e
 	 */
 	const handleDragStart = (e) => {
-		const data = { mal_id: anime.mal_id, title: anime.title, theme, isOpening, index };
+		const data = { mal_id: anime.mal_id, title: anime.title, img: anime.images.jpg.image_url, theme, isOpening, index };
 		e.dataTransfer.setData("text/plain", JSON.stringify(data));
 	};
 

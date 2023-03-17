@@ -27,6 +27,26 @@ const AddToListSection = ({ anime }) => {
 	//checks if list was updated and will allow user to see a message
 	const [isUpdated, setIsUpdated] = useState(() => false);
 
+	/**
+	 * sets state to default value
+	 * used in useEffect below
+	 */
+	const setDefaultState = () => {
+		setInList(false);
+		setRating("");
+		setStatus("plan");
+	};
+
+	/**
+	 * sets the status and rating of an anime dependiong on if its plan or completed
+	 * used in useEffect below
+	 * @param {*} animeFromList
+	 */
+	const setAnimeStatusAndRating = (animeFromList) => {
+		setRating(animeFromList.status === "plan" ? "" : animeFromList.rating);
+		setStatus(animeFromList.status || "plan");
+	};
+
 	//gets the user from the mongo db
 	useEffect(() => {
 		const getUser = async () => {
@@ -34,38 +54,27 @@ const AddToListSection = ({ anime }) => {
 			const result = await response.json();
 			setDbUser(result.data);
 
-			//set user favorites to be check or not checked
-			result.data.favorites ? setIsFavorite(result.data.favorites.filter((e) => e.mal_id === anime.mal_id).length > 0) : setIsFavorite(false);
+			//sets user favorites to be check or not checked
+			result.data.favorites ? setIsFavorite(result.data.favorites.some((e) => e.mal_id === anime.mal_id)) : setIsFavorite(false);
 
-			//set user plan/completed and rating
+			//sets user plan/completed and rating
 			if (result.data.list) {
-				//if anime not in list then set to default
-				if (!result.data.list.filter((e) => e.mal_id === anime.mal_id).length > 0) {
-					setInList(false);
-					setRating("");
-					setStatus("plan");
-				}
-				//if anime in list
-				else {
+				//gets anime from list. If not found, value will be undefined
+				const animeFromList = result.data.list.find((e) => e.mal_id === anime.mal_id);
+
+				//if anime does exist then set values
+				if (animeFromList) {
 					setInList(true);
-					let animeFromList = result.data.list.find((e) => e.mal_id === anime.mal_id);
-					//if anime is plan to watch set to default
-					if (animeFromList.status === "plan") {
-						setRating("");
-						setStatus("plan");
-					}
-					//if anime is completed
-					else {
-						setRating(animeFromList.rating);
-						setStatus(animeFromList.status);
-					}
+					setAnimeStatusAndRating(animeFromList);
+				}
+				//if anime is not in list
+				else {
+					setDefaultState();
 				}
 			}
 			//if no data in list then set to default
 			else {
-				setInList(false);
-				setRating("");
-				setStatus("plan");
+				setDefaultState();
 			}
 		};
 		//only run if user is authenticated
@@ -219,15 +228,11 @@ const AddToListSection = ({ anime }) => {
 						<Option disabled value={""}>
 							Rating
 						</Option>
-						{[...Array(11).keys()]
-							.map((i) => i)
-							.map((index) => {
-								return (
-									<Option key={index} value={index}>
-										{index}
-									</Option>
-								);
-							})}
+						{Array.from({ length: 11 }, (_, index) => (
+							<Option key={index} value={index}>
+								{index}
+							</Option>
+						))}
 					</Select>
 
 					{inList ? (

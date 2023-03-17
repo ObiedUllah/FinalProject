@@ -35,6 +35,7 @@ const NavButtons = () => {
 			<Search />
 
 			<AuthenticationButton />
+			{isAuthenticated && dbUser && <LibraryLink to="/songLibrary">Library</LibraryLink>}
 			{isAuthenticated && dbUser && (
 				<NavLink to="/profile">
 					{dbUser.image === "" ? <Avatar src={Default} alt="Profile" /> : <Avatar src={dbUser.image} alt="Profile" />}
@@ -55,7 +56,21 @@ const Avatar = styled.img`
 	width: 50px;
 	height: 50px;
 	border-radius: 50%;
-	margin-left: 10px;
+	margin: 0px 10px 0px 0px;
+`;
+
+const LibraryLink = styled(NavLink)`
+	text-decoration: none;
+	color: white;
+	border: 1px solid black;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 80px;
+	margin: 20px;
+	background: #222;
+	padding: 15px;
+	border-radius: 5px;
 `;
 
 export default NavButtons;

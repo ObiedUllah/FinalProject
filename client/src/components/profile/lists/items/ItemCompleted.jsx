@@ -31,7 +31,7 @@ const ItemCompleted = ({ user, anime, list, setList }) => {
 			},
 		};
 
-		//set value in frontend
+		//sets value in frontend
 		setLoading("loading");
 		setRating(parseInt(event.target.value));
 		setList([...list.map((obj) => (body.data.mal_id === obj.mal_id ? body.data : obj))]);

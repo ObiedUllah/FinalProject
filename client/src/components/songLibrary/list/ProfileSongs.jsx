@@ -1,14 +1,10 @@
-import ItemSong from "../items/ItemSong";
+import ItemSong from "./ItemSong";
 import styled from "styled-components";
 import { useState } from "react";
 
 const ProfileSongs = ({ user }) => {
+	console.log(user);
 	const [list, setList] = useState(() => user.songList);
-
-	//sorting
-	const [titleAsc, setTitleAsc] = useState(false);
-	const [themeAsc, setThemeAsc] = useState(false);
-	const [animeAsc, setAnimeAsc] = useState(false);
 
 	return (
 		<Wrapper>

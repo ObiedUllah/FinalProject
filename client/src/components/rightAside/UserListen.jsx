@@ -33,7 +33,10 @@ const UserListen = (props) => {
 			setDbUser(result.data);
 			setWidgets(result.data.songList);
 		};
-		getUser();
+
+		if (user) {
+			getUser();
+		}
 	}, [user]);
 
 	/**
@@ -66,6 +69,7 @@ const UserListen = (props) => {
 				title: songObject.title,
 				theme: songObject.theme,
 				type: songObject.isOpening ? "opening" : "ending",
+				img: songObject.img,
 				index: songObject.index,
 			},
 		};
