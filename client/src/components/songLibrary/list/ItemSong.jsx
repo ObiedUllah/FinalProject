@@ -4,9 +4,9 @@ import CircularProg from "utils/porgress/CircularProg";
 import { SongListContext } from "context/SongListContext";
 import styled from "styled-components";
 
-const ItemSong = ({ user, song, list, setList }) => {
+const ItemSong = ({ user, song, list, setList, index }) => {
 	//updates widget if user clicks on delete
-	const { setWidgets } = useContext(SongListContext).actions;
+	const { setWidgets, playCurrentSong } = useContext(SongListContext).actions;
 
 	//loading state to wait for db
 	const [loading, setLoading] = useState(() => null);
@@ -45,16 +45,15 @@ const ItemSong = ({ user, song, list, setList }) => {
 		}
 	};
 
+	/**
+	 * plays audio of the song that was clicked
+	 * modifies the front end so that it dispolays currently selected song
+	 * @param {*} event
+	 */
 	const handlePlay = async (event) => {
 		event.preventDefault();
 		setLoading(true);
-		const response = await fetch(`/api/video/${song?.theme + " opening " + song.title}`);
-		const result = await response.json();
-
-		let audio = new Audio(result.data.url);
-		audio.play();
-
-		console.log(result);
+		await playCurrentSong(song, index);
 		setLoading(false);
 	};
 

@@ -9,7 +9,7 @@ const SongHeader = ({ songList }) => {
 			<SongImage />
 			<TitleActionsDiv>
 				<SongTitle />
-				<SongActions />
+				<SongActions songList={songList} />
 			</TitleActionsDiv>
 		</Wrapper>
 	);

@@ -1,5 +1,6 @@
 const fetch = require("node-fetch");
 const yt = require("youtube-search-without-api-key");
+const ytdl = require("ytdl-core");
 
 //helper functions
 const { sendResponse, transformText } = require("./helperFunctions.js");
@@ -56,4 +57,32 @@ const downloadMp3 = async (req, res) => {
 	}
 };
 
-module.exports = { getVideo, downloadMp3 };
+/**
+ * Will get an mp3 audio from a youtube link
+ * searches for youtube link by looking at params which contains theme title
+ * converts the url to a audio and sends it back to as response
+ * @param {*} req
+ * @param {*} res
+ */
+const getMp3Audio = async (req, res) => {
+	//gets video first
+	const title = transformText(req.params.string);
+	const videos = await yt.search(title);
+	const video = videos[0];
+
+	// Set the response headers to indicate that this is an audio file
+	res.setHeader("Content-Type", "audio/mpeg");
+	res.setHeader("Accept-Ranges", "bytes");
+	res.setHeader("Cache-Control", "public, max-age=31536000");
+
+	// Use ytdl-core to extract the audio from the YouTube URL
+	const audio = ytdl(video.url, {
+		filter: "audioonly",
+		quality: "highestaudio",
+	});
+
+	// Pipe the audio stream to the response
+	audio.pipe(res);
+};
+
+module.exports = { getVideo, downloadMp3, getMp3Audio };

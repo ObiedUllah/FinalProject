@@ -8,7 +8,6 @@ import styled from "styled-components";
  * @returns
  */
 const Song = ({ song, index, setWidgets, dbUser, setStatus }) => {
-	console.log(song.type);
 	//format the title text
 	const formatText = (str) => {
 		return str.replace(/ *\([^)]*\) */g, " ");

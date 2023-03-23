@@ -60,7 +60,6 @@ const UserListen = (props) => {
 		//retrieves song object
 		const songObject = JSON.parse(e.dataTransfer.getData("text/plain"));
 
-		console.log(songObject);
 		//data to send to db
 		const body = {
 			email: dbUser.email,

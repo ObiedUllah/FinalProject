@@ -41,7 +41,7 @@ const App = () => {
 					<Route exact path="/anime/:id" element={<AnimeDetails />} />
 					<Route exact path="/genres" element={<Genres />} />
 					<Route exact path="/promos" element={<Promos />} />
-					<Route exact path="/songLibrary" element={<SongLibrary />} />
+					<Route exact path="/songLibrary" element={<ProtectedRoute component={SongLibrary} />} />
 				</Routes>
 			</Main>
 			<RightAside>

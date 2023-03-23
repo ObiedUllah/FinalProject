@@ -17,7 +17,8 @@
     "serve": "^14.0.1",
     "uuid": "^9.0.0",
     "uuidv4": "^6.2.13",
-    "youtube-search-without-api-key": "^1.0.7"
+    "youtube-search-without-api-key": "^1.0.7",
+    "ytdl-core": "^4.11.2"
   },
   "scripts": {
     "start": "nodemon server.js"

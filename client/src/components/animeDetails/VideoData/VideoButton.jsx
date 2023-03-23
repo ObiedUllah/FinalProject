@@ -70,6 +70,7 @@ const VideoButton = ({ anime, index, theme, isOpening, setSelectedTheme }) => {
 
 			//modal handling
 			const result = await response.json();
+
 			result.song_link === null ? setLink(null) : setLink(result.data.song_link);
 			setOpen(true);
 		} catch (error) {

@@ -18,8 +18,6 @@ const VideoSection = ({ anime, id, index, type }) => {
 	useEffect(() => {
 		const getInitialTheme = async () => {
 			try {
-				console.log(index);
-				console.log(type);
 				//retrieving data from the state (only used depending on if the user clicked the link from the user song list)
 				//only for endings
 				if (typeof index === "number" && type === "opening") {
