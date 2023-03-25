@@ -1,3 +1,4 @@
+import ItemHeader from "./ItemHeader";
 import ItemSong from "./ItemSong";
 import styled from "styled-components";
 import { useState } from "react";
@@ -7,6 +8,7 @@ const ProfileSongs = ({ user }) => {
 
 	return (
 		<Wrapper>
+			<ItemHeader />
 			{list.map((item, index) => (
 				<ItemSong key={item.theme + index} user={user} song={item} list={list} setList={setList} index={index} />
 			))}

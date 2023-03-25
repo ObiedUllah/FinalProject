@@ -10,7 +10,7 @@ const SongImage = () => {
 };
 
 const Wrapper = styled.div`
-	width: 60%;
+	width: 90%;
 
 	display: flex;
 	align-items: center;
@@ -20,6 +20,7 @@ const Wrapper = styled.div`
 const Image = styled.img`
 	width: 200px;
 	height: 280px;
+	border: 2px solid black;
 `;
 
 export default SongImage;

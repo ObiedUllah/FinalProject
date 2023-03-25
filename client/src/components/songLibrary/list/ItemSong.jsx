@@ -69,7 +69,11 @@ const ItemSong = ({ user, song, list, setList, index }) => {
 	return (
 		<Wrapper>
 			<MainButton onClick={(event) => handlePlay(event)}>
-				<ThemeTitle>{song.theme}</ThemeTitle>
+				<Box>
+					<Index>{index}</Index>
+					<ThemeTitle>{song.theme}</ThemeTitle>
+					<Title>{song.title}</Title>
+				</Box>
 			</MainButton>
 			<Button onClick={(event) => handleRemove(event)}>x</Button>
 		</Wrapper>
@@ -83,22 +87,41 @@ const Wrapper = styled.div`
 	align-items: center;
 `;
 
+const Box = styled.div`
+	display: flex;
+	align-items: center;
+	width: 100%;
+
+	&:hover {
+		background-color: #474545;
+	}
+
+	div {
+		margin: 3px;
+		padding: 2px;
+	}
+`;
+
 const MainButton = styled.button`
 	background-color: #191414;
 	padding: 5px;
 	color: white;
 	width: 100%;
+	cursor: pointer;
+	margin: 2px;
+`;
+
+const Index = styled.div`
+	width: 5%;
 `;
 
 const ThemeTitle = styled.div`
-	width: 98%;
-	align-self: center;
-	margin: 4px;
-	padding: 5px;
-	cursor: pointer;
-	&:hover {
-		background-color: #474545;
-	}
+	width: 75%;
+	text-align: left;
+`;
+
+const Title = styled.div`
+	width: 20%;
 	text-align: left;
 `;
 

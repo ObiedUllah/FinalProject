@@ -26,10 +26,12 @@ const Wrapper = styled.div`
 
 const Title = styled.h2`
 	font-size: 30px;
+	margin-bottom: 10px;
 `;
 
 const SubTitle = styled.h2`
 	font-size: 20px;
+	font-weight: 300;
 `;
 
 export default SongTitle;

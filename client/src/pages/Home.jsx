@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 
 import { AnimeListContext } from "context/AnimeListContext";
+import AnimePicks from "components/home/AnimePicks";
 import AnimeSlider from "components/home/AnimeSlider";
 import CircularProg from "utils/porgress/CircularProg";
 import styled from "styled-components";
@@ -18,8 +19,22 @@ const Home = () => {
 		return <CircularProg />;
 	}
 
+	const animePicks = popularAnimes
+		.filter((anime) => {
+			return (
+				anime.mal_id === 21 ||
+				anime.mal_id === 16498 ||
+				anime.mal_id === 11061 ||
+				anime.mal_id === 1575 ||
+				anime.mal_id === 22319 ||
+				anime.mal_id === 1735
+			);
+		})
+		.sort((a, b) => a.mal_id - b.mal_id);
+
 	return (
 		<Wrapper>
+			<AnimePicks animePicks={animePicks} />
 			<AnimeSlider list={topAnimes} title={"Top Anime"} />
 			{popularAnimes.length > 8 && <AnimeSlider list={popularAnimes} title={"Popular Anime"} />}
 			{recentAnimes.length > 8 && <AnimeSlider list={recentAnimes} title={"Recent Anime"} />}

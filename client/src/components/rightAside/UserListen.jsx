@@ -169,7 +169,7 @@ const Title = styled.h3`
 `;
 
 const WidgetBox = styled.div`
-	height: 400px;
+	height: 600px;
 	width: 100%;
 	border: 1px solid;
 	display: flex;

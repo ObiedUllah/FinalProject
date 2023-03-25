@@ -70,7 +70,7 @@ const SongActions = ({ songList }) => {
 
 	const changeAudioTime = useCallback(
 		(event) => {
-			if (!currentSong.theme) {
+			if (!currentSong) {
 				return;
 			}
 
@@ -80,7 +80,7 @@ const SongActions = ({ songList }) => {
 			const newTime = (clickPosition / progressBarWidth) * audioPlayer.duration;
 			audioPlayer.currentTime = newTime;
 		},
-		[progressBarRef]
+		[progressBarRef, audioPlayer]
 	);
 
 	const handleVolumeChange = useCallback((event) => {
@@ -149,7 +149,7 @@ const SongActions = ({ songList }) => {
 				<IconButtons Icon={TbRepeat} onClick={handleRepeat} color={isRepeat ? "green" : "inherit"} />
 			</Flexbox>
 
-			{audioPlayer.currentTime ? (
+			{audioPlayer ? (
 				<>
 					<Progress ref={progressBarRef} onClick={changeAudioTime}>
 						<ProgressBar prog={playerState.progress}></ProgressBar>
@@ -180,14 +180,14 @@ const SongActions = ({ songList }) => {
 const Wrapper = styled.div``;
 
 const Flexbox = styled.div`
-	width: 40%;
+	width: 50%;
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
 `;
 
 const Progress = styled.div`
-	width: 41%;
+	width: 51%;
 	height: 20px;
 	border-radius: 30px;
 	background-color: lightgrey;
@@ -206,10 +206,10 @@ const ProgressBar = styled.div`
 const VolumeBar = styled.input``;
 
 const TimeSound = styled.div`
+	width: 51%;
 	display: flex;
 	justify-content: space-between;
 	margin-top: 15px;
-	width: 41%;
 `;
 
 export default SongActions;
