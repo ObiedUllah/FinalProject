@@ -3,7 +3,6 @@
 import { NavLink, useNavigate } from "react-router-dom";
 import { useContext, useEffect } from "react";
 
-import { AnimeListContext } from "context/AnimeListContext";
 import CircularProg from "utils/porgress/CircularProg";
 import QuotesListenTabs from "./QuotesListenTabs";
 import { RandomQuoteContext } from "context/RandomQuoteContext";
@@ -16,8 +15,6 @@ const RightSideBar = () => {
 	const { quotes } = useContext(RandomQuoteContext);
 	const { getQuotes } = useContext(RandomQuoteContext).actions;
 
-	const { seasonalAnimes, upcomingAnimes } = useContext(AnimeListContext);
-
 	//gets the anime information on the right side bar on the top
 	useEffect(() => {
 		if (!quotes) {
@@ -26,13 +23,15 @@ const RightSideBar = () => {
 	}, []);
 
 	const navigate = useNavigate();
+
 	const handleClickSeasonal = async (event) => {
 		event.preventDefault();
-		navigate("searchList", { state: { data: seasonalAnimes } });
+		navigate("searchList", { state: { url: "https://api.jikan.moe/v4/seasons/now?limit=175&" } });
 	};
+
 	const handleClickUpcoming = async (event) => {
 		event.preventDefault();
-		navigate("searchList", { state: { data: upcomingAnimes } });
+		navigate("searchList", { state: { url: "https://api.jikan.moe/v4/seasons/upcoming?limit=175&" } });
 	};
 
 	//wait until the quotes are loaded

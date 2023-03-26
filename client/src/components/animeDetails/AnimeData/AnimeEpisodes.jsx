@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 
 import { Episode, EpisodeLabel, EpisodeList, SubTitle, Synopsis } from "styles/AnimeDetailsStyles";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 import CircularProg from "utils/porgress/CircularProg";
 
@@ -26,7 +26,7 @@ const AnimeEpisodes = ({ anime, id }) => {
 				//if success then set data
 				if (response.status === 200) {
 					const data = await response.json();
-					setEpisodes(data.data);
+					!data ? setEpisodes([]) : setEpisodes(data.data);
 				}
 			}
 		};

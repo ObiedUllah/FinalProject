@@ -1,5 +1,4 @@
 import { NavLink } from "react-router-dom";
-import React from "react";
 import styled from "styled-components";
 
 /**
@@ -19,7 +18,7 @@ const AnimeCard = ({ anime }) => {
 };
 
 const Card = styled.article`
-	flex: 0 0 15%;
+	flex: 0 0 17%;
 	text-align: center;
 	margin: 1.5vh 0.5vw;
 	width: 200px;
@@ -50,6 +49,7 @@ const Image = styled.img`
 const Title = styled.h1`
 	font-size: 20px;
 	padding-top: 10px;
+	font-weight: 300;
 `;
 
 export default AnimeCard;

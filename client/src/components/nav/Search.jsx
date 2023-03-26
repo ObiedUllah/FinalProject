@@ -1,5 +1,4 @@
 import { BsSearch } from "react-icons/bs";
-import React from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
@@ -33,8 +32,9 @@ const Search = () => {
 	 */
 	const handleSearch = async (event) => {
 		event.preventDefault();
-		const temp = await fetch(`https://api.jikan.moe/v4/anime?q=${search}&order_by=score&sort=desc&sfw`).then((res) => res.json());
-		navigate("searchList", { state: { data: temp.data } });
+		navigate("searchList", {
+			state: { url: `https://api.jikan.moe/v4/anime?q=${search}&limit=175&order_by=scored_by&sort=desc&sfw&` },
+		});
 	};
 
 	return (

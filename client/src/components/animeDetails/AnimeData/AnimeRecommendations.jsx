@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 
-import { useEffect, useState } from "react";
 import { Synopsis, Title } from "styles/AnimeDetailsStyles";
+import { useEffect, useState } from "react";
 
 import AnimeSlider from "components/home/AnimeSlider";
 import CircularProg from "utils/porgress/CircularProg";
@@ -31,10 +31,15 @@ const AnimeRecommendations = ({ anime, id }) => {
 				//if success then set data
 				if (response.status === 200) {
 					const data = await response.json();
-
-					//sets length of anime slider
-					data.data.length < 8 ? setLength(parseInt(data.data.length)) : setLength(8);
-					setRecommendations(data.data);
+					console.log(data);
+					if (data.status === 404) {
+						setRecommendations([]);
+						setLength(0);
+					} else {
+						//sets length of anime slider
+						data.data.length < 8 ? setLength(parseInt(data.data.length)) : setLength(8);
+						setRecommendations(data.data);
+					}
 				}
 			}
 		};
