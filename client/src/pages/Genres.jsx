@@ -29,8 +29,7 @@ const Genres = () => {
 	 */
 	const handleClick = async (event, index) => {
 		event.preventDefault();
-		const temp = await fetch(`https://api.jikan.moe/v4/anime?genres=${index}&order_by=score&sort=desc`).then((res) => res.json());
-		navigate("/searchList", { state: { data: temp.data } });
+		navigate("/searchList", { state: { url: `https://api.jikan.moe/v4/anime?genres=${index}&order_by=score&sort=desc&` } });
 	};
 
 	// wait until data is loaded

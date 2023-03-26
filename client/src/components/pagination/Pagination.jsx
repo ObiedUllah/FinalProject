@@ -1,13 +1,28 @@
 import styled from "styled-components";
 
 const Pagination = ({ pagination, handleNumClick }) => {
-	const { last_visible_page, has_previous_page, has_next_page, current_page, items } = pagination;
+	const { has_previous_page, has_next_page, current_page, last_visible_page, items } = pagination;
 	const { total, per_page } = items;
 
 	const totalPages = Math.ceil(total / per_page);
+	const MAX_VISIBLE_PAGES = 5; // Maximum number of visible pages at once
 
+	// Calculate the range of pages to display
+	let startPage = 1;
+	let endPage = totalPages;
+	if (totalPages > MAX_VISIBLE_PAGES) {
+		const midPage = Math.floor(MAX_VISIBLE_PAGES / 2) + 1;
+		if (current_page > midPage) {
+			startPage = current_page - midPage + 1;
+			endPage = Math.min(startPage + MAX_VISIBLE_PAGES - 1, totalPages);
+		} else {
+			endPage = MAX_VISIBLE_PAGES;
+		}
+	}
+
+	// Generate the page buttons
 	const pageButtons = [];
-	for (let i = 1; i <= last_visible_page; i++) {
+	for (let i = startPage; i <= endPage; i++) {
 		pageButtons.push(
 			<PageButton key={i} value={i} active={i === current_page} onClick={handleNumClick}>
 				{i}
@@ -17,20 +32,13 @@ const Pagination = ({ pagination, handleNumClick }) => {
 
 	return (
 		<Wrapper>
-			{has_previous_page && (
-				<PageButton value={current_page - 1} onClick={handleNumClick}>
-					Previous
-				</PageButton>
-			)}
+			<NavigationButton onClick={handleNumClick} value={1} disabled={!has_previous_page}>
+				&laquo; Previous
+			</NavigationButton>
 			{pageButtons}
-			{has_next_page && (
-				<PageButton value={current_page + 1} onClick={handleNumClick}>
-					Next
-				</PageButton>
-			)}
-			<PaginationInfo>
-				{current_page} / {totalPages}
-			</PaginationInfo>
+			<NavigationButton onClick={handleNumClick} value={last_visible_page} disabled={!has_next_page}>
+				Next &raquo;
+			</NavigationButton>
 		</Wrapper>
 	);
 };
@@ -48,7 +56,7 @@ const PageButton = styled.button`
 	margin: 0 5px;
 	border-radius: 5px;
 	border: 1px solid #ccc;
-	background-color: ${(props) => (props.active ? "#111" : "#333")};
+	background-color: ${(props) => (props.active ? "#111" : "#666")};
 	color: #fff;
 	cursor: pointer;
 	&:hover {
@@ -57,10 +65,22 @@ const PageButton = styled.button`
 	}
 `;
 
-const PaginationInfo = styled.span`
-	margin: 0 1px;
-	font-size: 14px;
-	margin-top: 10px;
+const NavigationButton = styled.button`
+	padding: 8px 12px;
+	margin: 0 5px;
+	border-radius: 5px;
+	border: 1px solid #ccc;
+	background-color: #333;
+	color: #fff;
+	cursor: pointer;
+	&:hover {
+		background-color: #eee;
+		color: #111;
+	}
+	&:disabled {
+		opacity: 0.5;
+		cursor: not-allowed;
+	}
 `;
 
 export default Pagination;

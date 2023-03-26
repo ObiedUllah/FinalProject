@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import { useRef, useState } from "react";
 
 import Default from "../../../images/default.png";
 import styled from "styled-components";
@@ -96,9 +96,12 @@ const ProfilePicture = ({ user }) => {
 				<Avatar src={previewSource} alt="Profile" />
 				<Centered>Upload Image</Centered>
 			</ImageContainer>
-			<UploadButton type="submit" hasFile={selectedFile !== undefined} disabled={selectedFile === undefined}>
-				Save
-			</UploadButton>
+
+			{selectedFile !== undefined && (
+				<UploadButton type="submit" hasFile={selectedFile !== undefined} disabled={selectedFile === undefined}>
+					Save
+				</UploadButton>
+			)}
 		</Form>
 	);
 };

@@ -22,7 +22,7 @@ const Card = styled.article`
 	text-align: center;
 	margin: 1.5vh 0.5vw;
 	width: 200px;
-	height: 280px;
+	height: 300px;
 
 	&:hover {
 		img {

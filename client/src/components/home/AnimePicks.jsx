@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
@@ -11,22 +11,29 @@ import styled from "styled-components";
  */
 const AnimePicks = ({ animePicks }) => {
 	const [currentAnime, setCurrentAnime] = useState({ ...animePicks[0], index: 0 });
+	const wrapperRef = useRef(null);
 
 	useEffect(() => {
-		const Timer = setTimeout(() => {
-			setCurrentAnime((prevAnime) => {
-				const nextIndex = prevAnime ? (prevAnime.index + 1) % animePicks.length : 0;
-				return { ...animePicks[nextIndex], index: nextIndex };
-			});
-		}, 3000);
+		const animate = () => {
+			wrapperRef.current.style.opacity = 0;
+			setTimeout(() => {
+				setCurrentAnime((prevAnime) => {
+					const nextIndex = prevAnime.index + 1 >= animePicks.length ? 0 : prevAnime.index + 1;
+					return { ...animePicks[nextIndex], index: nextIndex };
+				});
+				wrapperRef.current.style.opacity = 1;
+			}, 500);
 
-		return () => clearTimeout(Timer);
-	}, [currentAnime]);
+			setTimeout(animate, 3000);
+		};
+		animate();
 
+		return () => clearTimeout(animate);
+	}, [animePicks]);
 	return (
 		<>
-			<HeaderTitle>Recommendations</HeaderTitle>
-			<Wrapper>
+			<HeaderTitle>Goated Picks</HeaderTitle>
+			<Wrapper ref={wrapperRef}>
 				<div>
 					<Img src={currentAnime.images.jpg.image_url} />
 				</div>
@@ -48,7 +55,7 @@ const HeaderTitle = styled.h1`
 	text-align: left;
 	font-size: 18px;
 	margin-bottom: 20px;
-	width: 93%;
+	width: 95%;
 `;
 
 const Wrapper = styled.div`
@@ -65,6 +72,8 @@ const Wrapper = styled.div`
 	width: 90%;
 	height: 400px;
 	border-radius: 20px;
+
+	transition: opacity 0.5s ease-in-out;
 `;
 
 const Img = styled.img`
