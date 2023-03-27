@@ -27,9 +27,5 @@ express()
 	.use(require("./endpoints/uploadImageEndpoints"))
 	.use(require("./endpoints/animeListsEndpoints"))
 
-	.get("/*", (req, res) => {
-		res.sendFile(path.join(__dirname, "build", "index.html"));
-	})
-
 	// Node spins up our server and sets it to listen on set port
 	.listen(PORT, () => console.log(`Listening on port ${PORT}`));
