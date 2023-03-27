@@ -5,7 +5,8 @@ const Pagination = ({ pagination, handleNumClick }) => {
 	const { total, per_page } = items;
 
 	const totalPages = Math.ceil(total / per_page);
-	const MAX_VISIBLE_PAGES = 5; // Maximum number of visible pages at once
+	// Maximum number of visible pages at once
+	const MAX_VISIBLE_PAGES = 5;
 
 	// Calculate the range of pages to display
 	let startPage = 1;
