@@ -1,10 +1,11 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 
+import styled from "styled-components";
+
 import { AnimeListContext } from "context/AnimeListContext";
 import AnimePicks from "components/home/AnimePicks";
 import AnimeSlider from "components/home/AnimeSlider";
 import CircularProg from "utils/porgress/CircularProg";
-import styled from "styled-components";
 import { useContext } from "react";
 
 /**

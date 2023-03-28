@@ -39,15 +39,15 @@ const Search = () => {
 
 	return (
 		<SearchBox onSubmit={handleSearch}>
-			{display && (
-				<SearchInput
-					type="search"
-					placeholder="Search for an anime..."
-					required
-					value={search}
-					onChange={(event) => setSearch(event.target.value)}
-				/>
-			)}
+			<SearchInput
+				type="search"
+				placeholder="Search for an anime..."
+				required
+				value={search}
+				onChange={(event) => setSearch(event.target.value)}
+				display={display}
+			/>
+
 			<Icon size="30px" onClick={showInput} />
 		</SearchBox>
 	);
@@ -67,13 +67,16 @@ const SearchInput = styled.input`
 	font-size: 20px;
 	margin-left: auto;
 
+	opacity: ${(props) => (props.display ? 1 : 0)};
+	transform: ${(props) => (props.display ? "translateY(0)" : "translateY(-100%)")};
+
 	display: block;
 	width: 80%;
 	padding: 14px;
 	border-radius: 999px;
 	background-color: #ccc;
 
-	transition: 0.4s;
+	transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
 
 	::placeholder {
 		color: inherit;

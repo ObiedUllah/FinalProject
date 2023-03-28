@@ -1,6 +1,5 @@
 import LogoTitle from "./LogoTitle";
 import NavButtons from "./NavButtons";
-import React from "react";
 import styled from "styled-components";
 
 /**
@@ -17,7 +16,7 @@ const NavBar = () => {
 };
 
 const Nav = styled.nav`
-	height: 100%;
+	height: 90%;
 	width: 100%;
 	display: flex;
 	align-items: center;

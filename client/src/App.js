@@ -7,6 +7,7 @@ import Genres from "pages/Genres";
 import GlobalStyles from "styles/GlobalStyles";
 import Home from "pages/Home";
 import LeftSideBar from "components/leftAside/LeftSideBar";
+import MovingText from "components/home/MovingText";
 import NavBar from "components/nav/NavBar";
 import Profile from "pages/Profile";
 import Promos from "pages/Promos";
@@ -29,6 +30,7 @@ const App = () => {
 			<GlobalStyles />
 			<Nav>
 				<NavBar />
+				<MovingText />
 			</Nav>
 			<LeftAside>
 				<LeftSideBar />

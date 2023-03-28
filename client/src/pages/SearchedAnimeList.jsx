@@ -45,6 +45,15 @@ const SearchedAnimeList = () => {
 		setCurrentPage(newPage);
 	};
 
+	if (animeList?.status === 500) {
+		return (
+			<Wrapper>
+				<Title>Search Result:</Title>
+				<Title>No Results Found</Title>
+			</Wrapper>
+		);
+	}
+
 	return (
 		<Wrapper>
 			<Title>Search Result:</Title>

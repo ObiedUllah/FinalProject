@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+
 import { TbArrowsShuffle, TbPlayerPause, TbPlayerPlay, TbPlayerSkipBack, TbPlayerSkipForward, TbRepeat } from "react-icons/tb";
 
 import IconButtons from "./IconButtons";
