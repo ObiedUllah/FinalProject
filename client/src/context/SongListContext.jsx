@@ -24,32 +24,43 @@ export const SongListProvider = ({ children }) => {
 	 * Gets the song url and plays it
 	 */
 	const playCurrentSong = async (song, index) => {
-		const response = await fetch(`/api/audio/${song?.theme + " " + song.type + " " + song.title}`);
+		try {
+			const response = await fetch(`/api/audio/${song?.theme + " " + song.type + " " + song.title}`);
 
-		//changes the stream to a blob
-		const blob = await response.blob();
-		//gets  url
-		const audioUrl = URL.createObjectURL(blob);
-		//creates audio and plays it
-		audioPlayer.src = audioUrl;
+			if (response.status === 200) {
+				//changes the stream to a blob
+				const blob = await response.blob();
+				//gets  url
+				const audioUrl = URL.createObjectURL(blob);
+				//creates audio and plays it
+				audioPlayer.src = audioUrl;
 
-		if (!audioPlayer.paused) {
-			audioPlayer.pause();
+				if (!audioPlayer.paused) {
+					audioPlayer.pause();
+				}
+
+				audioPlayer.play();
+
+				setCurrentSong({
+					theme: song.theme,
+					title: song.title,
+					image: song.img,
+					type: song.type,
+					index: index,
+					isPlaying: true,
+				});
+				setAudioPlayer(audioPlayer);
+			} else {
+				throw new Error("An error occured! Refresh the page or Contact support");
+			}
+		} catch (error) {
+			alert(error);
 		}
-
-		audioPlayer.play();
-
-		setCurrentSong({
-			theme: song.theme,
-			title: song.title,
-			image: song.img,
-			type: song.type,
-			index: index,
-			isPlaying: true,
-		});
-		setAudioPlayer(audioPlayer);
 	};
 
+	/**
+	 * Pauses the current song
+	 */
 	const pause = async () => {
 		audioPlayer.pause();
 
@@ -60,6 +71,9 @@ export const SongListProvider = ({ children }) => {
 		setAudioPlayer(audioPlayer);
 	};
 
+	/**
+	 * Plays the current song
+	 */
 	const play = async () => {
 		audioPlayer.play();
 
@@ -70,7 +84,13 @@ export const SongListProvider = ({ children }) => {
 		setAudioPlayer(audioPlayer);
 	};
 
+	/**
+	 * goes to the song before if it exists and plays the song
+	 * @param {*} songList
+	 * @returns
+	 */
 	const playBefore = async (songList) => {
+		// plays the last song if the current song is the first song
 		if (currentSong.index === 0) {
 			const newSong = songList[songList.length - 1];
 			await playCurrentSong(newSong, songList.length - 1);
@@ -81,7 +101,13 @@ export const SongListProvider = ({ children }) => {
 		await playCurrentSong(newSong, currentSong.index - 1);
 	};
 
+	/**
+	 * goes to the song after if it exists and plays the song
+	 * @param {*} songList
+	 * @returns
+	 */
 	const playNext = async (songList) => {
+		// plays the first song if the current song is the last song
 		if (currentSong.index === songList.length - 1) {
 			const newSong = songList[0];
 			await playCurrentSong(newSong, 0);
@@ -92,8 +118,13 @@ export const SongListProvider = ({ children }) => {
 		await playCurrentSong(newSong, currentSong.index + 1);
 	};
 
+	/**
+	 * Plays a random song and makes sure that it does not replay the same song
+	 * @param {*} songList
+	 */
 	const shuffle = async (songList) => {
 		let index = currentSong.index;
+		//checks if new song is the same as current song so that it does not play it again
 		while (index === currentSong.index) {
 			index = Math.floor(Math.random() * songList.length);
 		}
@@ -101,6 +132,9 @@ export const SongListProvider = ({ children }) => {
 		await playCurrentSong(newSong, index);
 	};
 
+	/**
+	 * replays the current song
+	 */
 	const repeat = () => {
 		setCurrentSong({
 			...currentSong,

@@ -13,16 +13,18 @@ export const PromosProvider = ({ children }) => {
 
 	//gets all the promos from the database
 	const getPromos = async () => {
-		const response = await fetch("/api/promos");
-		const result = await response.json();
+		try {
+			const response = await fetch("/api/promos");
+			const result = await response.json();
 
-		//if success then set data
-		if (result.status === 200) {
-			setPromos(result.data["promos"]);
-		}
-
-		if (result.status === 500) {
-			alert("An error occured! Refresh the page or Contact support");
+			//if success then set data
+			if (result.status === 200) {
+				setPromos(result.data["promos"]);
+			} else {
+				throw new Error("An error occured! Refresh the page or Contact support");
+			}
+		} catch (error) {
+			alert(error);
 		}
 	};
 	return (

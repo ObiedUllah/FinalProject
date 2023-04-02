@@ -3,6 +3,11 @@ import SongImage from "./SongImage";
 import SongTitle from "./SongTitle";
 import styled from "styled-components";
 
+/**
+ * Top div of the songLibrary page which has the song image, title and all the song actions
+ * @param {*} param0
+ * @returns
+ */
 const SongHeader = ({ songList }) => {
 	return (
 		<Wrapper>

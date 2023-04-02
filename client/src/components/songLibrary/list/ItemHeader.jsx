@@ -1,5 +1,9 @@
 import styled from "styled-components";
 
+/**
+ * Header for the list of songs. Similar to table header!
+ * @returns
+ */
 const ItemHeader = () => {
 	return (
 		<Wrapper>

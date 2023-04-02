@@ -1,5 +1,10 @@
 import styled from "styled-components";
 
+/**
+ * Pagination for the search page
+ * @param {*} param0
+ * @returns
+ */
 const Pagination = ({ pagination, handleNumClick }) => {
 	const { has_previous_page, has_next_page, current_page, last_visible_page, items } = pagination;
 	const { total, per_page } = items;

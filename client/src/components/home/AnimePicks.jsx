@@ -15,13 +15,15 @@ const AnimePicks = ({ animePicks }) => {
 
 	useEffect(() => {
 		const animate = () => {
-			wrapperRef.current.style.opacity = 0;
+			//loading state for the wrapper to disappear
+			if (wrapperRef) wrapperRef.current.style.opacity = 0;
 			setTimeout(() => {
 				setCurrentAnime((prevAnime) => {
 					const nextIndex = prevAnime.index + 1 >= animePicks.length ? 0 : prevAnime.index + 1;
 					return { ...animePicks[nextIndex], index: nextIndex };
 				});
-				wrapperRef.current.style.opacity = 1;
+				//displays the wrapper
+				if (wrapperRef) wrapperRef.current.style.opacity = 1;
 			}, 500);
 
 			setTimeout(animate, 3000);

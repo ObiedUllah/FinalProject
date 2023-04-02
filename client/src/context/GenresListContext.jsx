@@ -17,18 +17,20 @@ export const GenresListProvider = ({ children }) => {
 	 * Gets the data from the database and sets the states
 	 */
 	const getGenres = async () => {
-		const response = await fetch("/api/genres");
-		const result = await response.json();
+		try {
+			const response = await fetch("/api/genres");
+			const result = await response.json();
 
-		//if success then set data
-		if (result.status === 200) {
-			setTopGenres(result.data["genres"]);
-			setThemesList(result.data["themes"]);
-			setDemoGraphicsList(result.data["demographics"]);
-		}
-
-		if (result.status === 500) {
-			alert("An error occured! Refresh the page or Contact support");
+			//if success then set data
+			if (result.status === 200) {
+				setTopGenres(result.data["genres"]);
+				setThemesList(result.data["themes"]);
+				setDemoGraphicsList(result.data["demographics"]);
+			} else {
+				throw new Error("An error occured! Refresh the page or Contact support");
+			}
+		} catch (error) {
+			alert(error);
 		}
 	};
 

@@ -45,7 +45,7 @@ const Search = () => {
 				required
 				value={search}
 				onChange={(event) => setSearch(event.target.value)}
-				display={display}
+				showInput={display}
 			/>
 
 			<Icon size="30px" onClick={showInput} />
@@ -67,8 +67,8 @@ const SearchInput = styled.input`
 	font-size: 20px;
 	margin-left: auto;
 
-	opacity: ${(props) => (props.display ? 1 : 0)};
-	transform: ${(props) => (props.display ? "translateY(0)" : "translateY(-100%)")};
+	opacity: ${(props) => (props.showInput ? 1 : 0)};
+	transform: ${(props) => (props.showInput ? "translateY(0)" : "translateY(-100%)")};
 
 	display: block;
 	width: 80%;

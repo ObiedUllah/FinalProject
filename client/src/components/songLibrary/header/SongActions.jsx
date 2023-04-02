@@ -11,6 +11,13 @@ import { useEffect } from "react";
 import { useRef } from "react";
 import { useState } from "react";
 
+/**
+ * Contains everything related to
+ * playing/pausing/skipping/shuffling/repeating/changing audio time
+ * Also shows user time remaining to a song
+ * @param {*} param0
+ * @returns
+ */
 const SongActions = ({ songList }) => {
 	const { currentSong, audioPlayer, actions } = useContext(SongListContext);
 	const { play, pause, playBefore, playNext, shuffle, repeat } = actions;
@@ -21,13 +28,19 @@ const SongActions = ({ songList }) => {
 		progress: 0,
 	});
 
+	// refernce to the song length
 	const progressBarRef = useRef(null);
+
 	const [volume, setVolume] = useState(() => 0.5);
 	const [isShuffle, setIsShuffle] = useState(() => false);
 	const [isRepeat, setIsRepeat] = useState(() => false);
 
+	//checks if there is a song selected
 	const checkAvailable = !currentSong.theme;
 
+	/**
+	 * Plays the song
+	 */
 	const handlePlay = useCallback(
 		(event) => {
 			event.preventDefault();
@@ -36,6 +49,9 @@ const SongActions = ({ songList }) => {
 		[play]
 	);
 
+	/**
+	 * Pauses the song
+	 */
 	const handlePause = useCallback(
 		(event) => {
 			event.preventDefault();
@@ -44,6 +60,9 @@ const SongActions = ({ songList }) => {
 		[pause]
 	);
 
+	/**
+	 * Goes to the previous song
+	 */
 	const handleBefore = useCallback(
 		(event) => {
 			event.preventDefault();
@@ -52,6 +71,9 @@ const SongActions = ({ songList }) => {
 		[playBefore, songList]
 	);
 
+	/**
+	 * Goes to the next song
+	 */
 	const handleNext = useCallback(
 		(event) => {
 			event.preventDefault();
@@ -60,22 +82,35 @@ const SongActions = ({ songList }) => {
 		[playNext, songList]
 	);
 
+	/**
+	 * sets the state to shuffle or not shuffle
+	 */
 	const handleShuffle = useCallback((event) => {
 		event.preventDefault();
 		setIsShuffle((shuff) => !shuff);
 	}, []);
 
+	/**
+	 * sets the state to repeat or not repeat
+	 */
 	const handleRepeat = useCallback((event) => {
 		event.preventDefault();
 		setIsRepeat((rep) => !rep);
 	}, []);
 
+	/**
+	 * Allows user to change the current time of a song by clicking on the progress bar
+	 */
 	const changeAudioTime = useCallback(
 		(event) => {
+			//only works if a song is selected
 			if (!currentSong) {
 				return;
 			}
 
+			//gets the progress bar and compares the distance of the screen on the left
+			//to where the click was made in the progress bar
+			//then changes the audio time depending on the duration of the audio
 			const progressBar = progressBarRef.current;
 			const clickPosition = event.clientX - progressBar.getBoundingClientRect().left;
 			const progressBarWidth = progressBar.offsetWidth;
@@ -85,11 +120,20 @@ const SongActions = ({ songList }) => {
 		[progressBarRef, audioPlayer]
 	);
 
+	/**
+	 * Changes volume of song
+	 */
 	const handleVolumeChange = useCallback((event) => {
 		setVolume(event.target.value);
 		audioPlayer.volume = event.target.value;
 	}, []);
 
+	/**
+	 * Helper function that display a song length like the following
+	 * 0:00/ 0:00
+	 * @param {*} seconds
+	 * @returns
+	 */
 	const formatTime = (seconds) => {
 		const minutes = Math.floor(seconds / 60);
 		let remainingSeconds = Math.floor(seconds % 60);
@@ -100,6 +144,7 @@ const SongActions = ({ songList }) => {
 	};
 
 	useEffect(() => {
+		//handles whenever the song ends
 		const ended = async () => {
 			setPlayerState({
 				currentTime: 0,
@@ -107,17 +152,21 @@ const SongActions = ({ songList }) => {
 				progress: 0,
 			});
 
+			//repeats the current song
 			if (isRepeat) {
 				return await repeat();
 			}
 
+			//shuffles to find the new random song
 			if (isShuffle) {
 				return await shuffle(songList);
 			}
 
+			//plays the next song
 			await playNext(songList);
 		};
 
+		//Updates the song length being displayed and its progress
 		const updateTime = async () => {
 			setPlayerState({
 				currentTime: formatTime(Math.floor(audioPlayer.currentTime)),

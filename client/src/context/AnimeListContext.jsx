@@ -42,16 +42,18 @@ export const AnimeListProvider = ({ children }) => {
 	 * gets a random category and all its anime from the database
 	 */
 	const getRandomGenreAnimes = async () => {
-		const response = await fetch(`/api/animes/random`);
-		const result = await response.json();
+		try {
+			const response = await fetch(`/api/animes/random`);
+			const result = await response.json();
 
-		//if success then set data
-		if (result.status === 200) {
-			setRandomGenreAnimes({ name: capitalizeFirstLetter(result.data.name) + " Anime", data: result.data.data });
-		}
-
-		if (result.status === 500) {
-			alert("An error occured! Refresh the page or Contact support");
+			//if success then set data
+			if (result.status === 200) {
+				setRandomGenreAnimes({ name: capitalizeFirstLetter(result.data.name) + " Anime", data: result.data.data });
+			} else {
+				throw new Error("An error occured! Refresh the page or Contact support");
+			}
+		} catch (error) {
+			alert(error);
 		}
 	};
 
@@ -59,20 +61,22 @@ export const AnimeListProvider = ({ children }) => {
 	 * gets the data of all the animes
 	 */
 	const getAllAnimes = async () => {
-		const response = await fetch("/api/animes");
-		const result = await response.json();
+		try {
+			const response = await fetch("/api/animes");
+			const result = await response.json();
 
-		//if success then set data
-		if (result.status === 200) {
-			setTopAnime(result.data["top"]);
-			setRecentAnime(result.data["recent"]);
-			setPopularAnime(result.data["popular"]);
-			setSeasonalAnimes(result.data["seasonal"]);
-			setUpcomingAnimes(result.data["upcoming"]);
-		}
-
-		if (result.status === 500) {
-			alert("An error occured! Refresh the page or Contact support");
+			//if success then set data
+			if (result.status === 200) {
+				setTopAnime(result.data["top"]);
+				setRecentAnime(result.data["recent"]);
+				setPopularAnime(result.data["popular"]);
+				setSeasonalAnimes(result.data["seasonal"]);
+				setUpcomingAnimes(result.data["upcoming"]);
+			} else {
+				throw new Error("An error occured! Refresh the page or Contact support");
+			}
+		} catch (error) {
+			alert(error);
 		}
 	};
 

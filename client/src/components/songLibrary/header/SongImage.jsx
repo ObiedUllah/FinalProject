@@ -3,6 +3,10 @@ import { SongListContext } from "context/SongListContext";
 import styled from "styled-components";
 import { useContext } from "react";
 
+/**
+ * Image of the current song being played
+ * @returns
+ */
 const SongImage = () => {
 	const { currentSong } = useContext(SongListContext);
 

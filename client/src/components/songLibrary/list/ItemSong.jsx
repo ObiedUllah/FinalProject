@@ -4,7 +4,12 @@ import CircularProg from "utils/porgress/CircularProg";
 import { SongListContext } from "context/SongListContext";
 import styled from "styled-components";
 
-const ItemSong = ({ user, song, list, setList, index }) => {
+/**
+ * Each song of the user displayed in the songLibrary under the header
+ * @param {*} param0
+ * @returns
+ */
+const ItemSong = ({ user, song, setList, index }) => {
 	//updates widget if user clicks on delete
 	const { setWidgets, playCurrentSong } = useContext(SongListContext).actions;
 
@@ -36,12 +41,15 @@ const ItemSong = ({ user, song, list, setList, index }) => {
 					if (data.status === 200) {
 						setWidgets(data.data.songList);
 						setList(data.data.songList);
+					} else {
+						throw new Error("An error occured! Refresh the page or Contact support");
 					}
+
 					//ends loading state
 					setLoading(false);
 				});
 		} catch (error) {
-			alert("An error occured please try again or contact support");
+			alert(error);
 		}
 	};
 

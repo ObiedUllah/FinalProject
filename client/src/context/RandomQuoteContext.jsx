@@ -1,4 +1,4 @@
-import React, { createContext, useState } from "react";
+import { createContext, useState } from "react";
 
 export const RandomQuoteContext = createContext(null);
 
@@ -12,8 +12,12 @@ export const RandomQuoteProvider = ({ children }) => {
 	const [quotes, setQuotes] = useState(() => null);
 
 	const getQuotes = async () => {
-		const data = await fetch(`https://animechan.vercel.app/api/quotes`).then((res) => res.json());
-		setQuotes(data);
+		try {
+			const data = await fetch(`https://animechan.vercel.app/api/quotes`).then((res) => res.json());
+			setQuotes(data);
+		} catch (error) {
+			alert("An error occured! Refresh the page or Contact support");
+		}
 	};
 	return (
 		<RandomQuoteContext.Provider
