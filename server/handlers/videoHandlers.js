@@ -15,6 +15,7 @@ const getVideo = async (req, res) => {
 	try {
 		const title = transformText(req.params.string);
 		const videos = await yt.search(title);
+		console.log(videos);
 
 		sendResponse(res, 200, videos[0], "video Retrieved");
 	} catch (error) {
@@ -69,6 +70,7 @@ const getMp3Audio = async (req, res) => {
 	const title = transformText(req.params.string);
 	const videos = await yt.search(title);
 	const video = videos[0];
+	console.log(video, videos);
 
 	// Set the response headers to indicate that this is an audio file
 	res.setHeader("Content-Type", "audio/mpeg");
