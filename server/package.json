@@ -22,8 +22,8 @@
     "ytdl-core": "^4.11.2"
   },
   "scripts": {
-    "start": "pm2 start server.js",
+    "start": "nodemon server.js",
     "dev": "nodemon server.js",
-    "build": "npm i "
+    "build": "yarn install"
   }
 }
