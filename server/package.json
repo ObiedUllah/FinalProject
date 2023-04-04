@@ -22,7 +22,7 @@
     "ytdl-core": "^4.11.2"
   },
   "scripts": {
-    "start": "pm2 start",
+    "start": "pm2 start app.js",
     "dev": "nodemon server.js",
     "build": "npm i "
   }
