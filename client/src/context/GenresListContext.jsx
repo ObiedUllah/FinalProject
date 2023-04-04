@@ -19,10 +19,11 @@ export const GenresListProvider = ({ children }) => {
 	const getGenres = async () => {
 		try {
 			const response = await fetch("/api/genres");
-			const result = await response.json();
 
 			//if success then set data
-			if (result.status === 200) {
+			if (response.status === 200) {
+				const result = await response.json();
+
 				setTopGenres(result.data["genres"]);
 				setThemesList(result.data["themes"]);
 				setDemoGraphicsList(result.data["demographics"]);

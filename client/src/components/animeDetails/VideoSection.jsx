@@ -18,38 +18,41 @@ const VideoSection = ({ anime, id, index, type }) => {
 	useEffect(() => {
 		const getInitialTheme = async () => {
 			try {
-				//retrieving data from the state (only used depending on if the user clicked the link from the user song list)
-				//only for endings
+				let selectedTheme = null;
+				const openings = anime?.theme?.openings ?? [];
+				const endings = anime?.theme?.endings ?? [];
+
 				if (typeof index === "number" && type === "opening") {
-					const response = await fetch(`/api/video/${anime?.theme.openings[index] + " opening " + anime.title}`);
-					const result = await response.json();
-					setSelectedTheme(result.data);
-				}
-				//retrieving data from the state (only used depending on if the user clicked the link from the user song list)
-				//only for endings
-				else if (typeof index === "number" && type === "ending") {
-					const response = await fetch(`/api/video/${anime?.theme.endings[index] + " opening " + anime.title}`);
-					const result = await response.json();
-					setSelectedTheme(result.data);
-				}
-				//if no opening or ending set to null
-				else if (anime?.theme.openings[0] === undefined && anime?.theme.endings[0] === undefined) {
-					setSelectedTheme(false);
-				}
-				//if opening then set to opening
-				else if (anime?.theme.openings[0] !== undefined) {
-					const response = await fetch(`/api/video/${anime?.theme.openings[0] + " opening " + anime.title}`);
-					const result = await response.json();
-					setSelectedTheme(result.data);
-				}
-				//if ending then set to ending
-				else if (anime?.theme.endings[0] !== undefined) {
-					const response = await fetch(`/api/video/${anime?.theme.endings[0] + " opening " + anime.title}`);
-					const result = await response.json();
-					setSelectedTheme(result.data);
+					const response = await fetch(`/api/video/${openings[index] + " opening " + anime.title}`);
+					if (response.status === 200) {
+						const result = await response.json();
+						selectedTheme = result.data;
+					}
+				} else if (typeof index === "number" && type === "ending") {
+					const response = await fetch(`/api/video/${endings[index] + " ending " + anime.title}`);
+					if (response.status === 200) {
+						const result = await response.json();
+						selectedTheme = result.data;
+					}
+				} else if (openings[0] === undefined && endings[0] === undefined) {
+					selectedTheme = false;
+				} else if (openings[0] !== undefined) {
+					const response = await fetch(`/api/video/${openings[0] + " opening " + anime.title}`);
+					if (response.status === 200) {
+						const result = await response.json();
+						selectedTheme = result.data;
+					}
+				} else if (endings[0] !== undefined) {
+					const response = await fetch(`/api/video/${endings[0] + " ending " + anime.title}`);
+					if (response.status === 200) {
+						const result = await response.json();
+						selectedTheme = result.data;
+					}
 				} else {
-					setSelectedTheme(false);
+					selectedTheme = false;
 				}
+
+				setSelectedTheme(selectedTheme);
 			} catch (error) {
 				setSelectedTheme(false);
 			}

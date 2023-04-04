@@ -15,10 +15,10 @@ export const PromosProvider = ({ children }) => {
 	const getPromos = async () => {
 		try {
 			const response = await fetch("/api/promos");
-			const result = await response.json();
 
 			//if success then set data
-			if (result.status === 200) {
+			if (response.status === 200) {
+				const result = await response.json();
 				setPromos(result.data["promos"]);
 			} else {
 				throw new Error("An error occured! Refresh the page or Contact support");

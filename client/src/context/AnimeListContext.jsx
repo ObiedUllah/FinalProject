@@ -44,10 +44,10 @@ export const AnimeListProvider = ({ children }) => {
 	const getRandomGenreAnimes = async () => {
 		try {
 			const response = await fetch(`/api/animes/random`);
-			const result = await response.json();
 
 			//if success then set data
-			if (result.status === 200) {
+			if (response.status === 200) {
+				const result = await response.json();
 				setRandomGenreAnimes({ name: capitalizeFirstLetter(result.data.name) + " Anime", data: result.data.data });
 			} else {
 				throw new Error("An error occured! Refresh the page or Contact support");
