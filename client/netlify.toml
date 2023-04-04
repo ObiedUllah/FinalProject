@@ -2,6 +2,9 @@
 # netlify.toml
 [[redirects]]
   from = "/api/*"
-  to = "https://anime-enma-server.onrender.com/:splat"
+  to = "https://anime-enma-server.onrender.com/"
   status = 200
   force = true
+  headers = {X-From = "Netlify"}
+
+
