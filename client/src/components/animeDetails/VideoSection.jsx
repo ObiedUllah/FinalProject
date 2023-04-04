@@ -71,7 +71,7 @@ const VideoSection = ({ anime, id, index, type }) => {
 			<MainTitle>{anime.title}</MainTitle>
 			{anime.title_english && <EnglishTitle>{anime.title_english}</EnglishTitle>}
 			{selectedTheme ? (
-				<ReactPlayer controls={true} width="100%" height="70vh" url={selectedTheme.url} />
+				<ReactPlayer controls={true} width="100%" height="70vh" url={selectedTheme} />
 			) : (
 				<Title style={{ textAlign: "center" }}>Themes Unavailable...</Title>
 			)}

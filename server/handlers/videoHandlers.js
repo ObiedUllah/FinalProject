@@ -1,9 +1,28 @@
 const fetch = require("node-fetch");
 const yt = require("youtube-search-without-api-key");
 const ytdl = require("ytdl-core");
+const { google } = require("googleapis");
+
+const youtube = google.youtube({
+	version: "v3",
+	auth: process.env.YOUTUBE_API_KEY,
+});
 
 //helper functions
 const { sendResponse, transformText } = require("./helperFunctions.js");
+
+/**
+ * Will search for all videos with that query using youtube api from google
+ * @param {*} query
+ * @returns
+ */
+const searchVideos = async (query) => {
+	const response = await youtube.search.list({
+		part: "id,snippet",
+		q: query,
+	});
+	return response.data.items;
+};
 
 /**
  * get a anime theme from youtube with a string from the client
@@ -13,11 +32,11 @@ const { sendResponse, transformText } = require("./helperFunctions.js");
  */
 const getVideo = async (req, res) => {
 	try {
+		//gets video first
 		const title = transformText(req.params.string);
-		const videos = await yt.search(title);
-		console.log(videos);
+		const videos = await searchVideos(title);
 
-		sendResponse(res, 200, videos[0], "video Retrieved");
+		sendResponse(res, 200, "https://www.youtube.com/watch?v=" + videos[0].id.videoId, "video Retrieved");
 	} catch (error) {
 		sendResponse(res, 500, null, "Server Error");
 	}
@@ -34,11 +53,10 @@ const downloadMp3 = async (req, res) => {
 	try {
 		//gets video first
 		const title = transformText(req.body.video);
-		const videos = await yt.search(title);
-		const video = videos[0];
+		const videos = await searchVideos(title);
 
 		//gets video id
-		const videoId = video.id.videoId;
+		const videoId = videos[0].id.videoId;
 
 		//downloads video through api
 		const download = await fetch(`https://youtube-mp36.p.rapidapi.com/dl?id=${videoId}`, {
@@ -66,13 +84,11 @@ const downloadMp3 = async (req, res) => {
  * @param {*} res
  */
 const getMp3Audio = async (req, res) => {
-	console.log(req.params);
-	console.log(req.params.string);
 	//gets video first
 	const title = transformText(req.params.string);
-	const videos = await yt.search(title);
-	const video = videos[0];
-	console.log(video, videos);
+	const videos = await searchVideos(title);
+
+	const videoId = videos[0].id.videoId;
 
 	// Set the response headers to indicate that this is an audio file
 	res.setHeader("Content-Type", "audio/mpeg");
@@ -80,7 +96,7 @@ const getMp3Audio = async (req, res) => {
 	res.setHeader("Cache-Control", "public, max-age=31536000");
 
 	// Use ytdl-core to extract the audio from the YouTube URL
-	const audio = ytdl(video.url, {
+	const audio = ytdl("https://www.youtube.com/watch?v=" + videoId, {
 		filter: "audioonly",
 		quality: "highestaudio",
 	});
