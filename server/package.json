@@ -21,6 +21,7 @@
     "ytdl-core": "^4.11.2"
   },
   "scripts": {
-    "start": "nodemon server.js"
+    "start": "nodemon server.js",
+    "dev": "nodemon server.js"
   }
 }
