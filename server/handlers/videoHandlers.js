@@ -66,6 +66,8 @@ const downloadMp3 = async (req, res) => {
  * @param {*} res
  */
 const getMp3Audio = async (req, res) => {
+	console.log(req.params);
+	console.log(req.params.string);
 	//gets video first
 	const title = transformText(req.params.string);
 	const videos = await yt.search(title);
