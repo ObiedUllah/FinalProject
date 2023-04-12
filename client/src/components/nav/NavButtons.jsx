@@ -28,7 +28,7 @@ const NavButtons = () => {
 		if (isAuthenticated) {
 			getUser();
 		}
-	}, [user]);
+	}, [user, isAuthenticated]);
 
 	return (
 		<Wrapper>
@@ -38,7 +38,7 @@ const NavButtons = () => {
 			{isAuthenticated && dbUser && <LibraryLink to="/songLibrary">Library</LibraryLink>}
 			{isAuthenticated && dbUser && (
 				<NavLink to="/profile">
-					{dbUser.image === "" ? <Avatar src={Default} alt="Profile" /> : <Avatar src={dbUser.image} alt="Profile" />}
+					{!dbUser.image ? <Avatar src={Default} alt="Profile" /> : <Avatar src={dbUser.image} alt="Profile" />}
 				</NavLink>
 			)}
 		</Wrapper>

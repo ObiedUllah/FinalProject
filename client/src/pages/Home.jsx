@@ -1,19 +1,43 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 
-import styled from "styled-components";
+import { useContext, useEffect } from "react";
 
 import { AnimeListContext } from "context/AnimeListContext";
 import AnimePicks from "components/home/AnimePicks";
 import AnimeSlider from "components/home/AnimeSlider";
 import CircularProg from "utils/porgress/CircularProg";
-import { useContext } from "react";
+import styled from "styled-components";
+import { useAuth0 } from "@auth0/auth0-react";
 
 /**
  * Shows three AnimeSliders with anime that are always at the top, popular or recent
  * @returns
  */
 const Home = () => {
+	//gets user
+	const { user, isAuthenticated } = useAuth0();
 	const { topAnimes, recentAnimes, popularAnimes, randomGenreAnimes } = useContext(AnimeListContext);
+
+	//gets the user from the mongo db
+	useEffect(() => {
+		const addUser = async () => {
+			try {
+				//adds the user if they do not exist
+				await fetch("/api/user", {
+					method: "POST",
+					headers: {
+						"Content-Type": "application/json",
+					},
+					body: JSON.stringify({ email: user.email, picture: user?.picture }),
+				});
+			} catch (error) {
+				alert("An error occured please try again or contact support");
+			}
+		};
+		if (isAuthenticated) {
+			addUser();
+		}
+	}, [user]);
 
 	//wait until all the anime are loaded
 	if (!topAnimes || !recentAnimes || !popularAnimes || !randomGenreAnimes) {

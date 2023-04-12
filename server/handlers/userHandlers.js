@@ -10,6 +10,49 @@ const { sendResponse } = require("./helperFunctions.js");
 const { v4: uuidv4 } = require("uuid");
 
 /**
+ * Adds a new user to the database with the necessary information
+ * will not add a user if they already exists
+ * @param {*} req
+ * @param {*} res
+ * @returns
+ */
+const createUser = async (req, res) => {
+	//creates client
+	const client = new MongoClient(MONGO_URI, options);
+	console.log(req.body);
+
+	try {
+		//connects to db
+		await client.connect();
+		const db = client.db(DBNAME);
+
+		//gets email
+		const email = req.body.email;
+
+		//get picture
+		const image = req.body.picture || null;
+
+		//checks if user exists
+		const user = await db.collection("users").findOne({ email: email });
+
+		console.log("user", user);
+		// does not add a new user if the user already exists
+		if (user) {
+			return sendResponse(res, 200, user, "User already exists");
+		}
+
+		//adds new user
+		const newUser = { email, favorites: [], list: [], songList: [], image };
+		const added = await db.collection("users").insertOne(newUser);
+
+		console.log("added", added);
+		added ? sendResponse(res, 201, added, "user added") : sendResponse(res, 404, null, "user not added");
+	} catch (error) {
+		sendResponse(res, 500, null, "Server Error");
+	}
+};
+
+/**
  * GET all users
  * gets every user in the db
  * adding for possible functionality (friends list)
@@ -275,6 +318,7 @@ const removeSongFromList = async (req, res) => {
 };
 
 module.exports = {
+	createUser,
 	getUsers,
 	getUser,
 	toggleFavorites,

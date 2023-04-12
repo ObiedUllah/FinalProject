@@ -1,6 +1,17 @@
 const router = require("express").Router();
 
-const { getUsers, getUser, toggleFavorites, changeStatus, removeStatus, addSongToList, removeSongFromList } = require("../handlers/userHandlers");
+const {
+	createUser,
+	getUsers,
+	getUser,
+	toggleFavorites,
+	changeStatus,
+	removeStatus,
+	addSongToList,
+	removeSongFromList,
+} = require("../handlers/userHandlers");
+
+router.post(`/api/user`, createUser);
 
 //gets all the users
 router.get(`/api/users`, getUsers);
