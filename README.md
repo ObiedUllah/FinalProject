@@ -18,6 +18,7 @@
   10. [Promos Page](#promos)
   11. [Profile Page](#profile)
   12. [Song Library Page](#library)
+
 ## <a id="link"></a> Website Link
 
 <https://anime-enma.onrender.com/>
@@ -138,7 +139,7 @@ The Home page presents users with 5 different lists of anime:
 
 ![Anime Lists](https://i.imgur.com/eOR6bse.jpeg)
 
-### Anime Details Page
+### <a id="details"></a> Anime Details Page
 
 ---
 
