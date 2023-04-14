@@ -35,7 +35,6 @@ const createUser = async (req, res) => {
 		//checks if user exists
 		const user = await db.collection("users").findOne({ email: email });
 
-		console.log("user", user);
 		// does not add a new user if the user already exists
 		if (user) {
 			return sendResponse(res, 200, user, "User already exists");
@@ -45,7 +44,6 @@ const createUser = async (req, res) => {
 		const newUser = { email, favorites: [], list: [], songList: [], image };
 		const added = await db.collection("users").insertOne(newUser);
 
-		console.log("added", added);
 		added ? sendResponse(res, 201, added, "user added") : sendResponse(res, 404, null, "user not added");
 	} catch (error) {
 		sendResponse(res, 500, null, "Server Error");

@@ -31,7 +31,6 @@ const AnimeRecommendations = ({ anime, id }) => {
 				//if success then set data
 				if (response.status === 200) {
 					const data = await response.json();
-					console.log(data);
 					if (data.status === 404) {
 						setRecommendations([]);
 						setLength(0);

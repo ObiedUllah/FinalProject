@@ -1,6 +1,5 @@
 import Logo from "../../images/chibi.png";
 import { NavLink } from "react-router-dom";
-import React from "react";
 import styled from "styled-components";
 
 /**
@@ -10,7 +9,9 @@ import styled from "styled-components";
 const LogoTitle = () => {
 	return (
 		<Wrapper to="/">
-			<Image src={Logo} />
+			<Container>
+				<Image src={Logo} alt="Logo" />
+			</Container>
 			<Title>AnimeEnma</Title>
 		</Wrapper>
 	);
@@ -24,8 +25,29 @@ const Wrapper = styled(NavLink)`
 	color: inherit;
 `;
 
-const Image = styled.img`
+const Container = styled.div`
+	position: relative;
+	width: 125px;
 	height: 125px;
+`;
+
+const Image = styled.img`
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	border-radius: 50%;
+	animation: rotate 4s linear infinite;
+
+	@keyframes rotate {
+		from {
+			transform: rotate(0deg);
+		}
+		to {
+			transform: rotate(360deg);
+		}
+	}
 `;
 
 const Title = styled.div`

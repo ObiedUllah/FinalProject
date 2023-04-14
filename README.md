@@ -1,19 +1,34 @@
-# FinalProject
+# Anime Enma
 
-Website link
-============
+## Table of Contents
+
+- [Website Link](#link)
+- [Description](#description)
+- [Installation](#installation)
+- [Website Functionality](#functionality)
+  1. [Navbar](#nav)
+  2. [Update Section](#update)
+  3. [Left SideBar](#left)
+  4. [Right SideBar](#right)
+  5. [Footer](#footer)
+  6. [Home Page](#home)
+  7. [Anime Details Page](#details)
+  8. [Search Page](#search)
+  9. [Genres Page](#genres)
+  10. [Promos Page](#promos)
+  11. [Profile Page](#profile)
+  12. [Song Library Page](#library)
+## <a id="link"></a> Website Link
 
 <https://anime-enma.onrender.com/>
 
 -> takes a bit of time to load
 
-Description
-============
+## <a id="description"></a> Description
 
 Anime Enma allows users to view some of the top/recent/upcoming/popular anime and get details about each anime, including opening and ending themes. Users can create profiles, favorite anime, rate anime, change profile pictures, add songs to their playlists, and listen to those songs. My goal is to provide a platform where anime fans can discover new shows, share their favorites and listen to their favorite themes. hope you enjoy using my website!
 
-Installation
-============
+## <a id="installation"></a> Installation
 
 Anime Enma is a MERN (MongoDB, Express, React, Node) application that utilizes the following APIs:
 
@@ -46,10 +61,9 @@ After adding those environment variables, you will have to go into the server an
 
 Due to the limitations of the Jikan API, which only allows 3 calls per second, some of the anime lists are added to a MongoDB database. This helps to bypass the API's rate limit and ensures that the data can be retrieved and displayed on the website without any delays or errors. By storing the anime lists locally, the website can provide a faster and more reliable user experience, while also reducing the load on the API server.
 
-Website Functionality
-============
+## <a id="functionality"></a> Website Functionality
 
-## Nav Bar
+### <a id="nav"></a> Nav Bar
 
 ---
 
@@ -65,7 +79,7 @@ When a user logs in to AnimeEnma, the NavBar displays additional features, inclu
 
 ![NavBar logged in](https://i.imgur.com/xbefiAf.png)
 
-## Update Section
+### <a id="update"></a> Update Section
 
 ---
 
@@ -73,7 +87,7 @@ Under the navigation bar, you'll find a `small div` that informs the user that t
 
 ![Left Side Bar](https://i.imgur.com/j2ek2PZ.png)
 
-## Left SideBar
+### <a id="left"></a> Left SideBar
 
 ---
 
@@ -81,7 +95,7 @@ The `left sidebar` is a section of the web application that displays the top-rat
 
 ![Left Side Bar](https://i.imgur.com/zHbuWz0.png)
 
-## Right SideBar
+### <a id="right"></a> Right SideBar
 
 ---
 
@@ -91,12 +105,12 @@ The Right Sidebar is divided into three different sections, each serving a uniqu
 
 - Songs and Quotes Tabs: Directly underneath the navigation tabs, there are two tabs that allow the user to switch between viewing their saved anime theme songs or some random anime quotes.
 
-- The first tab displays the user's saved anime theme songs, while the second tab shows some random anime quotes. When a user is not logged in, it tells the user to log in to view their liked songs
+- The first tab displays the user's saved anime theme songs, while the second tab shows some random anime quotes. When a user is not logged in, it tells the user to log in to view their liked songs. The user can drag and drop themes in the box which allows them to save the songs and listen to them in the song library.
 
 ![Right Side Bar Songs](https://i.imgur.com/AEwfFb1.png)
 ![Right Side Bar Quotes](https://i.imgur.com/I9kRM8a.png)
 
-## Footer
+### <a id="footer"></a> Footer
 
 ---
 
@@ -110,7 +124,7 @@ The Footer is composed of five different sections:
 
 ![Footer](https://i.imgur.com/2M5PWbB.png)
 
-## Home Page
+### <a id="home"></a> Home Page
 
 ---
 
@@ -124,26 +138,72 @@ The Home page presents users with 5 different lists of anime:
 
 ![Anime Lists](https://i.imgur.com/eOR6bse.jpeg)
 
-## Anime Details Page
+### Anime Details Page
 
 ---
 
-## Search Page
+The anime details page features a prominent YouTube player at the top, showcasing the anime's opening or ending theme. Above the player, the page displays the anime's title in English and Japanese. Users can easily switch between different themes by selecting them from a list located beneath the YouTube player.
+
+![youtube player](https://i.imgur.com/RwRDzLZ.png)
+
+![themes list](https://i.imgur.com/cxHCaGI.png)
+
+- This componenet  allows logged-in users to save an anime to their personal list or mark it as a favorite. This feature provides a personalized experience for each user and makes it easy to keep track of their favorite shows.
+
+![Add anime](https://i.imgur.com/0vP5sys.png)
+
+- This component displays  detailed information about each anime. This includes statistics, a synopsis, background information, episode listings, relations, and recommendations. A zoomed-out image of the anime's details is provided, giving users a comprehensive overview of the anime without overwhelming them with too much information at once.
+
+![Details](https://i.imgur.com/CtRZ2Uv.png)
+
+### <a id="search"></a> Search Page
 
 ---
 
-## Genres Page
+the search page allows users to view what they have searched for in the navbar. There is also pagination on the bottom for the user to view more animes.
+
+![Search list](https://i.imgur.com/EwwUWW6.png)
+![Pagination](https://i.imgur.com/I9Cmsuc.png)
+
+### <a id="genres"></a> Genres Page
 
 ---
 
-## Promos Page
+The genres pages displays all the different genres, themes and demographics. Clicking on one of them will go to the search page and get the most popular anime of that genres.
+
+![Genres](https://i.imgur.com/xMzO8uw.png)
+
+### <a id="promos"></a> Promos Page
 
 ---
 
-## Profile Page
+The promos page allows users to see the newest animes or pormotions. clicking on one of them changes the youtube player below. 
+
+![Promos](https://i.imgur.com/B6HZG6r.png)
+### <a id="profile"></a> Profile Page
 
 ---
 
-## Song Library
+The profile page displays information about the user and their anime lists.
+
+- At the top of the page, the user's profile picture is displayed, along with their username and other stats, such as the number of animes they've watched, completed, and added to their favorites. The user can easily change their profile picture by clicking on the image and selecting a new one from their computer.
+
+![Info](https://i.imgur.com/7qN1xhw.png)
+
+- The completed, plan to watch, and favorite animes of the user are also displayed on the page, providing a quick and easy way to access their activity on the platform by clicking on the selected tab.
+
+![Commpleted](https://i.imgur.com/4IsthzZ.png)
+
+![Plan  To Watch](https://i.imgur.com/DfJvina.png)
+
+![Favorites](https://i.imgur.com/ZSwHL2G.png)
+
+### <a id="library"></a> Song Library
 
 ---
+
+The song library is a fully-functional music player, comparable to platforms like Spotify or Apple Music. Users can play, pause, skip, repeat, and shuffle songs with ease. Additionally, users can select any song from the list of available tracks simply by clicking on its name. The player also allows users to adjust the volume to their desired level.
+
+![Library](https://i.imgur.com/w43gAe7.png)
+
+![Library 2](https://i.imgur.com/oFtTjRA.png)
