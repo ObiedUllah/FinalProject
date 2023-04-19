@@ -67,7 +67,6 @@ const ProfilePicture = ({ user }) => {
 				body: JSON.stringify({ data: base64EncodedImage, email: user.email }),
 				headers: { "Content-Type": "application/json" },
 			});
-			window.location.reload(true);
 		} catch (err) {
 			alert("Something went wrong!");
 		}

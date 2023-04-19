@@ -18,6 +18,9 @@ export const AnimeListProvider = ({ children }) => {
 	const [seasonalAnimes, setSeasonalAnimes] = useState(() => null);
 	const [upcomingAnimes, setUpcomingAnimes] = useState(() => null);
 
+	//error checking
+	const [error, setError] = useState(null);
+
 	//fetches data on mount of application
 	useEffect(() => {
 		if (!topAnimes || !recentAnimes || !popularAnimes || !seasonalAnimes || !upcomingAnimes) {
@@ -89,6 +92,8 @@ export const AnimeListProvider = ({ children }) => {
 				randomGenreAnimes,
 				seasonalAnimes,
 				upcomingAnimes,
+				error,
+				setError,
 			}}
 		>
 			{children}
