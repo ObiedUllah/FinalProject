@@ -9,6 +9,6 @@
     { "src": "/(.*)", "dest": "server/build/$1" }
   ], 
   "scripts": {
-  "build": "your-build-command"
+  "build": "npm run build"
 }
 }
