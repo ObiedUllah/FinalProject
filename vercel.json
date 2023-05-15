@@ -5,7 +5,7 @@
     { "src": "server/build/**", "use": "@vercel/static" }
   ],
   "routes": [
-    { "src": "/(.*)", "dest": "server/api/$1" },
+    { "src": "/(.*)", "dest": "/$1" },
     { "src": "/(.*)", "dest": "server/build/$1" }
   ], 
   "scripts": {
