@@ -4,10 +4,6 @@
     { "src": "server/**/*.js", "use": "@vercel/node" },
     { "src": "server/build/**", "use": "@vercel/static" }
   ],
-  "routes": [
-    { "src": "/api/(.*)", "dest": "server/$1" },
-    { "src": "/(.*)", "dest": "server/build/$1" }
-  ], 
   "scripts": 
     { "build": "npm run build" }
 }
