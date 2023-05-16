@@ -9,6 +9,6 @@
     { "src": "/(.*)", "dest": "server/build/index.html" }
   ],
   "scripts": {
-    "build": "npm run build"
+    "build": "yarn build"
   }
 }
