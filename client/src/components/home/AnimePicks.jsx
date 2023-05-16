@@ -34,7 +34,7 @@ const AnimePicks = ({ animePicks }) => {
 	}, [animePicks]);
 	return (
 		<>
-			<HeaderTitle>Goated Picks</HeaderTitle>
+			<HeaderTitle>Recommendations</HeaderTitle>
 			<Wrapper ref={wrapperRef}>
 				<div>
 					<Img src={currentAnime.images.jpg.image_url} />
