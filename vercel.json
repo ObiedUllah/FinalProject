@@ -4,9 +4,6 @@
     { "src": "server/**/*.js", "use": "@vercel/node" },
     { "src": "server/build/**", "use": "@vercel/static" }
   ],
-  "routes": [
-    { "src": "/(.*)", "dest": "server/server.js" }
-  ],
   "scripts": {
     "build": "yarn build"
   }
