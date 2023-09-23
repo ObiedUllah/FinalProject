@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 
 import { NavLink, useNavigate } from "react-router-dom";
+
 import QuotesListenTabs from "./QuotesListenTabs";
 import styled from "styled-components";
 
@@ -23,12 +24,12 @@ const RightSideBar = () => {
 
 	const handleClickSeasonal = async (event) => {
 		event.preventDefault();
-		navigate("searchList", { state: { url: "https://api.jikan.moe/v4/seasons/now?limit=175&" } });
+		navigate("searchList", { state: { url: "https://api.jikan.moe/v4/seasons/now?" } });
 	};
 
 	const handleClickUpcoming = async (event) => {
 		event.preventDefault();
-		navigate("searchList", { state: { url: "https://api.jikan.moe/v4/seasons/upcoming?limit=175&" } });
+		navigate("searchList", { state: { url: "https://api.jikan.moe/v4/seasons/upcoming?" } });
 	};
 
 	//wait until the quotes are loaded

@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 
-import { addSongToList, getUsers as getUserApi } from "endpoints/apiConfig";
+import { addSongToList, getUser as getUserApi } from "endpoints/apiConfig";
 
 import CircularProg from "utils/porgress/CircularProg";
 import Song from "./Song";

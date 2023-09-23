@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 
-import { changeStatus, getUsers, removeStatus, toggleFavorites } from "endpoints/apiConfig";
+import { changeStatus, getUser as getUserApi, removeStatus, toggleFavorites } from "endpoints/apiConfig";
 import { useEffect, useState } from "react";
 
 import LoginButton from "components/auth/buttons/LoginButton";
@@ -51,7 +51,7 @@ const AddToListSection = ({ anime }) => {
 	//gets the user from the mongo db
 	useEffect(() => {
 		const getUser = async () => {
-			const response = await fetch(`${getUsers}/${user.email}`);
+			const response = await fetch(`${getUserApi}/${user.email}`);
 			const result = await response.json();
 			setDbUser(result.data);
 

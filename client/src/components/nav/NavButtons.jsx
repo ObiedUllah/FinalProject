@@ -6,7 +6,7 @@ import AuthenticationButton from "components/auth/buttons/AuthenticationButton";
 import Default from "../../images/default.png";
 import { NavLink } from "react-router-dom";
 import Search from "./Search";
-import { getUserApi } from "endpoints/apiConfig";
+import { getUser as getUserApi } from "endpoints/apiConfig";
 import styled from "styled-components";
 import { useAuth0 } from "@auth0/auth0-react";
 

@@ -1,5 +1,5 @@
-const apiBaseUrl = "https://anime-enma-server.onrender.com/api";
-// const apiBaseUrl = "/api";
+// const apiBaseUrl = "https://anime-enma-server.onrender.com/api";
+const apiBaseUrl = "/api";
 
 // ANIME
 

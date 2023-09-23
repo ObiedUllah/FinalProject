@@ -14,7 +14,7 @@ const SongLibrary = () => {
 	//gets the user from the mongo db
 	useEffect(() => {
 		const getUser = async () => {
-			const response = await fetch(`${getUserApi}${user.email}`);
+			const response = await fetch(`${getUserApi}/${user.email}`);
 			const result = await response.json();
 			setDbUser(result.data);
 			setSongList(result.data.songList);
