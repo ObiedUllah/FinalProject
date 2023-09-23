@@ -33,7 +33,7 @@ const Search = () => {
 	const handleSearch = async (event) => {
 		event.preventDefault();
 		navigate("searchList", {
-			state: { url: `https://api.jikan.moe/v4/anime?q=${search}&limit=175&order_by=scored_by&sort=desc&sfw&` },
+			state: { url: `https://api.jikan.moe/v4/anime?q=${search}&order_by=scored_by&sort=desc&sfw&` },
 		});
 	};
 

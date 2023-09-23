@@ -1,26 +1,23 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 
 import { NavLink, useNavigate } from "react-router-dom";
-import { useContext, useEffect } from "react";
-
-import CircularProg from "utils/porgress/CircularProg";
 import QuotesListenTabs from "./QuotesListenTabs";
-import { RandomQuoteContext } from "context/RandomQuoteContext";
 import styled from "styled-components";
 
 /**
  * displays random quotes
  */
 const RightSideBar = () => {
-	const { quotes } = useContext(RandomQuoteContext);
-	const { getQuotes } = useContext(RandomQuoteContext).actions;
+	// const { quotes } = useContext(RandomQuoteContext);
+	// const { getQuotes } = useContext(RandomQuoteContext).actions;
+	// console.log(quotes);
 
 	//gets the anime information on the right side bar on the top
-	useEffect(() => {
-		if (!quotes) {
-			getQuotes();
-		}
-	}, []);
+	// useEffect(() => {
+	// 	if (!quotes) {
+	// 		getQuotes();
+	// 	}
+	// }, []);
 
 	const navigate = useNavigate();
 
@@ -35,9 +32,9 @@ const RightSideBar = () => {
 	};
 
 	//wait until the quotes are loaded
-	if (!quotes) {
-		return <CircularProg />;
-	}
+	// if (!quotes) {
+	// 	return <CircularProg />;
+	// }
 
 	return (
 		<Nav>

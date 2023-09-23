@@ -22,12 +22,14 @@ const SearchedAnimeList = () => {
 		let isCancelled = false;
 		const fetchData = async () => {
 			const response = await fetch(state.url + "page=" + currentPage);
+			console.log(response);
 			//if failure then throw an error
 			if (response.status === 429) throw new Error(response.error);
 
 			//if success then set data
 			if (response.status === 200) {
 				const data = await response.json();
+				console.log(data);
 				setAnimeList(data);
 			}
 		};

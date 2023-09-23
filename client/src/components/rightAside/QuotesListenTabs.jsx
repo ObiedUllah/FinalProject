@@ -1,4 +1,3 @@
-import Quotes from "./Quotes";
 import UserListen from "./UserListen";
 import styled from "styled-components";
 import { useState } from "react";
@@ -18,13 +17,13 @@ const QuotesListenTabs = () => {
 				<Button onClick={(event) => handleTabClick(event, 0)} isSelected={selectedTab === 0}>
 					Your Songs
 				</Button>
-				<Button onClick={(event) => handleTabClick(event, 1)} isSelected={selectedTab === 1}>
+				{/* <Button onClick={(event) => handleTabClick(event, 1)} isSelected={selectedTab === 1}>
 					Random Quotes
-				</Button>
+				</Button> */}
 			</Wrapper>
 
 			{selectedTab === 0 && <UserListen />}
-			{selectedTab === 1 && <Quotes />}
+			{/* {selectedTab === 1 && <Quotes />} */}
 		</>
 	);
 };
