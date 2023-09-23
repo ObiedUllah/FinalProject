@@ -7,9 +7,9 @@ const cors = require("cors");
 const path = require("path");
 
 // Allow requests from the Netlify domain
-const netlifyDomain = "https://animeenma.netlify.app/";
+const allowedOrigins = ["https://animeenma.netlify.app", "https://another-allowed-origin.com"];
 const corsOptions = {
-	origin: netlifyDomain,
+	origin: allowedOrigins,
 	methods: ["GET", "POST", "PUT", "DELETE"], // Adjust as needed
 };
 
