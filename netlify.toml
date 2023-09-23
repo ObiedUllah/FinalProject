@@ -1,8 +1,10 @@
 [build]
-  command = "yarn run build"
-  publish = "/build"
+  command = "cd client && yarn && yarn run build"  
+  publish = "client/build"  
   base = "/"
 
+[build.environment]
+  NODE_ENV = "production"
 [[redirects]]
   from = "/*"
   to = "/"
