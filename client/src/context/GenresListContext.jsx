@@ -1,5 +1,7 @@
 import { createContext, useState } from "react";
 
+import { getGenresList } from "endpoints/apiConfig";
+
 export const GenresListContext = createContext(null);
 
 /**
@@ -18,7 +20,7 @@ export const GenresListProvider = ({ children }) => {
 	 */
 	const getGenres = async () => {
 		try {
-			const response = await fetch("/api/genres");
+			const response = await fetch(getGenresList);
 
 			//if success then set data
 			if (response.status === 200) {

@@ -2,6 +2,8 @@
 
 import { createContext, useEffect, useState } from "react";
 
+import { getAnimeList } from "endpoints/apiConfig";
+
 export const AnimeListContext = createContext(null);
 
 /**
@@ -46,7 +48,7 @@ export const AnimeListProvider = ({ children }) => {
 	 */
 	const getRandomGenreAnimes = async () => {
 		try {
-			const response = await fetch(`/api/animes/random`);
+			const response = await fetch(getAnimeList);
 
 			//if success then set data
 			if (response.status === 200) {

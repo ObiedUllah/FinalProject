@@ -1,5 +1,7 @@
 import { createContext, useState } from "react";
 
+import { getPromosList } from "endpoints/apiConfig";
+
 export const PromosContext = createContext(null);
 
 /**
@@ -14,7 +16,7 @@ export const PromosProvider = ({ children }) => {
 	//gets all the promos from the database
 	const getPromos = async () => {
 		try {
-			const response = await fetch("/api/promos");
+			const response = await fetch(getPromosList);
 
 			//if success then set data
 			if (response.status === 200) {
