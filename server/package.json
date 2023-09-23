@@ -26,6 +26,6 @@
   "scripts": {
     "start": "nodemon server.js",
     "dev": "nodemon server.js",
-    "build": "yarn build"
+    "build": "yarn install"
   }
 }
