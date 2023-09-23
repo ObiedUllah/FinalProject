@@ -26,6 +26,6 @@
   "scripts": {
     "start": "nodemon server.js",
     "dev": "nodemon server.js",
-    "build": "react-scripts build"
+    "build": "yarn build"
   }
 }
