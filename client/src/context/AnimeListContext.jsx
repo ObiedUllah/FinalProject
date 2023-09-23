@@ -1,8 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 
 import { createContext, useEffect, useState } from "react";
-
-import { getAnimeList } from "endpoints/apiConfig";
+import { getAnimeList, getRandomAnimeList } from "endpoints/apiConfig";
 
 export const AnimeListContext = createContext(null);
 
@@ -48,7 +47,7 @@ export const AnimeListProvider = ({ children }) => {
 	 */
 	const getRandomGenreAnimes = async () => {
 		try {
-			const response = await fetch(getAnimeList);
+			const response = await fetch(getRandomAnimeList);
 
 			//if success then set data
 			if (response.status === 200) {
@@ -67,7 +66,7 @@ export const AnimeListProvider = ({ children }) => {
 	 */
 	const getAllAnimes = async () => {
 		try {
-			const response = await fetch("/api/animes");
+			const response = await fetch(getAnimeList);
 			const result = await response.json();
 
 			//if success then set data
