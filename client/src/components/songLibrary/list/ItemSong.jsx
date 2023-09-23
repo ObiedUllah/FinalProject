@@ -2,6 +2,7 @@ import { useContext, useState } from "react";
 
 import CircularProg from "utils/porgress/CircularProg";
 import { SongListContext } from "context/SongListContext";
+import { removeSongFromList } from "endpoints/apiConfig";
 import styled from "styled-components";
 
 /**
@@ -28,7 +29,7 @@ const ItemSong = ({ user, song, setList, index }) => {
 
 		try {
 			//updates the songs list in the database
-			await fetch(`/api/user/song/${song.id}`, {
+			await fetch(`${removeSongFromList}/${song.id}`, {
 				method: "PATCH",
 				headers: {
 					"Content-Type": "application/json",

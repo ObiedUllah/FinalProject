@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import CircularProg from "utils/porgress/CircularProg";
 import ProfileSongs from "components/songLibrary/list/ProfileSongs";
 import SongHeader from "components/songLibrary/header/SongHeader";
+import { getUser as getUserApi } from "endpoints/apiConfig";
 import { useAuth0 } from "@auth0/auth0-react";
 
 const SongLibrary = () => {
@@ -13,7 +14,7 @@ const SongLibrary = () => {
 	//gets the user from the mongo db
 	useEffect(() => {
 		const getUser = async () => {
-			const response = await fetch(`/api/user/${user.email}`);
+			const response = await fetch(`${getUserApi}${user.email}`);
 			const result = await response.json();
 			setDbUser(result.data);
 			setSongList(result.data.songList);

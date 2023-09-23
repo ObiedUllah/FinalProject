@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { removeSongFromList } from "endpoints/apiConfig";
 import styled from "styled-components";
 
 /**
@@ -25,7 +26,7 @@ const Song = ({ song, index, setWidgets, dbUser, setStatus }) => {
 
 		try {
 			//updates the songs list in the database
-			await fetch(`/api/user/song/${song.id}`, {
+			await fetch(`${removeSongFromList}/${song.id}`, {
 				method: "PATCH",
 				headers: {
 					"Content-Type": "application/json",

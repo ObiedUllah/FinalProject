@@ -1,5 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 
+import { changeStatus, getUsers, removeStatus, toggleFavorites } from "endpoints/apiConfig";
 import { useEffect, useState } from "react";
 
 import LoginButton from "components/auth/buttons/LoginButton";
@@ -50,7 +51,7 @@ const AddToListSection = ({ anime }) => {
 	//gets the user from the mongo db
 	useEffect(() => {
 		const getUser = async () => {
-			const response = await fetch(`/api/user/${user.email}`);
+			const response = await fetch(`${getUsers}/${user.email}`);
 			const result = await response.json();
 			setDbUser(result.data);
 
@@ -122,7 +123,7 @@ const AddToListSection = ({ anime }) => {
 
 		try {
 			//updates the favorites in the database
-			await fetch("/api/user/favorite", {
+			await fetch(toggleFavorites, {
 				method: "PUT",
 				headers: {
 					"Content-Type": "application/json",
@@ -170,7 +171,7 @@ const AddToListSection = ({ anime }) => {
 
 		try {
 			//updates the status in the database
-			await fetch("/api/user/status", {
+			await fetch(changeStatus, {
 				method: "PUT",
 				headers: {
 					"Content-Type": "application/json",
@@ -203,7 +204,7 @@ const AddToListSection = ({ anime }) => {
 
 		try {
 			//deletes the aniem from the list in the database
-			await fetch("/api/user/status", {
+			await fetch(removeStatus, {
 				method: "PATCH",
 				headers: {
 					"Content-Type": "application/json",

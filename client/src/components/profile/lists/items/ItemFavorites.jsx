@@ -1,6 +1,7 @@
 import { Anchor, Button, Image, Label, Wrapper } from "styles/profile/ProfileItemStyles";
 
 import CircularProg from "utils/porgress/CircularProg";
+import { toggleFavorites } from "endpoints/apiConfig";
 import { useState } from "react";
 
 /**
@@ -36,7 +37,7 @@ const ItemFavorites = ({ user, anime, list, setList }) => {
 
 		try {
 			//updates the favorites in the database
-			await fetch("/api/user/favorite", {
+			await fetch(toggleFavorites, {
 				method: "PUT",
 				headers: {
 					"Content-Type": "application/json",

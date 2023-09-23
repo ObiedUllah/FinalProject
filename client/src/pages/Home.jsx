@@ -6,6 +6,7 @@ import { AnimeListContext } from "context/AnimeListContext";
 import AnimePicks from "components/home/AnimePicks";
 import AnimeSlider from "components/home/AnimeSlider";
 import CircularProg from "utils/porgress/CircularProg";
+import { createUser } from "endpoints/apiConfig";
 import styled from "styled-components";
 import { useAuth0 } from "@auth0/auth0-react";
 
@@ -23,7 +24,7 @@ const Home = () => {
 		const addUser = async () => {
 			try {
 				//adds the user if they do not exist
-				await fetch("/api/user", {
+				await fetch(createUser, {
 					method: "POST",
 					headers: {
 						"Content-Type": "application/json",

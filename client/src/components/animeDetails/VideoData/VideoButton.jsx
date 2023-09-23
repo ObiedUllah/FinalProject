@@ -1,3 +1,5 @@
+import { downloadMp3, getVideo } from "endpoints/apiConfig";
+
 import { BsDownload } from "react-icons/bs";
 import DownloadDialog from "./DownloadDialog";
 import styled from "styled-components";
@@ -35,8 +37,8 @@ const VideoButton = ({ anime, index, theme, isOpening, setSelectedTheme }) => {
 		try {
 			let response;
 			isOpening
-				? (response = await fetch(`/api/video/${anime?.theme.openings[index] + " opening " + anime.title}`))
-				: (response = await fetch(`/api/video/${anime?.theme.endings[index] + " ending " + anime.title}`));
+				? (response = await fetch(`${getVideo}/${anime?.theme.openings[index] + " opening " + anime.title}`))
+				: (response = await fetch(`${getVideo}/${anime?.theme.endings[index] + " ending " + anime.title}`));
 
 			const result = await response.json();
 			setSelectedTheme(result.data);
@@ -60,7 +62,7 @@ const VideoButton = ({ anime, index, theme, isOpening, setSelectedTheme }) => {
 			isOpening ? (data = anime?.theme.openings[index] + " opening") : (data = anime?.theme.endings[index] + " ending");
 
 			//download mp3
-			const response = await fetch("/api/convert-mp3", {
+			const response = await fetch(downloadMp3, {
 				method: "POST", // or 'PUT'
 				headers: {
 					"Content-Type": "application/json",

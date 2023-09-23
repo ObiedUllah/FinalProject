@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import CircularProg from "utils/porgress/CircularProg";
 import ReactPlayer from "react-player";
 import VideoButton from "./VideoData/VideoButton";
+import { getVideo } from "endpoints/apiConfig";
 import styled from "styled-components";
 
 /**
@@ -23,13 +24,13 @@ const VideoSection = ({ anime, id, index, type }) => {
 				const endings = anime?.theme?.endings ?? [];
 
 				if (typeof index === "number" && type === "opening") {
-					const response = await fetch(`/api/video/${openings[index] + " opening " + anime.title}`);
+					const response = await fetch(`${getVideo}/${openings[index] + " opening " + anime.title}`);
 					if (response.status === 200) {
 						const result = await response.json();
 						selectedTheme = result.data;
 					}
 				} else if (typeof index === "number" && type === "ending") {
-					const response = await fetch(`/api/video/${endings[index] + " ending " + anime.title}`);
+					const response = await fetch(`${getVideo}/${endings[index] + " ending " + anime.title}`);
 					if (response.status === 200) {
 						const result = await response.json();
 						selectedTheme = result.data;
@@ -37,13 +38,13 @@ const VideoSection = ({ anime, id, index, type }) => {
 				} else if (openings[0] === undefined && endings[0] === undefined) {
 					selectedTheme = false;
 				} else if (openings[0] !== undefined) {
-					const response = await fetch(`/api/video/${openings[0] + " opening " + anime.title}`);
+					const response = await fetch(`${getVideo}/${openings[0] + " opening " + anime.title}`);
 					if (response.status === 200) {
 						const result = await response.json();
 						selectedTheme = result.data;
 					}
 				} else if (endings[0] !== undefined) {
-					const response = await fetch(`/api/video/${endings[0] + " ending " + anime.title}`);
+					const response = await fetch(`${getVideo}/${endings[0] + " ending " + anime.title}`);
 					if (response.status === 200) {
 						const result = await response.json();
 						selectedTheme = result.data;

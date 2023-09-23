@@ -1,9 +1,42 @@
-const apiBaseUrl = "https://anime-enma-server.onrender.com";
+const apiBaseUrl = "https://anime-enma-server.onrender.com/api";
+// const apiBaseUrl = "/api";
 
-export const getAnimeList = `${apiBaseUrl}/api/animes`;
+// ANIME
 
-export const getPromosList = `${apiBaseUrl}/api/promos`;
+export const getAnimeList = `${apiBaseUrl}/animes`;
 
-export const getGenresList = `${apiBaseUrl}/api/genres`;
+export const getPromosList = `${apiBaseUrl}/promos`;
 
-export const getRandomAnimeList = `${apiBaseUrl}/api/animes/random`;
+export const getGenresList = `${apiBaseUrl}/genres`;
+
+export const getRandomAnimeList = `${apiBaseUrl}/animes/random`;
+
+// IMAGE
+
+export const uploadImage = `${apiBaseUrl}/upload`;
+
+// USER
+
+export const createUser = `${apiBaseUrl}/user`;
+
+export const getUsers = `${apiBaseUrl}/users`;
+
+export const getUser = `${apiBaseUrl}/user`;
+
+export const toggleFavorites = `${apiBaseUrl}/user/favorite`;
+
+export const changeStatus = `${apiBaseUrl}/user/status`;
+
+export const removeStatus = `${apiBaseUrl}/user/status`;
+
+export const addSongToList = `${apiBaseUrl}/user/song`;
+
+export const removeSongFromList = `${apiBaseUrl}/user/song`;
+
+// VIDEO
+
+export const getVideo = `${apiBaseUrl}/video`;
+
+export const downloadMp3 = `${apiBaseUrl}/convert-mp3`;
+
+export const getMp3Audio = `${apiBaseUrl}/audio`;

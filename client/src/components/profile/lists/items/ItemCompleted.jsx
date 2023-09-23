@@ -2,6 +2,7 @@ import { Anchor, Button, Image, Label, Option, Select, Wrapper } from "styles/pr
 import { handleRemoveFromList, handleStatusChange } from "../ProfileHelpers";
 
 import CircularProg from "utils/porgress/CircularProg";
+import { changeStatus } from "endpoints/apiConfig";
 import { useState } from "react";
 
 /**
@@ -38,7 +39,7 @@ const ItemCompleted = ({ user, anime, list, setList }) => {
 
 		try {
 			//updates the rating for the completed anime in the database
-			await fetch("/api/user/status", {
+			await fetch(changeStatus, {
 				method: "PUT",
 				headers: {
 					"Content-Type": "application/json",

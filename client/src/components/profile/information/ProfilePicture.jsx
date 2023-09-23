@@ -2,6 +2,7 @@ import { useRef, useState } from "react";
 
 import Default from "../../../images/default.png";
 import styled from "styled-components";
+import { uploadImage as uploadImageApi } from "endpoints/apiConfig";
 
 const ProfilePicture = ({ user }) => {
 	//profile picture state
@@ -62,7 +63,7 @@ const ProfilePicture = ({ user }) => {
 	 */
 	const uploadImage = async (base64EncodedImage) => {
 		try {
-			await fetch("/api/upload", {
+			await fetch(uploadImageApi, {
 				method: "POST",
 				body: JSON.stringify({ data: base64EncodedImage, email: user.email }),
 				headers: { "Content-Type": "application/json" },

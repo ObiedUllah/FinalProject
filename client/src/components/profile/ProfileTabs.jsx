@@ -1,6 +1,7 @@
 import ProfileCompleted from "./lists/sections/ProfileCompleted";
 import ProfileFavorites from "./lists/sections/ProfileFavorites";
 import ProfilePlan from "./lists/sections/ProfilePlan";
+import { getUser } from "endpoints/apiConfig";
 import styled from "styled-components";
 import { useState } from "react";
 
@@ -16,7 +17,7 @@ const ProfileTabs = ({ user, setUser }) => {
 	const handleTabClick = async (event, index) => {
 		event.preventDefault();
 		//refresh list
-		const response = await fetch(`/api/user/${user.email}`);
+		const response = await fetch(`${getUser}/${user.email}`);
 		const result = await response.json();
 		setUser(result.data);
 

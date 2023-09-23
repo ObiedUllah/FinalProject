@@ -5,6 +5,7 @@ import { useEffect, useLayoutEffect, useState } from "react";
 import CircularProg from "utils/porgress/CircularProg";
 import ProfileInformation from "components/profile/ProfileInformation";
 import ProfileTabs from "components/profile/ProfileTabs";
+import { getUser as getUserApi } from "endpoints/apiConfig";
 import styled from "styled-components";
 import { useAuth0 } from "@auth0/auth0-react";
 
@@ -21,7 +22,7 @@ const Profile = () => {
 	//gets the user from the mongo db
 	useEffect(() => {
 		const getUser = async () => {
-			const response = await fetch(`/api/user/${user.email}`);
+			const response = await fetch(`${getUserApi}/${user.email}`);
 			const result = await response.json();
 			setDbUser(result.data);
 		};

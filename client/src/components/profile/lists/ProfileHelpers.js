@@ -1,3 +1,5 @@
+import { changeStatus, removeStatus } from "endpoints/apiConfig";
+
 /**
  * Helper function to sort by ascending or descending for the title
  * @param {*} event
@@ -79,7 +81,7 @@ export const handleStatusChange = async (event, list, setList, anime, email, sta
 	};
 	try {
 		//updates the status in the database
-		const response = await fetch("/api/user/status", {
+		const response = await fetch(changeStatus, {
 			method: "PUT",
 			headers: {
 				"Content-Type": "application/json",
@@ -115,7 +117,7 @@ export const handleRemoveFromList = async (event, list, setList, anime, email) =
 
 	try {
 		//deletes anime item from db
-		await fetch("/api/user/status", {
+		await fetch(removeStatus, {
 			method: "PATCH",
 			headers: {
 				"Content-Type": "application/json",

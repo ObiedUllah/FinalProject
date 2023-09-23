@@ -1,5 +1,7 @@
 import { createContext, useState } from "react";
 
+import { getMp3Audio } from "endpoints/apiConfig";
+
 export const SongListContext = createContext(null);
 
 const initialState = {
@@ -25,7 +27,7 @@ export const SongListProvider = ({ children }) => {
 	 */
 	const playCurrentSong = async (song, index) => {
 		try {
-			const response = await fetch(`/api/audio/${song?.theme + " " + song.type + " " + song.title}`);
+			const response = await fetch(`${getMp3Audio}/${song?.theme + " " + song.type + " " + song.title}`);
 
 			if (response.status === 200) {
 				//changes the stream to a blob

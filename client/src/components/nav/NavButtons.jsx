@@ -6,6 +6,7 @@ import AuthenticationButton from "components/auth/buttons/AuthenticationButton";
 import Default from "../../images/default.png";
 import { NavLink } from "react-router-dom";
 import Search from "./Search";
+import { getUserApi } from "endpoints/apiConfig";
 import styled from "styled-components";
 import { useAuth0 } from "@auth0/auth0-react";
 
@@ -21,7 +22,7 @@ const NavButtons = () => {
 	//gets the user from the mongo db
 	useEffect(() => {
 		const getUser = async () => {
-			const response = await fetch(`/api/user/${user.email}`);
+			const response = await fetch(`${getUserApi}/${user.email}`);
 			const result = await response.json();
 			setDbUser(result.data);
 		};

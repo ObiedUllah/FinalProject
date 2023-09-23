@@ -1,5 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 
+import { addSongToList, getUsers as getUserApi } from "endpoints/apiConfig";
+
 import CircularProg from "utils/porgress/CircularProg";
 import Song from "./Song";
 import { SongListContext } from "context/SongListContext";
@@ -28,7 +30,7 @@ const UserListen = (props) => {
 	//gets the user from the mongo db
 	useEffect(() => {
 		const getUser = async () => {
-			const response = await fetch(`/api/user/${user.email}`);
+			const response = await fetch(`${getUserApi}/${user.email}`);
 			const result = await response.json();
 			setDbUser(result.data);
 			setWidgets(result.data.songList);
@@ -75,7 +77,7 @@ const UserListen = (props) => {
 
 		try {
 			//updates the songs list in the database
-			await fetch("/api/user/song", {
+			await fetch(addSongToList, {
 				method: "PUT",
 				headers: {
 					"Content-Type": "application/json",
