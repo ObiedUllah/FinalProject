@@ -32,9 +32,9 @@ const app = express()
 	.use(require("./endpoints/userEndpoints"))
 	.use(require("./endpoints/videoEndpoints"))
 	.use(require("./endpoints/uploadImageEndpoints"))
-	.use(require("./endpoints/animeListsEndpoints"))
+	.use(require("./endpoints/animeListsEndpoints"));
 
-	// Node spins up our server and sets it to listen on set port
-	.listen(PORT, () => console.log(`Listening on port ${PORT}`));
+// Node spins up our server and sets it to listen on set port
+// .listen(PORT, () => console.log(`Listening on port ${PORT}`))
 
 module.exports = app;
