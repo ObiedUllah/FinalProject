@@ -15,7 +15,7 @@ const corsOptions = {
 
 const PORT = process.env.PORT || 7200;
 
-express()
+const app = express()
 	//default
 	.use(function (req, res, next) {
 		res.header("Access-Control-Allow-Methods", "OPTIONS, HEAD, GET, PUT, POST, DELETE");
