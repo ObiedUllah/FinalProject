@@ -6,13 +6,6 @@ const morgan = require("morgan");
 const cors = require("cors");
 const path = require("path");
 
-// Allow requests from the Netlify domain
-const allowedOrigins = ["https://animeenma.netlify.app", "https://another-allowed-origin.com"];
-const corsOptions = {
-	origin: allowedOrigins,
-	methods: ["GET", "POST", "PUT", "DELETE"], // Adjust as needed
-};
-
 const PORT = process.env.PORT || 7200;
 
 const app = express()
@@ -26,7 +19,7 @@ const app = express()
 	.use(express.static(path.join(__dirname, "build")))
 	.use(express.json({ limit: "50mb" }))
 	.use(express.urlencoded({ limit: "50mb", extended: true }))
-	.use(cors(corsOptions))
+	.use(cors())
 
 	//endpoints
 	.use(require("./endpoints/userEndpoints"))
