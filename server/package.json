@@ -23,6 +23,7 @@
   "scripts": {
     "start": "nodemon server.js",
     "dev": "nodemon server.js",
-    "build": "yarn install"
+    "build": "yarn install",
+    "vercel-build" : "echo hello"
   }
 }

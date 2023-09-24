@@ -36,3 +36,5 @@ express()
 
 	// Node spins up our server and sets it to listen on set port
 	.listen(PORT, () => console.log(`Listening on port ${PORT}`));
+
+module.exports = app;
