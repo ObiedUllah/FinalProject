@@ -4,11 +4,11 @@ Anime Enma API
 This is a backend API that provides data on anime, anime genres, and anime-related media. It includes endpoints for fetching the top recent popular upcoming season anime, anime promos, anime genres themes demographics, a random anime category and the top anime of that category, as well as endpoints for user authentication and management, such as adding or removing anime from the user's favorites list, updating anime status, and adding/removing songs to/from the user's song list.
 
 The endpoints can be tested using the following base url:
-- https://anime-enma.onrender.com/ 
+- https://anime-enma.vercel.app
 
 Examples: 
-- https://anime-enma.onrender.com/api/animes
-- https://anime-enma.onrender.com/api/video/bleach+opening+2
+- https://anime-enma.vercel.app/api/animes
+- https://anime-enma.vercel.app/api/video/bleach+opening+2
 
 
 Dependencies 

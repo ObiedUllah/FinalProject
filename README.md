@@ -21,9 +21,7 @@
 
 ## <a id="link"></a> Website Link
 
-<https://anime-enma.onrender.com/>
-
--> takes a bit of time to load
+https://animeenma.netlify.app/
 
 ## <a id="description"></a> Description
 
