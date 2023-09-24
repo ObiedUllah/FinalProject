@@ -25,7 +25,11 @@ const app = express()
 	.use(require("./endpoints/userEndpoints"))
 	.use(require("./endpoints/videoEndpoints"))
 	.use(require("./endpoints/uploadImageEndpoints"))
-	.use(require("./endpoints/animeListsEndpoints"));
+	.use(require("./endpoints/animeListsEndpoints"))
+
+	.get("/", (req, res) => {
+		res.status(200).json({ message: "Access Granted" });
+	});
 
 // Node spins up our server and sets it to listen on set port
 // .listen(PORT, () => console.log(`Listening on port ${PORT}`))
