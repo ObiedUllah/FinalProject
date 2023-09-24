@@ -1,5 +1,5 @@
 //WEBSITE
-const apiBaseUrl = "https://anime-enma-server.onrender.com/api";
+const apiBaseUrl = "https://anime-enma.vercel.app/api";
 
 // LOCAL DEVICE
 // const apiBaseUrl = "/api";
