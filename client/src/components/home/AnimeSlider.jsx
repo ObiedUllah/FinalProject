@@ -85,7 +85,7 @@ const Image = styled.img`
 	height: 9vw;
 
 	@media (max-width: 768px) {
-		width: 40%; /* Adjust image size for mobile */
+		width: 60%; /* Adjust image size for mobile */
 		height: auto;
 	}
 `;
@@ -95,7 +95,7 @@ const Text = styled.p`
 	line-height: 1.2em;
 
 	@media (max-width: 768px) {
-		font-size: 11px; /* Adjust font size for mobile */
+		font-size: 10px; /* Adjust font size for mobile */
 		width: 70px;
 	}
 `;
