@@ -15,7 +15,6 @@ const SongImage = () => {
 
 const Wrapper = styled.div`
 	width: 90%;
-
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -25,6 +24,11 @@ const Image = styled.img`
 	width: 200px;
 	height: 280px;
 	border: 2px solid black;
+
+	@media (max-width: 768px) {
+		width: 90px;
+		height: 130px;
+	}
 `;
 
 export default SongImage;

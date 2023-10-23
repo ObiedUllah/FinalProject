@@ -7,6 +7,7 @@ import Default from "../../images/default.png";
 import { NavLink } from "react-router-dom";
 import Search from "./Search";
 import { getUser as getUserApi } from "endpoints/apiConfig";
+import { isMobile } from "utils/porgress/mobile";
 import styled from "styled-components";
 import { useAuth0 } from "@auth0/auth0-react";
 
@@ -15,7 +16,6 @@ import { useAuth0 } from "@auth0/auth0-react";
  * @returns
  */
 const NavButtons = () => {
-	const isMobile = window.innerWidth <= 768;
 	//gets user
 	const { user, isAuthenticated } = useAuth0();
 	const [dbUser, setDbUser] = useState(() => null);
@@ -56,6 +56,7 @@ const Wrapper = styled.div`
 	@media (max-width: 768px) {
 		padding-right: 0px;
 		justify-content: flex-start;
+		align-items: center;
 	}
 `;
 
@@ -89,6 +90,7 @@ const LibraryLink = styled(NavLink)`
 		width: 50px;
 		padding: 5px;
 		font-size: 10px;
+		margin: 5px;
 	}
 `;
 

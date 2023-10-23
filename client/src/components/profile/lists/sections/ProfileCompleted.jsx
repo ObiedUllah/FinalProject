@@ -2,6 +2,7 @@ import { Button, Label, TitleDiv, Wrapper } from "styles/profile/ProfileHeaderSt
 import { sortByRating, sortByScore, sortByTitle } from "../ProfileHelpers";
 
 import ItemCompleted from "../items/ItemCompleted";
+import { isMobile } from "utils/porgress/mobile";
 import { useState } from "react";
 
 /**
@@ -10,8 +11,6 @@ import { useState } from "react";
  * @returns
  */
 const ProfileCompleted = ({ user }) => {
-	const isMobile = window.innerWidth <= 768;
-
 	const [list, setList] = useState(() => user.list.filter((item) => item.status === "completed"));
 
 	//handles sortung

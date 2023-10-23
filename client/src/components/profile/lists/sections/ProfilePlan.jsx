@@ -2,6 +2,7 @@ import { Button, Label, TitleDiv, Wrapper } from "styles/profile/ProfileHeaderSt
 import { sortByScore, sortByTitle } from "../ProfileHelpers";
 
 import ItemPlan from "../items/ItemPlan";
+import { isMobile } from "utils/porgress/mobile";
 import { useState } from "react";
 
 /**
@@ -15,8 +16,6 @@ const ProfilePlan = ({ user }) => {
 	//sort
 	const [titleAsc, setTitleAsc] = useState(false);
 	const [scoreAsc, setScoreAsc] = useState(false);
-
-	const isMobile = window.innerWidth <= 768;
 
 	return (
 		<Wrapper>

@@ -228,13 +228,27 @@ const SongActions = ({ songList }) => {
 	);
 };
 
-const Wrapper = styled.div``;
+const Wrapper = styled.div`
+	@media (max-width: 768px) {
+		width: 100%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+
+		flex-direction: column;
+		margin-top: 20px;
+	}
+`;
 
 const Flexbox = styled.div`
 	width: 50%;
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
+
+	@media (max-width: 768px) {
+		width: 100%;
+	}
 `;
 
 const Progress = styled.div`
@@ -245,6 +259,10 @@ const Progress = styled.div`
 	margin-top: 10px;
 	margin-bottom: 5px;
 	cursor: pointer;
+
+	@media (max-width: 768px) {
+		width: 100%;
+	}
 `;
 
 const ProgressBar = styled.div`
@@ -261,6 +279,10 @@ const TimeSound = styled.div`
 	display: flex;
 	justify-content: space-between;
 	margin-top: 15px;
+
+	@media (max-width: 768px) {
+		width: 100%;
+	}
 `;
 
 export default SongActions;

@@ -3,6 +3,7 @@ import { handleRemoveFromList, handleStatusChange } from "../ProfileHelpers";
 
 import { CircularProgress } from "@mui/material";
 import Dialog from "./Dialog";
+import { isMobile } from "utils/porgress/mobile";
 import { useState } from "react";
 
 /**
@@ -11,8 +12,6 @@ import { useState } from "react";
  * @returns
  */
 const ItemPlan = ({ user, anime, list, setList }) => {
-	const isMobile = window.innerWidth <= 768;
-
 	const [rating, setRating] = useState(() => 0);
 	const [status, setStatus] = useState(() => anime.status);
 

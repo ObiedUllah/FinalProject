@@ -139,7 +139,11 @@ const StyledSlider = styled(Slider)`
 	}
 
 	.slick-dots li button:before {
-		font-size: 12px; // Adjust the dots size
+		font-size: 10px; // Adjust the dots size
+
+		@media (max-width: 768px) {
+			font-size: 8px;
+		}
 	}
 
 	.slick-dots {

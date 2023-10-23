@@ -82,17 +82,16 @@ const ItemSong = ({ user, song, setList, index }) => {
 					<Index>{index}</Index>
 					<ThemeTitle>{song.theme}</ThemeTitle>
 					<Title>{song.title}</Title>
+					<Button onClick={(event) => handleRemove(event)}>x</Button>
 				</Box>
 			</MainButton>
-			<Button onClick={(event) => handleRemove(event)}>x</Button>
 		</Wrapper>
 	);
 };
 
 const Wrapper = styled.div`
 	display: flex;
-	flex-direction: row;
-	justify-content: space-around;
+	justify-content: center;
 	align-items: center;
 `;
 
@@ -100,10 +99,7 @@ const Box = styled.div`
 	display: flex;
 	align-items: center;
 	width: 100%;
-
-	&:hover {
-		background-color: #474545;
-	}
+	padding: 5px;
 
 	div {
 		margin: 3px;
@@ -113,16 +109,16 @@ const Box = styled.div`
 
 const MainButton = styled.button`
 	background-color: #191414;
-	padding: 5px;
 	color: white;
 	width: 100%;
 	cursor: pointer;
-	margin: 2px;
+
+	&:hover {
+		background-color: #474545;
+	}
 `;
 
-const Index = styled.div`
-	width: 5%;
-`;
+const Index = styled.div``;
 
 const ThemeTitle = styled.div`
 	width: 75%;
@@ -139,7 +135,6 @@ const Button = styled.button`
 	background-color: inherit;
 	border: none;
 	color: white;
-	margin: 4px;
 
 	&:hover {
 		color: white;

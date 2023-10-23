@@ -26,16 +26,29 @@ const SongTitle = () => {
 const Wrapper = styled.div`
 	width: 70%;
 	height: 90%;
+
+	@media (max-width: 768px) {
+		width: 50%;
+		height: 40%;
+	}
 `;
 
 const Title = styled.h2`
 	font-size: 30px;
 	margin-bottom: 10px;
+
+	@media (max-width: 768px) {
+		font-size: 18px;
+	}
 `;
 
 const SubTitle = styled.h2`
 	font-size: 20px;
 	font-weight: 300;
+
+	@media (max-width: 768px) {
+		font-size: 16px;
+	}
 `;
 
 export default SongTitle;

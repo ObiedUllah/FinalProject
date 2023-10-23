@@ -21,12 +21,6 @@ const ProfileSongs = ({ user }) => {
 	);
 };
 
-const Wrapper = styled.div`
-	display: flex;
-	flex-direction: column;
-	margin-top: 15px;
-	border: none;
-	padding-bottom: 8px;
-`;
+const Wrapper = styled.div``;
 
 export default ProfileSongs;

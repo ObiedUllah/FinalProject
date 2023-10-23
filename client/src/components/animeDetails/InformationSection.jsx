@@ -4,6 +4,7 @@ import AnimeRecommendations from "./AnimeData/AnimeRecommendations";
 import AnimeRelations from "./AnimeData/AnimeRelations";
 import AnimeStats from "./AnimeData/AnimeStats";
 import AnimeSynopsis from "./AnimeData/AnimeSynopsis";
+import { isMobile } from "utils/porgress/mobile";
 import styled from "styled-components";
 
 /**
@@ -12,8 +13,6 @@ import styled from "styled-components";
  * @returns
  */
 const InformationSection = ({ anime, id }) => {
-	const isMobile = window.innerWidth <= 768;
-
 	return (
 		<Wrapper>
 			<First>

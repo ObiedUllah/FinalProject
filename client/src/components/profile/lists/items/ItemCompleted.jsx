@@ -4,6 +4,7 @@ import { handleRemoveFromList, handleStatusChange } from "../ProfileHelpers";
 import CircularProg from "utils/porgress/CircularProg";
 import Dialog from "./Dialog";
 import { changeStatus } from "endpoints/apiConfig";
+import { isMobile } from "utils/porgress/mobile";
 import { useState } from "react";
 
 /**
@@ -12,8 +13,6 @@ import { useState } from "react";
  * @returns
  */
 const ItemCompleted = ({ user, anime, list, setList }) => {
-	const isMobile = window.innerWidth <= 768;
-
 	const [rating, setRating] = useState(() => anime.rating);
 	const [loading, setLoading] = useState(() => null);
 

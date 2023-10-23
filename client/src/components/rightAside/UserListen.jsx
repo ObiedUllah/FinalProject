@@ -155,12 +155,13 @@ const UserListen = (props) => {
 };
 
 const BoxDiv = styled.div`
-	@media (max-width: 1200px) {
-		display: none;
-	}
 	display: flex;
 	flex-direction: column;
 	width: 100%;
+
+	@media (max-width: 1200px) {
+		display: none;
+	}
 `;
 
 const Title = styled.h3`

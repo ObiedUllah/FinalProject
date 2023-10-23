@@ -56,6 +56,7 @@ const Nav = styled.nav`
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
+
 	@media (max-width: 1200px) {
 		order: 4;
 		padding: 1vh 1vw;
@@ -63,8 +64,10 @@ const Nav = styled.nav`
 		align-items: center;
 		justify-content: space-around;
 	}
+
 	@media (max-width: 768px) {
 		padding: 0;
+		margin: 0px 3px;
 	}
 `;
 

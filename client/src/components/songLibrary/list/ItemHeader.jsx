@@ -18,8 +18,6 @@ const Wrapper = styled.div`
 	display: flex;
 	flex-direction: row;
 	width: 100%;
-	padding: 5px;
-	margin: 2px;
 
 	div {
 		margin: 3px;
@@ -28,12 +26,12 @@ const Wrapper = styled.div`
 `;
 
 const Index = styled.div`
-	width: 5%;
+	width: 2%;
 	text-align: center;
 `;
 
 const ThemeTitle = styled.div`
-	width: 71%;
+	width: 74%;
 	text-align: left;
 `;
 

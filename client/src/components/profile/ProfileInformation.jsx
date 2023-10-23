@@ -14,7 +14,6 @@ const ProfileInformation = ({ user }) => {
 
 			<Info>
 				<ProfileInfoData user={user} />
-				{/* Profile Picture component with save button */}
 				<ProfilePicture user={user} />
 			</Info>
 		</Wrapper>
@@ -29,6 +28,11 @@ const Wrapper = styled.div`
 
 const Title = styled.h1`
 	font-size: 40px;
+
+	@media (max-width: 768px) {
+		font-size: 26px;
+		text-align: center;
+	}
 `;
 
 const Info = styled.div`

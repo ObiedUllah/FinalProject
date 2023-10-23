@@ -53,8 +53,8 @@ const Image = styled.img`
 	transition: 0.4s;
 
 	@media (max-width: 768px) {
-		width: 70px;
-		height: 120px;
+		width: 90px;
+		height: 140px;
 	}
 `;
 

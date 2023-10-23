@@ -1,4 +1,3 @@
-import React from "react";
 import styled from "styled-components";
 
 const ProfileInfoData = ({ user }) => {
@@ -41,6 +40,11 @@ const Data = styled.div`
 	display: flex;
 	flex-direction: column;
 	padding-left: 30px;
+
+	@media (max-width: 768px) {
+		text-align: center;
+		padding-left: 0px;
+	}
 `;
 
 const Container = styled.div`
@@ -48,6 +52,10 @@ const Container = styled.div`
 	align-items: center;
 	margin: 20px 0px;
 	font-size: 18px;
+
+	@media (max-width: 768px) {
+		justify-content: center;
+	}
 `;
 
 const Label = styled.h2``;

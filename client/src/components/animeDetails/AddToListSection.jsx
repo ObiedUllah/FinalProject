@@ -237,7 +237,7 @@ const AddToListSection = ({ anime }) => {
 					</Select>
 
 					{inList ? (
-						<div>
+						<LoginDiv>
 							<Button confirm={true} onClick={handleAddToList}>
 								Update List
 							</Button>
@@ -245,7 +245,7 @@ const AddToListSection = ({ anime }) => {
 								Remove
 							</Button>
 							{isUpdated && <SuccessMessage>Updated!</SuccessMessage>}
-						</div>
+						</LoginDiv>
 					) : (
 						<div>
 							<Button confirm={true} onClick={handleAddToList}>
