@@ -61,7 +61,7 @@ const Button = styled.button`
 
 	@media (max-width: 768px) {
 		padding: 8px;
-		font-size: 11px;
+		font-size: 10px;
 	}
 `;
 

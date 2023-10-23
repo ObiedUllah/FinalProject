@@ -17,7 +17,7 @@ const MovingText = () => {
 		return () => clearInterval(interval);
 	}, []);
 
-	return <Text style={{ left: position }}>Mobile Version coming soon!</Text>;
+	return <Text style={{ left: position }}>Mobile Version Out!</Text>;
 };
 
 const Text = styled.div`

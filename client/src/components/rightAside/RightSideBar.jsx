@@ -72,8 +72,9 @@ const Nav = styled.nav`
 `;
 
 const Anchor = styled(NavLink)`
-	padding: 8px 1vw;
-	width: 10vw;
+	all: initial;
+	padding: 10px;
+	width: 200px;
 
 	color: #313131;
 	font-size: 16px;
@@ -100,13 +101,15 @@ const Anchor = styled(NavLink)`
 
 	@media (max-width: 768px) {
 		height: 35px;
-		width: 19%;
+		padding: 5px;
+		margin: 1px;
 	}
 `;
 
 const Button = styled.button`
-	padding: 8px 0px;
-	width: 12vw;
+	all: initial;
+	padding: 10px;
+	width: 200px;
 
 	color: #313131;
 	font-size: 16px;
@@ -131,7 +134,9 @@ const Button = styled.button`
 	}
 
 	@media (max-width: 768px) {
-		width: 19%;
+		height: 35px;
+		padding: 5px;
+		margin: 1px;
 	}
 `;
 

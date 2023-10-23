@@ -18,6 +18,11 @@ const Wrapper = styled.div`
 	display: flex;
 	align-items: center;
 	justify-content: center;
+
+	@media (max-width: 768px) {
+		width: 30%;
+		justify-content: center;
+	}
 `;
 
 const Image = styled.img`

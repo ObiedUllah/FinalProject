@@ -24,8 +24,9 @@ const Nav = styled.nav`
 	border-bottom: 1px solid black;
 
 	@media (max-width: 768px) {
-		height: 8vh;
+		height: 7vh;
 		border-bottom: none;
+		background: #111;
 	}
 `;
 

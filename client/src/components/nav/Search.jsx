@@ -1,7 +1,9 @@
+import { useEffect, useState } from "react";
+
 import { BsSearch } from "react-icons/bs";
+import { isMobile } from "utils/porgress/mobile";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
 
 /**
  * Search input handling in the nav bar
@@ -9,13 +11,29 @@ import { useState } from "react";
  */
 const Search = () => {
 	//display if search bar should appear
-	const [display, setDisplay] = useState(() => false);
+	const [display, setDisplay] = useState(() => isMobile);
 
 	//search data
 	const [search, setSearch] = useState("");
 
 	//be able to go to the search anime list page
 	const navigate = useNavigate();
+
+	useEffect(() => {
+		const handleResize = () => {
+			if (window.innerWidth <= 768) {
+				setDisplay(true);
+			} else {
+				setDisplay(false);
+			}
+		};
+
+		window.addEventListener("resize", handleResize);
+
+		return () => {
+			window.removeEventListener("resize", handleResize);
+		};
+	}, []);
 
 	/**
 	 * Shows or hides the input box depending on if the user clicks on the search icon
@@ -62,8 +80,10 @@ const SearchBox = styled.form`
 	margin: 20px 0px;
 
 	@media (max-width: 768px) {
-		width: 90vw;
-		padding: 0px 8px;
+		width: 100%;
+		padding: 20px 0px;
+		margin: 0;
+		background: #111;
 	}
 `;
 
@@ -101,6 +121,7 @@ const SearchInput = styled.input`
 		width: 90%;
 		padding: 8px;
 		height: 30px;
+		margin-bottom: 10px;
 	}
 `;
 
@@ -112,7 +133,7 @@ const Icon = styled(BsSearch)`
 
 	@media (max-width: 768px) {
 		font-size: 20px;
-		margin-right: 0px;
+		margin-right: 5px;
 	}
 `;
 
