@@ -286,6 +286,10 @@ const Wrapper = styled.div`
 	border-radius: 2px;
 	padding: 22px;
 	margin: 16px;
+
+	@media (max-width: 768px) {
+		flex-direction: column;
+	}
 `;
 
 const Button = styled.button`
@@ -325,6 +329,10 @@ const Select = styled.select`
 	padding: 8px;
 	border-radius: 10px;
 	cursor: pointer;
+
+	@media (max-width: 768px) {
+		margin-bottom: 10px;
+	}
 `;
 
 const Option = styled.option`
@@ -347,6 +355,9 @@ const LoginDiv = styled.div`
 
 const Checkbox = styled.input`
 	cursor: pointer;
+	@media (max-width: 768px) {
+		margin-top: 10px;
+	}
 `;
 
 const SuccessMessage = styled.div`

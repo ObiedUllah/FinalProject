@@ -48,15 +48,23 @@ const Search = () => {
 				showInput={display}
 			/>
 
-			<Icon size="30px" onClick={showInput} />
+			<Icon onClick={showInput} />
 		</SearchBox>
 	);
 };
 
 const SearchBox = styled.form`
 	display: flex;
+	justify-content: center;
+	align-items: center;
 	width: 30vw;
 	padding: 0px 15px;
+	margin: 20px 0px;
+
+	@media (max-width: 768px) {
+		width: 90vw;
+		padding: 0px 8px;
+	}
 `;
 
 const SearchInput = styled.input`
@@ -87,12 +95,25 @@ const SearchInput = styled.input`
 		background-color: #313131;
 		color: #fff;
 	}
+
+	@media (max-width: 768px) {
+		font-size: 13px;
+		width: 90%;
+		padding: 8px;
+		height: 30px;
+	}
 `;
 
 const Icon = styled(BsSearch)`
 	cursor: pointer;
-	margin: 15px;
 	margin-left: auto;
+	margin-right: 20px;
+	font-size: 30px;
+
+	@media (max-width: 768px) {
+		font-size: 20px;
+		margin-right: 0px;
+	}
 `;
 
 export default Search;

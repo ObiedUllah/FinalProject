@@ -54,7 +54,12 @@ const Wrapper = styled.div`
 	justify-content: right;
 	margin-top: 10px;
 	align-self: right;
-	width: 90%;
+	width: 100%;
+
+	@media (max-width: 768px) {
+		align-items: center;
+		justify-content: center;
+	}
 `;
 
 const PageButton = styled.button`

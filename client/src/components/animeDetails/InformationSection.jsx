@@ -4,7 +4,6 @@ import AnimeRecommendations from "./AnimeData/AnimeRecommendations";
 import AnimeRelations from "./AnimeData/AnimeRelations";
 import AnimeStats from "./AnimeData/AnimeStats";
 import AnimeSynopsis from "./AnimeData/AnimeSynopsis";
-import React from "react";
 import styled from "styled-components";
 
 /**
@@ -13,6 +12,8 @@ import styled from "styled-components";
  * @returns
  */
 const InformationSection = ({ anime, id }) => {
+	const isMobile = window.innerWidth <= 768;
+
 	return (
 		<Wrapper>
 			<First>
@@ -36,7 +37,7 @@ const InformationSection = ({ anime, id }) => {
 				<AnimeRelations anime={anime} />
 
 				{/* ANIME RECOMMENDATIONS */}
-				<AnimeRecommendations anime={anime} id={id} />
+				{!isMobile && <AnimeRecommendations anime={anime} id={id} />}
 			</Second>
 		</Wrapper>
 	);
@@ -49,12 +50,21 @@ const Wrapper = styled.div`
 	margin: 16px;
 	border: 2px solid #aaa;
 	border-radius: 2px;
+
+	@media (max-width: 768px) {
+		flex-wrap: wrap;
+	}
 `;
 
 const First = styled.div`
 	display: flex;
 	flex-direction: column;
 	width: 260px;
+
+	@media (max-width: 768px) {
+		width: 100%;
+		margin-bottom: -70px;
+	}
 `;
 
 const Image = styled.img`
@@ -67,6 +77,10 @@ const Second = styled.div`
 	flex-direction: column;
 	overflow: hidden;
 	width: 100%;
+
+	@media (max-width: 768px) {
+		width: 100%;
+	}
 `;
 
 export default InformationSection;

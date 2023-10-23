@@ -29,9 +29,9 @@ const app = express()
 
 	.get("/", (req, res) => {
 		res.status(200).json({ message: "Access Granted" });
-	});
+	})
 
-// Node spins up our server and sets it to listen on set port
-// .listen(PORT, () => console.log(`Listening on port ${PORT}`))
+	// Node spins up our server and sets it to listen on set port
+	.listen(PORT, () => console.log(`Listening on port ${PORT}`));
 
 module.exports = app;

@@ -63,6 +63,9 @@ const Nav = styled.nav`
 		align-items: center;
 		justify-content: space-around;
 	}
+	@media (max-width: 768px) {
+		padding: 0;
+	}
 `;
 
 const Anchor = styled(NavLink)`
@@ -77,6 +80,9 @@ const Anchor = styled(NavLink)`
 	text-decoration: none;
 	text-align: center;
 
+	display: flex;
+	align-items: center;
+	justify-content: center;
 	transition: 0.4s;
 
 	&:hover {
@@ -86,6 +92,11 @@ const Anchor = styled(NavLink)`
 	}
 	@media (max-width: 1200px) {
 		padding: 9px 0px;
+		width: 19%;
+	}
+
+	@media (max-width: 768px) {
+		height: 35px;
 		width: 19%;
 	}
 `;
@@ -113,6 +124,10 @@ const Button = styled.button`
 	}
 
 	@media (max-width: 1200px) {
+		width: 19%;
+	}
+
+	@media (max-width: 768px) {
 		width: 19%;
 	}
 `;

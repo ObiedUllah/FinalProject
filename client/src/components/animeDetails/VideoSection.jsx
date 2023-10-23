@@ -72,7 +72,9 @@ const VideoSection = ({ anime, id, index, type }) => {
 			<MainTitle>{anime.title}</MainTitle>
 			{anime.title_english && <EnglishTitle>{anime.title_english}</EnglishTitle>}
 			{selectedTheme ? (
-				<ReactPlayer controls={true} width="100%" height="70vh" url={selectedTheme} />
+				<Center>
+					<ReactPlayer controls={true} url={selectedTheme} />
+				</Center>
 			) : (
 				<Title style={{ textAlign: "center" }}>Themes Unavailable...</Title>
 			)}
@@ -143,6 +145,12 @@ const EndingList = styled.div`
 
 const Title = styled.h1`
 	font-size: 22px;
+`;
+
+const Center = styled.div`
+	display: flex;
+	align-items: center;
+	justify-content: center;
 `;
 
 export default VideoSection;

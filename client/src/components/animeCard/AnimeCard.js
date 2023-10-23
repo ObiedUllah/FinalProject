@@ -31,6 +31,13 @@ const Card = styled.article`
 			cursor: pointer;
 		}
 	}
+
+	@media (max-width: 768px) {
+		width: 100px;
+		height: 200px;
+		margin: 5px;
+		flex: 0 0 30%;
+	}
 `;
 
 const Anchor = styled(NavLink)`
@@ -44,12 +51,21 @@ const Image = styled.img`
 	border-radius: 16px;
 	box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.15);
 	transition: 0.4s;
+
+	@media (max-width: 768px) {
+		width: 70px;
+		height: 120px;
+	}
 `;
 
 const Title = styled.h1`
 	font-size: 20px;
 	padding-top: 10px;
 	font-weight: 300;
+
+	@media (max-width: 768px) {
+		font-size: 14px;
+	}
 `;
 
 export default AnimeCard;

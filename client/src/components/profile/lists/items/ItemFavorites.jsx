@@ -68,7 +68,7 @@ const ItemFavorites = ({ user, anime, list, setList }) => {
 
 			<Label>
 				<Button confirm={false} onClick={removeAnimeFromFavorites}>
-					Remove
+					x
 				</Button>
 			</Label>
 		</Wrapper>

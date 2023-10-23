@@ -13,7 +13,10 @@ import styled from "styled-components";
  * @returns
  */
 const AnimeSlider = ({ list, title, scroll = 8 }) => {
-	var settings = {
+	// Define a smaller scroll value for mobile
+	const mobileScroll = 3;
+
+	const settings = {
 		dots: true,
 		infinite: true,
 		speed: 500,
@@ -21,10 +24,17 @@ const AnimeSlider = ({ list, title, scroll = 8 }) => {
 		slidesToScroll: scroll,
 		arrows: true,
 	};
+
+	// Adjust the settings for mobile screens
+	if (window.innerWidth <= 768) {
+		settings.slidesToShow = mobileScroll;
+		settings.slidesToScroll = mobileScroll;
+	}
+
 	return (
 		<Wrapper>
 			<Title>{title}</Title>
-			<Slider {...settings}>
+			<StyledSlider {...settings}>
 				{list.map((slide) => {
 					if (slide.entry) {
 						return (
@@ -45,28 +55,49 @@ const AnimeSlider = ({ list, title, scroll = 8 }) => {
 						</div>
 					);
 				})}
-			</Slider>
+			</StyledSlider>
 		</Wrapper>
 	);
 };
 
-const Title = styled.h1`
-	padding-bottom: 20px;
-`;
-
 const Wrapper = styled.section`
 	width: 100%;
-	padding: 30px 3px;
+	padding: 45px 0px; /* Adjust padding for mobile */
 	height: 250px;
+
+	@media (max-width: 768px) {
+		height: auto;
+		padding: 20px 0px; /* Adjust padding for mobile */
+	}
+`;
+
+const Title = styled.h1`
+	padding-bottom: 20px;
+	font-size: 21px;
+
+	@media (max-width: 768px) {
+		font-size: 15px;
+	}
 `;
 
 const Image = styled.img`
 	width: 6vw;
 	height: 9vw;
+
+	@media (max-width: 768px) {
+		width: 40%; /* Adjust image size for mobile */
+		height: auto;
+	}
 `;
+
 const Text = styled.p`
 	text-align: center;
 	line-height: 1.2em;
+
+	@media (max-width: 768px) {
+		font-size: 11px; /* Adjust font size for mobile */
+		width: 70px;
+	}
 `;
 
 const Anchor = styled(NavLink)`
@@ -79,6 +110,45 @@ const Anchor = styled(NavLink)`
 	&:hover {
 		img {
 			transform: scale(1.05);
+		}
+	}
+`;
+
+const StyledSlider = styled(Slider)`
+	.slick-slider {
+		text-align: center; // Center the slider
+	}
+
+	.slick-prev,
+	.slick-next {
+		top: 50%; // Adjust the vertical position of the navigation buttons
+		transform: translateY(-50%);
+		z-index: 100;
+	}
+
+	.slick-prev {
+		left: 0px; // Adjust the distance from the left edge
+	}
+
+	.slick-next {
+		right: 0px; // Adjust the distance from the right edge
+	}
+
+	.slick-dots {
+		bottom: 0; // Move the dots (pagination) to the bottom
+	}
+
+	.slick-dots li button:before {
+		font-size: 12px; // Adjust the dots size
+	}
+
+	.slick-dots {
+		button:before {
+			margin-top: 35px; /* Add margin to the top of the active dot */
+
+			@media (max-width: 768px) {
+				margin-top: 15px;
+			}
 		}
 	}
 `;

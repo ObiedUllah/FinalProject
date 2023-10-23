@@ -42,7 +42,9 @@ const Promos = () => {
 			<Text>
 				{promos[selectedIndex].title}: {promos[selectedIndex].entry.title}
 			</Text>
-			<ReactPlayer controls={true} width="100%" height="70vh" url={promos[selectedIndex].trailer.embed_url} />
+			<Center>
+				<ReactPlayer controls={true} url={promos[selectedIndex].trailer.embed_url} />
+			</Center>
 		</Wrapper>
 	);
 };
@@ -80,6 +82,18 @@ const Button = styled.button`
 		transform: scale(1.2);
 		background-color: #666;
 	}
+
+	@media (max-width: 768px) {
+		flex: 0 0 30%;
+		height: 90px;
+		width: 90px;
+	}
+`;
+
+const Center = styled.div`
+	display: flex;
+	align-items: center;
+	justify-content: center;
 `;
 
 export default Promos;

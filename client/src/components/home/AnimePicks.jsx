@@ -51,9 +51,6 @@ const AnimePicks = ({ animePicks }) => {
 };
 
 const HeaderTitle = styled.h1`
-	@media (max-width: 1000px) {
-		display: none;
-	}
 	text-align: left;
 	font-size: 18px;
 	margin-bottom: 20px;
@@ -61,9 +58,6 @@ const HeaderTitle = styled.h1`
 `;
 
 const Wrapper = styled.div`
-	@media (max-width: 1000px) {
-		display: none;
-	}
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: space-around;
@@ -72,10 +66,13 @@ const Wrapper = styled.div`
 	background-image: repeating-linear-gradient(-45deg, #1b1b1b, #242323 10px, #312727 10px, #302323 20px);
 	padding: 15px;
 	width: 90%;
-	height: 400px;
 	border-radius: 20px;
 
 	transition: opacity 0.5s ease-in-out;
+
+	@media (max-width: 768px) {
+		height: 500px;
+	}
 `;
 
 const Img = styled.img`
@@ -86,14 +83,23 @@ const Img = styled.img`
 const Info = styled.div`
 	display: flex;
 	flex-direction: column;
-	justify-content: start;
+	justify-content: flex-start;
 	width: 70%;
+
+	@media (max-width: 768px) {
+		justify-content: center;
+		align-items: center;
+	}
 `;
 
 const Title = styled.h3`
 	font-size: 24px;
 	color: white;
 	font-weight: bold;
+
+	@media (max-width: 768px) {
+		text-align: center;
+	}
 `;
 
 const Text = styled.h3`
@@ -101,6 +107,10 @@ const Text = styled.h3`
 	margin: 5% 0px;
 	line-height: 20px;
 	color: white;
+
+	@media (max-width: 768px) {
+		display: none;
+	}
 `;
 
 const Anchor = styled(NavLink)`
@@ -115,6 +125,10 @@ const Anchor = styled(NavLink)`
 	&:hover {
 		transform: scale(1.05);
 		background: gray;
+	}
+
+	@media (max-width: 768px) {
+		margin-top: 10px;
 	}
 `;
 

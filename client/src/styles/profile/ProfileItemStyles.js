@@ -7,6 +7,10 @@ export const Wrapper = styled.div`
 	justify-content: space-around;
 	align-items: center;
 	border-bottom: 1px solid #777;
+
+	@media (max-width: 768px) {
+		overflow-x: auto;
+	}
 `;
 
 export const Image = styled.img`
@@ -48,6 +52,12 @@ export const Button = styled.button`
 	&:hover {
 		color: #333;
 		transform: scale(1.1);
+	}
+
+	@media (max-width: 768px) {
+		padding: 0 5px;
+		width: 20px;
+		height: 20px;
 	}
 `;
 

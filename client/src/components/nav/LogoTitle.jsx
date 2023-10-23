@@ -23,12 +23,24 @@ const Wrapper = styled(NavLink)`
 	padding-left: 50px;
 	text-decoration: none;
 	color: inherit;
+	height: 100%;
+
+	@media (max-width: 768px) {
+		padding-left: 5px;
+		/* Remove object-fit: cover */
+	}
 `;
 
 const Container = styled.div`
 	position: relative;
 	width: 125px;
 	height: 125px;
+
+	@media (max-width: 768px) {
+		width: 40px;
+		height: 40px;
+		/* Remove object-fit: cover */
+	}
 `;
 
 const Image = styled.img`
@@ -53,6 +65,11 @@ const Image = styled.img`
 const Title = styled.div`
 	font-size: 2.5em;
 	margin-left: 30px;
+
+	@media (max-width: 768px) {
+		font-size: 1.5em;
+		margin-left: 5px;
+	}
 `;
 
 export default LogoTitle;

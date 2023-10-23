@@ -119,6 +119,10 @@ const ButtonLabel = styled.button`
 		background-color: #444;
 		color: #777;
 	}
+
+	@media (max-width: 768px) {
+		width: 100%;
+	}
 `;
 
 const Name = styled.span`

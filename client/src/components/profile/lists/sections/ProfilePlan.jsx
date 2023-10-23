@@ -16,15 +16,26 @@ const ProfilePlan = ({ user }) => {
 	const [titleAsc, setTitleAsc] = useState(false);
 	const [scoreAsc, setScoreAsc] = useState(false);
 
+	const isMobile = window.innerWidth <= 768;
+
 	return (
 		<Wrapper>
 			<TitleDiv>
-				<Label>Image</Label>
-				<Button onClick={(event) => sortByTitle(event, titleAsc, setTitleAsc, list, setList)}>Title</Button>
-				<Label>Status</Label>
-				<Button onClick={(event) => sortByScore(event, scoreAsc, setScoreAsc, list, setList)}>Score</Button>
-
-				<Label>Remove</Label>
+				{isMobile ? (
+					<>
+						<Label>Image</Label>
+						<Button onClick={(event) => sortByTitle(event, titleAsc, setTitleAsc, list, setList)}>Title</Button>
+						<Button onClick={(event) => sortByScore(event, scoreAsc, setScoreAsc, list, setList)}>Score</Button>
+					</>
+				) : (
+					<>
+						<Label>Image</Label>
+						<Button onClick={(event) => sortByTitle(event, titleAsc, setTitleAsc, list, setList)}>Title</Button>
+						<Label>Status</Label>
+						<Button onClick={(event) => sortByScore(event, scoreAsc, setScoreAsc, list, setList)}>Score</Button>
+						<Label>Remove</Label>
+					</>
+				)}
 			</TitleDiv>
 
 			<>

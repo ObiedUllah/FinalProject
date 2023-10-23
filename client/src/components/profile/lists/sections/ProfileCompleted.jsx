@@ -10,6 +10,8 @@ import { useState } from "react";
  * @returns
  */
 const ProfileCompleted = ({ user }) => {
+	const isMobile = window.innerWidth <= 768;
+
 	const [list, setList] = useState(() => user.list.filter((item) => item.status === "completed"));
 
 	//handles sortung
@@ -20,12 +22,22 @@ const ProfileCompleted = ({ user }) => {
 	return (
 		<Wrapper>
 			<TitleDiv>
-				<Label>Image</Label>
-				<Button onClick={(event) => sortByTitle(event, titleAsc, setTitleAsc, list, setList)}>Title</Button>
-				<Label>Status</Label>
-				<Button onClick={(event) => sortByRating(event, ratingAsc, setRatingAsc, list, setList)}>Rating</Button>
-				<Button onClick={(event) => sortByScore(event, scoreAsc, setScoreAsc, list, setList)}>Score</Button>
-				<Label>Remove</Label>
+				{isMobile ? (
+					<>
+						<Label>Image</Label>
+						<Button onClick={(event) => sortByTitle(event, titleAsc, setTitleAsc, list, setList)}>Title</Button>
+						<Button onClick={(event) => sortByScore(event, scoreAsc, setScoreAsc, list, setList)}>Score</Button>
+					</>
+				) : (
+					<>
+						<Label>Image</Label>
+						<Button onClick={(event) => sortByTitle(event, titleAsc, setTitleAsc, list, setList)}>Title</Button>
+						<Label>Status</Label>
+						<Button onClick={(event) => sortByRating(event, ratingAsc, setRatingAsc, list, setList)}>Rating</Button>
+						<Button onClick={(event) => sortByScore(event, scoreAsc, setScoreAsc, list, setList)}>Score</Button>
+						<Label>Remove</Label>
+					</>
+				)}
 			</TitleDiv>
 			<>
 				{list.map((item) => (

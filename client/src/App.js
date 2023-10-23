@@ -13,12 +13,14 @@ import Profile from "pages/Profile";
 import Promos from "pages/Promos";
 import ProtectedRoute from "authentication/protected-route";
 import RightSideBar from "components/rightAside/RightSideBar";
+import Search from "components/nav/Search";
 import SearchedAnimeList from "pages/SearchedAnimeList";
 import SongLibrary from "pages/SongLibrary";
 import styled from "styled-components";
 import { useAuth0 } from "@auth0/auth0-react";
 
 const App = () => {
+	const isMobile = window.innerWidth <= 768;
 	const { isLoading } = useAuth0();
 
 	if (isLoading) {
@@ -31,6 +33,7 @@ const App = () => {
 			<Nav>
 				<NavBar />
 				<MovingText />
+				{isMobile && <Search />}
 			</Nav>
 			<LeftAside>
 				<LeftSideBar />

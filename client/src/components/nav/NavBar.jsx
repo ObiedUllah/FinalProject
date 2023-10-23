@@ -20,7 +20,13 @@ const Nav = styled.nav`
 	width: 100%;
 	display: flex;
 	align-items: center;
+	justify-content: center;
 	border-bottom: 1px solid black;
+
+	@media (max-width: 768px) {
+		height: 10vh;
+		border-bottom: 2px solid black;
+	}
 `;
 
 export default NavBar;

@@ -15,6 +15,7 @@ import { useAuth0 } from "@auth0/auth0-react";
  * @returns
  */
 const NavButtons = () => {
+	const isMobile = window.innerWidth <= 768;
 	//gets user
 	const { user, isAuthenticated } = useAuth0();
 	const [dbUser, setDbUser] = useState(() => null);
@@ -33,7 +34,7 @@ const NavButtons = () => {
 
 	return (
 		<Wrapper>
-			<Search />
+			{!isMobile && <Search />}
 
 			<AuthenticationButton />
 			{isAuthenticated && dbUser && <LibraryLink to="/songLibrary">Library</LibraryLink>}
@@ -51,6 +52,11 @@ const Wrapper = styled.div`
 	margin-left: auto;
 	padding-right: 50px;
 	align-items: center;
+
+	@media (max-width: 768px) {
+		padding-right: 0px;
+		justify-content: flex-start;
+	}
 `;
 
 const Avatar = styled.img`
@@ -58,6 +64,12 @@ const Avatar = styled.img`
 	height: 50px;
 	border-radius: 50%;
 	margin: 0px 10px 0px 0px;
+
+	@media (max-width: 768px) {
+		margin: 0px 0px 0px 0px;
+		width: 40px;
+		height: 40px;
+	}
 `;
 
 const LibraryLink = styled(NavLink)`
@@ -72,6 +84,12 @@ const LibraryLink = styled(NavLink)`
 	background: #222;
 	padding: 15px;
 	border-radius: 5px;
+
+	@media (max-width: 768px) {
+		width: 50px;
+		padding: 5px;
+		font-size: 10px;
+	}
 `;
 
 export default NavButtons;

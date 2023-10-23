@@ -1,6 +1,5 @@
 import DarkMode from "components/themes/DarkMode";
 import { Link } from "react-router-dom";
-import React from "react";
 import styled from "styled-components";
 import { useAuth0 } from "@auth0/auth0-react";
 
@@ -63,7 +62,7 @@ const Footer = () => {
 						AnimeChan API
 					</a>
 					<a href="https://rapidapi.com/" target="_blank" rel="noreferrer">
-						Rapid API (YT download)
+						Rapid API
 					</a>
 					<a href="https://www.npmjs.com/package/youtube-search-without-api-key" target="_blank" rel="noreferrer">
 						YT search API
@@ -87,6 +86,10 @@ const Wrapper = styled.div`
 	margin-left: 2vw;
 	margin-right: 2vw;
 	border-top: 2px solid black;
+
+	@media (max-width: 768px) {
+		margin-top: 5vw;
+	}
 `;
 
 const Upperdiv = styled.div`
@@ -133,6 +136,10 @@ const Upperdiv = styled.div`
 		&:hover {
 			color: #999;
 		}
+	}
+
+	@media (max-width: 768px) {
+		justify-content: space-between;
 	}
 `;
 

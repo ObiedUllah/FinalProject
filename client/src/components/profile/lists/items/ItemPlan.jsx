@@ -2,6 +2,7 @@ import { Anchor, Button, Image, Label, Option, Select, Wrapper } from "styles/pr
 import { handleRemoveFromList, handleStatusChange } from "../ProfileHelpers";
 
 import { CircularProgress } from "@mui/material";
+import Dialog from "./Dialog";
 import { useState } from "react";
 
 /**
@@ -10,8 +11,13 @@ import { useState } from "react";
  * @returns
  */
 const ItemPlan = ({ user, anime, list, setList }) => {
+	const isMobile = window.innerWidth <= 768;
+
 	const [rating, setRating] = useState(() => 0);
 	const [status, setStatus] = useState(() => anime.status);
+
+	//dialog box to change status
+	const [isConfirmDialogOpen, setConfirmDialogOpen] = useState(false);
 
 	//displays the rating if the user completed the anime
 	const [toDisplay, setToDisplay] = useState(false);
@@ -40,9 +46,49 @@ const ItemPlan = ({ user, anime, list, setList }) => {
 		setRating(event.target.value);
 	};
 
+	const onOpen = async (event) => {
+		event.preventDefault();
+		setConfirmDialogOpen(true);
+	};
+
+	const onCancel = async (event) => {
+		event.preventDefault();
+		setConfirmDialogOpen(false);
+	};
+
 	//load while waiting for db to update
 	if (loading === "loading") {
 		return <CircularProgress height={12} />;
+	}
+
+	if (isConfirmDialogOpen) {
+		return (
+			<Dialog
+				user={user}
+				anime={anime}
+				onCancel={onCancel}
+				handleChangeStatusSelect={handleChangeStatusSelect}
+				handleRatingChange={handleRatingChange}
+				list={list}
+				setList={setList}
+				setLoading={setLoading}
+				rating={rating}
+				status={status}
+				toDisplay={toDisplay}
+			/>
+		);
+	}
+
+	if (isMobile) {
+		return (
+			<Wrapper onClick={onOpen}>
+				<Label>
+					<Image src={anime.image} />
+				</Label>
+				<Label>{anime.title}</Label>
+				<Label>{anime.score}</Label>
+			</Wrapper>
+		);
 	}
 
 	return (

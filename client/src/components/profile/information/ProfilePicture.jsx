@@ -113,6 +113,13 @@ const Form = styled.form`
 	flex-direction: column;
 	align-items: center;
 	justify-content: flex-end;
+
+	@media (max-width: 768px) {
+		justify-content: flex-start;
+		margin-left: 0;
+		margin-right: 0;
+		align-items: center;
+	}
 `;
 
 const ImageContainer = styled.div`
@@ -145,6 +152,11 @@ const Avatar = styled.img`
 	border-radius: 50%;
 	margin-left: 10px;
 	margin-left: auto;
+
+	@media (max-width: 768px) {
+		width: 100px;
+		height: 100px;
+	}
 `;
 
 const UploadButton = styled.button`
@@ -157,6 +169,11 @@ const UploadButton = styled.button`
 
 	&:hover {
 		transform: ${(props) => props.hasFile && "scale(1.15)"};
+	}
+
+	@media (max-width: 768px) {
+		padding: 5px 15px;
+		margin-right: 0;
 	}
 `;
 

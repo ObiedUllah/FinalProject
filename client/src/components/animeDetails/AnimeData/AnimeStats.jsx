@@ -1,7 +1,5 @@
 import { Container, Information, InformationData, InformationLabel, Title } from "styles/AnimeDetailsStyles";
 
-import React from "react";
-
 /**
  * Displays the stats for an anime
  * @param {*} param0

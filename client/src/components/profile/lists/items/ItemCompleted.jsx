@@ -2,6 +2,7 @@ import { Anchor, Button, Image, Label, Option, Select, Wrapper } from "styles/pr
 import { handleRemoveFromList, handleStatusChange } from "../ProfileHelpers";
 
 import CircularProg from "utils/porgress/CircularProg";
+import Dialog from "./Dialog";
 import { changeStatus } from "endpoints/apiConfig";
 import { useState } from "react";
 
@@ -11,8 +12,13 @@ import { useState } from "react";
  * @returns
  */
 const ItemCompleted = ({ user, anime, list, setList }) => {
+	const isMobile = window.innerWidth <= 768;
+
 	const [rating, setRating] = useState(() => anime.rating);
 	const [loading, setLoading] = useState(() => null);
+
+	//dialog box to change status
+	const [isConfirmDialogOpen, setConfirmDialogOpen] = useState(false);
 
 	/**
 	 * updates the rating and changes it in the database
@@ -51,9 +57,48 @@ const ItemCompleted = ({ user, anime, list, setList }) => {
 		}
 	};
 
+	const onOpen = async (event) => {
+		event.preventDefault();
+		setConfirmDialogOpen(true);
+	};
+
+	const onCancel = async (event) => {
+		event.preventDefault();
+		setConfirmDialogOpen(false);
+	};
+
 	//load while waiting for db to update
 	if (loading === "loading") {
 		return <CircularProg height={12} />;
+	}
+
+	if (isConfirmDialogOpen) {
+		return (
+			<Dialog
+				user={user}
+				anime={anime}
+				onCancel={onCancel}
+				handleRatingChange={updateRating}
+				handleChangeStatusSelect={updateRating}
+				list={list}
+				setList={setList}
+				setLoading={setLoading}
+				rating={rating}
+				completed={true}
+			/>
+		);
+	}
+
+	if (isMobile) {
+		return (
+			<Wrapper onClick={onOpen}>
+				<Label>
+					<Image src={anime.image} />
+				</Label>
+				<Label>{anime.title}</Label>
+				<Label>{anime.score}</Label>
+			</Wrapper>
+		);
 	}
 
 	return (

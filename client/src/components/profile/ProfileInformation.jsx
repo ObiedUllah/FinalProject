@@ -1,6 +1,5 @@
 import ProfileInfoData from "./information/ProfileInfoData";
 import ProfilePicture from "./information/ProfilePicture";
-import React from "react";
 import styled from "styled-components";
 
 /**
@@ -36,6 +35,10 @@ const Info = styled.div`
 	display: flex;
 	flex-direction: row;
 	margin-top: 20px;
+
+	@media (max-width: 768px) {
+		flex-direction: column-reverse;
+	}
 `;
 
 export default ProfileInformation;

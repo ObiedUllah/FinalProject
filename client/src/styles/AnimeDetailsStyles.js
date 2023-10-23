@@ -23,6 +23,10 @@ export const Background = styled.div`
 	padding: 10px 16px;
 	max-height: 350px;
 	overflow: hidden;
+
+	@media (max-width: 768px) {
+		padding: 10px 0px;
+	}
 `;
 
 export const Title = styled.h1`
@@ -37,6 +41,10 @@ export const SubTitle = styled.h1`
 	margin-left: 20px;
 	margin-top: 16px;
 	padding-bottom: 7px;
+
+	@media (max-width: 768px) {
+		margin-left: 0px;
+	}
 `;
 
 export const Synopsis = styled.p`
@@ -77,6 +85,11 @@ export const EpisodeList = styled.div`
 	max-height: 400px;
 	padding: 8px;
 	border-radius: 3px;
+
+	@media (max-width: 768px) {
+		padding: 10px 0px;
+		margin-left: 0px;
+	}
 `;
 
 export const Episode = styled.div`
@@ -105,6 +118,11 @@ export const RelationList = styled.div`
 	max-height: 400px;
 	padding: 14px;
 	border-radius: 3px;
+
+	@media (max-width: 768px) {
+		padding: 10px 0px;
+		margin-left: 0px;
+	}
 `;
 
 export const Relation = styled.div`

@@ -58,6 +58,11 @@ const Button = styled.button`
 		top: 0;
 		border-radius: 10px;
 	}
+
+	@media (max-width: 768px) {
+		padding: 8px;
+		font-size: 11px;
+	}
 `;
 
 export default Button;
