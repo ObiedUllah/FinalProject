@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+
 import { BsDownload, BsFillPlusCircleFill } from "react-icons/bs";
 import { addSongToList, getUser as getUserApi } from "endpoints/apiConfig";
 import { downloadMp3, getVideo } from "endpoints/apiConfig";
